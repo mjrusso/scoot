@@ -13,6 +13,8 @@
 		E5776234262F04D300849D7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5776232262F04D300849D7D /* Main.storyboard */; };
 		E5776240262F04D300849D7D /* ScootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E577623F262F04D300849D7D /* ScootTests.swift */; };
 		E577624B262F04D300849D7D /* ScootUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E577624A262F04D300849D7D /* ScootUITests.swift */; };
+		E5776261262F067700849D7D /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5776260262F067700849D7D /* Window.swift */; };
+		E5776269262F0EC700849D7D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5776268262F0EC700849D7D /* WindowController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		E5776246262F04D300849D7D /* ScootUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScootUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E577624A262F04D300849D7D /* ScootUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScootUITests.swift; sourceTree = "<group>"; };
 		E577624C262F04D300849D7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5776260262F067700849D7D /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
+		E5776268262F0EC700849D7D /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,10 +100,12 @@
 		E577622B262F04D100849D7D /* Scoot */ = {
 			isa = PBXGroup;
 			children = (
+				E5776232262F04D300849D7D /* Main.storyboard */,
 				E577622C262F04D100849D7D /* AppDelegate.swift */,
+				E5776268262F0EC700849D7D /* WindowController.swift */,
+				E5776260262F067700849D7D /* Window.swift */,
 				E577622E262F04D100849D7D /* ViewController.swift */,
 				E5776230262F04D300849D7D /* Assets.xcassets */,
-				E5776232262F04D300849D7D /* Main.storyboard */,
 				E5776235262F04D300849D7D /* Info.plist */,
 				E5776236262F04D300849D7D /* Scoot.entitlements */,
 			);
@@ -253,6 +259,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5776261262F067700849D7D /* Window.swift in Sources */,
+				E5776269262F0EC700849D7D /* WindowController.swift in Sources */,
 				E577622F262F04D100849D7D /* ViewController.swift in Sources */,
 				E577622D262F04D100849D7D /* AppDelegate.swift in Sources */,
 			);
