@@ -9,6 +9,7 @@ class Window: NSWindow {
 
         isOpaque = false
         isMovable = true
+        ignoresMouseEvents = true
     }
 
 }
