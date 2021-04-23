@@ -15,6 +15,7 @@
 		E577624B262F04D300849D7D /* ScootUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E577624A262F04D300849D7D /* ScootUITests.swift */; };
 		E5776261262F067700849D7D /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5776260262F067700849D7D /* Window.swift */; };
 		E5776269262F0EC700849D7D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5776268262F0EC700849D7D /* WindowController.swift */; };
+		E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E87FFC2630A3550094FE9B /* GridView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,8 @@
 		E577624C262F04D300849D7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5776260262F067700849D7D /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		E5776268262F0EC700849D7D /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		E5E87FF4263061250094FE9B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../scoot/README.md; sourceTree = "<group>"; };
+		E5E87FFC2630A3550094FE9B /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GridView.swift; path = ../../scoot/Scoot/GridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +83,7 @@
 		E5776220262F04D100849D7D = {
 			isa = PBXGroup;
 			children = (
+				E5E87FF4263061250094FE9B /* README.md */,
 				E577622B262F04D100849D7D /* Scoot */,
 				E577623E262F04D300849D7D /* ScootTests */,
 				E5776249262F04D300849D7D /* ScootUITests */,
@@ -105,6 +109,7 @@
 				E5776268262F0EC700849D7D /* WindowController.swift */,
 				E5776260262F067700849D7D /* Window.swift */,
 				E577622E262F04D100849D7D /* ViewController.swift */,
+				E5E87FFC2630A3550094FE9B /* GridView.swift */,
 				E5776230262F04D300849D7D /* Assets.xcassets */,
 				E5776235262F04D300849D7D /* Info.plist */,
 				E5776236262F04D300849D7D /* Scoot.entitlements */,
@@ -262,6 +267,7 @@
 				E5776261262F067700849D7D /* Window.swift in Sources */,
 				E5776269262F0EC700849D7D /* WindowController.swift in Sources */,
 				E577622F262F04D100849D7D /* ViewController.swift in Sources */,
+				E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */,
 				E577622D262F04D100849D7D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

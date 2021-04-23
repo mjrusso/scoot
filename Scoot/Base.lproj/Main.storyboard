@@ -708,61 +708,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SZN-mo-FJT">
-                                <rect key="frame" x="205" y="100" width="70" height="70"/>
-                                <subviews>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="slx-E5-MIF">
-                                        <rect key="frame" x="-7" y="43" width="84" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Random" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="si6-BO-xj9">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                            <string key="keyEquivalent">r</string>
-                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="randomButtonPressed:" target="XfG-lQ-9wD" id="EFK-Ru-Qae"/>
-                                        </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jZy-HT-sOp">
-                                        <rect key="frame" x="3" y="18" width="64" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Click" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zgL-OL-hbX">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                            <string key="keyEquivalent">c</string>
-                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="clickButtonPressed:" target="XfG-lQ-9wD" id="Ugt-IP-wEE"/>
-                                        </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f4A-30-C7X">
-                                        <rect key="frame" x="3" y="-7" width="64" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Drag" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="geg-2l-tca">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                            <string key="keyEquivalent">d</string>
-                                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="dragButtonPressed:" target="XfG-lQ-9wD" id="Nu7-GC-g6V"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <visibilityPriorities>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                    <integer value="1000"/>
-                                </visibilityPriorities>
-                                <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                    <real value="3.4028234663852886e+38"/>
-                                </customSpacing>
-                            </stackView>
+                            <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="jt8-es-1kb" customClass="GridView" customModule="Scoot" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="SZN-mo-FJT" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="egk-yn-hp2"/>
-                            <constraint firstItem="SZN-mo-FJT" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="szd-ra-PN0"/>
+                            <constraint firstItem="jt8-es-1kb" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="8gf-g4-u4V"/>
+                            <constraint firstAttribute="bottom" secondItem="jt8-es-1kb" secondAttribute="bottom" id="9RE-8V-jwh"/>
+                            <constraint firstItem="jt8-es-1kb" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="fc5-DT-GFl"/>
+                            <constraint firstAttribute="trailing" secondItem="jt8-es-1kb" secondAttribute="trailing" id="kbM-ka-3cH"/>
                         </constraints>
                     </view>
                 </viewController>
