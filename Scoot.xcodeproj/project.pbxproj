@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E511785B2636EEC800B4202F /* NSScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */; };
+		E51178602636EEEB00B4202F /* NSPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */; };
 		E577622D262F04D100849D7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E577622C262F04D100849D7D /* AppDelegate.swift */; };
 		E577622F262F04D100849D7D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E577622E262F04D100849D7D /* ViewController.swift */; };
 		E5776231262F04D300849D7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5776230262F04D300849D7D /* Assets.xcassets */; };
@@ -15,6 +17,8 @@
 		E577624B262F04D300849D7D /* ScootUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E577624A262F04D300849D7D /* ScootUITests.swift */; };
 		E5776261262F067700849D7D /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5776260262F067700849D7D /* Window.swift */; };
 		E5776269262F0EC700849D7D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5776268262F0EC700849D7D /* WindowController.swift */; };
+		E591E5672636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E591E5662636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift */; };
+		E591E56C2636F8D000C037FF /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E591E56B2636F8D000C037FF /* Mouse.swift */; };
 		E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E87FFC2630A3550094FE9B /* GridView.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extensions.swift"; sourceTree = "<group>"; };
+		E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPoint+Extensions.swift"; sourceTree = "<group>"; };
 		E5776229262F04D100849D7D /* Scoot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scoot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E577622C262F04D100849D7D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E577622E262F04D100849D7D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +57,8 @@
 		E577624C262F04D300849D7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5776260262F067700849D7D /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		E5776268262F0EC700849D7D /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		E591E5662636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+NSStandardKeyBindingResponding.swift"; sourceTree = "<group>"; };
+		E591E56B2636F8D000C037FF /* Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
 		E5E87FF4263061250094FE9B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../scoot/README.md; sourceTree = "<group>"; };
 		E5E87FFC2630A3550094FE9B /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GridView.swift; path = ../../scoot/Scoot/GridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,6 +88,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E51178642636EF1500B4202F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */,
+				E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		E5776220262F04D100849D7D = {
 			isa = PBXGroup;
 			children = (
@@ -106,10 +123,13 @@
 			children = (
 				E5776232262F04D300849D7D /* Main.storyboard */,
 				E577622C262F04D100849D7D /* AppDelegate.swift */,
-				E5776268262F0EC700849D7D /* WindowController.swift */,
 				E5776260262F067700849D7D /* Window.swift */,
+				E5776268262F0EC700849D7D /* WindowController.swift */,
 				E577622E262F04D100849D7D /* ViewController.swift */,
+				E591E5662636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift */,
 				E5E87FFC2630A3550094FE9B /* GridView.swift */,
+				E591E56B2636F8D000C037FF /* Mouse.swift */,
+				E51178642636EF1500B4202F /* Extensions */,
 				E5776230262F04D300849D7D /* Assets.xcassets */,
 				E5776235262F04D300849D7D /* Info.plist */,
 				E5776236262F04D300849D7D /* Scoot.entitlements */,
@@ -264,11 +284,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E51178602636EEEB00B4202F /* NSPoint+Extensions.swift in Sources */,
+				E591E56C2636F8D000C037FF /* Mouse.swift in Sources */,
+				E511785B2636EEC800B4202F /* NSScreen+Extensions.swift in Sources */,
 				E5776261262F067700849D7D /* Window.swift in Sources */,
 				E5776269262F0EC700849D7D /* WindowController.swift in Sources */,
 				E577622F262F04D100849D7D /* ViewController.swift in Sources */,
 				E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */,
 				E577622D262F04D100849D7D /* AppDelegate.swift in Sources */,
+				E591E5672636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
