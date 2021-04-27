@@ -8,7 +8,7 @@ _Meet **Scoot**, your friendly cursor teleportation tool._
 
 ---
 
-<img align="right" width="256" alt="Scoot App Icon" src="./Scoot/Assets.xcassets/AppIcon.appiconset/256.png" />
+<img align="right" width="128" alt="Scoot App Icon" src="./Scoot/Assets.xcassets/AppIcon.appiconset/256.png" />
 
 Scoot is a tiny utility app that (will) provide fast, keyboard-driven control over the mouse pointer. Scoot lets you move your mouse cursor, click, and drag, all from the comfort of your keyboard.
 
