@@ -34,7 +34,7 @@ class ViewController: NSViewController {
         self.mouse = Mouse(screen: screen)
 
         self.grid = Grid(
-            gridSize: screen.frame.size,
+            gridSize: screen.visibleFrame.size,
             targetStepSize: CGSize(width: 60.0, height: 60.0))
 
         isDisplayingGrid = true
