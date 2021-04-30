@@ -45,6 +45,15 @@ class ViewController: NSViewController {
 
         window?.makeFirstResponder(self)
     }
+}
+
+// MARK: - Actions
+
+extension ViewController {
+
+    @IBAction func toggleGrid(_ sender: NSMenuItem) {
+        isDisplayingGrid.toggle()
+    }
 
 }
 
