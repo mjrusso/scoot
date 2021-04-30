@@ -42,19 +42,19 @@ extension ViewController {
     }
 
     override func moveLeft(_ sender: Any?) {
-        mouse?.move(.left, stepSize: 10)
+        mouse?.move(.left, stepSize: stepWidth)
     }
 
     override func moveRight(_ sender: Any?) {
-        mouse?.move(.right, stepSize: 10)
+        mouse?.move(.right, stepSize: stepWidth)
     }
 
     override func moveWordLeft(_ sender: Any?) {
-        mouse?.move(.left, stepSize: 10, stepMultiple: 6)
+        mouse?.move(.left, stepSize: stepWidth, stepMultiple: numStepsPerCell)
     }
 
     override func moveWordRight(_ sender: Any?) {
-        mouse?.move(.right, stepSize: 10, stepMultiple: 6)
+        mouse?.move(.right, stepSize: stepWidth, stepMultiple: numStepsPerCell)
     }
 
     override func moveToBeginningOfLine(_ sender: Any?) {
@@ -66,27 +66,27 @@ extension ViewController {
     }
 
     override func moveUp(_ sender: Any?) {
-        mouse?.move(.up, stepSize: 10)
+        mouse?.move(.up, stepSize: stepHeight)
     }
 
     override func moveDown(_ sender: Any?) {
-        mouse?.move(.down, stepSize: 10)
+        mouse?.move(.down, stepSize: stepHeight)
     }
 
     override func moveToBeginningOfParagraph(_ sender: Any?) {
-        mouse?.move(.up, stepSize: 10, stepMultiple: 6)
+        mouse?.move(.up, stepSize: stepHeight, stepMultiple: numStepsPerCell)
     }
 
     override func moveToEndOfParagraph(_ sender: Any?) {
-        mouse?.move(.down, stepSize: 10, stepMultiple: 6)
+        mouse?.move(.down, stepSize: stepHeight, stepMultiple: numStepsPerCell)
     }
 
     override func scrollPageUp(_ sender: Any?) {
-        mouse?.move(.up, stepSize: 10, stepMultiple: 6)
+        mouse?.move(.up, stepSize: stepHeight, stepMultiple: numStepsPerCell)
     }
 
     override func scrollPageDown(_ sender: Any?) {
-        mouse?.move(.down, stepSize: 10, stepMultiple: 6)
+        mouse?.move(.down, stepSize: stepHeight, stepMultiple: numStepsPerCell)
     }
 
     override func moveToBeginningOfDocument(_ sender: Any?) {

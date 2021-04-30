@@ -10,6 +10,18 @@ class ViewController: NSViewController {
         view.window
     }
 
+    var defaultCellSize = CGSize(width: 60.0, height: 60.0)
+
+    var numStepsPerCell = CGFloat(6.0)
+
+    var stepWidth: CGFloat {
+        (grid?.cellWidth ?? defaultCellSize.width) / numStepsPerCell
+    }
+
+    var stepHeight: CGFloat {
+        (grid?.cellHeight ?? defaultCellSize.height) / numStepsPerCell
+    }
+
     @IBOutlet var gridView: GridView!
 
     var isDisplayingGrid: Bool = false {
@@ -35,7 +47,7 @@ class ViewController: NSViewController {
 
         self.grid = Grid(
             gridSize: screen.visibleFrame.size,
-            targetStepSize: CGSize(width: 60.0, height: 60.0))
+            targetCellSize: defaultCellSize)
 
         isDisplayingGrid = true
     }

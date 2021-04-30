@@ -44,9 +44,9 @@ struct Grid {
         self.data = data
     }
 
-    init(gridSize: CGSize, targetStepSize: CGSize) {
-        let numCols = floor(gridSize.width / targetStepSize.width)
-        let numRows = floor(gridSize.height / targetStepSize.height)
+    init(gridSize: CGSize, targetCellSize: CGSize) {
+        let numCols = floor(gridSize.width / targetCellSize.width)
+        let numRows = floor(gridSize.height / targetCellSize.height)
 
         self.init(numRows: Int(numRows), numCols: Int(numCols), gridSize: gridSize)
     }
