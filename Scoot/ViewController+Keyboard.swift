@@ -28,10 +28,10 @@ extension ViewController {
             moveToEndOfParagraph(self)
 
         case ([.shift, .option], "<"): // Emacs: beginning-of-buffer
-            mouse?.move(to: .topLeft)
+            moveToBeginningOfDocument(self)
 
         case ([.shift, .option], ">"): // Emacs: end-of-buffer
-            mouse?.move(to: .bottomRight)
+            moveToEndOfDocument(self)
 
         case (.command, "c"): // Click
             mouse?.click()
@@ -52,4 +52,3 @@ extension ViewController {
     }
 
 }
-
