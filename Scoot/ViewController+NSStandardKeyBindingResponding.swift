@@ -5,7 +5,7 @@ import Cocoa
  Implementation of methods in the `NSStandardKeyBindingResponding` protocol.
 
  Overriding these methods enables this app to support the system default
- keybindings (including Emacs keybindings). Of course, we're mapping shortuts
+ keybindings (including Emacs keybindings). Of course, we're mapping shortcuts
  for document movement [0] to a 2d grid, so some liberties have been taken,
  however the (goal) is for the keybinds to be as intuitive as possible.
 
