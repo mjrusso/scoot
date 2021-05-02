@@ -69,13 +69,13 @@ struct Grid {
     ///
     /// For example, the coordinate (x: 0, y: 0) has an index of 0, and the
     /// coordinate (x: 5, y: 3) has an index of 23.
-    private func index(atX x: Int, y: Int) -> Int {
+    internal func index(atX x: Int, y: Int) -> Int {
         (y * numColumns) + x
     }
 
     /// The inverse of `index`: given the index in a 1-dimensional array,
     /// return the grid coordinates.
-    private func coordinates(atIndex index: Int) -> (x: Int, y: Int) {
+    internal func coordinates(atIndex index: Int) -> (x: Int, y: Int) {
         let x = index % self.numColumns
         let y = (index - x) / self.numColumns
         return (x: x, y: y)

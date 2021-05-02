@@ -22,6 +22,7 @@
 		E5776269262F0EC700849D7D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5776268262F0EC700849D7D /* WindowController.swift */; };
 		E591E5672636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E591E5662636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift */; };
 		E591E56C2636F8D000C037FF /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E591E56B2636F8D000C037FF /* Mouse.swift */; };
+		E59C162A263E52540033E2CC /* GridTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C1629263E52540033E2CC /* GridTests.swift */; };
 		E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E87FFC2630A3550094FE9B /* GridView.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		E5776268262F0EC700849D7D /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		E591E5662636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+NSStandardKeyBindingResponding.swift"; sourceTree = "<group>"; };
 		E591E56B2636F8D000C037FF /* Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
+		E59C1629263E52540033E2CC /* GridTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTests.swift; sourceTree = "<group>"; };
 		E5E87FF4263061250094FE9B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../scoot/README.md; sourceTree = "<group>"; };
 		E5E87FFC2630A3550094FE9B /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GridView.swift; path = ../../scoot/Scoot/GridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				E577623F262F04D300849D7D /* ScootTests.swift */,
+				E59C1629263E52540033E2CC /* GridTests.swift */,
 				E5776241262F04D300849D7D /* Info.plist */,
 			);
 			path = ScootTests;
@@ -317,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5776240262F04D300849D7D /* ScootTests.swift in Sources */,
+				E59C162A263E52540033E2CC /* GridTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
