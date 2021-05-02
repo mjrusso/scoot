@@ -32,11 +32,11 @@ When Scoot is in the foreground, use ⌘G to toggle the grid on/off. (The grid d
 
 Scoot uses the standard Mac keyboard shorcuts for [moving the insertion point][mac-keyboard-shortcuts-text]. (This means that keyboard shortcuts intended for navigating around in a document have been re-purposed to control movement on a 2-dimensional grid. Some liberties have been taken with this mapping; hopefully you find these keybindings intuitive.)
 
-The equivalent standard Emacs keybindings should also work out-of-the-box, if you have them configured system-wide (for example, via [Karabiner-Elements][karabiner-elements] ([complex modification][karabiner-elements-emacs-mod]), or by augmenting the [system defaults][emacs-keyboard-shortcuts-osx] ([DefaultKeyBinding.dict][defaultkeybinding.dict], [Cocoa Text System][cocoa-text-system], [Text System Defaults and Key Bindings][apple-dev-text-system])).
+The equivalent standard Emacs keybindings should also work out-of-the-box, if you have them configured system-wide (for example, via [Karabiner-Elements][karabiner-elements] [[complex modification][karabiner-elements-emacs-mod]], or by augmenting the [system defaults][emacs-keyboard-shortcuts-osx] [[DefaultKeyBinding.dict][defaultkeybinding.dict], [Cocoa Text System][cocoa-text-system], [Text System Defaults and Key Bindings][apple-dev-text-system]]).
 
 ### Keybindings
 
-_Note:_ see [symbol reference][what-are-those-mac-symbols].
+_Not sure what these symbols mean? See the [symbol reference][what-are-those-mac-symbols], and [Emacs key notation][emacs-key-notation]._
 
 #### Movement
 
@@ -92,6 +92,7 @@ Copyright (c) 2021, [Michael Russo](https://mjrusso.com).
 [mac-keyboard-shortcuts]: https://support.apple.com/en-ca/HT201236
 [mac-keyboard-shortcuts-text]: https://support.apple.com/en-ca/HT201236#text
 [what-are-those-mac-symbols]: https://support.apple.com/en-ca/guide/mac-help/cpmh0011/mac
+[emacs-key-notation]: https://www.emacswiki.org/emacs/EmacsKeyNotation
 [karabiner-elements]: https://karabiner-elements.pqrs.org
 [karabiner-elements-emacs-mod]: https://ke-complex-modifications.pqrs.org/#emacs_key_bindings
 [emacs-keyboard-shortcuts-osx]: https://jblevins.org/log/kbd
