@@ -2,7 +2,7 @@
 
 # Scoot
 
-_Meet **Scoot**, your friendly cursor teleportation tool._
+_Meet **Scoot**, your friendly cursor teleportation and actuation tool._
 
 <a href="https://twitter.com/mjrusso" title="@mjrusso on Twitter"><img src="https://img.shields.io/badge/twitter-@mjrusso-blue.svg" alt="@mjrusso on Twitter"></a>
 
@@ -40,34 +40,35 @@ _Note:_ see [symbol reference][what-are-those-mac-symbols].
 
 #### Movement
 
-| System | Emacs (Alt) | Description                                                 |
-|----------|-------------|-------------------------------------------------------------|
-| ↑        | C-p         | Move cursor up (partial step)                               |
-| ↓        | C-n         | Move cursor down (partial step)                             |
-| ←        | C-b         | Move cursor left (partial step)                             |
-| →        | C-f         | Move cursor right (partial step)                            |
-| ⌥↑       | M-a         | Move cursor up (full step)                                  |
-| ⌥↓       | M-e         | Move cursor down (full step)                                |
-| ⌥←       | M-b         | Move cursor left (full step)                                |
-| ⌥→       | M-f         | Move cursor right (full step)                               |
-| ⌘↑       | M-<         | Move cursor to top edge of screen                           |
-| ⌘↓       | M->         | Move cursor to bottom edge of screen                        |
-| ⌘←       | C-a         | Move cursor to left edge of screen                          |
-| ⌘→       | C-e         | Move cursor to right edge of screen                         |
-| ⌃L       | C-l         | Move cursor to center, and (on repeat) cycle around corners |
+| System | Emacs | Description                                                 |
+|--------|-------|-------------------------------------------------------------|
+| ↑      | C-p   | Move cursor up (partial step)                               |
+| ↓      | C-n   | Move cursor down (partial step)                             |
+| ←      | C-b   | Move cursor left (partial step)                             |
+| →      | C-f   | Move cursor right (partial step)                            |
+| ⌥↑     | M-a   | Move cursor up (full step)                                  |
+| ⌥↓     | M-e   | Move cursor down (full step)                                |
+| ⌥←     | M-b   | Move cursor left (full step)                                |
+| ⌥→     | M-f   | Move cursor right (full step)                               |
+| ⌘↑     | M-<   | Move cursor to top edge of screen                           |
+| ⌘↓     | M->   | Move cursor to bottom edge of screen                        |
+| ⌘←     | C-a   | Move cursor to left edge of screen                          |
+| ⌘→     | C-e   | Move cursor to right edge of screen                         |
+| ⌃L     | C-l   | Move cursor to center, and (on repeat) cycle around corners |
 
 #### Other
 
-| Shortcut | Description |
-|----------|-------------|
-| ⌘G       | Toggle grid |
-| ⌘C       | Click       |
+| Shortcut | Description                        |
+|----------|------------------------------------|
+| ⌘G       | Toggle grid display                |
+| ⌘C       | Click (at current cursor location) |
+
 
 ## Installation
 
 Pre-built binaries are not (yet) available. To build, you'll need Xcode 12.5 (or later); `open Scoot.xcodeproj` and select _Product_ → _Build_.
 
-## Roadmap
+## Backlog
 
 - Ability to jump directly to a cell in the grid, using a char-based decision tree (inspired by [avy][avy]).
 - Ability to specify destination when dragging.
