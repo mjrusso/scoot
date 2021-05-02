@@ -16,7 +16,6 @@
 		E577622F262F04D100849D7D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E577622E262F04D100849D7D /* ViewController.swift */; };
 		E5776231262F04D300849D7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5776230262F04D300849D7D /* Assets.xcassets */; };
 		E5776234262F04D300849D7D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E5776232262F04D300849D7D /* Main.storyboard */; };
-		E5776240262F04D300849D7D /* ScootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E577623F262F04D300849D7D /* ScootTests.swift */; };
 		E577624B262F04D300849D7D /* ScootUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E577624A262F04D300849D7D /* ScootUITests.swift */; };
 		E5776261262F067700849D7D /* Window.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5776260262F067700849D7D /* Window.swift */; };
 		E5776269262F0EC700849D7D /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5776268262F0EC700849D7D /* WindowController.swift */; };
@@ -56,7 +55,6 @@
 		E5776235262F04D300849D7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5776236262F04D300849D7D /* Scoot.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Scoot.entitlements; sourceTree = "<group>"; };
 		E577623B262F04D300849D7D /* ScootTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScootTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E577623F262F04D300849D7D /* ScootTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScootTests.swift; sourceTree = "<group>"; };
 		E5776241262F04D300849D7D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5776246262F04D300849D7D /* ScootUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScootUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E577624A262F04D300849D7D /* ScootUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScootUITests.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 		E577623E262F04D300849D7D /* ScootTests */ = {
 			isa = PBXGroup;
 			children = (
-				E577623F262F04D300849D7D /* ScootTests.swift */,
 				E59C1629263E52540033E2CC /* GridTests.swift */,
 				E5776241262F04D300849D7D /* Info.plist */,
 			);
@@ -319,7 +316,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5776240262F04D300849D7D /* ScootTests.swift in Sources */,
 				E59C162A263E52540033E2CC /* GridTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
