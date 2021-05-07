@@ -45,9 +45,11 @@ class ViewController: NSViewController {
 
         self.mouse = Mouse(screen: screen)
 
-        self.grid = Grid(
+        let config = Grid.Config(
             gridSize: screen.visibleFrame.size,
             targetCellSize: defaultCellSize)
+
+        self.grid = Grid(config: config)
 
         isDisplayingGrid = true
     }

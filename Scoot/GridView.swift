@@ -51,32 +51,31 @@ class GridView: NSView {
           .paragraphStyle: paragraphStyle
         ]
 
-        for column in 0..<grid.numColumns {
+        for (index, cellRect) in grid.rects.enumerated() {
+            let text = grid.data(atIndex: index)
 
-            for row in 0..<grid.numRows {
+            let boundingRect = text.boundingRect(
+                with: cellRect.size,
+                options: .usesLineFragmentOrigin,
+                attributes: attrs
+            )
 
-                let text = grid.data(atX: column, y: row)
+            let textHeight = boundingRect.height
 
-                let x = CGFloat(column) * cellSize.width
-                let y = CGFloat(row) * cellSize.height
+            text.draw(
+                with: CGRect(
+                    origin: CGPoint(
+                        x: cellRect.origin.x,
+                        y: cellRect.origin.y - textHeight
+                    ),
+                    size: cellRect.size
+                ),
+                options: .usesLineFragmentOrigin,
+                attributes: attrs,
+                context: nil
+            )
 
-                let boundingRect = text.boundingRect(
-                    with: cellSize,
-                    options: .usesLineFragmentOrigin,
-                    attributes: attrs)
-
-                let textHeight = boundingRect.height
-
-                text.draw(
-                    with: CGRect(
-                        origin: CGPoint(x: x, y: y - textHeight),
-                        size: cellSize),
-                    options: .usesLineFragmentOrigin,
-                    attributes: attrs,
-                    context: nil
-                )
-
-            }
         }
+
     }
 }

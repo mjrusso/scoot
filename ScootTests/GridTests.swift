@@ -3,7 +3,7 @@ import XCTest
 
 class GridTests: XCTestCase {
 
-    let grid = Grid(numRows: 3, numCols: 4, gridSize: .zero)
+    let grid = Grid(config: Grid.Config(numRows: 3, numColumns: 4, gridSize: .zero))
 
     func testIndexing() {
         XCTAssertEqual(grid.index(atX: 0, y: 0), 0)
@@ -58,28 +58,30 @@ class GridTests: XCTestCase {
         XCTAssertEqual(grid.coordinates(atIndex: 11).y, 2)
     }
 
-    func testBasicInitialization() {
+    func testInitialization() {
         let numRows = 3
-        let numCols = 4
+        let numColumns = 4
         let gridSize = CGSize(width: 200, height: 400)
 
-        let grid = Grid(numRows: numRows, numCols: numCols, gridSize: gridSize)
+        let config = Grid.Config(numRows: numRows, numColumns: numColumns, gridSize: gridSize)
 
-        XCTAssertEqual(grid.numCells, numRows*numCols)
-        XCTAssertEqual(grid.cellWidth, gridSize.width/CGFloat(numCols))
-        XCTAssertEqual(grid.cellHeight, gridSize.height/CGFloat(numRows))
-        XCTAssertEqual(grid.cellSize, CGSize(
-                        width: gridSize.width/CGFloat(numCols),
+        XCTAssertEqual(config.numCells, numRows*numColumns)
+        XCTAssertEqual(config.cellWidth, gridSize.width/CGFloat(numColumns))
+        XCTAssertEqual(config.cellHeight, gridSize.height/CGFloat(numRows))
+        XCTAssertEqual(config.cellSize, CGSize(
+                        width: gridSize.width/CGFloat(numColumns),
                         height: gridSize.height/CGFloat(numRows)))
     }
 
-    func testInitializationViaTargetSizing() {
+    func testInitializationViaTargetCellSizing() {
         let gridSize = CGSize(width: 200, height: 440)
 
         // This target size evenly divides the grid size, in both dimensions.
         var targetCellSize = CGSize(width: 20, height: 40)
 
-        var grid = Grid(gridSize: gridSize, targetCellSize: targetCellSize)
+        var config = Grid.Config(gridSize: gridSize, targetCellSize: targetCellSize)
+
+        var grid = Grid(config: config)
 
         XCTAssertEqual(grid.numColumns, 10)
 
@@ -90,7 +92,9 @@ class GridTests: XCTestCase {
         // This target size doesn't evenly divide the grid size, in either dimension.
         targetCellSize = CGSize(width: 30, height: 30)
 
-        grid = Grid(gridSize: gridSize, targetCellSize: targetCellSize)
+        config = Grid.Config(gridSize: gridSize, targetCellSize: targetCellSize)
+
+        grid = Grid(config: config)
 
         XCTAssertEqual(grid.numColumns, 6)
         XCTAssertEqual(grid.numRows, 14)
@@ -100,4 +104,35 @@ class GridTests: XCTestCase {
                         height: gridSize.height/CGFloat(14)))
     }
 
+    func testRects() {
+        let numRows = 3
+        let numColumns = 2
+        let gridSize = CGSize(width: 200, height: 90)
+
+        let config = Grid.Config(numRows: numRows, numColumns: numColumns, gridSize: gridSize)
+
+        XCTAssertEqual(config.rects, [
+            CGRect(x: 0, y: 0, width: 100, height: 30),
+            CGRect(x: 100, y: 0, width: 100, height: 30),
+            CGRect(x: 0, y: 30, width: 100, height: 30),
+            CGRect(x: 100, y: 30, width: 100, height: 30),
+            CGRect(x: 0, y: 60, width: 100, height: 30),
+            CGRect(x: 100, y: 60, width: 100, height: 30),
+        ])
+    }
+
+    func testPropertyProxying() {
+        let numRows = 3
+        let numColumns = 4
+        let gridSize = CGSize(width: 200, height: 400)
+
+        let config = Grid.Config(numRows: numRows, numColumns: numColumns, gridSize: gridSize)
+        let grid = Grid(config: config)
+
+        XCTAssertEqual(grid.numCells, config.numCells)
+        XCTAssertEqual(grid.cellWidth, config.cellWidth)
+        XCTAssertEqual(grid.cellHeight, config.cellHeight)
+        XCTAssertEqual(grid.cellSize, config.cellSize)
+        XCTAssertEqual(grid.rects, config.rects)
+    }
 }

@@ -2,38 +2,80 @@ import Foundation
 
 struct Grid {
 
-    let numColumns: Int
+    class Config {
 
-    let numRows: Int
+        let size: CGSize
 
-    let size: CGSize
+        let numColumns: Int
+        let numRows: Int
+        let numCells: Int
 
-    var cellWidth: CGFloat {
-        size.width / CGFloat(numColumns)
+        let cellWidth: CGFloat
+        let cellHeight: CGFloat
+        let cellSize: CGSize
+
+        lazy var rects: [CGRect] = {
+            var rects = [CGRect]()
+            rects.reserveCapacity(numCells)
+
+            let xs = stride(from: 0.0, to: size.width, by: cellWidth)
+            let ys = stride(from: 0.0, to: size.height, by: cellHeight)
+
+            for y in ys {
+                for x in xs {
+                    let rect = CGRect(origin: CGPoint(x: x, y: y), size: cellSize)
+                    rects.append(rect)
+                }
+            }
+
+            return rects
+        }()
+
+        convenience init(gridSize: CGSize, targetCellSize: CGSize) {
+            let numRows = Int(floor(gridSize.height / targetCellSize.height))
+            let numColumns = Int(floor(gridSize.width / targetCellSize.width))
+            self.init(numRows: numRows, numColumns: numColumns, gridSize: gridSize)
+        }
+
+        init(numRows: Int, numColumns: Int, gridSize: CGSize) {
+            self.size = gridSize
+            self.numRows = numRows
+            self.numColumns = numColumns
+            self.numCells = numRows * numColumns
+            self.cellWidth = gridSize.width / CGFloat(numColumns)
+            self.cellHeight = gridSize.height / CGFloat(numRows)
+            self.cellSize = CGSize(width: cellWidth, height: cellHeight)
+        }
+
     }
 
-    var cellHeight: CGFloat {
-        size.height / CGFloat(numRows)
-    }
-
-    var cellSize: CGSize {
-        CGSize(width: cellWidth, height: cellHeight)
-    }
-
-    var numCells: Int {
-        data.count
-    }
+    let config: Config
 
     /// The underlying data stored in the grid.  (See `index` for details on how grid
     /// coordinates are mapped to this 1-dimensional array.)
     let data: [String]
 
-    init(numRows rows: Int, numCols cols: Int, gridSize size: CGSize) {
-        self.numRows = rows
-        self.numColumns = cols
-        self.size = size
+    var numColumns: Int { config.numColumns }
 
-        let count = numRows * numColumns
+    var numRows: Int { config.numRows }
+
+    var size: CGSize { config.size }
+
+    var cellWidth: CGFloat { config.cellWidth }
+
+    var cellHeight: CGFloat { config.cellHeight }
+
+    var cellSize: CGSize { config.cellSize }
+
+    var numCells: Int { config.numCells }
+
+    var rects: [CGRect] { config.rects }
+
+    init(config: Config) {
+        self.config = config
+
+        let count = config.numCells
+
         var data = [String]()
         data.reserveCapacity(count)
 
@@ -44,15 +86,12 @@ struct Grid {
         self.data = data
     }
 
-    init(gridSize: CGSize, targetCellSize: CGSize) {
-        let numCols = floor(gridSize.width / targetCellSize.width)
-        let numRows = floor(gridSize.height / targetCellSize.height)
-
-        self.init(numRows: Int(numRows), numCols: Int(numCols), gridSize: gridSize)
-    }
-
     func data(atX x: Int, y: Int) -> String {
         let index = (y * numColumns) + x
+        return data[index]
+    }
+
+    func data(atIndex index: Int) -> String {
         return data[index]
     }
 
