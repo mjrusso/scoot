@@ -85,6 +85,7 @@ Pre-built binaries are not (yet) available. To build, you'll need Xcode 12.5 (or
 - Show visual feedback when walking the decision tree.
   - After starting a sequence, indicate which keys can still be pressed.
   - If user types an invalid key, let them know. (Avy handles this by writing _"no such candidate ..." to the minibuffer; see [here](https://github.com/abo-abo/avy/blob/e92cb37457b43336b765630dbfbea8ba4be601fa/avy.el#L474-L475).)
+- CI ([example](https://betterprogramming.pub/indie-mac-app-devops-with-github-actions-b16764a3ebe7)).
 
 ## License
 
