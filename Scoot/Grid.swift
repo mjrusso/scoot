@@ -1,84 +1,64 @@
 import Foundation
 
-struct Grid {
-
-    class Config {
-
-        let size: CGSize
-
-        let numColumns: Int
-        let numRows: Int
-        let numCells: Int
-
-        let cellWidth: CGFloat
-        let cellHeight: CGFloat
-        let cellSize: CGSize
-
-        lazy var rects: [CGRect] = {
-            var rects = [CGRect]()
-            rects.reserveCapacity(numCells)
-
-            let xs = stride(from: 0.0, to: size.width, by: cellWidth)
-            let ys = stride(from: 0.0, to: size.height, by: cellHeight)
-
-            for y in ys {
-                for x in xs {
-                    let rect = CGRect(origin: CGPoint(x: x, y: y), size: cellSize)
-                    rects.append(rect)
-                }
-            }
-
-            return rects
-        }()
-
-        convenience init(gridSize: CGSize, targetCellSize: CGSize) {
-            let numRows = Int(floor(gridSize.height / targetCellSize.height))
-            let numColumns = Int(floor(gridSize.width / targetCellSize.width))
-            self.init(numRows: numRows, numColumns: numColumns, gridSize: gridSize)
-        }
-
-        init(numRows: Int, numColumns: Int, gridSize: CGSize) {
-            self.size = gridSize
-            self.numRows = numRows
-            self.numColumns = numColumns
-            self.numCells = numRows * numColumns
-            self.cellWidth = gridSize.width / CGFloat(numColumns)
-            self.cellHeight = gridSize.height / CGFloat(numRows)
-            self.cellSize = CGSize(width: cellWidth, height: cellHeight)
-        }
-
-    }
-
-    let config: Config
+class Grid {
 
     /// The underlying data stored in the grid.  (See `index` for details on how grid
     /// coordinates are mapped to this 1-dimensional array.)
-    let data: [String]
+    var data: [String] {
+        didSet {
+            if numCells != data.count {
+                data = oldValue
+            }
+        }
+    }
 
-    var numColumns: Int { config.numColumns }
+    let numColumns: Int
 
-    var numRows: Int { config.numRows }
+    let numRows: Int
 
-    var size: CGSize { config.size }
+    let size: CGSize
 
-    var cellWidth: CGFloat { config.cellWidth }
+    let cellWidth: CGFloat
 
-    var cellHeight: CGFloat { config.cellHeight }
+    let cellHeight: CGFloat
 
-    var cellSize: CGSize { config.cellSize }
+    let cellSize: CGSize
 
-    var numCells: Int { config.numCells }
+    let numCells: Int
 
-    var rects: [CGRect] { config.rects }
+    lazy var rects: [CGRect] = {
+        var rects = [CGRect]()
+        rects.reserveCapacity(numCells)
 
-    init(config: Config, data: [String]? = nil) {
-        self.config = config
+        let xs = stride(from: 0.0, to: size.width, by: cellWidth)
+        let ys = stride(from: 0.0, to: size.height, by: cellHeight)
 
-        let data = data ?? (0..<config.numCells).map { String($0) }
+        for y in ys {
+            for x in xs {
+                let rect = CGRect(origin: CGPoint(x: x, y: y), size: cellSize)
+                rects.append(rect)
+            }
+        }
 
-        assert(config.numCells == data.count)
+        return rects
+    }()
 
-        self.data = data
+    convenience init(gridSize: CGSize, targetCellSize: CGSize) {
+        let numRows = Int(floor(gridSize.height / targetCellSize.height))
+        let numColumns = Int(floor(gridSize.width / targetCellSize.width))
+        self.init(numRows: numRows, numColumns: numColumns, gridSize: gridSize)
+    }
+
+    init(numRows: Int, numColumns: Int, gridSize: CGSize) {
+        let numCells = numRows * numColumns
+        self.size = gridSize
+        self.numRows = numRows
+        self.numColumns = numColumns
+        self.numCells = numCells
+        self.cellWidth = gridSize.width / CGFloat(numColumns)
+        self.cellHeight = gridSize.height / CGFloat(numRows)
+        self.cellSize = CGSize(width: cellWidth, height: cellHeight)
+        self.data = (0..<numCells).map { String($0) }
     }
 
     func data(atX x: Int, y: Int) -> String {

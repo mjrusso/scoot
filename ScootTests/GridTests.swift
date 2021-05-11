@@ -3,7 +3,7 @@ import XCTest
 
 class GridTests: XCTestCase {
 
-    let grid = Grid(config: Grid.Config(numRows: 3, numColumns: 4, gridSize: .zero))
+    let grid = Grid(numRows: 3, numColumns: 4, gridSize: .zero)
 
     func testIndexing() {
         XCTAssertEqual(grid.index(atX: 0, y: 0), 0)
@@ -63,14 +63,17 @@ class GridTests: XCTestCase {
         let numColumns = 4
         let gridSize = CGSize(width: 200, height: 400)
 
-        let config = Grid.Config(numRows: numRows, numColumns: numColumns, gridSize: gridSize)
+        let grid = Grid(numRows: numRows, numColumns: numColumns, gridSize: gridSize)
 
-        XCTAssertEqual(config.numCells, numRows*numColumns)
-        XCTAssertEqual(config.cellWidth, gridSize.width/CGFloat(numColumns))
-        XCTAssertEqual(config.cellHeight, gridSize.height/CGFloat(numRows))
-        XCTAssertEqual(config.cellSize, CGSize(
-                        width: gridSize.width/CGFloat(numColumns),
-                        height: gridSize.height/CGFloat(numRows)))
+        XCTAssertEqual(grid.numCells, numRows*numColumns)
+        XCTAssertEqual(grid.cellWidth, gridSize.width/CGFloat(numColumns))
+        XCTAssertEqual(grid.cellHeight, gridSize.height/CGFloat(numRows))
+        XCTAssertEqual(
+            grid.cellSize,
+            CGSize(
+                width: gridSize.width/CGFloat(numColumns),
+                height: gridSize.height/CGFloat(numRows))
+        )
     }
 
     func testInitializationViaTargetCellSizing() {
@@ -79,9 +82,7 @@ class GridTests: XCTestCase {
         // This target size evenly divides the grid size, in both dimensions.
         var targetCellSize = CGSize(width: 20, height: 40)
 
-        var config = Grid.Config(gridSize: gridSize, targetCellSize: targetCellSize)
-
-        var grid = Grid(config: config)
+        var grid = Grid(gridSize: gridSize, targetCellSize: targetCellSize)
 
         XCTAssertEqual(grid.numColumns, 10)
 
@@ -92,9 +93,7 @@ class GridTests: XCTestCase {
         // This target size doesn't evenly divide the grid size, in either dimension.
         targetCellSize = CGSize(width: 30, height: 30)
 
-        config = Grid.Config(gridSize: gridSize, targetCellSize: targetCellSize)
-
-        grid = Grid(config: config)
+        grid = Grid(gridSize: gridSize, targetCellSize: targetCellSize)
 
         XCTAssertEqual(grid.numColumns, 6)
         XCTAssertEqual(grid.numRows, 14)
@@ -104,14 +103,14 @@ class GridTests: XCTestCase {
                         height: gridSize.height/CGFloat(14)))
     }
 
-    func testRects() {
+    func testRectGeneration() {
         let numRows = 3
         let numColumns = 2
         let gridSize = CGSize(width: 200, height: 90)
 
-        let config = Grid.Config(numRows: numRows, numColumns: numColumns, gridSize: gridSize)
+        let grid = Grid(numRows: numRows, numColumns: numColumns, gridSize: gridSize)
 
-        XCTAssertEqual(config.rects, [
+        XCTAssertEqual(grid.rects, [
             CGRect(x: 0, y: 0, width: 100, height: 30),
             CGRect(x: 100, y: 0, width: 100, height: 30),
             CGRect(x: 0, y: 30, width: 100, height: 30),
@@ -121,18 +120,30 @@ class GridTests: XCTestCase {
         ])
     }
 
-    func testPropertyProxying() {
+    func testDataAssignment() {
         let numRows = 3
-        let numColumns = 4
-        let gridSize = CGSize(width: 200, height: 400)
+        let numColumns = 2
+        let numCells = numRows * numColumns
 
-        let config = Grid.Config(numRows: numRows, numColumns: numColumns, gridSize: gridSize)
-        let grid = Grid(config: config)
+        let grid = Grid(numRows: numRows, numColumns: numColumns, gridSize: .zero)
 
-        XCTAssertEqual(grid.numCells, config.numCells)
-        XCTAssertEqual(grid.cellWidth, config.cellWidth)
-        XCTAssertEqual(grid.cellHeight, config.cellHeight)
-        XCTAssertEqual(grid.cellSize, config.cellSize)
-        XCTAssertEqual(grid.rects, config.rects)
+        grid.data = (0..<numCells).map { String($0 * $0) }
+
+        let expected = ["0", "1", "4", "9", "16", "25"]
+
+        XCTAssertEqual(grid.data, expected)
+
+        // Too many items; grid.data shouldn't change.
+        grid.data = (0..<numCells+1).map { String($0) }
+        XCTAssertEqual(grid.data, expected)
+
+        // Too few items; grid.data shouldn't change.
+        grid.data = (0..<numCells-1).map { String($0) }
+        XCTAssertEqual(grid.data, expected)
+
+        // Now, grid.data should change (correct number of items in array).
+        grid.data = (0..<numCells).map { String($0) }
+        XCTAssertEqual(grid.data, ["0", "1", "2", "3", "4", "5"])
     }
+
 }

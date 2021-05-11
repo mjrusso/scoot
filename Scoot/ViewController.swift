@@ -58,18 +58,20 @@ class ViewController: NSViewController {
 
         self.mouse = Mouse(screen: screen)
 
-        let config = Grid.Config(
+        let grid = Grid(
             gridSize: screen.visibleFrame.size,
-            targetCellSize: defaultCellSize)
-
-        let tree = Tree(
-            candidates: config.rects,
-            keys: determineAvailableKeys(config: config)
+            targetCellSize: defaultCellSize
         )
 
-        self.tree = tree
+        let tree = Tree(
+            candidates: grid.rects,
+            keys: determineAvailableKeys(numCandidates: grid.numCells)
+        )
 
-        self.grid = Grid(config: config, data: tree.sequences)
+        grid.data = tree.sequences
+
+        self.tree = tree
+        self.grid = grid
 
         isDisplayingGrid = true
     }
@@ -83,9 +85,7 @@ class ViewController: NSViewController {
 
 extension ViewController {
 
-    func determineAvailableKeys(config: Grid.Config) -> [Character] {
-
-        // Scale the number of keys to use based on screen size.
+    func determineAvailableKeys(numCandidates: Int) -> [Character] {
 
         let keys: [[Character]] = [
             ["a", "s", "d", "f", "j", "k", "l"],
@@ -96,7 +96,7 @@ extension ViewController {
             [";"],
         ]
 
-        switch config.numCells {
+        switch numCandidates {
         case 0..<800:
             return keys[0] + keys[1]
         case 800..<1200:
