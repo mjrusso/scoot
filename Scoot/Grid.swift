@@ -71,17 +71,12 @@ struct Grid {
 
     var rects: [CGRect] { config.rects }
 
-    init(config: Config) {
+    init(config: Config, data: [String]? = nil) {
         self.config = config
 
-        let count = config.numCells
+        let data = data ?? (0..<config.numCells).map { String($0) }
 
-        var data = [String]()
-        data.reserveCapacity(count)
-
-        for i in 0..<count {
-            data.append("\(i)")
-        }
+        assert(config.numCells == data.count)
 
         self.data = data
     }

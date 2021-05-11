@@ -1,17 +1,48 @@
 import Cocoa
+import Carbon.HIToolbox
 
 // MARK: - Keyboard
 
 extension ViewController {
 
-    // By default, we vend to the system directly (by calling `interpretKeyEvents`
-    // with the input event). However, in some cases we need to override the
-    // system behaviour: for example, Control-A maps to `moveToBeginningOfParagraph`,
-    // but `moveToBeginningOfLine` is more appropriate here.
-
     override func keyDown(with event: NSEvent) {
-        let characters = event.charactersIgnoringModifiers
-        let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+        let modifiers = event.modifierFlags.intersection(
+            .deviceIndependentFlagsMask
+        )
+
+        guard let characters = event.charactersIgnoringModifiers else {
+            return
+        }
+
+        // Cancel, if user hits the escape key, or Control-G (Emacs: keyboard-quit).
+        if event.keyCode == kVK_Escape || (modifiers, characters) == (.control, "g") {
+            cancelOperation(self)
+            return
+        }
+
+        // FIXME: this logic would be better encoded as a state machine.
+        if modifiers.isEmpty && characters.count == 1 {
+            let character = characters[characters.startIndex]
+
+            if let nextNode = (currentNode ?? tree.root).step(by: character) {
+                if nextNode.isLeaf , let rect = nextNode.value {
+                    mouse.move(to: CGPoint(x: rect.midX, y: rect.midY))
+                    currentNode = nil
+                    return
+                }
+                self.currentNode = nextNode
+            }
+        }
+
+        if isWalkingDecisionTree {
+            // Ignore all other keypresses while we're walking the decision tree.
+            return
+        }
+
+        // By default, we vend to the system directly (by calling `interpretKeyEvents`
+        // with the input event). However, in some cases we need to override the
+        // system behaviour: for example, Control-A maps to `moveToBeginningOfParagraph`,
+        // but `moveToBeginningOfLine` is more appropriate here.
 
         switch (modifiers, characters) {
 

@@ -2,9 +2,22 @@ import Cocoa
 
 class ViewController: NSViewController {
 
-    var grid: Grid?
+    var mouse: Mouse!
 
-    var mouse: Mouse?
+    // A grid, subdividing the screen into a collection of evenly-sized cells.
+    var grid: Grid!
+
+    // The underlying data structure enabling cursor movement via a
+    // character-based decision tree.
+    var tree: Tree<CGRect>!
+
+    // Non-nil, if the user is in the process of entering a key sequence to
+    // navigate via the decision tree.
+    var currentNode: Tree<CGRect>.Node<CGRect>?
+
+    var isWalkingDecisionTree: Bool {
+        currentNode != nil
+    }
 
     var window: NSWindow? {
         view.window
@@ -49,7 +62,14 @@ class ViewController: NSViewController {
             gridSize: screen.visibleFrame.size,
             targetCellSize: defaultCellSize)
 
-        self.grid = Grid(config: config)
+        let tree = Tree(
+            candidates: config.rects,
+            keys: determineAvailableKeys(config: config)
+        )
+
+        self.tree = tree
+
+        self.grid = Grid(config: config, data: tree.sequences)
 
         isDisplayingGrid = true
     }
@@ -59,6 +79,35 @@ class ViewController: NSViewController {
 
         window?.makeFirstResponder(self)
     }
+}
+
+extension ViewController {
+
+    func determineAvailableKeys(config: Grid.Config) -> [Character] {
+
+        // Scale the number of keys to use based on screen size.
+
+        let keys: [[Character]] = [
+            ["a", "s", "d", "f", "j", "k", "l"],
+            ["g", "h"],
+            ["q", "w", "e", "r", "u", "i", "o", "p"],
+            ["t", "y"],
+            ["z", "x", "c", "v", "b", "n", "m"],
+            [";"],
+        ]
+
+        switch config.numCells {
+        case 0..<800:
+            return keys[0] + keys[1]
+        case 800..<1200:
+            return keys[0] + keys[1] + keys[2]
+        case 1200..<1400:
+            return keys[0] + keys[1] + keys[2] + keys[3]
+        default:
+            return keys.flatMap { $0 }
+        }
+    }
+
 }
 
 // MARK: - Actions

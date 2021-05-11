@@ -22,6 +22,9 @@
 		E591E5672636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E591E5662636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift */; };
 		E591E56C2636F8D000C037FF /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E591E56B2636F8D000C037FF /* Mouse.swift */; };
 		E59C162A263E52540033E2CC /* GridTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C1629263E52540033E2CC /* GridTests.swift */; };
+		E59C162E264184500033E2CC /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C162D264184500033E2CC /* Tree.swift */; };
+		E59C162F264184500033E2CC /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C162D264184500033E2CC /* Tree.swift */; };
+		E59C1631264185940033E2CC /* TreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C1630264185940033E2CC /* TreeTests.swift */; };
 		E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E87FFC2630A3550094FE9B /* GridView.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +67,8 @@
 		E591E5662636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+NSStandardKeyBindingResponding.swift"; sourceTree = "<group>"; };
 		E591E56B2636F8D000C037FF /* Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
 		E59C1629263E52540033E2CC /* GridTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTests.swift; sourceTree = "<group>"; };
+		E59C162D264184500033E2CC /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
+		E59C1630264185940033E2CC /* TreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeTests.swift; sourceTree = "<group>"; };
 		E5E87FF4263061250094FE9B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../scoot/README.md; sourceTree = "<group>"; };
 		E5E87FFC2630A3550094FE9B /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GridView.swift; path = ../../scoot/Scoot/GridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +146,7 @@
 				E5776230262F04D300849D7D /* Assets.xcassets */,
 				E5776235262F04D300849D7D /* Info.plist */,
 				E5776236262F04D300849D7D /* Scoot.entitlements */,
+				E59C162D264184500033E2CC /* Tree.swift */,
 			);
 			path = Scoot;
 			sourceTree = "<group>";
@@ -149,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				E59C1629263E52540033E2CC /* GridTests.swift */,
+				E59C1630264185940033E2CC /* TreeTests.swift */,
 				E5776241262F04D300849D7D /* Info.plist */,
 			);
 			path = ScootTests;
@@ -307,6 +314,7 @@
 				E5776269262F0EC700849D7D /* WindowController.swift in Sources */,
 				E577622F262F04D100849D7D /* ViewController.swift in Sources */,
 				E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */,
+				E59C162E264184500033E2CC /* Tree.swift in Sources */,
 				E577622D262F04D100849D7D /* AppDelegate.swift in Sources */,
 				E591E5672636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift in Sources */,
 			);
@@ -317,6 +325,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E59C162A263E52540033E2CC /* GridTests.swift in Sources */,
+				E59C1631264185940033E2CC /* TreeTests.swift in Sources */,
+				E59C162F264184500033E2CC /* Tree.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

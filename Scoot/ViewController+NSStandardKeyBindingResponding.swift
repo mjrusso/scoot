@@ -38,7 +38,7 @@ import Cocoa
 extension ViewController {
 
     override func cancelOperation(_ sender: Any?) {
-        NSApplication.shared.hide(self)
+        currentNode = nil
     }
 
     override func moveLeft(_ sender: Any?) {
