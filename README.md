@@ -20,6 +20,8 @@ Scoot is a tiny utility app that provides fast, keyboard-driven control over the
 
 * Scoot is in the early proof of concept + prototyping stage.
 
+* Scoot runs on MacOS, versions 10.15 (Catalina) and 11 (Big Sur).
+
 * Scoot is an AppKit app, written in Swift.
 
 * Scoot complements mouse-related accessibility tools that ship as part of MacOS, such as [Mouse Keys][mouse-keys] and other [accessibility shortcuts][mac-accessibility-shortcuts].
@@ -66,7 +68,6 @@ _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac
 |----------|------------------------------------|
 | ⌘G       | Toggle grid display                |
 | ⌘C       | Click (at current cursor location) |
-
 
 ## Installation
 
