@@ -19,6 +19,8 @@ class ViewController: NSViewController {
         currentNode != nil
     }
 
+    var isHoldingDownMouseButton = false
+
     var window: NSWindow? {
         view.window
     }

@@ -19,6 +19,12 @@ struct Mouse {
     }
 
     func click() {
+        pressDown()
+        usleep(40000)
+        release()
+    }
+
+    func pressDown() {
         let currentLocation = NSEvent.mouseLocation.convertToCG(screenSize: screenSize)
 
         CGEvent(
@@ -26,9 +32,22 @@ struct Mouse {
             mouseType: .leftMouseDown,
             mouseCursorPosition: currentLocation,
             mouseButton: .left
-        )?.post(tap: CGEventTapLocation.cghidEventTap)
+        )?.post(tap: .cghidEventTap)
+    }
 
-        usleep(40000)
+    func notifyDrag() {
+        let currentLocation = NSEvent.mouseLocation.convertToCG(screenSize: screenSize)
+
+        CGEvent(
+            mouseEventSource: nil,
+            mouseType: .leftMouseDragged,
+            mouseCursorPosition: currentLocation,
+            mouseButton: .left
+        )?.post(tap: .cghidEventTap)
+    }
+
+    func release() {
+        let currentLocation = NSEvent.mouseLocation.convertToCG(screenSize: screenSize)
 
         CGEvent(
             mouseEventSource: nil,

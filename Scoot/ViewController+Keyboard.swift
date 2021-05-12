@@ -21,6 +21,7 @@ extension ViewController {
         }
 
         // FIXME: this logic would be better encoded as a state machine.
+
         if modifiers.isEmpty && characters.count == 1 {
             let character = characters[characters.startIndex]
 
@@ -36,6 +37,23 @@ extension ViewController {
 
         if isWalkingDecisionTree {
             // Ignore all other keypresses while we're walking the decision tree.
+            return
+        }
+
+        if event.keyCode == kVK_Return {
+            switch (isHoldingDownMouseButton, modifiers) {
+            case (false, []):
+                mouse.click()
+            case (false, .command):
+                mouse.pressDown()
+                isHoldingDownMouseButton = true
+            case (true, _):
+                mouse.notifyDrag()
+                mouse.release()
+                isHoldingDownMouseButton = false
+            default:
+                break
+            }
             return
         }
 
@@ -63,14 +81,6 @@ extension ViewController {
 
         case ([.shift, .option], ">"): // Emacs: end-of-buffer
             moveToEndOfDocument(self)
-
-        case (.command, "c"): // Click
-            mouse?.click()
-            NSApplication.shared.hide(self)
-
-        case (.command, "d"): // Drag
-            mouse?.drag(.right, distance: 200) // TODO: mechanism to specify drag target
-            NSApplication.shared.hide(self)
 
         // Allow the system to handle the event. We override methods in the
         // NSStandardKeyBindingResponding protocol, to enable many of the default

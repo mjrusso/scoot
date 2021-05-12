@@ -39,6 +39,7 @@ extension ViewController {
 
     override func cancelOperation(_ sender: Any?) {
         currentNode = nil
+        isHoldingDownMouseButton = false
     }
 
     override func moveLeft(_ sender: Any?) {

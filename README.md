@@ -38,6 +38,11 @@ When Scoot is in the foreground:
 * You can _also_ move the cursor via the standard Mac keyboard shorcuts for [moving the insertion point][mac-keyboard-shortcuts-text]. (This means that keyboard shortcuts intended for navigating around in a document have been re-purposed to control movement on a 2-dimensional grid. Some liberties have been taken with this mapping; hopefully you find these keybindings intuitive.)
     * The equivalent standard Emacs keybindings should also work out-of-the-box, if you have them configured system-wide (for example, via [Karabiner-Elements][karabiner-elements] [[complex modification][karabiner-elements-emacs-mod]], or by augmenting the [system defaults][emacs-keyboard-shortcuts-osx] [[DefaultKeyBinding.dict][defaultkeybinding.dict], [Cocoa Text System][cocoa-text-system], [Text System Defaults and Key Bindings][apple-dev-text-system]]).
 
+* You can click with the left mouse button (at the current cursor location) by hitting the Return (↵) key.
+
+* You can hold the left mouse button down by hitting ⌘↵. (To release the button, type ⌘↵ again, or, alternatively, just press ↵ on its own.)
+  * To perform a drag-and-drop operation: situate the cursor above the object you want to drag and press ⌘↵, then move the mouse cursor to the desired drag destination (using one or more of the mechanisms that Scoot makes available), and then press ⌘↵ again to perform the drop.
+
 ### Keybindings
 
 _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac-symbols], and [Emacs key notation][emacs-key-notation]._
@@ -62,9 +67,12 @@ _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac
 
 #### Actions
 
-| Shortcut | Description                        |
-|----------|------------------------------------|
-| ⌘C       | Click (at current cursor location) |
+| Shortcut | Description                                                                 |
+|----------|-----------------------------------------------------------------------------|
+| ↵        | Click left mouse button (at current cursor location)                        |
+| ⌘↵       | Press and hold left mouse button (once activated, type ⌘↵ again to release) |
+
+_Note:_ ↵ signifies the Return (a.k.a Enter) key. (Technically, Return and Enter are [two different keys][return-and-enter-are-two-different-keys].)
 
 #### Presentation
 
@@ -83,7 +91,6 @@ Pre-built binaries are not (yet) available. To build, you'll need Xcode 12.5 (or
 
 ## Backlog
 
-- Ability to specify destination when dragging.
 - Menu bar item.
 - Ability to record, save, and run macros.
 - Multi-monitor support.
@@ -115,3 +122,4 @@ Copyright (c) 2021, [Michael Russo](https://mjrusso.com).
 [defaultkeybinding.dict]: https://github.com/nileshk/mac-configuration/blob/99eef47cd434fd3d6f4f1f9e2f50321f32179b88/Library/KeyBindings/DefaultKeyBinding.dict
 [cocoa-text-system]: https://www.hcs.harvard.edu/~jrus/site/cocoa-text.html
 [apple-dev-text-system]: https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/EventOverview/TextDefaultsBindings/TextDefaultsBindings.html
+[return-and-enter-are-two-different-keys]: https://daringfireball.net/2020/07/return_and_enter
