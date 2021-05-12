@@ -23,22 +23,61 @@ class ViewController: NSViewController {
         view.window
     }
 
-    var defaultCellSize = CGSize(width: 60.0, height: 60.0)
+    var targetCellSize = CGSize(width: 60.0, height: 60.0) {
+        didSet {
+            targetCellSize = clamp(
+                targetCellSize,
+                minValue: CGSize(width: 45.0, height: 45.0),
+                maxValue: CGSize(width: 90.0, height: 90.0)
+            )
+            if targetCellSize != oldValue {
+                initializeCoreDataStructures()
+            }
+        }
+    }
 
-    var numStepsPerCell = CGFloat(6.0)
+    let numStepsPerCell = CGFloat(6.0)
 
     var stepWidth: CGFloat {
-        (grid?.cellWidth ?? defaultCellSize.width) / numStepsPerCell
+        (grid?.cellWidth ?? targetCellSize.width) / numStepsPerCell
     }
 
     var stepHeight: CGFloat {
-        (grid?.cellHeight ?? defaultCellSize.height) / numStepsPerCell
+        (grid?.cellHeight ?? targetCellSize.height) / numStepsPerCell
     }
 
     @IBOutlet var gridView: GridView!
 
-    var isDisplayingGrid: Bool = false {
+    var isDisplayingGridLabels: Bool = true {
         didSet {
+            gridView.redraw()
+        }
+    }
+
+    var isDisplayingGridLines: Bool = true {
+        didSet {
+            gridView.redraw()
+        }
+    }
+
+    var gridLineAlphaComponent: CGFloat = 0.04 {
+        didSet {
+            gridLineAlphaComponent = clamp(
+                gridLineAlphaComponent,
+                minValue: 0.01,
+                maxValue: 1.0
+            )
+            gridView.redraw()
+        }
+    }
+
+    var gridLabelAlphaComponent: CGFloat = 0.5 {
+        didSet {
+            gridLabelAlphaComponent = clamp(
+                gridLabelAlphaComponent,
+                minValue: 0.01,
+                maxValue: 1.0
+            )
             gridView.redraw()
         }
     }
@@ -58,22 +97,7 @@ class ViewController: NSViewController {
 
         self.mouse = Mouse(screen: screen)
 
-        let grid = Grid(
-            gridSize: screen.visibleFrame.size,
-            targetCellSize: defaultCellSize
-        )
-
-        let tree = Tree(
-            candidates: grid.rects,
-            keys: determineAvailableKeys(numCandidates: grid.numCells)
-        )
-
-        grid.data = tree.sequences
-
-        self.tree = tree
-        self.grid = grid
-
-        isDisplayingGrid = true
+        self.initializeCoreDataStructures()
     }
 
     override func viewDidAppear() {
@@ -84,6 +108,34 @@ class ViewController: NSViewController {
 }
 
 extension ViewController {
+
+    func initializeCoreDataStructures() {
+        guard let screen = NSScreen.main else {
+            return
+        }
+
+        let screenSize = screen.visibleFrame.size
+
+        let grid = Grid(
+            gridSize: screenSize,
+            targetCellSize: targetCellSize
+        )
+
+        let tree = Tree(
+            candidates: grid.rects,
+            keys: determineAvailableKeys(numCandidates: grid.numCells)
+        )
+
+        grid.data = tree.sequences
+
+        assert(grid.numCells == grid.rects.count)
+        assert(tree.sequences.count == grid.numCells)
+
+        self.tree = tree
+        self.grid = grid
+
+        gridView.redraw()
+    }
 
     func determineAvailableKeys(numCandidates: Int) -> [Character] {
 
@@ -114,8 +166,30 @@ extension ViewController {
 
 extension ViewController {
 
-    @IBAction func toggleGrid(_ sender: NSMenuItem) {
-        isDisplayingGrid.toggle()
+    @IBAction func toggleGridLabels(_ sender: NSMenuItem) {
+        isDisplayingGridLabels.toggle()
+    }
+
+    @IBAction func toggleGridLines(_ sender: NSMenuItem) {
+        isDisplayingGridLines.toggle()
+    }
+
+    @IBAction func increaseGridSize(_ sender: NSMenuItem) {
+        targetCellSize += CGSize(width: 10.0, height: 10.0)
+    }
+
+    @IBAction func decreaseGridSize(_ sender: NSMenuItem) {
+        targetCellSize -= CGSize(width: 10.0, height: 10.0)
+    }
+
+    @IBAction func increaseContrast(_ sender: NSMenuItem) {
+        gridLineAlphaComponent += 0.1
+        gridLabelAlphaComponent += 0.15
+    }
+
+    @IBAction func decreaseContrast(_ sender: NSMenuItem) {
+        gridLineAlphaComponent -= 0.1
+        gridLabelAlphaComponent -= 0.15
     }
 
 }

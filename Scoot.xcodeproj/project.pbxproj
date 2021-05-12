@@ -25,6 +25,8 @@
 		E59C162E264184500033E2CC /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C162D264184500033E2CC /* Tree.swift */; };
 		E59C162F264184500033E2CC /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C162D264184500033E2CC /* Tree.swift */; };
 		E59C1631264185940033E2CC /* TreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C1630264185940033E2CC /* TreeTests.swift */; };
+		E59C1633264AC4F60033E2CC /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C1632264AC4F60033E2CC /* CGSize+Extensions.swift */; };
+		E59C1635264AC6FB0033E2CC /* Comparable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C1634264AC6FB0033E2CC /* Comparable+Extensions.swift */; };
 		E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E87FFC2630A3550094FE9B /* GridView.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +71,8 @@
 		E59C1629263E52540033E2CC /* GridTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridTests.swift; sourceTree = "<group>"; };
 		E59C162D264184500033E2CC /* Tree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		E59C1630264185940033E2CC /* TreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeTests.swift; sourceTree = "<group>"; };
+		E59C1632264AC4F60033E2CC /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
+		E59C1634264AC6FB0033E2CC /* Comparable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Extensions.swift"; sourceTree = "<group>"; };
 		E5E87FF4263061250094FE9B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../scoot/README.md; sourceTree = "<group>"; };
 		E5E87FFC2630A3550094FE9B /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GridView.swift; path = ../../scoot/Scoot/GridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,8 +106,10 @@
 		E51178642636EF1500B4202F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E59C1632264AC4F60033E2CC /* CGSize+Extensions.swift */,
 				E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */,
 				E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */,
+				E59C1634264AC6FB0033E2CC /* Comparable+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -311,12 +317,14 @@
 				E511785B2636EEC800B4202F /* NSScreen+Extensions.swift in Sources */,
 				E567D2A2263C77FC00A0A861 /* Grid.swift in Sources */,
 				E5776261262F067700849D7D /* Window.swift in Sources */,
+				E59C1633264AC4F60033E2CC /* CGSize+Extensions.swift in Sources */,
 				E5776269262F0EC700849D7D /* WindowController.swift in Sources */,
 				E577622F262F04D100849D7D /* ViewController.swift in Sources */,
 				E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */,
 				E59C162E264184500033E2CC /* Tree.swift in Sources */,
 				E577622D262F04D100849D7D /* AppDelegate.swift in Sources */,
 				E591E5672636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift in Sources */,
+				E59C1635264AC6FB0033E2CC /* Comparable+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

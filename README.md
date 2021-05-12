@@ -30,15 +30,13 @@ Scoot is a tiny utility app that provides fast, keyboard-driven control over the
 
 To activate Scoot, use the ⇧⌘J global keyboard shortcut. (As long as Scoot is running, this hotkey will bring the app to the foreground.)
 
-When Scoot is in the foreground, use ⌘G to toggle the grid on/off.
+When Scoot is in the foreground:
 
-You can jump directly to a cell in the grid. Each cell is marked with a label (e.g. “aaa”, “aas”, “aad”); type the characters, one letter at a time, and, as soon as a complete sequence is entered, the mouse cursor will move directly to the center of the corresponding cell. (This approach, including the use of a char-based decision tree, is heavily inspired by [avy][avy].)
+* You can jump directly to a cell in the grid. Each cell is marked with a label (e.g. “aaa”, “aas”, “aad”); type the characters, one letter at a time, and, as soon as a complete sequence is entered, the mouse cursor will move directly to the center of the corresponding cell. (This approach, including the use of a char-based decision tree, is heavily inspired by [avy][avy].)
+  * If you make a mistake while entering a label, hit the escape key (or C-G) to cancel and start over.
 
-If you make a mistake while entering a label, hit the escape key (or C-G) to cancel and start over.
-
-Scoot _also_ supports cursor movement via standard Mac keyboard shorcuts for [moving the insertion point][mac-keyboard-shortcuts-text]. (This means that keyboard shortcuts intended for navigating around in a document have been re-purposed to control movement on a 2-dimensional grid. Some liberties have been taken with this mapping; hopefully you find these keybindings intuitive.)
-
-The equivalent standard Emacs keybindings should also work out-of-the-box, if you have them configured system-wide (for example, via [Karabiner-Elements][karabiner-elements] [[complex modification][karabiner-elements-emacs-mod]], or by augmenting the [system defaults][emacs-keyboard-shortcuts-osx] [[DefaultKeyBinding.dict][defaultkeybinding.dict], [Cocoa Text System][cocoa-text-system], [Text System Defaults and Key Bindings][apple-dev-text-system]]).
+* You can _also_ move the cursor via the standard Mac keyboard shorcuts for [moving the insertion point][mac-keyboard-shortcuts-text]. (This means that keyboard shortcuts intended for navigating around in a document have been re-purposed to control movement on a 2-dimensional grid. Some liberties have been taken with this mapping; hopefully you find these keybindings intuitive.)
+    * The equivalent standard Emacs keybindings should also work out-of-the-box, if you have them configured system-wide (for example, via [Karabiner-Elements][karabiner-elements] [[complex modification][karabiner-elements-emacs-mod]], or by augmenting the [system defaults][emacs-keyboard-shortcuts-osx] [[DefaultKeyBinding.dict][defaultkeybinding.dict], [Cocoa Text System][cocoa-text-system], [Text System Defaults and Key Bindings][apple-dev-text-system]]).
 
 ### Keybindings
 
@@ -62,12 +60,22 @@ _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac
 | ⌘→     | C-e   | Move cursor to right edge of screen                         |
 | ⌃L     | C-l   | Move cursor to center, and (on repeat) cycle around corners |
 
-#### Other
+#### Actions
 
 | Shortcut | Description                        |
 |----------|------------------------------------|
-| ⌘G       | Toggle grid display                |
 | ⌘C       | Click (at current cursor location) |
+
+#### Presentation
+
+| Shortcut | Description                                |
+|----------|--------------------------------------------|
+| ⌃=       | Toggle visibility of grid lines            |
+| ⌃⇧=      | Toggle visibility of grid labels           |
+| ⇧⌘=      | Increase size of grid cells                |
+| ⇧⌘-      | Decrease size of grid cells                |
+| ⌘=       | Increase contrast of grid lines and labels |
+| ⌘-       | Decrease contrast of grid lines and labels |
 
 ## Installation
 

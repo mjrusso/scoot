@@ -11,10 +11,6 @@ class GridView: NSView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
 
-        guard viewController.isDisplayingGrid else {
-            return
-        }
-
         guard let grid = viewController.grid else {
             return
         }
@@ -25,20 +21,30 @@ class GridView: NSView {
 
         let cellSize = grid.cellSize
 
-        ctx.cgContext.setStrokeColor(NSColor.systemTeal.withAlphaComponent(0.04).cgColor)
+        ctx.cgContext.setStrokeColor(
+            NSColor.systemTeal.withAlphaComponent(
+                viewController.gridLineAlphaComponent
+            ).cgColor
+        )
         ctx.cgContext.setLineWidth(2)
 
-        for x in stride(from: 0.0, to: grid.size.width, by: cellSize.width) {
-            ctx.cgContext.move(to: CGPoint(x: x, y: 0))
-            ctx.cgContext.addLine(to: CGPoint(x: x, y: grid.size.height))
+        if viewController.isDisplayingGridLines {
+            for x in stride(from: 0.0, to: grid.size.width, by: cellSize.width) {
+                ctx.cgContext.move(to: CGPoint(x: x, y: 0))
+                ctx.cgContext.addLine(to: CGPoint(x: x, y: grid.size.height))
+            }
+
+            for y in stride(from: 0.0, to: grid.size.height, by: cellSize.height) {
+                ctx.cgContext.move(to: CGPoint(x: 0, y: y))
+                ctx.cgContext.addLine(to: CGPoint(x: grid.size.width, y: y))
+            }
+
+            ctx.cgContext.drawPath(using: .stroke)
         }
 
-        for y in stride(from: 0.0, to: grid.size.height, by: cellSize.height) {
-            ctx.cgContext.move(to: CGPoint(x: 0, y: y))
-            ctx.cgContext.addLine(to: CGPoint(x: grid.size.width, y: y))
+        guard viewController.isDisplayingGridLabels else {
+            return
         }
-
-        ctx.cgContext.drawPath(using: .stroke)
 
         let font = NSFont.systemFont(ofSize: 16, weight: .medium)
 
@@ -47,7 +53,9 @@ class GridView: NSView {
 
         let attrs: [NSAttributedString.Key: Any]  = [
           .font: font,
-          .foregroundColor: NSColor.systemTeal.withAlphaComponent(0.5),
+          .foregroundColor: NSColor.systemTeal.withAlphaComponent(
+            viewController.gridLabelAlphaComponent
+           ),
           .paragraphStyle: paragraphStyle
         ]
 
