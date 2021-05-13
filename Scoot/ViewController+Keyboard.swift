@@ -47,6 +47,8 @@ extension ViewController {
             case (false, .command):
                 mouse.pressDown()
                 isHoldingDownMouseButton = true
+            case (false, .shift):
+                mouse.doubleClick()
             case (true, _):
                 mouse.notifyDrag()
                 mouse.release()

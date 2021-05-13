@@ -57,6 +57,30 @@ struct Mouse {
         )?.post(tap: .cghidEventTap)
     }
 
+    func doubleClick() {
+        click()
+
+        let currentLocation = NSEvent.mouseLocation.convertToCG(screenSize: screenSize)
+
+        var event = CGEvent(
+            mouseEventSource: nil,
+            mouseType: .leftMouseDown,
+            mouseCursorPosition: currentLocation,
+            mouseButton: .left
+        )
+        event?.setIntegerValueField(.mouseEventClickState, value: 2)
+        event?.post(tap: .cghidEventTap)
+
+        event = CGEvent(
+            mouseEventSource: nil,
+            mouseType: .leftMouseUp,
+            mouseCursorPosition: currentLocation,
+            mouseButton: .left
+        )
+        event?.setIntegerValueField(.mouseEventClickState, value: 2)
+        event?.post(tap: .cghidEventTap)
+    }
+
     func drag(to point: CGPoint) {
         let start = NSEvent.mouseLocation.convertToCG(screenSize: screenSize)
         let end = point.convertToCG(screenSize: screenSize)

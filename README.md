@@ -43,6 +43,8 @@ When Scoot is in the foreground:
 * You can hold the left mouse button down by hitting ⌘↵. (To release the button, type ⌘↵ again, or, alternatively, just press ↵ on its own.)
   * To perform a drag-and-drop operation: situate the cursor above the object you want to drag and press ⌘↵, then move the mouse cursor to the desired drag destination (using one or more of the mechanisms that Scoot makes available), and then press ⌘↵ again to perform the drop.
 
+* You can double-click with the left mouse button (at the current cursor location) by hitting the Shift and Return keys together (⇧↵).
+
 ### Keybindings
 
 _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac-symbols], and [Emacs key notation][emacs-key-notation]._
@@ -71,6 +73,7 @@ _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac
 |----------|-----------------------------------------------------------------------------|
 | ↵        | Click left mouse button (at current cursor location)                        |
 | ⌘↵       | Press and hold left mouse button (once activated, type ⌘↵ again to release) |
+| ⇧↵       | Double-click left mouse button (at current cursor location) |
 
 _Note:_ ↵ signifies the Return (a.k.a Enter) key. (Technically, Return and Enter are [two different keys][return-and-enter-are-two-different-keys].)
 
