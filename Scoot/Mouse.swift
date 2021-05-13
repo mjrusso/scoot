@@ -8,6 +8,10 @@ struct Mouse {
         screen.frame.size
     }
 
+    var currentLocation: CGPoint {
+        NSEvent.mouseLocation.convertToCG(screenSize: screenSize)
+    }
+
     func move(to point: CGPoint) {
         let destination = point.convertToCG(screenSize: screenSize)
         let event =  CGEvent(
@@ -25,8 +29,6 @@ struct Mouse {
     }
 
     func pressDown() {
-        let currentLocation = NSEvent.mouseLocation.convertToCG(screenSize: screenSize)
-
         CGEvent(
             mouseEventSource: nil,
             mouseType: .leftMouseDown,
@@ -36,8 +38,6 @@ struct Mouse {
     }
 
     func notifyDrag() {
-        let currentLocation = NSEvent.mouseLocation.convertToCG(screenSize: screenSize)
-
         CGEvent(
             mouseEventSource: nil,
             mouseType: .leftMouseDragged,
@@ -47,8 +47,6 @@ struct Mouse {
     }
 
     func release() {
-        let currentLocation = NSEvent.mouseLocation.convertToCG(screenSize: screenSize)
-
         CGEvent(
             mouseEventSource: nil,
             mouseType: .leftMouseUp,
@@ -59,8 +57,6 @@ struct Mouse {
 
     func doubleClick() {
         click()
-
-        let currentLocation = NSEvent.mouseLocation.convertToCG(screenSize: screenSize)
 
         var event = CGEvent(
             mouseEventSource: nil,
@@ -82,7 +78,7 @@ struct Mouse {
     }
 
     func drag(to point: CGPoint) {
-        let start = NSEvent.mouseLocation.convertToCG(screenSize: screenSize)
+        let start = currentLocation
         let end = point.convertToCG(screenSize: screenSize)
 
         CGEvent(
