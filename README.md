@@ -45,11 +45,13 @@ When Scoot is in the foreground:
 
 * You can double-click with the left mouse button (at the current cursor location) by hitting the Shift and Return keys together (⇧↵).
 
+* You can scroll, by pressing the Shift key in conjunction with the arrow key (↑, ↓, ←, →) pointing in the desired scroll direction.
+
 ### Keybindings
 
 _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac-symbols], and [Emacs key notation][emacs-key-notation]._
 
-#### Movement
+#### Cursor Movement
 
 | System | Emacs | Description                                                 |
 |--------|-------|-------------------------------------------------------------|
@@ -67,7 +69,7 @@ _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac
 | ⌘→     | C-e   | Move cursor to right edge of screen                         |
 | ⌃L     | C-l   | Move cursor to center, and (on repeat) cycle around corners |
 
-#### Actions
+#### Clicking
 
 | Shortcut | Description                                                                 |
 |----------|-----------------------------------------------------------------------------|
@@ -76,6 +78,15 @@ _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac
 | ⇧↵       | Double-click left mouse button (at current cursor location) |
 
 _Note:_ ↵ signifies the Return (a.k.a Enter) key. (Technically, Return and Enter are [two different keys][return-and-enter-are-two-different-keys].)
+
+#### Scrolling
+
+| System | Alt | Description                              |
+|--------|-----|------------------------------------------|
+| ⇧↑     | ⇧-p | Scroll up (at current cursor location) |
+| ⇧↓     | ⇧-n | Scroll down (at current cursor location) |
+| ⇧←     | ⇧-b | Scroll left (at current cursor location) |
+| ⇧→     | ⇧-f | Scroll right (at current cursor location) |
 
 #### Presentation
 

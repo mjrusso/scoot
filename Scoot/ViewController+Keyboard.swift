@@ -73,6 +73,20 @@ extension ViewController {
             return
         }
 
+        if modifiers.contains(.shift) && (event.keyCode == kVK_UpArrow || characters == "P") {
+            mouse.scroll(.up, stepSize: 20)
+            return
+        } else if modifiers.contains(.shift) && (event.keyCode == kVK_DownArrow || characters == "N") {
+            mouse.scroll(.down, stepSize: 20)
+            return
+        } else if modifiers.contains(.shift) && (event.keyCode == kVK_LeftArrow || characters == "B") {
+            mouse.scroll(.left, stepSize: 20)
+            return
+        } else if modifiers.contains(.shift) && (event.keyCode == kVK_RightArrow || characters == "F") {
+            mouse.scroll(.right, stepSize: 20)
+            return
+        }
+
         // By default, we vend to the system directly (by calling `interpretKeyEvents`
         // with the input event). However, in some cases we need to override the
         // system behaviour: for example, Control-A maps to `moveToBeginningOfParagraph`,

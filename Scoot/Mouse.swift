@@ -107,6 +107,17 @@ struct Mouse {
         )?.post(tap: .cghidEventTap)
     }
 
+    func scroll(x deltaX: Int, y deltaY: Int) {
+        CGEvent(
+            scrollWheelEvent2Source: nil,
+            units: .pixel,
+            wheelCount: 2,
+            wheel1: Int32(deltaY),
+            wheel2: Int32(deltaX),
+            wheel3: 0
+        )?.post(tap: .cghidEventTap)
+    }
+
     // MARK: Convenience
 
     func move(_ direction: NSScreen.Direction, stepSize: CGFloat, stepMultiple: CGFloat = 1) {
@@ -136,6 +147,20 @@ struct Mouse {
 
     func drag(_ direction: NSScreen.Direction, distance: CGFloat) {
         drag(to: screen.point(for: direction, relativeTo: NSEvent.mouseLocation, offset: distance))
+    }
+
+    func scroll(_ direction: NSScreen.Direction, stepSize: CGFloat, stepMultiple: CGFloat = 1) {
+        let offset = Int(stepSize * stepMultiple)
+        switch direction {
+        case .up:
+            scroll(x: 0, y: offset)
+        case .down:
+            scroll(x: 0, y: -offset)
+        case .left:
+            scroll(x: offset, y: 0)
+        case .right:
+            scroll(x: -offset, y: 0)
+        }
     }
 
 }
