@@ -46,7 +46,7 @@ class GridView: NSView {
             return
         }
 
-        let font = NSFont.systemFont(ofSize: 16, weight: .medium)
+        let font = NSFont.systemFont(ofSize: 18, weight: .medium)
 
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
@@ -56,7 +56,9 @@ class GridView: NSView {
           .foregroundColor: NSColor.systemTeal.withAlphaComponent(
             viewController.gridLabelAlphaComponent
            ),
-          .paragraphStyle: paragraphStyle
+          .paragraphStyle: paragraphStyle,
+//          .strokeWidth: -2.0,
+//          .strokeColor: NSColor.black,
         ]
 
         for (index, cellRect) in grid.rects.enumerated() {

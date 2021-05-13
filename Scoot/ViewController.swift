@@ -73,7 +73,7 @@ class ViewController: NSViewController {
         }
     }
 
-    var gridLabelAlphaComponent: CGFloat = 0.5 {
+    var gridLabelAlphaComponent: CGFloat = 0.75 {
         didSet {
             gridLabelAlphaComponent = clamp(
                 gridLabelAlphaComponent,
