@@ -94,6 +94,7 @@ Pre-built binaries are not (yet) available. To build, you'll need Xcode 12.5 (or
 
 ## Backlog
 
+- Ability to simulate gestures, such as swipe, pinch, spread, and rotation.
 - Menu bar item.
 - Ability to record, save, and run macros.
 - Multi-monitor support.
