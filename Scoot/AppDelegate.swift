@@ -37,4 +37,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     }
 
+    // MARK: Actions
+
+    @IBAction func helpPressed(_ sender: NSMenuItem) {
+        NSWorkspace.shared.open(URL(string: "https://github.com/mjrusso/scoot")!)
+    }
+
 }

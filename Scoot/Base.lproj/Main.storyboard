@@ -133,7 +133,7 @@
                                     <items>
                                         <menuItem title="Scoot Help" keyEquivalent="?" id="FKE-Sm-Kum">
                                             <connections>
-                                                <action selector="showHelp:" target="Ady-hI-5gd" id="y7X-2Q-9no"/>
+                                                <action selector="helpPressed:" target="Voe-Tx-rLC" id="uL8-ww-p3U"/>
                                             </connections>
                                         </menuItem>
                                     </items>
