@@ -1,4 +1,8 @@
-<img align="left" alt="Scoot" src="./Assets/header.png" width="280" />
+<p align="center">
+  <img width="400" src="./Assets/card.png" alt="Scoot" />
+</p>
+
+---
 
 # Scoot
 
