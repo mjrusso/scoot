@@ -43,20 +43,6 @@ extension ViewController {
         if event.keyCode == kVK_Return {
             switch (isHoldingDownMouseButton, modifiers) {
             case (false, []):
-                // Mouse clicks aren't registering in some applications (for
-                // example, when following hyperlinks in web browsers).
-                //
-                // For some reason, posting a second click event makes this work
-                // reliably.
-                //
-                // [Why? This question [0] on Stack Overflow ("Simulating mouse
-                // clicks on Mac OS X does not work for some applications") seems
-                // relevant, but unfortunately none of the proposed strategies
-                // seem to work. Oh well... this hack will suffice for now.]
-                //
-                // [0]: https://stackoverflow.com/q/2369806/15304124
-                mouse.click()
-                usleep(1)
                 mouse.click()
             case (false, .command):
                 mouse.pressDown()
