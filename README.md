@@ -1,14 +1,12 @@
-<p align="center">
-  <img width="400" src="./Assets/card.png" alt="Scoot" />
-</p>
-
----
-
 # Scoot
 
 _Meet **Scoot**, your friendly cursor teleportation and actuation tool._
 
 <a href="https://twitter.com/mjrusso" title="@mjrusso on Twitter"><img src="https://img.shields.io/badge/twitter-@mjrusso-blue.svg" alt="@mjrusso on Twitter"></a>
+
+<p align="center">
+  <img src="./Assets/card.png" alt="Scoot, MacOS Cursor Actuator" />
+</p>
 
 ---
 
