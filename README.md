@@ -129,7 +129,23 @@ Finally, check _“Scoot.app”_ to give Scoot the ability to move your cursor, 
   <img width="550" src="./Assets/Documentation/accessibility-access-granted.png" alt="Scoot.app granted accessibility access" />
 </p>
 
-## Backlog
+See the [usage documentation](#usage) for details on how to use Scoot.
+
+If you're finding Scoot helpful, you may want to configure the app to launch automatically when you log in. To set this up, open System Preferences again, click _“Users & Groups”_, and then _“Login Items”_:
+
+<p align="center">
+  <img width="550" src="./Assets/Documentation/login-items-locked.png" alt="Locked login items settings" />
+</p>
+
+As before, you'll need to click the lock in the bottom left corner to unlock this preference pane. Once unlocked, click the “+” button, and select _“Scoot.app”_ from the _Applications_ folder. Checking the _“Hide”_ checkbox is recommended.
+
+<p align="center">
+  <img width="550" src="./Assets/Documentation/start-automatically.png" alt="Scoot configured to start automatically" />
+</p>
+
+If you encounter any problems, feel free to [file an issue][scoot-issues].
+
+## Feature Backlog
 
 - Improve legibility of grid labels, particularly when rendering on top of light backgrounds with dark text.
   - Is there a (performant) way to modify the colours of the grid based on the content immediately underneath it?
@@ -154,6 +170,7 @@ Copyright (c) 2021, [Michael Russo](https://mjrusso.com).
 
 [latest-scoot-binary]: https://github.com/mjrusso/scoot/releases/latest/download/Scoot.app.zip
 [latest-scoot-release]: https://github.com/mjrusso/scoot/releases/latest
+[scoot-issues]: https://github.com/mjrusso/scoot/issues
 
 [avy]: https://github.com/abo-abo/avy
 [mouse-keys]: https://support.apple.com/en-ca/guide/mac-help/mh27469/mac
