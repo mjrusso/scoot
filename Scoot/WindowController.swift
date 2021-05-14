@@ -13,3 +13,12 @@ class WindowController: NSWindowController {
     }
 
 }
+
+extension WindowController: NSWindowDelegate {
+
+    // Automatically hide the app when it is not in the foreground.
+    func windowDidResignMain(_ notification: Notification) {
+        NSApplication.shared.hide(self)
+    }
+
+}
