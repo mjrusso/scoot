@@ -109,6 +109,23 @@ To install Scoot:
 2. Drag the extracted _Scoot.app_ into your computer's _Applications_ folder.
 3. Double-click on _Scoot.app_ (from the _Applications_ folder) to launch it.
 
+On first run, you'll be presented with a prompt like the following:
+
+<p align="center">
+  <img width="350" src="./Assets/Documentation/accessibility-prompt.png" alt="Scoot.app would like to control this computer using accessibility features" />
+</p>
+
+To grant this permission, first click _“Open System Preferences”_. Next, click the lock in the bottom left corner (_“Click the lock to make changes”_).
+
+<p align="center">
+  <img width="450" src="./Assets/Documentation/privacy-locked.png" alt="Locked accessibility settings" />
+</p>
+
+Finally, check _“Scoot.app”_ to give Scoot the ability to move your cursor, click, drag, and scroll.
+
+<p align="center">
+  <img width="450" src="./Assets/Documentation/accessibility-access-granted.png" alt="Scoot.app granted accessibility access" />
+</p>
 
 ## Backlog
 
