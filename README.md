@@ -103,7 +103,12 @@ _Note:_ ↵ signifies the Return (a.k.a Enter) key. (Technically, Return and Ent
 
 ## Installation
 
-Pre-built binaries are not (yet) available. To build, you'll need Xcode 12.5 (or later); `open Scoot.xcodeproj` and select _Product_ → _Build_.
+To install Scoot:
+
+1. Download and extract the latest build of [Scoot][latest-scoot-binary].
+2. Drag the extracted _Scoot.app_ into your computer's _Applications_ folder.
+3. Double-click on _Scoot.app_ (from the _Applications_ folder) to launch it.
+
 
 ## Backlog
 
@@ -127,6 +132,9 @@ Scoot is released under the terms of the [BSD 3-Clause License](LICENSE).
 
 Copyright (c) 2021, [Michael Russo](https://mjrusso.com).
 
+
+[latest-scoot-binary]: https://github.com/mjrusso/scoot/releases/latest/download/Scoot.app.zip
+[latest-scoot-release]: https://github.com/mjrusso/scoot/releases/latest
 
 [avy]: https://github.com/abo-abo/avy
 [mouse-keys]: https://support.apple.com/en-ca/guide/mac-help/mh27469/mac
