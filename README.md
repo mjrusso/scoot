@@ -145,6 +145,28 @@ As before, you'll need to click the lock in the bottom left corner to unlock thi
 
 If you encounter any problems, feel free to [file an issue][scoot-issues].
 
+## Demos
+
+### Drag and Drop
+
+Here's what it's like to drag and drop with Scoot: 
+
+https://user-images.githubusercontent.com/100451/118299332-9e6a2e00-b4ae-11eb-901d-79a212ce1d37.mp4
+
+For reference, the following key sequence was used to grab the file and drop it in a new location:
+
+- `⇧⌘J` to activate Scoot
+- `kh` to jump cursor to cell
+- `⌘↵` to press and hold the left mouse button
+- `fd` to jump cursor to cell
+- `↵` to release the left mouse button
+
+### Move and Click
+
+An example of using Scoot to control an app running in the iOS simulator:
+
+https://user-images.githubusercontent.com/100451/118299409-b772df00-b4ae-11eb-93ae-3cc67e3ce2b8.mp4
+
 ## Feature Backlog
 
 - Improve legibility of grid labels, particularly when rendering on top of light backgrounds with dark text.
