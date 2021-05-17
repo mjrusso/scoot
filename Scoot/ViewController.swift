@@ -62,7 +62,7 @@ class ViewController: NSViewController {
         }
     }
 
-    var gridLineAlphaComponent: CGFloat = 0.04 {
+    var gridLineAlphaComponent: CGFloat = 0.15 {
         didSet {
             gridLineAlphaComponent = clamp(
                 gridLineAlphaComponent,
@@ -73,10 +73,21 @@ class ViewController: NSViewController {
         }
     }
 
-    var gridLabelAlphaComponent: CGFloat = 0.75 {
+    var gridLabelAlphaComponent: CGFloat = 0.95 {
         didSet {
             gridLabelAlphaComponent = clamp(
                 gridLabelAlphaComponent,
+                minValue: 0.01,
+                maxValue: 1.0
+            )
+            gridView.redraw()
+        }
+    }
+
+    var gridBackgroundAlphaComponent: CGFloat = 0.45 {
+        didSet {
+            gridBackgroundAlphaComponent = clamp(
+                gridBackgroundAlphaComponent,
                 minValue: 0.01,
                 maxValue: 1.0
             )
@@ -197,13 +208,15 @@ extension ViewController {
     }
 
     @IBAction func increaseContrast(_ sender: NSMenuItem) {
-        gridLineAlphaComponent += 0.1
-        gridLabelAlphaComponent += 0.15
+        gridLineAlphaComponent += 0.2
+        gridLabelAlphaComponent += 0.05
+        gridBackgroundAlphaComponent += 0.2
     }
 
     @IBAction func decreaseContrast(_ sender: NSMenuItem) {
-        gridLineAlphaComponent -= 0.1
-        gridLabelAlphaComponent -= 0.15
+        gridLineAlphaComponent -= 0.2
+        gridLabelAlphaComponent -= 0.05
+        gridBackgroundAlphaComponent -= 0.2
     }
 
 }

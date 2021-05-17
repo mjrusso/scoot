@@ -19,6 +19,13 @@ class GridView: NSView {
             return
         }
 
+        ctx.cgContext.setFillColor(
+            NSColor.black.withAlphaComponent(
+                viewController.gridBackgroundAlphaComponent
+            ).cgColor)
+
+        ctx.cgContext.fill(bounds)
+
         let cellSize = grid.cellSize
 
         ctx.cgContext.setStrokeColor(
