@@ -2,6 +2,10 @@ import Cocoa
 
 class WindowController: NSWindowController {
 
+    var viewController: ViewController {
+        contentViewController as! ViewController
+    }
+
     override func windowDidLoad() {
         super.windowDidLoad()
 
@@ -16,9 +20,14 @@ class WindowController: NSWindowController {
 
 extension WindowController: NSWindowDelegate {
 
-    // Automatically hide the app when it is not in the foreground.
+    // Automatically hide the grid UI when Scoot is not in the foreground.
     func windowDidResignMain(_ notification: Notification) {
-        NSApplication.shared.hide(self)
+        viewController.hideGrid()
+    }
+
+    // Automatically show the grid UI when Scoot enters the foreground.
+    func windowDidBecomeMain(_ notification: Notification) {
+        viewController.showGrid()
     }
 
 }

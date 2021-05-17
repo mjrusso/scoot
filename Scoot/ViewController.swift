@@ -164,6 +164,18 @@ extension ViewController {
 
 }
 
+extension ViewController {
+
+    func showGrid() {
+        self.gridView.isHidden = false
+    }
+
+    func hideGrid() {
+        self.gridView.isHidden = true
+    }
+
+}
+
 // MARK: - Actions
 
 extension ViewController {
