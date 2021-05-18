@@ -49,6 +49,8 @@ When Scoot is in the foreground:
 
 * You can scroll, by pressing the Shift key in conjunction with the arrow key (↑, ↓, ←, →) pointing in the desired scroll direction.
 
+After clicking, the grid will automatically hide. You can also hide the grid at any time by pressing ⌘H.
+
 ### Keybindings
 
 _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac-symbols], and [Emacs key notation][emacs-key-notation]._
