@@ -99,6 +99,8 @@ class ViewController: NSViewController {
         super.viewDidLoad()
 
         gridView.viewController = self
+
+        hideGrid()
     }
 
     override func viewWillAppear() {

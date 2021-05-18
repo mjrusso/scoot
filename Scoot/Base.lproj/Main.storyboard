@@ -32,7 +32,7 @@
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
                                         <menuItem title="Hide Scoot" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
-                                                <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
+                                                <action selector="hidePressed:" target="Ady-hI-5gd" id="JrC-EV-4dR"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Hide Others" keyEquivalent="h" id="Vdr-fp-XzO">

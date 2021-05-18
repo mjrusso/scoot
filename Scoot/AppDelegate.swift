@@ -5,6 +5,13 @@ import HotKey
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    var windows: [Window] {
+        NSApplication.shared.orderedWindows
+            .compactMap {
+                $0 as? Window
+            }
+    }
+
     public var hotKey: HotKey? {
         didSet {
             guard let hotKey = hotKey else {
@@ -16,15 +23,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     return
                 }
 
-                NSApplication.shared.orderedWindows
-                  .filter {
-                      $0 is Window
-                  }
-                  .forEach {
-                      NSApplication.shared.activate(ignoringOtherApps: true)
-                      $0.makeKeyAndOrderFront(self)
-                      $0.makeKey()
-                  }
+                NSApp.activate(ignoringOtherApps: true)
+
+                self.windows.forEach { window in
+                    window.makeKeyAndOrderFront(self)
+                    window.makeKey()
+                }
             }
         }
     }
@@ -38,6 +42,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     // MARK: Actions
+
+    @IBAction func hidePressed(_ sender: NSMenuItem) {
+        NSApp.hide(self)
+    }
 
     @IBAction func helpPressed(_ sender: NSMenuItem) {
         NSWorkspace.shared.open(URL(string: "https://github.com/mjrusso/scoot")!)
