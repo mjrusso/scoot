@@ -149,7 +149,7 @@ If you encounter any problems, feel free to [file an issue][scoot-issues].
 
 ### Drag and Drop
 
-Here's what it's like to drag and drop with Scoot: 
+Here's what it's like to drag and drop with Scoot:
 
 https://user-images.githubusercontent.com/100451/118299332-9e6a2e00-b4ae-11eb-901d-79a212ce1d37.mp4
 
