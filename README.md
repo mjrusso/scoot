@@ -180,9 +180,7 @@ https://user-images.githubusercontent.com/100451/118299409-b772df00-b4ae-11eb-93
 - Enable global keyboard shortcuts to be overridden.
 - Enable non-global keyboard shortcuts to customized.
 - Enable grid colours, opacity, etc. to be customized.
-- Show visual feedback when walking the decision tree.
-  - After starting a sequence, indicate which keys can still be pressed.
-  - If user types an invalid key, let them know. (Avy handles this by writing _"no such candidate ..."_ to the minibuffer; see [here](https://github.com/abo-abo/avy/blob/e92cb37457b43336b765630dbfbea8ba4be601fa/avy.el#L474-L475).)
+- If user types an invalid key, provide visual feedback to let them know. (Avy handles this by writing _"no such candidate ..."_ to the minibuffer; see [here](https://github.com/abo-abo/avy/blob/e92cb37457b43336b765630dbfbea8ba4be601fa/avy.el#L474-L475).)
 - CI ([example](https://betterprogramming.pub/indie-mac-app-devops-with-github-actions-b16764a3ebe7)).
 
 ## License

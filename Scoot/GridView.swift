@@ -58,18 +58,39 @@ class GridView: NSView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
+        let foregroundColor = NSColor.systemTeal.withAlphaComponent(
+            viewController.gridLabelAlphaComponent
+        )
+
         let attrs: [NSAttributedString.Key: Any]  = [
           .font: font,
-          .foregroundColor: NSColor.systemTeal.withAlphaComponent(
-            viewController.gridLabelAlphaComponent
-           ),
+          .foregroundColor: foregroundColor,
           .paragraphStyle: paragraphStyle,
 //          .strokeWidth: -2.0,
 //          .strokeColor: NSColor.black,
         ]
 
+        let currentSequence = String(viewController.currentSequence)
+
         for (index, cellRect) in grid.rects.enumerated() {
+
             let text = grid.data(atIndex: index)
+            let string = NSMutableAttributedString(string: text)
+
+            string.addAttributes(attrs, range: NSRange(text.startIndex..., in: text))
+
+            if !currentSequence.isEmpty {
+                if let range = text.range(of: currentSequence),
+                   text.distance(from: text.startIndex, to: range.lowerBound) == 0  {
+                    string.addAttribute(.foregroundColor,
+                                        value: foregroundColor.withAlphaComponent(0.5),
+                                        range: NSRange(range, in: text))
+                } else {
+                    string.addAttribute(.foregroundColor,
+                                        value: foregroundColor.withAlphaComponent(0.1),
+                                        range: NSRange(text.startIndex..., in: text))
+                }
+            }
 
             let boundingRect = text.boundingRect(
                 with: cellRect.size,
@@ -79,7 +100,7 @@ class GridView: NSView {
 
             let textHeight = boundingRect.height
 
-            text.draw(
+            string.draw(
                 with: CGRect(
                     origin: CGPoint(
                         x: cellRect.origin.x,
@@ -88,7 +109,6 @@ class GridView: NSView {
                     size: cellRect.size
                 ),
                 options: .usesLineFragmentOrigin,
-                attributes: attrs,
                 context: nil
             )
 

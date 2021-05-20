@@ -13,7 +13,20 @@ class ViewController: NSViewController {
 
     // Non-nil, if the user is in the process of entering a key sequence to
     // navigate via the decision tree.
-    var currentNode: Tree<CGRect>.Node<CGRect>?
+    var currentNode: Tree<CGRect>.Node<CGRect>? {
+        didSet {
+            if let currentNode = currentNode {
+                currentSequence.append(currentNode.label)
+            } else {
+                currentSequence = []
+            }
+            gridView.setNeedsDisplay(view.bounds)
+        }
+    }
+
+    // The sequence of characters that the user has entered, when navigating
+    // via the decision tree.
+    var currentSequence = [Character]()
 
     var isWalkingDecisionTree: Bool {
         currentNode != nil
