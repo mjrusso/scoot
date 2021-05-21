@@ -28,6 +28,7 @@ extension ViewController {
             if let nextNode = (currentNode ?? tree.root).step(by: character) {
                 if nextNode.isLeaf , let rect = nextNode.value {
                     mouse.move(to: CGPoint(x: rect.midX, y: rect.midY))
+                    flashFeedback(at: rect, duration: 1.4)
                     currentNode = nil
                     return
                 }
