@@ -33,7 +33,9 @@ extension ViewController {
                 }
                 self.currentNode = nextNode
             } else {
-                feedbackView.flash()
+                // Provide visual feedback: an invalid key (not corresponding to
+                // any valid sequence) was just typed by the user.
+                flashFeedback(at: view.bounds, duration: 0.8)
             }
             return
         }

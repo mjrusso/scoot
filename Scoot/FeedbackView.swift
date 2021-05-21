@@ -19,7 +19,7 @@ class FeedbackView: NSView {
         self.isHidden = true
     }
 
-    func flash(duration: TimeInterval = 0.15) {
+    func flash(duration: TimeInterval = 0.15, completion: (() -> Void)? = nil) {
         self.isHidden = false
         NSAnimationContext.runAnimationGroup { context in
             context.duration = duration
@@ -27,6 +27,7 @@ class FeedbackView: NSView {
         } completionHandler: {
             self.isHidden = true
             self.alphaValue = 1
+            completion?()
         }
     }
 

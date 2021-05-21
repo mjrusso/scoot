@@ -63,8 +63,6 @@ class ViewController: NSViewController {
 
     @IBOutlet var gridView: GridView!
 
-    @IBOutlet var feedbackView: FeedbackView!
-
     var isDisplayingGridLabels: Bool = true {
         didSet {
             gridView.redraw()
@@ -200,6 +198,14 @@ extension ViewController {
 
     func hideGrid() {
         self.gridView.isHidden = true
+    }
+
+    func flashFeedback(at rect: NSRect, duration: TimeInterval) {
+        let feedbackView = FeedbackView(frame: rect)
+        self.view.addSubview(feedbackView)
+        feedbackView.flash(duration: duration) {
+            feedbackView.removeFromSuperview()
+        }
     }
 
 }

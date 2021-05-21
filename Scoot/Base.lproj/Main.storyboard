@@ -179,9 +179,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="bkj-bS-qFb" customClass="FeedbackView" customModule="Scoot" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                            </customView>
                             <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="jt8-es-1kb" customClass="GridView" customModule="Scoot" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             </customView>
@@ -189,16 +186,11 @@
                         <constraints>
                             <constraint firstItem="jt8-es-1kb" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="8gf-g4-u4V"/>
                             <constraint firstAttribute="bottom" secondItem="jt8-es-1kb" secondAttribute="bottom" id="9RE-8V-jwh"/>
-                            <constraint firstAttribute="bottom" secondItem="bkj-bS-qFb" secondAttribute="bottom" id="Ida-Oj-Ogx"/>
-                            <constraint firstItem="bkj-bS-qFb" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="UXe-0G-dhb"/>
                             <constraint firstItem="jt8-es-1kb" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="fc5-DT-GFl"/>
                             <constraint firstAttribute="trailing" secondItem="jt8-es-1kb" secondAttribute="trailing" id="kbM-ka-3cH"/>
-                            <constraint firstAttribute="trailing" secondItem="bkj-bS-qFb" secondAttribute="trailing" id="rHa-JK-BFN"/>
-                            <constraint firstItem="bkj-bS-qFb" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="wiF-IK-N6v"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="feedbackView" destination="bkj-bS-qFb" id="U2s-7R-fKO"/>
                         <outlet property="gridView" destination="jt8-es-1kb" id="tmY-dr-rud"/>
                     </connections>
                 </viewController>
