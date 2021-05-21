@@ -6,10 +6,7 @@ import HotKey
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     var windows: [Window] {
-        NSApplication.shared.orderedWindows
-            .compactMap {
-                $0 as? Window
-            }
+        NSApp.orderedWindows.compactMap { $0 as? Window }
     }
 
     public var hotKey: HotKey? {
@@ -19,26 +16,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
 
             hotKey.keyDownHandler = { [weak self] in
-                guard let self = self else {
-                    return
-                }
-
-                NSApp.activate(ignoringOtherApps: true)
-
-                self.windows.forEach { window in
-                    window.makeKeyAndOrderFront(self)
-                    window.makeKey()
-                }
+                self?.bringToForeground()
             }
         }
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         self.hotKey = HotKey(key: .j, modifiers: [.command, .shift])
+        self.bringToForeground()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
 
+    }
+
+    // MARK: Activation
+
+    func bringToForeground() {
+        NSApp.activate(ignoringOtherApps: true)
+
+        self.windows.forEach { window in
+            window.makeKeyAndOrderFront(self)
+            window.makeKey()
+        }
     }
 
     // MARK: Actions
