@@ -32,6 +32,8 @@ extension ViewController {
                     return
                 }
                 self.currentNode = nextNode
+            } else {
+                feedbackView.flash()
             }
             return
         }

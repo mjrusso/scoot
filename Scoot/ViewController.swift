@@ -63,6 +63,8 @@ class ViewController: NSViewController {
 
     @IBOutlet var gridView: GridView!
 
+    @IBOutlet var feedbackView: FeedbackView!
+
     var isDisplayingGridLabels: Bool = true {
         didSet {
             gridView.redraw()

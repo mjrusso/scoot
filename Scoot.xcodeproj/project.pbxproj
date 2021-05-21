@@ -27,6 +27,7 @@
 		E59C1631264185940033E2CC /* TreeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C1630264185940033E2CC /* TreeTests.swift */; };
 		E59C1633264AC4F60033E2CC /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C1632264AC4F60033E2CC /* CGSize+Extensions.swift */; };
 		E59C1635264AC6FB0033E2CC /* Comparable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C1634264AC6FB0033E2CC /* Comparable+Extensions.swift */; };
+		E5B9214A2656A18D000A0A75 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B921492656A18D000A0A75 /* FeedbackView.swift */; };
 		E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E87FFC2630A3550094FE9B /* GridView.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		E59C1630264185940033E2CC /* TreeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeTests.swift; sourceTree = "<group>"; };
 		E59C1632264AC4F60033E2CC /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		E59C1634264AC6FB0033E2CC /* Comparable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Comparable+Extensions.swift"; sourceTree = "<group>"; };
+		E5B921492656A18D000A0A75 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
 		E5E87FF4263061250094FE9B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../scoot/README.md; sourceTree = "<group>"; };
 		E5E87FFC2630A3550094FE9B /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GridView.swift; path = ../../scoot/Scoot/GridView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -148,6 +150,7 @@
 				E567D2A3263C7FB000A0A861 /* ViewController+Keyboard.swift */,
 				E591E5662636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift */,
 				E5E87FFC2630A3550094FE9B /* GridView.swift */,
+				E5B921492656A18D000A0A75 /* FeedbackView.swift */,
 				E591E56B2636F8D000C037FF /* Mouse.swift */,
 				E51178642636EF1500B4202F /* Extensions */,
 				E5776230262F04D300849D7D /* Assets.xcassets */,
@@ -322,6 +325,7 @@
 				E577622F262F04D100849D7D /* ViewController.swift in Sources */,
 				E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */,
 				E59C162E264184500033E2CC /* Tree.swift in Sources */,
+				E5B9214A2656A18D000A0A75 /* FeedbackView.swift in Sources */,
 				E577622D262F04D100849D7D /* AppDelegate.swift in Sources */,
 				E591E5672636F1F900C037FF /* ViewController+NSStandardKeyBindingResponding.swift in Sources */,
 				E59C1635264AC6FB0033E2CC /* Comparable+Extensions.swift in Sources */,
