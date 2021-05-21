@@ -22,7 +22,7 @@ extension ViewController {
 
         // FIXME: this logic would be better encoded as a state machine.
 
-        if modifiers.isEmpty && characters.count == 1 {
+        if modifiers.isEmpty && characters.count == 1 && event.keyCode != kVK_Return {
             let character = characters[characters.startIndex]
 
             if let nextNode = (currentNode ?? tree.root).step(by: character) {
@@ -33,10 +33,6 @@ extension ViewController {
                 }
                 self.currentNode = nextNode
             }
-        }
-
-        if isWalkingDecisionTree {
-            // Ignore all other keypresses while we're walking the decision tree.
             return
         }
 
