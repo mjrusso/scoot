@@ -174,7 +174,6 @@ https://user-images.githubusercontent.com/100451/118299409-b772df00-b4ae-11eb-93
 - Improve legibility of grid labels, particularly when rendering on top of light backgrounds with dark text.
   - Is there a (performant) way to modify the colours of the grid based on the content immediately underneath it?
 - Ability to simulate gestures, such as swipe, pinch, spread, and rotation.
-- Menu bar item.
 - Ability to record, save, and run macros.
 - Multi-monitor support.
 - Enable global keyboard shortcuts to be overridden.
