@@ -43,10 +43,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func configureMenuBarExtra() {
         let item = NSStatusBar.system.statusItem(
-            withLength: NSStatusItem.variableLength
+            withLength: NSStatusItem.squareLength
         )
 
-        item.button?.title = "Scoot"
+        let image = NSImage(named: "MenuIcon")
+        image?.isTemplate = true
+
+        item.button?.image = image
+        item.button?.image?.size = NSSize(width: 18.0, height: 18.0)
 
         item.menu = menu
 
