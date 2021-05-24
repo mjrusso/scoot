@@ -12,132 +12,87 @@
                 <application id="hnw-xV-0zn" sceneMemberID="viewController">
                     <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
                         <items>
-                            <menuItem title="Scoot" id="1Xt-HY-uBw">
+                            <menuItem title="Scoot" id="5kV-Vb-QxS" userLabel="Scoot">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Scoot" systemMenu="apple" id="uQy-DD-JDr">
+                                <menu key="submenu" title="Scoot" autoenablesItems="NO" id="Rkb-lU-63l">
                                     <items>
-                                        <menuItem title="About Scoot" id="5kV-Vb-QxS">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
+                                        <menuItem title="Hide Grid" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
-                                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
+                                                <action selector="hidePressed:" target="Voe-Tx-rLC" id="T4I-eg-084"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
-                                        <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
-                                        <menuItem title="Services" id="NMo-om-nkz">
+                                        <menuItem title="Show Grid" keyEquivalent="J" id="9ey-1D-QEB">
+                                            <connections>
+                                                <action selector="showPressed:" target="Voe-Tx-rLC" id="5m3-Jl-IfR"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="Tu3-wV-t86"/>
+                                        <menuItem title="Presentation" id="H8h-7b-M4v">
                                             <modifierMask key="keyEquivalentModifierMask"/>
-                                            <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
+                                            <menu key="submenu" title="Presentation" id="HyV-fh-RgO">
+                                                <items>
+                                                    <menuItem title="Toggle Grid Labels" keyEquivalent="=" id="nlF-kl-ook">
+                                                        <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                                        <connections>
+                                                            <action selector="toggleGridLabels:" target="Ady-hI-5gd" id="DQ3-pJ-gt2"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Toggle Grid Lines" keyEquivalent="=" id="krQ-ol-RlF">
+                                                        <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES"/>
+                                                        <connections>
+                                                            <action selector="toggleGridLines:" target="Ady-hI-5gd" id="zHb-Se-hCE"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem isSeparatorItem="YES" id="Ucm-Ta-rb7"/>
+                                                    <menuItem title="Increase Grid Size" keyEquivalent="=" id="VBZ-HR-rN8">
+                                                        <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                                        <connections>
+                                                            <action selector="increaseGridSize:" target="Ady-hI-5gd" id="Rhu-Jy-6za"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Decrease Grid Size" keyEquivalent="-" id="tdL-dT-Dbj">
+                                                        <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                                        <connections>
+                                                            <action selector="decreaseGridSize:" target="Ady-hI-5gd" id="jrP-BL-9yx"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem isSeparatorItem="YES" id="ArR-tX-M2h"/>
+                                                    <menuItem title="Increase Contrast" keyEquivalent="=" id="CAZ-T0-6N2">
+                                                        <connections>
+                                                            <action selector="increaseContrast:" target="Ady-hI-5gd" id="2wa-BL-4JR"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Decrease Contrast" keyEquivalent="-" id="d0V-EM-2yE">
+                                                        <connections>
+                                                            <action selector="decreaseContrast:" target="Ady-hI-5gd" id="bTr-n1-HH3"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
-                                        <menuItem title="Hide Scoot" keyEquivalent="h" id="Olw-nP-bQN">
-                                            <connections>
-                                                <action selector="hidePressed:" target="Ady-hI-5gd" id="JrC-EV-4dR"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Hide Others" keyEquivalent="h" id="Vdr-fp-XzO">
-                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="hideOtherApplications:" target="Ady-hI-5gd" id="VT4-aY-XCT"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Show All" id="Kd2-mp-pUS">
+                                        <menuItem title="About" id="u8K-d6-TrV" userLabel="About">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="unhideAllApplications:" target="Ady-hI-5gd" id="Dhg-Le-xox"/>
+                                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="y9D-oG-Rdr"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                                        <menuItem title="Quit Scoot" keyEquivalent="q" id="4sb-4s-VLi">
+                                        <menuItem title="Help" keyEquivalent="?" id="FKE-Sm-Kum" userLabel="Help">
+                                            <connections>
+                                                <action selector="helpPressed:" target="Voe-Tx-rLC" id="uL8-ww-p3U"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Quit" keyEquivalent="q" id="4sb-4s-VLi" userLabel="Quit">
                                             <connections>
                                                 <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
                                             </connections>
                                         </menuItem>
                                     </items>
                                 </menu>
-                            </menuItem>
-                            <menuItem title="File" id="dMs-cI-mzQ">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                            </menuItem>
-                            <menuItem title="View" id="H8h-7b-M4v">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="View" id="HyV-fh-RgO">
-                                    <items>
-                                        <menuItem title="Toggle Grid Labels" keyEquivalent="=" id="nlF-kl-ook">
-                                            <modifierMask key="keyEquivalentModifierMask" control="YES"/>
-                                            <connections>
-                                                <action selector="toggleGridLabels:" target="Ady-hI-5gd" id="DQ3-pJ-gt2"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Toggle Grid Lines" keyEquivalent="=" id="krQ-ol-RlF">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" control="YES"/>
-                                            <connections>
-                                                <action selector="toggleGridLines:" target="Ady-hI-5gd" id="zHb-Se-hCE"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="Ucm-Ta-rb7"/>
-                                        <menuItem title="Increase Grid Size" keyEquivalent="=" id="VBZ-HR-rN8">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="increaseGridSize:" target="Ady-hI-5gd" id="Rhu-Jy-6za"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Decrease Grid Size" keyEquivalent="-" id="tdL-dT-Dbj">
-                                            <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
-                                            <connections>
-                                                <action selector="decreaseGridSize:" target="Ady-hI-5gd" id="jrP-BL-9yx"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="ArR-tX-M2h"/>
-                                        <menuItem title="Increase Contrast" keyEquivalent="=" id="CAZ-T0-6N2">
-                                            <connections>
-                                                <action selector="increaseContrast:" target="Ady-hI-5gd" id="2wa-BL-4JR"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Decrease Contrast" keyEquivalent="-" id="d0V-EM-2yE">
-                                            <connections>
-                                                <action selector="decreaseContrast:" target="Ady-hI-5gd" id="bTr-n1-HH3"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
-                            <menuItem title="Window" id="aUF-d1-5bR">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
-                                    <items>
-                                        <menuItem title="Minimize" keyEquivalent="m" id="OY7-WF-poV">
-                                            <connections>
-                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="VwT-WD-YPe"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Zoom" id="R4o-n2-Eq4">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
-                                        <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="arrangeInFront:" target="Ady-hI-5gd" id="DRN-fu-gQh"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
-                            <menuItem title="Help" id="wpr-3q-Mcd">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Help" systemMenu="help" id="F2S-fz-NVQ">
-                                    <items>
-                                        <menuItem title="Scoot Help" keyEquivalent="?" id="FKE-Sm-Kum">
-                                            <connections>
-                                                <action selector="helpPressed:" target="Voe-Tx-rLC" id="uL8-ww-p3U"/>
-                                            </connections>
-                                        </menuItem>
-                                    </items>
-                                </menu>
+                                <connections>
+                                    <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>

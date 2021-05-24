@@ -5,6 +5,14 @@ import HotKey
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    @IBOutlet weak var menu: NSMenu!
+
+    var statusItem: NSStatusItem?
+
+    @IBOutlet weak var hideMenuItem: NSMenuItem!
+
+    @IBOutlet weak var showMenuItem: NSMenuItem!
+
     var windows: [Window] {
         NSApp.orderedWindows.compactMap { $0 as? Window }
     }
@@ -23,11 +31,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         self.hotKey = HotKey(key: .j, modifiers: [.command, .shift])
+        self.configureMenuBarExtra()
         self.bringToForeground()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
 
+    }
+
+    // MARK: Menu Bar
+
+    func configureMenuBarExtra() {
+        let item = NSStatusBar.system.statusItem(
+            withLength: NSStatusItem.variableLength
+        )
+
+        item.button?.title = "Scoot"
+
+        item.menu = menu
+
+        self.statusItem = item
     }
 
     // MARK: Activation
@@ -41,10 +64,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    // MARK: Deactivation
+
+    func bringToBackground() {
+        NSApp.hide(self)
+    }
+
     // MARK: Actions
 
     @IBAction func hidePressed(_ sender: NSMenuItem) {
-        NSApp.hide(self)
+        bringToBackground()
+    }
+
+    @IBAction func showPressed(_ sender: NSMenuItem) {
+        bringToForeground()
     }
 
     @IBAction func helpPressed(_ sender: NSMenuItem) {
