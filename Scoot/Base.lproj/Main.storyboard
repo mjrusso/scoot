@@ -100,7 +100,13 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Scoot" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Scoot" customModuleProvider="target">
+                    <connections>
+                        <outlet property="hideMenuItem" destination="Olw-nP-bQN" id="9Tb-8L-TjN"/>
+                        <outlet property="menu" destination="Rkb-lU-63l" id="H8S-nT-JvV"/>
+                        <outlet property="showMenuItem" destination="9ey-1D-QEB" id="5I7-h7-147"/>
+                    </connections>
+                </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
