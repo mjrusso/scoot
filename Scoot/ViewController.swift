@@ -38,6 +38,10 @@ class ViewController: NSViewController {
         view.window
     }
 
+    var appDelegate: AppDelegate? {
+        NSApp.delegate as? AppDelegate
+    }
+
     var targetCellSize = CGSize(width: 60.0, height: 60.0) {
         didSet {
             targetCellSize = clamp(

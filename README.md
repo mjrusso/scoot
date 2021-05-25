@@ -35,7 +35,7 @@ To activate Scoot, use the ⇧⌘J global keyboard shortcut. (As long as Scoot i
 When Scoot is in the foreground:
 
 * You can jump directly to a cell in the grid. Each cell is marked with a label (e.g. “aaa”, “aas”, “aad”); type the characters, one letter at a time, and, as soon as a complete sequence is entered, the mouse cursor will move directly to the center of the corresponding cell. (This approach, including the use of a char-based decision tree, is heavily inspired by [avy][avy].)
-  * If you make a mistake while entering a label, hit the escape key (or C-G) to cancel and start over.
+  * If you make a mistake while entering a label, hit the escape key (⎋) to cancel and start over. (Alternatively, you can type ⌘. or C-G.)
 
 * You can _also_ move the cursor via the standard Mac keyboard shorcuts for [moving the insertion point][mac-keyboard-shortcuts-text]. (This means that keyboard shortcuts intended for navigating around in a document have been re-purposed to control movement on a 2-dimensional grid. Some liberties have been taken with this mapping; hopefully you find these keybindings intuitive.)
     * The equivalent standard Emacs keybindings should also work out-of-the-box, if you have them configured system-wide (for example, via [Karabiner-Elements][karabiner-elements] [[complex modification][karabiner-elements-emacs-mod]], or by augmenting the [system defaults][emacs-keyboard-shortcuts-osx] [[DefaultKeyBinding.dict][defaultkeybinding.dict], [Cocoa Text System][cocoa-text-system], [Text System Defaults and Key Bindings][apple-dev-text-system]]).
@@ -54,6 +54,15 @@ After clicking, the grid will automatically hide. You can also hide the grid at 
 ### Keybindings
 
 _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac-symbols], and [Emacs key notation][emacs-key-notation]._
+
+
+| Shortcut  | Emacs | Description                                                                                                       |
+|-----------|-------|-------------------------------------------------------------------------------------------------------------------|
+| ⇧⌘J       |       | Show grid (bring Scoot to foreground)                                                                             |
+| ⌘H        |       | Hide grid (bring Scoot to background)                                                                             |
+| ⎋ (or ⌘.) | C-g   | Cancel: if currently typing a label, clears all currently-typed characters; otherwise, brings Scoot to background |
+
+_Note:_ ⎋ signifies the Escape key.
 
 #### Cursor Movement
 

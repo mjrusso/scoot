@@ -38,9 +38,16 @@ import Cocoa
 extension ViewController {
 
     override func cancelOperation(_ sender: Any?) {
-        currentNode = nil
-        isHoldingDownMouseButton = false
-        flashFeedback(at: view.bounds, duration: 0.4)
+        defer {
+            currentNode = nil
+            isHoldingDownMouseButton = false
+        }
+
+        if isWalkingDecisionTree {
+            flashFeedback(at: view.bounds, duration: 0.4)
+        } else {
+            appDelegate?.bringToBackground()
+        }
     }
 
     override func moveLeft(_ sender: Any?) {
