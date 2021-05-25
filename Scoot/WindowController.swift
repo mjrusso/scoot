@@ -12,7 +12,35 @@ class WindowController: NSWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
+        self.setWindowSize()
 
+        NotificationCenter.default.addObserver(
+            forName: NSApplication.didChangeScreenParametersNotification,
+            object: NSApplication.shared,
+            queue: OperationQueue.main
+        ) { [weak self] notification in
+            guard let self = self else {
+                return
+            }
+
+            guard let window = self.window, let screen = NSScreen.main else {
+                return
+            }
+
+            guard window.frame != screen.frame else {
+                return
+            }
+
+            self.setWindowSize()
+            self.viewController.initializeCoreDataStructures()
+        }
+    }
+
+}
+
+extension WindowController {
+
+    func setWindowSize() {
         guard let screen = NSScreen.main else {
             return
         }

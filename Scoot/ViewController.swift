@@ -123,12 +123,6 @@ class ViewController: NSViewController {
     override func viewWillAppear() {
         super.viewWillAppear()
 
-        guard let screen = NSScreen.main else {
-            return
-        }
-
-        self.mouse = Mouse(screen: screen)
-
         self.initializeCoreDataStructures()
     }
 
@@ -165,6 +159,8 @@ extension ViewController {
 
         self.tree = tree
         self.grid = grid
+
+        self.mouse = Mouse(screen: screen)
 
         gridView.redraw()
     }

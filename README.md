@@ -185,7 +185,6 @@ https://user-images.githubusercontent.com/100451/118299409-b772df00-b4ae-11eb-93
 - Ability to simulate gestures, such as swipe, pinch, spread, and rotation.
 - Ability to record, save, and run macros.
 - Multi-monitor support.
-  - Also: support monitor resolution changes.
 - Enable global keyboard shortcuts to be overridden.
 - Enable non-global keyboard shortcuts to customized.
 - Enable grid colours, opacity, etc. to be customized.
