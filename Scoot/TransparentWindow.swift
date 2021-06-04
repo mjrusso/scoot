@@ -1,14 +1,14 @@
 import Cocoa
 
-class Window: NSWindow {
+class TransparentWindow: NSWindow {
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        backgroundColor =  NSColor.clear
+        backgroundColor = NSColor.clear
 
         isOpaque = false
-        isMovable = true
+        isMovable = false
         ignoresMouseEvents = true
     }
 

@@ -2,7 +2,7 @@ import Cocoa
 
 class GridView: NSView {
 
-    weak var viewController: ViewController!
+    weak var viewController: GridViewController!
 
     func redraw() {
         setNeedsDisplay(bounds)
@@ -70,7 +70,7 @@ class GridView: NSView {
 //          .strokeColor: NSColor.black,
         ]
 
-        let currentSequence = String(viewController.currentSequence)
+        let currentSequence = String(viewController.keyboardInputWindow?.currentSequence ?? [])
 
         for (index, cellRect) in grid.rects.enumerated() {
 

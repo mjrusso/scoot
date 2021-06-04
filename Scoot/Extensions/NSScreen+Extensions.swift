@@ -2,24 +2,6 @@ import Cocoa
 
 extension NSScreen {
 
-    // MARK: - Direction
-
-    enum Direction {
-        case up
-        case down
-        case left
-        case right
-    }
-
-    func point(for direction: Direction, relativeTo point: NSPoint, offset: CGFloat) -> CGPoint {
-        switch direction {
-        case .up: return CGPoint(x: point.x, y: point.y + offset)
-        case .down: return CGPoint(x: point.x, y: point.y - offset)
-        case .left: return CGPoint(x: point.x - offset, y: point.y)
-        case .right: return CGPoint(x: point.x + offset, y: point.y)
-        }
-    }
-
     // MARK: - Landmarks (Absolute and Relative)
 
     enum AbsoluteLandmark {

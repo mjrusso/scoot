@@ -1,11 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9Ma-9h-iN7">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Window Controller-->
+        <scene sceneID="1ag-Gt-Ms6">
+            <objects>
+                <windowController id="9Ma-9h-iN7" sceneMemberID="viewController">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="6so-EM-lwk" customClass="KeyboardInputWindow" customModule="Scoot" customModuleProvider="target">
+                        <windowStyleMask key="styleMask" titled="YES" fullSizeContentView="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="516" y="566" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="3008" height="1667"/>
+                        <view key="contentView" id="bOd-3M-zpY">
+                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </view>
+                        <connections>
+                            <outlet property="delegate" destination="9Ma-9h-iN7" id="HuP-Il-k4F"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="kLW-ST-Owf" kind="relationship" relationship="window.shadowedContentViewController" id="He2-Ke-ZOx"/>
+                    </connections>
+                </windowController>
+                <customObject id="0Vb-SW-gHX" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-477" y="250"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="o3b-ci-xQ1">
+            <objects>
+                <customObject id="ZJD-b7-E9J" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <viewController id="kLW-ST-Owf" sceneMemberID="viewController">
+                    <view key="view" id="fg4-pa-cCz">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-477" y="655"/>
+        </scene>
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
             <objects>
@@ -35,7 +73,7 @@
                                                     <menuItem title="Toggle Grid Labels" keyEquivalent="=" id="nlF-kl-ook">
                                                         <modifierMask key="keyEquivalentModifierMask" control="YES"/>
                                                         <connections>
-                                                            <action selector="toggleGridLabels:" target="Ady-hI-5gd" id="DQ3-pJ-gt2"/>
+                                                            <action selector="toggleGridLabels:" target="Ady-hI-5gd" id="4Ul-iT-ejQ"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Toggle Grid Lines" keyEquivalent="=" id="krQ-ol-RlF">
@@ -115,8 +153,8 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController id="B8D-0N-5wS" customClass="WindowController" customModule="Scoot" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Scoot" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="Window" customModule="Scoot" customModuleProvider="target">
+                <windowController storyboardIdentifier="WindowController" id="B8D-0N-5wS" customClass="GridWindowController" customModule="Scoot" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="GridWindow" customModule="Scoot" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" fullSizeContentView="YES"/>
                         <rect key="contentRect" x="0.0" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -132,10 +170,10 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--Grid View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Scoot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="GridViewController" customModule="Scoot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>

@@ -3,7 +3,7 @@ import Carbon.HIToolbox
 
 // MARK: - Keyboard
 
-extension ViewController {
+extension KeyboardInputWindow {
 
     override func keyDown(with event: NSEvent) {
         let modifiers = event.modifierFlags.intersection(
@@ -36,7 +36,7 @@ extension ViewController {
             } else {
                 // Provide visual feedback: an invalid key (not corresponding to
                 // any valid sequence) was just typed by the user.
-                flashFeedback(at: view.bounds, duration: 0.8)
+                flashFeedback(duration: 0.8)
             }
             return
         }

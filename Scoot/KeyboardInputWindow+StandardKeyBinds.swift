@@ -35,7 +35,7 @@ import Cocoa
 
  */
 
-extension ViewController {
+extension KeyboardInputWindow {
 
     override func cancelOperation(_ sender: Any?) {
         defer {
@@ -44,71 +44,71 @@ extension ViewController {
         }
 
         if isWalkingDecisionTree {
-            flashFeedback(at: view.bounds, duration: 0.4)
+            flashFeedback(duration: 0.4)
         } else {
             appDelegate?.bringToBackground()
         }
     }
 
     override func moveLeft(_ sender: Any?) {
-        mouse?.move(.left, stepSize: stepWidth)
+        mouse.move(.left, stepSize: stepWidth)
     }
 
     override func moveRight(_ sender: Any?) {
-        mouse?.move(.right, stepSize: stepWidth)
+        mouse.move(.right, stepSize: stepWidth)
     }
 
     override func moveWordLeft(_ sender: Any?) {
-        mouse?.move(.left, stepSize: stepWidth, stepMultiple: numStepsPerCell)
+        mouse.move(.left, stepSize: stepWidth, stepMultiple: numStepsPerCell)
     }
 
     override func moveWordRight(_ sender: Any?) {
-        mouse?.move(.right, stepSize: stepWidth, stepMultiple: numStepsPerCell)
+        mouse.move(.right, stepSize: stepWidth, stepMultiple: numStepsPerCell)
     }
 
     override func moveToBeginningOfLine(_ sender: Any?) {
-        mouse?.move(to: .leftEdge)
+        mouse.move(to: .leftEdge)
     }
 
     override func moveToEndOfLine(_ sender: Any?) {
-        mouse?.move(to: .rightEdge)
+        mouse.move(to: .rightEdge)
     }
 
     override func moveUp(_ sender: Any?) {
-        mouse?.move(.up, stepSize: stepHeight)
+        mouse.move(.up, stepSize: stepHeight)
     }
 
     override func moveDown(_ sender: Any?) {
-        mouse?.move(.down, stepSize: stepHeight)
+        mouse.move(.down, stepSize: stepHeight)
     }
 
     override func moveToBeginningOfParagraph(_ sender: Any?) {
-        mouse?.move(.up, stepSize: stepHeight, stepMultiple: numStepsPerCell)
+        mouse.move(.up, stepSize: stepHeight, stepMultiple: numStepsPerCell)
     }
 
     override func moveToEndOfParagraph(_ sender: Any?) {
-        mouse?.move(.down, stepSize: stepHeight, stepMultiple: numStepsPerCell)
+        mouse.move(.down, stepSize: stepHeight, stepMultiple: numStepsPerCell)
     }
 
     override func scrollPageUp(_ sender: Any?) {
-        mouse?.move(.up, stepSize: stepHeight, stepMultiple: numStepsPerCell)
+        mouse.move(.up, stepSize: stepHeight, stepMultiple: numStepsPerCell)
     }
 
     override func scrollPageDown(_ sender: Any?) {
-        mouse?.move(.down, stepSize: stepHeight, stepMultiple: numStepsPerCell)
+        mouse.move(.down, stepSize: stepHeight, stepMultiple: numStepsPerCell)
     }
 
     override func moveToBeginningOfDocument(_ sender: Any?) {
-        mouse?.move(to: .topEdge)
+        mouse.move(to: .topEdge)
     }
 
     override func moveToEndOfDocument(_ sender: Any?) {
-        mouse?.move(to: .bottomEdge)
+        mouse.move(to: .bottomEdge)
     }
 
     override func centerSelectionInVisibleArea(_ sender: Any?) {
         // Mimic recenter-top-bottom behavior in Emacs.
-        mouse?.cycle()
+        mouse.cycle()
     }
 
 }

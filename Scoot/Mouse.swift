@@ -2,18 +2,20 @@ import Cocoa
 
 struct Mouse {
 
-    let screen: NSScreen
-
-    var screenSize: CGSize {
-        screen.frame.size
+    /// The location of the mouse cursor, in the Core Graphics (Quartz) coordinate system.
+    var currentLocation: CGPoint {
+        NSEvent.mouseLocation.convertToCG()
     }
 
-    var currentLocation: CGPoint {
-        NSEvent.mouseLocation.convertToCG(screenSize: screenSize)
+    /// The screen that the mouse cursor is currently inhabiting.
+    var currentScreen: NSScreen? {
+        NSScreen.screens.first {
+            NSMouseInRect(NSEvent.mouseLocation, $0.frame, false)
+        }
     }
 
     func move(to point: CGPoint) {
-        let destination = point.convertToCG(screenSize: screenSize)
+        let destination = point.convertToCG()
         let event =  CGEvent(
             mouseEventSource: nil,
             mouseType: .mouseMoved,
@@ -104,7 +106,7 @@ struct Mouse {
 
     func drag(to point: CGPoint) {
         let start = currentLocation
-        let end = point.convertToCG(screenSize: screenSize)
+        let end = point.convertToCG()
 
         CGEvent(
             mouseEventSource: nil,
@@ -145,21 +147,33 @@ struct Mouse {
 
     // MARK: Convenience
 
-    func move(_ direction: NSScreen.Direction, stepSize: CGFloat, stepMultiple: CGFloat = 1) {
-        move(to: screen.point(for: direction, relativeTo: NSEvent.mouseLocation, offset: stepSize * stepMultiple))
+    func move(_ direction: NSPoint.Direction, stepSize: CGFloat, stepMultiple: CGFloat = 1) {
+        move(to: NSEvent.mouseLocation.offset(by: stepSize * stepMultiple, in: direction))
     }
 
     func move(to landmark: NSScreen.AbsoluteLandmark) {
+        guard let screen = currentScreen else {
+            return
+        }
+
         move(to: screen.point(for: landmark))
     }
 
     func move(to landmark: NSScreen.RelativeLandmark) {
+        guard let screen = currentScreen else {
+            return
+        }
+
         move(to: screen.point(for: landmark, relativeTo: NSEvent.mouseLocation))
     }
 
     // Mimic (somewhat) the recenter-top-bottom behavior in Emacs, by cycling
     // between the center of the screen, and the screen's corners.
     func cycle() {
+        guard let screen = currentScreen else {
+            return
+        }
+
         switch NSEvent.mouseLocation {
         case screen.point(for: .center): move(to: .topLeft)
         case screen.point(for: .topLeft): move(to: .topRight)
@@ -170,11 +184,11 @@ struct Mouse {
         }
     }
 
-    func drag(_ direction: NSScreen.Direction, distance: CGFloat) {
-        drag(to: screen.point(for: direction, relativeTo: NSEvent.mouseLocation, offset: distance))
+    func drag(_ direction: NSPoint.Direction, distance: CGFloat) {
+        drag(to: NSEvent.mouseLocation.offset(by: distance, in: direction))
     }
 
-    func scroll(_ direction: NSScreen.Direction, stepSize: CGFloat, stepMultiple: CGFloat = 1) {
+    func scroll(_ direction: NSPoint.Direction, stepSize: CGFloat, stepMultiple: CGFloat = 1) {
         let offset = Int(stepSize * stepMultiple)
         switch direction {
         case .up:
