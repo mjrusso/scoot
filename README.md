@@ -2,6 +2,8 @@
 
 _Meet **Scoot**, your friendly cursor teleportation and actuation tool._
 
+<img src="https://github.com/mjrusso/scoot/actions/workflows/main_test.yml/badge.svg" alt="build status"></a>
+
 <a href="https://twitter.com/mjrusso" title="@mjrusso on Twitter"><img src="https://img.shields.io/badge/twitter-@mjrusso-blue.svg" alt="@mjrusso on Twitter"></a>
 
 <p align="center">
