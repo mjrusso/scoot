@@ -14,7 +14,7 @@ jobs:
 
       - name: Find first scheme of default project
         run: |
-          echo "::set-env name=SCHEME::$(xcodebuild -list -json | jq -r '.project.schemes[0]')"
+          echo "SCHEME=$(xcodebuild -list -json | jq -r '.project.schemes[0]')" >> $GITHUB_ENV
 
       - name: Build and test app
         shell: bash --noprofile --norc -eo pipefail {0}
