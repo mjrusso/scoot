@@ -33,6 +33,7 @@
 		E5BD595826615DB700BB5181 /* KeyboardInputWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BD595726615DB700BB5181 /* KeyboardInputWindow.swift */; };
 		E5BD595A26615E5600BB5181 /* KeyboardInputWindow+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BD595926615E5600BB5181 /* KeyboardInputWindow+Delegate.swift */; };
 		E5BD595C26615F5300BB5181 /* GridWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BD595B26615F5300BB5181 /* GridWindow.swift */; };
+		E5BE2E9126F25D7100BB754D /* AXSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E5BE2E9026F25D7100BB754D /* AXSwift */; };
 		E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E87FFC2630A3550094FE9B /* GridView.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E558B7662638FC1700211CB5 /* HotKey in Frameworks */,
+				E5BE2E9126F25D7100BB754D /* AXSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +214,7 @@
 			name = Scoot;
 			packageProductDependencies = (
 				E558B7652638FC1700211CB5 /* HotKey */,
+				E5BE2E9026F25D7100BB754D /* AXSwift */,
 			);
 			productName = Scoot;
 			productReference = E5776229262F04D100849D7D /* Scoot.app */;
@@ -286,6 +289,7 @@
 			mainGroup = E5776220262F04D100849D7D;
 			packageReferences = (
 				E558B7642638FC1700211CB5 /* XCRemoteSwiftPackageReference "HotKey" */,
+				E5BE2E8F26F25D7100BB754D /* XCRemoteSwiftPackageReference "AXSwift" */,
 			);
 			productRefGroup = E577622A262F04D100849D7D /* Products */;
 			projectDirPath = "";
@@ -690,6 +694,14 @@
 				minimumVersion = 0.1.3;
 			};
 		};
+		E5BE2E8F26F25D7100BB754D /* XCRemoteSwiftPackageReference "AXSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tmandry/AXSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -697,6 +709,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E558B7642638FC1700211CB5 /* XCRemoteSwiftPackageReference "HotKey" */;
 			productName = HotKey;
+		};
+		E5BE2E9026F25D7100BB754D /* AXSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E5BE2E8F26F25D7100BB754D /* XCRemoteSwiftPackageReference "AXSwift" */;
+			productName = AXSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
