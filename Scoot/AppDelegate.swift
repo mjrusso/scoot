@@ -40,7 +40,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        guard Accessibility.checkIfProcessIsTrusted(withPrompt: true) else {
+
+        guard Accessibility.checkIfProcessIsTrusted(withPrompt: !isRunningTests) else {
             func showAlert(completion: (Bool) -> Void) {
                 let alert = NSAlert()
                 alert.messageText = "Accessibility Permission Required"
@@ -210,6 +211,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func installationHelpRequested(_ sender: Any) {
         NSWorkspace.shared.open(URL(string: "https://github.com/mjrusso/scoot#installation")!)
+    }
+
+    // MARK: Testing
+
+    var isRunningTests: Bool {
+        ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
     }
 
 }
