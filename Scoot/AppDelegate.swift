@@ -40,7 +40,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        guard Accessibility.checkIfProcessIsTrusted(withPrompt: true) else {
+            func showAlert(completion: (Bool) -> Void) {
+                let alert = NSAlert()
+                alert.messageText = "Accessibility Permission Required"
+                alert.informativeText = "Please re-launch Scoot after authorizing."
+                alert.alertStyle = .critical
+                alert.addButton(withTitle: "View Documentation")
+                alert.addButton(withTitle: "Exit")
+                completion(alert.runModal() == .alertFirstButtonReturn)
+            }
+
+            showAlert { viewDocumentation in
+                if viewDocumentation {
+                    self.installationHelpRequested(self)
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    print("Terminating because not trusted as an AX process.")
+                    NSApp.terminate(self)
+                }
+            }
+            return
+        }
+
         self.hotKey = HotKey(key: .j, modifiers: [.command, .shift])
+
         self.configureMenuBarExtra()
 
         for screen in NSScreen.screens {
@@ -182,6 +206,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func helpPressed(_ sender: NSMenuItem) {
         NSWorkspace.shared.open(URL(string: "https://github.com/mjrusso/scoot")!)
+    }
+
+    @IBAction func installationHelpRequested(_ sender: Any) {
+        NSWorkspace.shared.open(URL(string: "https://github.com/mjrusso/scoot#installation")!)
     }
 
 }
