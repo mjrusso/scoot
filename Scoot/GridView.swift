@@ -2,7 +2,7 @@ import Cocoa
 
 class GridView: NSView {
 
-    weak var viewController: GridViewController!
+    weak var viewController: JumpViewController!
 
     func redraw() {
         setNeedsDisplay(bounds)

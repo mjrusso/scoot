@@ -1,13 +1,13 @@
 import Cocoa
 
-class GridWindowController: NSWindowController {
+class JumpWindowController: NSWindowController {
 
     var appDelegate: AppDelegate? {
         NSApp.delegate as? AppDelegate
     }
 
-    var viewController: GridViewController {
-        contentViewController as! GridViewController
+    var viewController: JumpViewController {
+        contentViewController as! JumpViewController
     }
 
     var assignedScreen: NSScreen?
@@ -18,11 +18,11 @@ class GridWindowController: NSWindowController {
 
 }
 
-extension GridWindowController {
+extension JumpWindowController {
 
-    class func spawn(on screen: NSScreen) -> GridWindowController {
+    class func spawn(on screen: NSScreen) -> JumpWindowController {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateController(withIdentifier: "WindowController") as! GridWindowController
+        let controller = storyboard.instantiateController(withIdentifier: "WindowController") as! JumpWindowController
         controller.assignScreen(screen: screen)
         controller.showWindow(self)
 

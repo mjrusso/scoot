@@ -3,7 +3,7 @@ import Cocoa
 extension KeyboardInputWindow {
 
     func showGridViews() {
-        appDelegate?.gridWindowControllers.forEach {
+        appDelegate?.jumpWindowControllers.forEach {
             $0.viewController.showGrid()
         }
         appDelegate?.showMenuItem.isHidden = true
@@ -11,7 +11,7 @@ extension KeyboardInputWindow {
     }
 
     func hideGridViews() {
-        appDelegate?.gridWindowControllers.forEach {
+        appDelegate?.jumpWindowControllers.forEach {
             $0.viewController.hideGrid()
         }
         appDelegate?.showMenuItem.isHidden = false
@@ -19,28 +19,28 @@ extension KeyboardInputWindow {
     }
 
     func redrawGridViews() {
-        appDelegate?.gridWindowControllers.forEach {
+        appDelegate?.jumpWindowControllers.forEach {
             $0.viewController.gridView.redraw()
         }
     }
 
     func flashFeedback(duration: TimeInterval) {
-        guard let gridWindowControllers = appDelegate?.gridWindowControllers else {
+        guard let jumpWindowControllers = appDelegate?.jumpWindowControllers else {
             return
         }
 
-        for gridWindowController in gridWindowControllers {
-            let viewController = gridWindowController.viewController
+        for jumpWindowController in jumpWindowControllers {
+            let viewController = jumpWindowController.viewController
             viewController.flashFeedback(at: viewController.view.bounds, duration: duration)
         }
     }
 
     func flashFeedback(at screenRect: CGRect, duration: TimeInterval) {
-        guard let gridWindowControllers = appDelegate?.gridWindowControllers else {
+        guard let jumpWindowControllers = appDelegate?.jumpWindowControllers else {
             return
         }
 
-        for windowController in gridWindowControllers {
+        for windowController in jumpWindowControllers {
             if let screen = windowController.assignedScreen {
                 if screen.frame.contains(screenRect) {
                     let rect = NSRect( // Convert from screen coordinates.

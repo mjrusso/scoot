@@ -17,14 +17,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.orderedWindows.compactMap({ $0 as? KeyboardInputWindow }).first!
     }()
 
-    var gridWindowControllers = [GridWindowController]()
+    var jumpWindowControllers = [JumpWindowController]()
 
-    var gridWindows: [GridWindow] {
-        gridWindowControllers.compactMap { $0.window as? GridWindow }
+    var jumpWindows: [JumpWindow] {
+        jumpWindowControllers.compactMap { $0.window as? JumpWindow }
     }
 
-    var gridViewControllers: [GridViewController] {
-        gridWindowControllers.compactMap { $0.contentViewController as? GridViewController }
+    var jumpViewControllers: [JumpViewController] {
+        jumpWindowControllers.compactMap { $0.contentViewController as? JumpViewController }
     }
 
     public var hotKey: HotKey? {
@@ -68,7 +68,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.configureMenuBarExtra()
 
         for screen in NSScreen.screens {
-            self.spawnGridWindow(on: screen)
+            self.spawnJumpWindow(on: screen)
         }
 
         self.inputWindow.initializeCoreDataStructures()
@@ -84,18 +84,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: Handling Screen Changes
 
-    func spawnGridWindow(on screen: NSScreen) {
-        let controller = GridWindowController.spawn(on: screen)
-        gridWindowControllers.append(controller)
+    func spawnJumpWindow(on screen: NSScreen) {
+        let controller = JumpWindowController.spawn(on: screen)
+        jumpWindowControllers.append(controller)
     }
 
-    func resizeGridWindow(managedBy controller: GridWindowController, to size: NSRect) {
+    func resizeJumpWindow(managedBy controller: JumpWindowController, to size: NSRect) {
         controller.setWindowFrame(size)
     }
 
-    func closeGridWindow(managedBy controller: GridWindowController) {
+    func closeJumpWindow(managedBy controller: JumpWindowController) {
         controller.close()
-        gridWindowControllers.removeAll(where: {
+        jumpWindowControllers.removeAll(where: {
             $0 == controller
         })
     }
@@ -113,32 +113,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             var mustReinitialize = false
 
-            for windowController in self.gridWindowControllers {
+            for windowController in self.jumpWindowControllers {
                 guard let screen = windowController.assignedScreen,
                     NSScreen.screens.contains(screen),
                     let window = windowController.window
                 else {
-                    self.closeGridWindow(managedBy: windowController)
+                    self.closeJumpWindow(managedBy: windowController)
                     mustReinitialize = true
                     continue
                 }
 
                 guard window.frame == screen.frame else {
                     // Resize the window: screen dimensions have changed.
-                    self.resizeGridWindow(managedBy: windowController, to: screen.visibleFrame)
+                    self.resizeJumpWindow(managedBy: windowController, to: screen.visibleFrame)
                     mustReinitialize = true
                     continue
                 }
             }
 
-            let assignedScreens = self.gridWindowControllers.compactMap {
+            let assignedScreens = self.jumpWindowControllers.compactMap {
                 $0.assignedScreen
             }
 
             let addedScreens = Set(NSScreen.screens).subtracting(assignedScreens)
 
             for screen in addedScreens {
-                self.spawnGridWindow(on: screen)
+                self.spawnJumpWindow(on: screen)
                 mustReinitialize = true
             }
 
@@ -150,8 +150,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: Convenience
 
-    func gridWindowController(for screen: NSScreen) -> GridWindowController? {
-        self.gridWindowControllers.first(where: {
+    func jumpWindowController(for screen: NSScreen) -> JumpWindowController? {
+        self.jumpWindowControllers.first(where: {
             $0.assignedScreen == screen
         })
     }
@@ -180,7 +180,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.activate(ignoringOtherApps: true)
 
         DispatchQueue.main.async {
-            self.gridWindows.forEach { window in
+            self.jumpWindows.forEach { window in
                 window.orderFront(self)
             }
             self.inputWindow.makeMain()

@@ -1,6 +1,6 @@
 import Cocoa
 
-class GridViewController: NSViewController {
+class JumpViewController: NSViewController {
 
     // A grid, subdividing the screen into a collection of evenly-sized cells.
     var grid: Grid!
@@ -82,7 +82,7 @@ class GridViewController: NSViewController {
 }
 
 
-extension GridViewController {
+extension JumpViewController {
 
     func showGrid() {
         self.gridView.isHidden = false

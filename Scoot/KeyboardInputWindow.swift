@@ -76,7 +76,7 @@ class KeyboardInputWindow: TransparentWindow {
             return nil
         }
 
-        return appDelegate?.gridWindowController(for: activeScreen)?.viewController.grid
+        return appDelegate?.jumpWindowController(for: activeScreen)?.viewController.grid
     }
 
     var stepWidth: CGFloat {
@@ -89,21 +89,21 @@ class KeyboardInputWindow: TransparentWindow {
 
     func initializeCoreDataStructures() {
 
-        guard let gridWindowControllers = appDelegate?.gridWindowControllers else {
+        guard let jumpWindowControllers = appDelegate?.jumpWindowControllers else {
             return
         }
 
         var data = [(grid: Grid, screenRects: [CGRect])]()
 
-        for gridWindowController in gridWindowControllers {
-            guard let screen = gridWindowController.assignedScreen else {
+        for jumpWindowController in jumpWindowControllers {
+            guard let screen = jumpWindowController.assignedScreen else {
                 return
             }
 
             let grid = Grid(gridSize: screen.visibleFrame.size,
                             targetCellSize: targetCellSize)
 
-            gridWindowController.viewController.grid = grid
+            jumpWindowController.viewController.grid = grid
 
             // All rects, transformed into screen coordinates. (This
             // transformation is needed to account for cases where multiple
