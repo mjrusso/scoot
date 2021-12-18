@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E511785B2636EEC800B4202F /* NSScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */; };
 		E51178602636EEEB00B4202F /* NSPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */; };
+		E52BFD172763D5FB00BB65AF /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52BFD162763D5FB00BB65AF /* Accessibility.swift */; };
 		E558B7662638FC1700211CB5 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = E558B7652638FC1700211CB5 /* HotKey */; };
 		E567D2A2263C77FC00A0A861 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567D2A1263C77FC00A0A861 /* Grid.swift */; };
 		E567D2A4263C7FB000A0A861 /* KeyboardInputWindow+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567D2A3263C7FB000A0A861 /* KeyboardInputWindow+Keyboard.swift */; };
@@ -57,6 +58,7 @@
 /* Begin PBXFileReference section */
 		E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extensions.swift"; sourceTree = "<group>"; };
 		E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPoint+Extensions.swift"; sourceTree = "<group>"; };
+		E52BFD162763D5FB00BB65AF /* Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
 		E567D2A1263C77FC00A0A861 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		E567D2A3263C7FB000A0A861 /* KeyboardInputWindow+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardInputWindow+Keyboard.swift"; sourceTree = "<group>"; };
 		E5776229262F04D100849D7D /* Scoot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scoot.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +156,7 @@
 			children = (
 				E5776232262F04D300849D7D /* Main.storyboard */,
 				E577622C262F04D100849D7D /* AppDelegate.swift */,
+				E52BFD162763D5FB00BB65AF /* Accessibility.swift */,
 				E5776260262F067700849D7D /* TransparentWindow.swift */,
 				E5BD595726615DB700BB5181 /* KeyboardInputWindow.swift */,
 				E5BD595926615E5600BB5181 /* KeyboardInputWindow+Delegate.swift */,
@@ -334,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E51178602636EEEB00B4202F /* NSPoint+Extensions.swift in Sources */,
+				E52BFD172763D5FB00BB65AF /* Accessibility.swift in Sources */,
 				E567D2A4263C7FB000A0A861 /* KeyboardInputWindow+Keyboard.swift in Sources */,
 				E591E56C2636F8D000C037FF /* Mouse.swift in Sources */,
 				E511785B2636EEC800B4202F /* NSScreen+Extensions.swift in Sources */,
