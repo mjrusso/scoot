@@ -193,14 +193,7 @@ For reference, the following key sequence was used to grab the file and drop it 
 
 ## Feature Backlog
 
-- Improve legibility of grid labels, particularly when rendering on top of light backgrounds with dark text.
-  - Is there a (performant) way to modify the colours of the grid based on the content immediately underneath it?
-- Ability to simulate gestures, such as swipe, pinch, spread, and rotation.
-- Ability to record, save, and run macros.
-- Enable global keyboard shortcuts to be overridden.
-- Enable non-global keyboard shortcuts to customized.
-- Enable grid colours, opacity, etc. to be customized.
-- CI ([example](https://betterprogramming.pub/indie-mac-app-devops-with-github-actions-b16764a3ebe7)).
+See [the issue tracker][scoot-issues]. Contributions welcome!
 
 ## License
 
