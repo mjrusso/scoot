@@ -21,13 +21,13 @@ Scoot supports two navigation modes: **element-based**, and **grid-based**.
 * **Element-based navigation:** MacOS accessibility APIs are used to find user interface elements, such as buttons and links, on the user's screen. (In this mode, Scoot will look for elements in the focused window of the frontmost app.)
 
 <p align="center">
-  <img width="550" src="./Assets/Examples/element-nav.png" alt="Scoot using the element-based navigation mode" />
+  <img src="./Assets/Examples/element-nav.png" alt="Scoot using the element-based navigation mode" />
 </p>
 
 * **Grid-based navigation:** all connected screens are subdivided into aa grid of equally-sized cells.
 
 <p align="center">
-  <img width="550" src="./Assets/Examples/grid-nav.png" alt="Scoot using the grid-based navigation mode" />
+  <img src="./Assets/Examples/grid-nav.png" alt="Scoot using the grid-based navigation mode" />
 </p>
 
 
