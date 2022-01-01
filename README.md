@@ -191,12 +191,6 @@ For reference, the following key sequence was used to grab the file and drop it 
 - `fd` to jump cursor to cell
 - `↵` to release the left mouse button
 
-### Move and Click
-
-An example of using Scoot to control an app running in the iOS simulator:
-
-https://user-images.githubusercontent.com/100451/118299409-b772df00-b4ae-11eb-93ae-3cc67e3ce2b8.mp4
-
 ## Feature Backlog
 
 - Improve legibility of grid labels, particularly when rendering on top of light backgrounds with dark text.
