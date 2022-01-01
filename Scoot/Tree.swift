@@ -87,9 +87,18 @@ class Tree<T>: CustomStringConvertible where T: Equatable {
     }()
 
     init(candidates: [T], keys: [Character]) {
+        self.root = Node(label: " ")
+
         let numCandidates = candidates.count
 
-        self.root = Node(label: " ")
+        // The underlying implementation expects there to be at least as many
+        // candidates as there are keys...
+        let keys = Array(keys.prefix(numCandidates))
+
+        // ...and it also expects to have at least one candidate.
+        guard numCandidates > 0 else {
+            return
+        }
 
         var numLeafs = 0
 

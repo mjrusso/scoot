@@ -11,47 +11,81 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var hideMenuItem: NSMenuItem!
 
-    @IBOutlet weak var showMenuItem: NSMenuItem!
+    @IBOutlet weak var showElementsMenuItem: NSMenuItem!
+
+    @IBOutlet weak var showGridMenuItem: NSMenuItem!
 
     lazy var inputWindow: KeyboardInputWindow = {
         NSApp.orderedWindows.compactMap({ $0 as? KeyboardInputWindow }).first!
     }()
 
-    var gridWindowControllers = [GridWindowController]()
+    var jumpWindowControllers = [JumpWindowController]()
 
-    var gridWindows: [GridWindow] {
-        gridWindowControllers.compactMap { $0.window as? GridWindow }
+    var jumpWindows: [JumpWindow] {
+        jumpWindowControllers.compactMap { $0.window as? JumpWindow }
     }
 
-    var gridViewControllers: [GridViewController] {
-        gridWindowControllers.compactMap { $0.contentViewController as? GridViewController }
+    var jumpViewControllers: [JumpViewController] {
+        jumpWindowControllers.compactMap { $0.contentViewController as? JumpViewController }
     }
 
-    public var hotKey: HotKey? {
+    public var showElementsHotKey: HotKey? {
         didSet {
-            guard let hotKey = hotKey else {
-                return
+            showElementsHotKey?.keyDownHandler = { [weak self] in
+                self?.bringToForeground(using: .element)
             }
+        }
+    }
 
-            hotKey.keyDownHandler = { [weak self] in
-                self?.bringToForeground()
+    public var showGridHotKey: HotKey? {
+        didSet {
+            showGridHotKey?.keyDownHandler = { [weak self] in
+                self?.bringToForeground(using: .grid)
             }
         }
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        self.hotKey = HotKey(key: .j, modifiers: [.command, .shift])
+
+        guard Accessibility.checkIfProcessIsTrusted(withPrompt: !isRunningTests) else {
+            func showAlert(completion: (Bool) -> Void) {
+                let alert = NSAlert()
+                alert.messageText = "Accessibility Permission Required"
+                alert.informativeText = "Please re-launch Scoot after authorizing."
+                alert.alertStyle = .critical
+                alert.addButton(withTitle: "View Documentation")
+                alert.addButton(withTitle: "Exit")
+                completion(alert.runModal() == .alertFirstButtonReturn)
+            }
+
+            showAlert { viewDocumentation in
+                if viewDocumentation {
+                    self.installationHelpRequested(self)
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    print("Terminating because not trusted as an AX process.")
+                    NSApp.terminate(self)
+                }
+            }
+            return
+        }
+
+        self.showElementsHotKey = HotKey(key: .j, modifiers: [.command, .shift])
+
+        self.showGridHotKey = HotKey(key: .k, modifiers: [.command, .shift])
+
         self.configureMenuBarExtra()
 
         for screen in NSScreen.screens {
-            self.spawnGridWindow(on: screen)
+            self.spawnJumpWindow(on: screen)
+            print("Screen: \(screen.localizedName) \(screen.frame)")
         }
 
-        self.inputWindow.initializeCoreDataStructures()
+        self.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
 
         self.initializeChangeScreenParametersObserver()
 
-        self.bringToForeground()
+        self.bringToForeground(using: .element)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -60,18 +94,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: Handling Screen Changes
 
-    func spawnGridWindow(on screen: NSScreen) {
-        let controller = GridWindowController.spawn(on: screen)
-        gridWindowControllers.append(controller)
+    func spawnJumpWindow(on screen: NSScreen) {
+        let controller = JumpWindowController.spawn(on: screen)
+        jumpWindowControllers.append(controller)
     }
 
-    func resizeGridWindow(managedBy controller: GridWindowController, to size: NSRect) {
+    func resizeJumpWindow(managedBy controller: JumpWindowController, to size: NSRect) {
         controller.setWindowFrame(size)
     }
 
-    func closeGridWindow(managedBy controller: GridWindowController) {
+    func closeJumpWindow(managedBy controller: JumpWindowController) {
         controller.close()
-        gridWindowControllers.removeAll(where: {
+        jumpWindowControllers.removeAll(where: {
             $0 == controller
         })
     }
@@ -89,45 +123,45 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             var mustReinitialize = false
 
-            for windowController in self.gridWindowControllers {
+            for windowController in self.jumpWindowControllers {
                 guard let screen = windowController.assignedScreen,
                     NSScreen.screens.contains(screen),
                     let window = windowController.window
                 else {
-                    self.closeGridWindow(managedBy: windowController)
+                    self.closeJumpWindow(managedBy: windowController)
                     mustReinitialize = true
                     continue
                 }
 
                 guard window.frame == screen.frame else {
                     // Resize the window: screen dimensions have changed.
-                    self.resizeGridWindow(managedBy: windowController, to: screen.visibleFrame)
+                    self.resizeJumpWindow(managedBy: windowController, to: screen.visibleFrame)
                     mustReinitialize = true
                     continue
                 }
             }
 
-            let assignedScreens = self.gridWindowControllers.compactMap {
+            let assignedScreens = self.jumpWindowControllers.compactMap {
                 $0.assignedScreen
             }
 
             let addedScreens = Set(NSScreen.screens).subtracting(assignedScreens)
 
             for screen in addedScreens {
-                self.spawnGridWindow(on: screen)
+                self.spawnJumpWindow(on: screen)
                 mustReinitialize = true
             }
 
             if mustReinitialize {
-                self.inputWindow.initializeCoreDataStructures()
+                self.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
             }
         }
     }
 
     // MARK: Convenience
 
-    func gridWindowController(for screen: NSScreen) -> GridWindowController? {
-        self.gridWindowControllers.first(where: {
+    func jumpWindowController(for screen: NSScreen) -> JumpWindowController? {
+        self.jumpWindowControllers.first(where: {
             $0.assignedScreen == screen
         })
     }
@@ -153,15 +187,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: Activation
 
     func bringToForeground() {
+        if let frontmostApp = NSWorkspace.shared.frontmostApplication,
+           frontmostApp != NSRunningApplication.current {
+            self.inputWindow.initializeCoreDataStructuresForElementBasedMovement(of: frontmostApp)
+        }
+
+        self.inputWindow.showAppropriateJumpView()
+
         NSApp.activate(ignoringOtherApps: true)
 
         DispatchQueue.main.async {
-            self.gridWindows.forEach { window in
+            self.jumpWindows.forEach { window in
                 window.orderFront(self)
             }
             self.inputWindow.makeMain()
             self.inputWindow.makeKeyAndOrderFront(self)
         }
+    }
+
+    func bringToForeground(using jumpMode: JumpMode) {
+        inputWindow.activeJumpMode = jumpMode
+        bringToForeground()
     }
 
     // MARK: Deactivation
@@ -176,12 +222,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         bringToBackground()
     }
 
-    @IBAction func showPressed(_ sender: NSMenuItem) {
-        bringToForeground()
+    @IBAction func showElementsPressed(_ sender: NSMenuItem) {
+        bringToForeground(using: .element)
+    }
+
+    @IBAction func showGridPressed(_ sender: NSMenuItem) {
+        bringToForeground(using: .grid)
     }
 
     @IBAction func helpPressed(_ sender: NSMenuItem) {
         NSWorkspace.shared.open(URL(string: "https://github.com/mjrusso/scoot")!)
+    }
+
+    @IBAction func installationHelpRequested(_ sender: Any) {
+        NSWorkspace.shared.open(URL(string: "https://github.com/mjrusso/scoot#installation")!)
+    }
+
+    // MARK: Testing
+
+    var isRunningTests: Bool {
+        ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
     }
 
 }

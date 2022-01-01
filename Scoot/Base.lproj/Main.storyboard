@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9Ma-9h-iN7">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="9Ma-9h-iN7">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -55,14 +55,19 @@
                                 <menu key="submenu" title="Scoot" autoenablesItems="NO" id="Rkb-lU-63l">
                                     <items>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Hide Grid" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hidePressed:" target="Voe-Tx-rLC" id="T4I-eg-084"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Show Grid" keyEquivalent="J" id="9ey-1D-QEB">
+                                        <menuItem title="Show Elements" keyEquivalent="J" id="PJE-er-84e" userLabel="Show Elements">
                                             <connections>
-                                                <action selector="showPressed:" target="Voe-Tx-rLC" id="5m3-Jl-IfR"/>
+                                                <action selector="showElementsPressed:" target="Voe-Tx-rLC" id="gLz-X4-6K0"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Show Grid" keyEquivalent="K" id="9ey-1D-QEB">
+                                            <connections>
+                                                <action selector="showGridPressed:" target="Voe-Tx-rLC" id="clY-p7-5wv"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Tu3-wV-t86"/>
@@ -142,7 +147,8 @@
                     <connections>
                         <outlet property="hideMenuItem" destination="Olw-nP-bQN" id="9Tb-8L-TjN"/>
                         <outlet property="menu" destination="Rkb-lU-63l" id="H8S-nT-JvV"/>
-                        <outlet property="showMenuItem" destination="9ey-1D-QEB" id="5I7-h7-147"/>
+                        <outlet property="showElementsMenuItem" destination="PJE-er-84e" id="kK9-md-IPf"/>
+                        <outlet property="showGridMenuItem" destination="9ey-1D-QEB" id="5I7-h7-147"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -153,8 +159,8 @@
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
-                <windowController storyboardIdentifier="WindowController" id="B8D-0N-5wS" customClass="GridWindowController" customModule="Scoot" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="GridWindow" customModule="Scoot" customModuleProvider="target">
+                <windowController storyboardIdentifier="WindowController" id="B8D-0N-5wS" customClass="JumpWindowController" customModule="Scoot" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" hasShadow="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA" customClass="JumpWindow" customModule="Scoot" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" fullSizeContentView="YES"/>
                         <rect key="contentRect" x="0.0" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
@@ -170,26 +176,34 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--Grid View Controller-->
+        <!--Jump View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="GridViewController" customModule="Scoot" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="JumpViewController" customModule="Scoot" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="YFK-2r-HWf" customClass="ElementView" customModule="Scoot" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            </customView>
                             <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="jt8-es-1kb" customClass="GridView" customModule="Scoot" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             </customView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="YFK-2r-HWf" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="7GB-HZ-GSf"/>
                             <constraint firstItem="jt8-es-1kb" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="8gf-g4-u4V"/>
                             <constraint firstAttribute="bottom" secondItem="jt8-es-1kb" secondAttribute="bottom" id="9RE-8V-jwh"/>
+                            <constraint firstAttribute="trailing" secondItem="YFK-2r-HWf" secondAttribute="trailing" id="KAk-8h-BUC"/>
+                            <constraint firstItem="YFK-2r-HWf" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="LBm-xF-VWm"/>
+                            <constraint firstAttribute="bottom" secondItem="YFK-2r-HWf" secondAttribute="bottom" id="Mt8-dl-9cC"/>
                             <constraint firstItem="jt8-es-1kb" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="fc5-DT-GFl"/>
                             <constraint firstAttribute="trailing" secondItem="jt8-es-1kb" secondAttribute="trailing" id="kbM-ka-3cH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="elementView" destination="YFK-2r-HWf" id="oa5-Iz-omQ"/>
                         <outlet property="gridView" destination="jt8-es-1kb" id="tmY-dr-rud"/>
                     </connections>
                 </viewController>

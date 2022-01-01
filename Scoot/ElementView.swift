@@ -1,6 +1,6 @@
 import Cocoa
 
-class GridView: NSView {
+class ElementView: NSView {
 
     weak var viewController: JumpViewController!
 
@@ -11,7 +11,7 @@ class GridView: NSView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
 
-        guard let grid = viewController.grid else {
+        guard let elements = viewController?.elements else {
             return
         }
 
@@ -21,60 +21,34 @@ class GridView: NSView {
 
         ctx.cgContext.setFillColor(
             NSColor.black.withAlphaComponent(
-                viewController.gridBackgroundAlphaComponent
+                viewController.elementBackgroundAlphaComponent
             ).cgColor)
 
-        ctx.cgContext.fill(bounds)
-
-        let cellSize = grid.cellSize
-
-        ctx.cgContext.setStrokeColor(
-            NSColor.systemTeal.withAlphaComponent(
-                viewController.gridLineAlphaComponent
-            ).cgColor
-        )
-        ctx.cgContext.setLineWidth(2)
-
-        if viewController.isDisplayingGridLines {
-            for x in stride(from: 0.0, to: grid.size.width, by: cellSize.width) {
-                ctx.cgContext.move(to: CGPoint(x: x, y: 0))
-                ctx.cgContext.addLine(to: CGPoint(x: x, y: grid.size.height))
-            }
-
-            for y in stride(from: 0.0, to: grid.size.height, by: cellSize.height) {
-                ctx.cgContext.move(to: CGPoint(x: 0, y: y))
-                ctx.cgContext.addLine(to: CGPoint(x: grid.size.width, y: y))
-            }
-
-            ctx.cgContext.drawPath(using: .stroke)
+        for (element, _) in elements {
+            ctx.cgContext.fill(element.windowRect)
         }
 
-        guard viewController.isDisplayingGridLabels else {
-            return
-        }
-
-        let font = NSFont.systemFont(ofSize: 18, weight: .medium)
+        let font = NSFont.systemFont(ofSize: 14, weight: .medium)
 
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
         let foregroundColor = NSColor.systemTeal.withAlphaComponent(
-            viewController.gridLabelAlphaComponent
+            viewController.elementLabelAlphaComponent
         )
 
         let attrs: [NSAttributedString.Key: Any]  = [
-          .font: font,
-          .foregroundColor: foregroundColor,
-          .paragraphStyle: paragraphStyle,
-//          .strokeWidth: -2.0,
-//          .strokeColor: NSColor.black,
+            .font: font,
+            .foregroundColor: foregroundColor,
+            .paragraphStyle: paragraphStyle,
         ]
 
         let currentSequence = String(viewController.keyboardInputWindow?.currentSequence ?? [])
 
-        for (index, cellRect) in grid.rects.enumerated() {
+        for (element, sequence) in elements {
+            let rect = element.windowRect
 
-            let text = grid.data(atIndex: index)
+            let text = sequence
             let string = NSMutableAttributedString(string: text)
 
             string.addAttributes(attrs, range: NSRange(text.startIndex..., in: text))
@@ -92,21 +66,24 @@ class GridView: NSView {
                 }
             }
 
-            let boundingRect = text.boundingRect(
-                with: cellRect.size,
-                options: .usesLineFragmentOrigin,
-                attributes: attrs
-            )
+            let boundingRect = string.boundingRect(
+                with: rect.size,
+                options: .usesLineFragmentOrigin
+            ).integral
 
             let textHeight = boundingRect.height
+
+            let padding = CGSize(width: 8.0, height: 12.0)
+
+            let y = rect.origin.y - rect.height + (0.4 * textHeight) - padding.height
 
             string.draw(
                 with: CGRect(
                     origin: CGPoint(
-                        x: cellRect.origin.x,
-                        y: cellRect.origin.y - textHeight
+                        x: rect.origin.x - (padding.width / 2),
+                        y: max(y, self.frame.minY)
                     ),
-                    size: cellRect.size
+                    size: rect.size + padding
                 ),
                 options: .usesLineFragmentOrigin,
                 context: nil
@@ -115,4 +92,5 @@ class GridView: NSView {
         }
 
     }
+
 }

@@ -1,9 +1,17 @@
 import Cocoa
 
-class GridViewController: NSViewController {
+class JumpViewController: NSViewController {
 
-    // A grid, subdividing the screen into a collection of evenly-sized cells.
+    /// A grid, subdividing the screen into a collection of evenly-sized cells.
+    ///
+    /// Used for grid-based navigation.
     var grid: Grid!
+
+    /// An array of UI elements and the corresponding character sequences used to
+    /// access these elements.
+    ///
+    /// Used for element-based navigation.
+    var elements = [(element: Accessibility.Element, sequence: String)]()
 
     var window: NSWindow? {
         view.window
@@ -18,6 +26,8 @@ class GridViewController: NSViewController {
     }
 
     @IBOutlet var gridView: GridView!
+
+    @IBOutlet var elementView: ElementView!
 
     var isDisplayingGridLabels: Bool = true {
         didSet {
@@ -64,12 +74,36 @@ class GridViewController: NSViewController {
         }
     }
 
+    var elementLabelAlphaComponent: CGFloat = 0.95 {
+        didSet {
+            elementLabelAlphaComponent = clamp(
+                elementLabelAlphaComponent,
+                minValue: 0.01,
+                maxValue: 1.0
+            )
+            elementView.redraw()
+        }
+    }
+
+    var elementBackgroundAlphaComponent: CGFloat = 0.15 {
+        didSet {
+            elementBackgroundAlphaComponent = clamp(
+                elementBackgroundAlphaComponent,
+                minValue: 0.01,
+                maxValue: 1.0
+            )
+            elementView.redraw()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         gridView.viewController = self
+        elementView.viewController = self
 
         hideGrid()
+        hideElements()
     }
 
     override func viewWillAppear() {
@@ -82,7 +116,7 @@ class GridViewController: NSViewController {
 }
 
 
-extension GridViewController {
+extension JumpViewController {
 
     func showGrid() {
         self.gridView.isHidden = false
@@ -90,6 +124,14 @@ extension GridViewController {
 
     func hideGrid() {
         self.gridView.isHidden = true
+    }
+
+    func showElements() {
+        self.elementView.isHidden = false
+    }
+
+    func hideElements() {
+        self.elementView.isHidden = true
     }
 
     func flashFeedback(at rect: NSRect, duration: TimeInterval) {
@@ -101,4 +143,3 @@ extension GridViewController {
     }
 
 }
-

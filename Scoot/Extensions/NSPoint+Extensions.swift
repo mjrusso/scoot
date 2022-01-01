@@ -1,20 +1,55 @@
 import Cocoa
 
+// MARK: - Coordinate System Conversions
+
 extension NSPoint {
 
-    // Convert between the Cocoa coordinate system (origin at lower left,
-    // increasing upwards), and the Core Graphics (Quartz) coordinate system
-    // (origin at top left, increasing downwards).
-    func convertToCG(screenHeight: CGFloat) -> CGPoint {
-        return CGPoint(x: self.x, y: screenHeight - self.y)
+    /// The screen that the point is currently on.
+    var currentScreen: NSScreen? {
+        NSScreen.screens.first {
+            NSPointInRect(self, $0.frame)
+        }
     }
 
-    func convertToCG() -> CGPoint {
-        let screen = NSScreen.screens.sorted { $0.frame.height < $1.frame.height }.last
-        return convertToCG(screenHeight: screen?.frame.height ?? 0.0)
+    /// Change the drawing orientation of the vertical axis.
+    ///
+    /// See
+    /// https://developer.apple.com/library/archive/documentation/General/Conceptual/Devpedia-CocoaApp/CoordinateSystem.html
+    /// for additional details.
+    func swapVerticalAxisOrientation() -> Self {
+        // Unlike the advice in https://stackoverflow.com/a/19314037,
+        // everything seems to work properly when the tallest screen is used,
+        // not the current screen...
+        //
+        // guard let screen = self.currentScreen else {
+        //     return .zero
+        // }
+
+        guard let tallestScreen = NSScreen.tallest else {
+            return .zero
+        }
+
+        return Self(x: self.x,
+                    y: tallestScreen.frame.origin.y + tallestScreen.frame.size.height - self.y)
+    }
+
+    /// Convert from the Cocoa/ AppKit coordinate system (origin at lower
+    /// left, increasing upwards), to the Core Graphics/ Quartz/ Carbon
+    /// coordinate system (origin at top left, increasing downwards).
+    func convertToCG() -> Self {
+        self.swapVerticalAxisOrientation()
+    }
+
+    /// Convert from the Core Graphics/ Quartz/ Carbon coordinate system
+    /// (origin at top left, increasing downwards), to the Cocoa/ AppKit
+    /// coordinate system (origin at lower left, increasing upwards).
+    func convertToCocoa() -> Self {
+        self.swapVerticalAxisOrientation()
     }
 
 }
+
+// MARK: - Convenience
 
 extension NSPoint {
 
