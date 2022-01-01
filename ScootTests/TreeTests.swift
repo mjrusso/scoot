@@ -146,6 +146,44 @@ class TreeTests: XCTestCase {
 
     }
 
+    func testSequenceGenerationWithMoreKeysThanCandidates() throws {
+
+        let keys: [Character] = ["a", "l", "g", "h"]
+
+        XCTAssertEqual(
+            Tree(candidates: Array(0..<1), keys: keys).sequences,
+            ["a"]
+        )
+        XCTAssertEqual(
+            Tree(candidates: Array(0..<2), keys: keys).sequences,
+            ["a", "l"]
+        )
+
+        XCTAssertEqual(
+            Tree(candidates: Array(0..<3), keys: keys).sequences,
+            ["a", "l", "g",]
+        )
+
+    }
+
+    func testTreeGenerationWithNoCandidates() throws {
+
+        let keys: [Character] = ["a", "l", "g", "h"]
+
+        let tree = Tree(candidates: Array<Int>(), keys: keys)
+
+        XCTAssertEqual(
+            tree.sequences,
+            [""]
+        )
+
+        XCTAssertEqual(
+            tree.leaves.map({ $0.value }),
+            [nil]
+        )
+
+    }
+
     func testCandidateAssignments() {
 
         var tree = Tree(candidates: Array(0..<2), keys: ["a", "l"])

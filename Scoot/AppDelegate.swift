@@ -11,7 +11,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var hideMenuItem: NSMenuItem!
 
-    @IBOutlet weak var showMenuItem: NSMenuItem!
+    @IBOutlet weak var showElementsMenuItem: NSMenuItem!
+
+    @IBOutlet weak var showGridMenuItem: NSMenuItem!
 
     lazy var inputWindow: KeyboardInputWindow = {
         NSApp.orderedWindows.compactMap({ $0 as? KeyboardInputWindow }).first!
@@ -27,14 +29,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         jumpWindowControllers.compactMap { $0.contentViewController as? JumpViewController }
     }
 
-    public var hotKey: HotKey? {
+    public var showElementsHotKey: HotKey? {
         didSet {
-            guard let hotKey = hotKey else {
-                return
+            showElementsHotKey?.keyDownHandler = { [weak self] in
+                self?.bringToForeground(using: .element)
             }
+        }
+    }
 
-            hotKey.keyDownHandler = { [weak self] in
-                self?.bringToForeground()
+    public var showGridHotKey: HotKey? {
+        didSet {
+            showGridHotKey?.keyDownHandler = { [weak self] in
+                self?.bringToForeground(using: .grid)
             }
         }
     }
@@ -64,19 +70,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
-        self.hotKey = HotKey(key: .j, modifiers: [.command, .shift])
+        self.showElementsHotKey = HotKey(key: .j, modifiers: [.command, .shift])
+
+        self.showGridHotKey = HotKey(key: .k, modifiers: [.command, .shift])
 
         self.configureMenuBarExtra()
 
         for screen in NSScreen.screens {
             self.spawnJumpWindow(on: screen)
+            print("Screen: \(screen.localizedName) \(screen.frame)")
         }
 
-        self.inputWindow.initializeCoreDataStructures()
+        self.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
 
         self.initializeChangeScreenParametersObserver()
 
-        self.bringToForeground()
+        self.bringToForeground(using: .element)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -144,7 +153,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
 
             if mustReinitialize {
-                self.inputWindow.initializeCoreDataStructures()
+                self.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
             }
         }
     }
@@ -178,6 +187,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: Activation
 
     func bringToForeground() {
+        if let frontmostApp = NSWorkspace.shared.frontmostApplication,
+           frontmostApp != NSRunningApplication.current {
+            self.inputWindow.initializeCoreDataStructuresForElementBasedMovement(of: frontmostApp)
+        }
+
+        self.inputWindow.showAppropriateJumpView()
+
         NSApp.activate(ignoringOtherApps: true)
 
         DispatchQueue.main.async {
@@ -187,6 +203,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.inputWindow.makeMain()
             self.inputWindow.makeKeyAndOrderFront(self)
         }
+    }
+
+    func bringToForeground(using jumpMode: JumpMode) {
+        inputWindow.activeJumpMode = jumpMode
+        bringToForeground()
     }
 
     // MARK: Deactivation
@@ -201,8 +222,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         bringToBackground()
     }
 
-    @IBAction func showPressed(_ sender: NSMenuItem) {
-        bringToForeground()
+    @IBAction func showElementsPressed(_ sender: NSMenuItem) {
+        bringToForeground(using: .element)
+    }
+
+    @IBAction func showGridPressed(_ sender: NSMenuItem) {
+        bringToForeground(using: .grid)
     }
 
     @IBAction func helpPressed(_ sender: NSMenuItem) {

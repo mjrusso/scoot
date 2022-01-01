@@ -27,6 +27,8 @@ extension KeyboardInputWindow {
             $0.gridLineAlphaComponent += 0.2
             $0.gridLabelAlphaComponent += 0.05
             $0.gridBackgroundAlphaComponent += 0.2
+            $0.elementLabelAlphaComponent += 0.01
+            $0.elementBackgroundAlphaComponent += 0.05
         }
     }
 
@@ -35,6 +37,8 @@ extension KeyboardInputWindow {
             $0.gridLineAlphaComponent -= 0.2
             $0.gridLabelAlphaComponent -= 0.05
             $0.gridBackgroundAlphaComponent -= 0.2
+            $0.elementLabelAlphaComponent -= 0.01
+            $0.elementBackgroundAlphaComponent -= 0.05
         }
     }
 

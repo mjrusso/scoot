@@ -17,11 +17,28 @@ class KeyboardInputWindow: TransparentWindow {
 
     let mouse = Mouse()
 
-    // The underlying data structure enabling cursor movement via a
-    // character-based decision tree.
-    var tree: Tree<CGRect>! {
+    /// The currently-active jump mode, which determines whether element-based
+    /// or grid-based navigation is in use.
+    var activeJumpMode: JumpMode = .grid {
         didSet {
             currentNode = nil
+        }
+    }
+
+    /// The decision tree enabling grid-based navigation.
+    var treeForGridBasedNavigation: Tree<CGRect>!
+
+    /// The decision tree enabling element-based navigation.
+    var treeForElementBasedNavigation: Tree<CGRect>!
+
+    /// The underlying data structure enabling cursor movement via a
+    /// character-based decision tree (as determined by the active jump mode).
+    var currentTree: Tree<CGRect> {
+        switch activeJumpMode {
+        case .grid:
+            return treeForGridBasedNavigation
+        case .element:
+            return treeForElementBasedNavigation
         }
     }
 
@@ -34,7 +51,7 @@ class KeyboardInputWindow: TransparentWindow {
             } else {
                 currentSequence = []
             }
-            redrawGridViews()
+            redrawJumpViews()
         }
     }
 
@@ -58,7 +75,7 @@ class KeyboardInputWindow: TransparentWindow {
                 maxValue: CGSize(width: 90.0, height: 90.0)
             )
             if targetCellSize != oldValue {
-                initializeCoreDataStructures()
+                initializeCoreDataStructuresForGridBasedMovement()
             }
         }
     }
@@ -87,8 +104,7 @@ class KeyboardInputWindow: TransparentWindow {
         (activeGrid?.cellHeight ?? targetCellSize.height) / numStepsPerCell
     }
 
-    func initializeCoreDataStructures() {
-
+    func initializeCoreDataStructuresForGridBasedMovement() {
         guard let jumpWindowControllers = appDelegate?.jumpWindowControllers else {
             return
         }
@@ -140,7 +156,52 @@ class KeyboardInputWindow: TransparentWindow {
 
         assert(tree.sequences.count == candidates.count)
 
-        self.tree = tree
+        self.treeForGridBasedNavigation = tree
+    }
+
+    func initializeCoreDataStructuresForElementBasedMovement(of app: NSRunningApplication) {
+        guard let jumpWindowControllers = appDelegate?.jumpWindowControllers else {
+            return
+        }
+
+        let elements = Accessibility.getAccessibleElementsForFocusedWindow(of: app)
+
+        var data = [(elements: [Accessibility.Element], screenRects: [CGRect])]()
+
+        for jumpWindowController in jumpWindowControllers {
+            guard let screen = jumpWindowController.assignedScreen else {
+                return
+            }
+
+            let elements = elements.filter {
+                screen == $0.screen
+            }
+
+            let screenRects: [CGRect] = elements.map {
+                $0.frame
+            }
+
+            data.append((elements, screenRects))
+        }
+
+        let candidates = data.flatMap { $0.screenRects }
+
+        let tree = Tree(
+            candidates: candidates,
+            keys: determineAvailableKeys(numCandidates: candidates.count)
+        )
+
+        for (n, (elements, _)) in data.enumerated() {
+            let startIndex = data[0..<n].reduce(0, { $0 + $1.elements.count })
+            let endIndex = startIndex + elements.count
+
+            let sequences = tree.sequences[startIndex..<endIndex]
+
+            let viewController = jumpWindowControllers[n].viewController
+            viewController.elements = Array(zip(elements, sequences))
+        }
+
+        self.treeForElementBasedNavigation = tree
     }
 
     func determineAvailableKeys(numCandidates: Int) -> [Character] {

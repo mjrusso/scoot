@@ -55,14 +55,19 @@
                                 <menu key="submenu" title="Scoot" autoenablesItems="NO" id="Rkb-lU-63l">
                                     <items>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Hide Grid" keyEquivalent="h" id="Olw-nP-bQN">
+                                        <menuItem title="Hide" keyEquivalent="h" id="Olw-nP-bQN">
                                             <connections>
                                                 <action selector="hidePressed:" target="Voe-Tx-rLC" id="T4I-eg-084"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Show Grid" keyEquivalent="J" id="9ey-1D-QEB">
+                                        <menuItem title="Show Elements" keyEquivalent="J" id="PJE-er-84e" userLabel="Show Elements">
                                             <connections>
-                                                <action selector="showPressed:" target="Voe-Tx-rLC" id="5m3-Jl-IfR"/>
+                                                <action selector="showElementsPressed:" target="Voe-Tx-rLC" id="gLz-X4-6K0"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Show Grid" keyEquivalent="K" id="9ey-1D-QEB">
+                                            <connections>
+                                                <action selector="showGridPressed:" target="Voe-Tx-rLC" id="clY-p7-5wv"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Tu3-wV-t86"/>
@@ -142,7 +147,8 @@
                     <connections>
                         <outlet property="hideMenuItem" destination="Olw-nP-bQN" id="9Tb-8L-TjN"/>
                         <outlet property="menu" destination="Rkb-lU-63l" id="H8S-nT-JvV"/>
-                        <outlet property="showMenuItem" destination="9ey-1D-QEB" id="5I7-h7-147"/>
+                        <outlet property="showElementsMenuItem" destination="PJE-er-84e" id="kK9-md-IPf"/>
+                        <outlet property="showGridMenuItem" destination="9ey-1D-QEB" id="5I7-h7-147"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -178,18 +184,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="YFK-2r-HWf" customClass="ElementView" customModule="Scoot" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                            </customView>
                             <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="jt8-es-1kb" customClass="GridView" customModule="Scoot" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             </customView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="YFK-2r-HWf" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="7GB-HZ-GSf"/>
                             <constraint firstItem="jt8-es-1kb" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="8gf-g4-u4V"/>
                             <constraint firstAttribute="bottom" secondItem="jt8-es-1kb" secondAttribute="bottom" id="9RE-8V-jwh"/>
+                            <constraint firstAttribute="trailing" secondItem="YFK-2r-HWf" secondAttribute="trailing" id="KAk-8h-BUC"/>
+                            <constraint firstItem="YFK-2r-HWf" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="LBm-xF-VWm"/>
+                            <constraint firstAttribute="bottom" secondItem="YFK-2r-HWf" secondAttribute="bottom" id="Mt8-dl-9cC"/>
                             <constraint firstItem="jt8-es-1kb" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="fc5-DT-GFl"/>
                             <constraint firstAttribute="trailing" secondItem="jt8-es-1kb" secondAttribute="trailing" id="kbM-ka-3cH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="elementView" destination="YFK-2r-HWf" id="oa5-Iz-omQ"/>
                         <outlet property="gridView" destination="jt8-es-1kb" id="tmY-dr-rud"/>
                     </connections>
                 </viewController>

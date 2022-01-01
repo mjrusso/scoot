@@ -2,25 +2,36 @@ import Cocoa
 
 extension KeyboardInputWindow {
 
-    func showGridViews() {
+    func showAppropriateJumpView() {
         appDelegate?.jumpWindowControllers.forEach {
-            $0.viewController.showGrid()
+            switch activeJumpMode {
+            case .grid:
+                $0.viewController.showGrid()
+                $0.viewController.hideElements()
+            case .element:
+                $0.viewController.showElements()
+                $0.viewController.hideGrid()
+            }
         }
-        appDelegate?.showMenuItem.isHidden = true
+        appDelegate?.showElementsMenuItem.isHidden = true
+        appDelegate?.showGridMenuItem.isHidden = true
         appDelegate?.hideMenuItem.isHidden = false
     }
 
-    func hideGridViews() {
+    func hideJumpViews() {
         appDelegate?.jumpWindowControllers.forEach {
             $0.viewController.hideGrid()
+            $0.viewController.hideElements()
         }
-        appDelegate?.showMenuItem.isHidden = false
+        appDelegate?.showElementsMenuItem.isHidden = false
+        appDelegate?.showGridMenuItem.isHidden = false
         appDelegate?.hideMenuItem.isHidden = true
     }
 
-    func redrawGridViews() {
+    func redrawJumpViews() {
         appDelegate?.jumpWindowControllers.forEach {
             $0.viewController.gridView.redraw()
+            $0.viewController.elementView.redraw()
         }
     }
 
@@ -43,7 +54,7 @@ extension KeyboardInputWindow {
         for windowController in jumpWindowControllers {
             if let screen = windowController.assignedScreen {
                 if screen.frame.contains(screenRect) {
-                    let rect = NSRect( // Convert from screen coordinates.
+                    let rect = NSRect( // Convert from screen coordinates to window coordinates.
                         x: screenRect.origin.x - screen.frame.origin.x,
                         y: screenRect.origin.y - screen.frame.origin.y,
                         width: screenRect.width,

@@ -2,6 +2,13 @@ import Cocoa
 
 extension NSScreen {
 
+    // MARK: - Convenience
+
+    /// The screen with the largest height.
+    static var tallest: NSScreen? {
+        NSScreen.screens.sorted { $0.frame.height < $1.frame.height }.last
+    }
+
     // MARK: - Landmarks (Absolute and Relative)
 
     enum AbsoluteLandmark {
