@@ -85,7 +85,7 @@ class JumpViewController: NSViewController {
         }
     }
 
-    var elementBackgroundAlphaComponent: CGFloat = 0.25 {
+    var elementBackgroundAlphaComponent: CGFloat = 0.15 {
         didSet {
             elementBackgroundAlphaComponent = clamp(
                 elementBackgroundAlphaComponent,

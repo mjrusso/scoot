@@ -20,7 +20,7 @@ class ElementView: NSView {
         }
 
         ctx.cgContext.setFillColor(
-            NSColor.systemTeal.withAlphaComponent(
+            NSColor.black.withAlphaComponent(
                 viewController.elementBackgroundAlphaComponent
             ).cgColor)
 
