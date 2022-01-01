@@ -185,7 +185,7 @@ https://user-images.githubusercontent.com/100451/118299332-9e6a2e00-b4ae-11eb-90
 
 For reference, the following key sequence was used to grab the file and drop it in a new location:
 
-- `⇧⌘J` to activate Scoot
+- `⇧⌘K` to activate Scoot
 - `kh` to jump cursor to cell
 - `⌘↵` to press and hold the left mouse button
 - `fd` to jump cursor to cell
