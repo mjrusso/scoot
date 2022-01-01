@@ -164,7 +164,14 @@ class KeyboardInputWindow: TransparentWindow {
             return
         }
 
-        let elements = Accessibility.getAccessibleElementsForFocusedWindow(of: app)
+        let elements = Accessibility
+            .getAccessibleElementsForFocusedWindow(of: app)
+            .reduce([], { // Filter out any elements that have duplicate frames.
+                accumulator, element in
+
+                accumulator.contains(where: { element.frame == $0.frame })
+                ? accumulator : accumulator + [element]
+            })
 
         var data = [(elements: [Accessibility.Element], screenRects: [CGRect])]()
 
