@@ -24,19 +24,30 @@ Scoot is a tiny utility app that provides fast, keyboard-driven control over the
 
 * Scoot is in the early proof of concept + prototyping stage.
 
-* Scoot runs on MacOS, versions 10.15 (Catalina) and 11 (Big Sur).
+* Scoot runs on MacOS, versions 10.15 (Catalina), 11 (Big Sur), and 12 (Monterey).
 
-* Scoot is an AppKit app, written in Swift.
+* Scoot is an AppKit app, written in Swift. (There's still [some][carbon-events] [Carbon][carbon-accessibility] in here, too!)
 
 * Scoot complements mouse-related accessibility tools that ship as part of MacOS, such as [Mouse Keys][mouse-keys] and other [accessibility shortcuts][mac-accessibility-shortcuts].
 
 ## Usage
 
-To activate Scoot, use the ⇧⌘J global keyboard shortcut. (As long as Scoot is running, this hotkey will bring the app to the foreground.)
+Scoot supports two navigation modes: **element-based**, and **grid-based**.
+
+* **Element-based navigation:** MacOS accessibility APIs are used to find user interface elements, such as buttons and links, on the user's screen. (In this mode, Scoot will look for elements in the focused window of the frontmost app.)
+* **Grid-based navigation:** all connected screens are subdivided into aa grid of equally-sized cells.
+
+Each location is identified by a unique character sequence, making each element (or cell) uniquely addressable with the keyboard.
+
+To activate Scoot in element-based navigation mode, use the ⇧⌘J global keyboard shortcut.
+
+To activate Scoot in grid-based navigation mode, use the ⇧⌘K global keyboard shortcut.
+
+(As long as Scoot is running, either hotkey will bring the app to the foreground, and activate the requested navigation mode.)
 
 When Scoot is in the foreground:
 
-* You can jump directly to a cell in the grid. Each cell is marked with a label (e.g. “aaa”, “aas”, “aad”); type the characters, one letter at a time, and, as soon as a complete sequence is entered, the mouse cursor will move directly to the center of the corresponding cell. (This approach, including the use of a char-based decision tree, is heavily inspired by [avy][avy].)
+* You can jump directly to a cell (a UI element, or a location in the grid, depending on the active navigation mode). Each cell is marked with a label (e.g. “aaa”, “aas”, “aad”); type the characters, one letter at a time, and, as soon as a complete sequence is entered, the mouse cursor will move directly to the center of the corresponding cell. (This approach, including the use of a char-based decision tree, is heavily inspired by [avy][avy].)
   * If you make a mistake while entering a label, hit the escape key (⎋) to cancel and start over. (Alternatively, you can type ⌘. or C-G.)
 
 * You can _also_ move the cursor via the standard Mac keyboard shorcuts for [moving the insertion point][mac-keyboard-shortcuts-text]. (This means that keyboard shortcuts intended for navigating around in a document have been re-purposed to control movement on a 2-dimensional grid. Some liberties have been taken with this mapping; hopefully you find these keybindings intuitive.)
@@ -60,8 +71,9 @@ _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac
 
 | Shortcut  | Emacs | Description                                                                                                       |
 |-----------|-------|-------------------------------------------------------------------------------------------------------------------|
-| ⇧⌘J       |       | Show grid (bring Scoot to foreground)                                                                             |
-| ⌘H        |       | Hide grid (bring Scoot to background)                                                                             |
+| ⇧⌘J       |       | Use element-based navigation (bring Scoot to foreground)                                                          |
+| ⇧⌘K       |       | Use grid-based navigation (bring Scoot to foreground)                                                             |
+| ⌘H        |       | Hide UI (bring Scoot to background)                                                                               |
 | ⎋ (or ⌘.) | C-g   | Cancel: if currently typing a label, clears all currently-typed characters; otherwise, brings Scoot to background |
 
 _Note:_ ⎋ signifies the Escape key.
@@ -111,8 +123,8 @@ _Note:_ ↵ signifies the Return (a.k.a Enter) key. (Technically, Return and Ent
 | ⌃⇧=      | Toggle visibility of grid labels           |
 | ⇧⌘=      | Increase size of grid cells                |
 | ⇧⌘-      | Decrease size of grid cells                |
-| ⌘=       | Increase contrast of grid lines and labels |
-| ⌘-       | Decrease contrast of grid lines and labels |
+| ⌘=       | Increase contrast of user interface |
+| ⌘-       | Decrease contrast of user interface |
 
 ## Installation
 
@@ -202,6 +214,8 @@ Copyright (c) 2021, [Michael Russo](https://mjrusso.com).
 [latest-scoot-release]: https://github.com/mjrusso/scoot/releases/latest
 [scoot-issues]: https://github.com/mjrusso/scoot/issues
 
+[carbon-events]: https://developer.apple.com/library/archive/documentation/Carbon/Conceptual/Carbon_Event_Manager/Intro/CarbonEventsIntro.html
+[carbon-accessibility]: https://developer.apple.com/documentation/applicationservices/carbon_accessibility
 [avy]: https://github.com/abo-abo/avy
 [mouse-keys]: https://support.apple.com/en-ca/guide/mac-help/mh27469/mac
 [mac-accessibility-shortcuts]: https://support.apple.com/en-ca/HT204434
