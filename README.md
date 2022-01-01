@@ -18,20 +18,19 @@ Scoot is a tiny utility app that provides fast, keyboard-driven control over the
 
 Scoot supports two navigation modes: **element-based**, and **grid-based**.
 
-* **Element-based navigation:** MacOS accessibility APIs are used to find user interface elements, such as buttons and links, on the user's screen. (In this mode, Scoot will look for elements in the focused window of the frontmost app.)
+* **Element-based navigation:** MacOS accessibility APIs are used to find user interface elements, such as buttons and links, on the user's screen. (In this mode, Scoot will look for elements in the focused window of the frontmost app.) Here, for example, Scoot has identified the only link on the page _("More information...")_, and assigned it the key sequence "aa":
 
 <p align="center">
   <img src="./Assets/Examples/element-nav.png" alt="Scoot using the element-based navigation mode" />
 </p>
 
-* **Grid-based navigation:** all connected screens are subdivided into aa grid of equally-sized cells.
+* **Grid-based navigation:** all connected screens are subdivided into a grid of equally-sized cells.
 
 <p align="center">
   <img src="./Assets/Examples/grid-nav.png" alt="Scoot using the grid-based navigation mode" />
 </p>
 
-
-Each location is identified by a unique character sequence, making each element (or cell) uniquely addressable with the keyboard.
+Each location is identified by a unique character sequence, making each element (or cell) uniquely addressable with the keyboard — simply type the associated key sequence to teleport your mouse cursor to that location.
 
 ## About
 
