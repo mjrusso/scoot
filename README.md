@@ -38,7 +38,7 @@ Each location is identified by a unique character sequence, making each element 
 
 * Scoot is in the early proof of concept + prototyping stage.
 
-* Scoot runs on MacOS, versions 10.15 (Catalina), 11 (Big Sur), and 12 (Monterey).
+* Scoot runs on MacOS 11 (Big Sur), and 12 (Monterey).
 
 * Scoot is an AppKit app, written in Swift. (There's still [some][carbon-events] [Carbon][carbon-accessibility] in here, too!)
 
