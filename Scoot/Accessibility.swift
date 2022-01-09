@@ -3,7 +3,7 @@ import AppKit
 
 struct Accessibility {
 
-    struct Element {
+    struct Element: Positionable, Equatable {
         let role: Role
 
         let subrole: Subrole?

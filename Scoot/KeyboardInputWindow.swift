@@ -165,13 +165,11 @@ class KeyboardInputWindow: TransparentWindow {
         }
 
         let elements = Accessibility
-            .getAccessibleElementsForFocusedWindow(of: app)
-            .reduce([], { // Filter out any elements that have duplicate frames.
-                accumulator, element in
-
-                accumulator.contains(where: { element.frame == $0.frame })
-                ? accumulator : accumulator + [element]
-            })
+          .getAccessibleElementsForFocusedWindow(of: app)
+        // Because Scoot places labels vertically, horizontal congestion is
+        // less of an issue in practice. For this reason, add padding in the y
+        // direction only (`paddingY`).
+          .reducingCrowding(intersectionThreshold: 0.1, paddingX: 0.0, paddingY: 10.0)
 
         var data = [(elements: [Accessibility.Element], screenRects: [CGRect])]()
 

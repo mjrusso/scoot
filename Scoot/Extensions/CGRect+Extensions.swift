@@ -1,5 +1,7 @@
 import Cocoa
 
+// MARK: - Coordinate System Conversions
+
 extension CGRect {
 
     /// Convert from the Core Graphics/ Quartz/ Carbon coordinate system
@@ -13,4 +15,29 @@ extension CGRect {
                       width: self.width,
                       height: self.height)
     }
+
+}
+
+// MARK: - Geometry
+
+extension CGRect {
+
+    /// The area of the rectangle.
+    var area: CGFloat {
+        self.width * self.height
+    }
+
+    /// Returns the percentage overlap between the two rects.
+    func percentageOverlapping(_ other: CGRect) -> CGFloat {
+        guard self.intersects(other) else {
+            return 0
+        }
+
+        if self.contains(other) || other.contains(self) {
+            return 1
+        }
+
+        return self.intersection(other).area / ((self.area + other.area) / 2)
+    }
+
 }
