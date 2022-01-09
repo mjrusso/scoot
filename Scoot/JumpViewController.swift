@@ -85,6 +85,17 @@ class JumpViewController: NSViewController {
         }
     }
 
+    var elementLabelBackgroundAlphaComponent: CGFloat = 0.85 {
+        didSet {
+            elementLabelBackgroundAlphaComponent = clamp(
+                elementLabelBackgroundAlphaComponent,
+                minValue: 0.01,
+                maxValue: 1.0
+            )
+            elementView.redraw()
+        }
+    }
+
     var elementBackgroundAlphaComponent: CGFloat = 0.15 {
         didSet {
             elementBackgroundAlphaComponent = clamp(

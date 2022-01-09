@@ -37,9 +37,14 @@ class ElementView: NSView {
             viewController.elementLabelAlphaComponent
         )
 
-        let attrs: [NSAttributedString.Key: Any]  = [
+        let backgroundColor = NSColor.black.withAlphaComponent(
+            viewController.elementLabelBackgroundAlphaComponent
+        )
+
+        let attrs: [NSAttributedString.Key: Any] = [
             .font: font,
             .foregroundColor: foregroundColor,
+            .backgroundColor: backgroundColor,
             .paragraphStyle: paragraphStyle,
         ]
 
