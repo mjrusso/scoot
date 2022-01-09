@@ -217,7 +217,6 @@ class KeyboardInputWindow: TransparentWindow {
             ["q", "w", "e", "r", "u", "i", "o", "p"],
             ["t", "y"],
             ["z", "x", "c", "v", "b", "n", "m"],
-            [";"],
         ]
 
         switch numCandidates {
