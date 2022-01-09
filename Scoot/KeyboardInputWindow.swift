@@ -221,11 +221,11 @@ class KeyboardInputWindow: TransparentWindow {
         ]
 
         switch numCandidates {
-        case 0..<800:
+        case 0..<80:
             return keys[0] + keys[1]
-        case 800..<1200:
+        case 80..<200:
             return keys[0] + keys[1] + keys[2]
-        case 1200..<1400:
+        case 200..<1400:
             return keys[0] + keys[1] + keys[2] + keys[3]
         default:
             return keys.flatMap { $0 }
