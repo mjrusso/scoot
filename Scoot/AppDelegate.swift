@@ -46,6 +46,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    /// The frontmost application at the moment when Scoot was most recently
+    /// invoked. (If Scoot happens to be the frontmost app when it is invoked,
+    /// the previous frontmost app is returned.)
+    var currentApp: NSRunningApplication? {
+        didSet {
+            // Don't allow Scoot to be set as the current app; instead, retain
+            // the previous value. (This behaviour provides a simple mechanism
+            // for recomputing available elements when using element-based
+            // navigation: simply re-invoke Scoot, even if it is frontmost.)
+            guard currentApp != .current else {
+                currentApp = oldValue
+                return
+            }
+        }
+    }
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 
         guard Accessibility.checkIfProcessIsTrusted(withPrompt: !isRunningTests) else {
@@ -198,9 +214,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: Activation
 
     func bringToForeground() {
-        if let frontmostApp = NSWorkspace.shared.frontmostApplication,
-           frontmostApp != NSRunningApplication.current {
-            self.inputWindow.initializeCoreDataStructuresForElementBasedMovement(of: frontmostApp)
+        self.currentApp = NSWorkspace.shared.frontmostApplication
+
+        if let app = self.currentApp {
+            Logger().log("Scoot invoked with frontmost app: \(String(describing: app.localizedName ?? "<unknown>"))")
+            self.inputWindow.initializeCoreDataStructuresForElementBasedMovement(of: app)
         }
 
         self.inputWindow.showAppropriateJumpView()
