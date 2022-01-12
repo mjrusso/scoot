@@ -152,7 +152,6 @@ struct Accessibility {
                             frame: frame.convertToCocoa()
                         )
                         elements.append(element)
-                        continue
                     default:
                         break
                     }
