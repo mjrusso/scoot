@@ -137,6 +137,38 @@ class PositionableTests: XCTestCase {
         XCTAssertEqual(reduceCrowding([b, a]), [b])
     }
 
+    func testAlternatingItemsRemovedWhenPaddedFramesOverlap() {
+        let size = CGSize(width: 10, height: 10)
+
+        let a = Item(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: size))
+        let b = Item(frame: CGRect(origin: CGPoint(x: 0, y: 10), size: size))
+        let c = Item(frame: CGRect(origin: CGPoint(x: 0, y: 20), size: size))
+        let d = Item(frame: CGRect(origin: CGPoint(x: 0, y: 30), size: size))
+        let e = Item(frame: CGRect(origin: CGPoint(x: 0, y: 40), size: size))
+        let f = Item(frame: CGRect(origin: CGPoint(x: 0, y: 50), size: size))
+        let g = Item(frame: CGRect(origin: CGPoint(x: 0, y: 60), size: size))
+        let h = Item(frame: CGRect(origin: CGPoint(x: 0, y: 70), size: size))
+
+        XCTAssertEqual(reduceCrowding([a, b]), [a])
+        XCTAssertEqual(reduceCrowding([a, b, c]), [a, c])
+        XCTAssertEqual(reduceCrowding([a, b, c, d]), [a, c])
+        XCTAssertEqual(reduceCrowding([a, b, c, d, e]), [a, c, e])
+        XCTAssertEqual(reduceCrowding([a, b, c, d, e, f]), [a, c, e])
+        XCTAssertEqual(reduceCrowding([a, b, c, d, e, f, g]), [a, c, e, g])
+        XCTAssertEqual(reduceCrowding([a, b, c, d, e, f, g, h]), [a, c, e, g])
+
+        XCTAssertEqual(reduceCrowding([h, g, f, e, d, c, b, a]), [h, f, d, b])
+        XCTAssertEqual(reduceCrowding([h, g, f, e, d, c, b]), [h, f, d, b])
+        XCTAssertEqual(reduceCrowding([h, g, f, e, d, c]), [h, f, d])
+        XCTAssertEqual(reduceCrowding([h, g, f, e, d]), [h, f, d])
+        XCTAssertEqual(reduceCrowding([h, g, f, e]), [h, f])
+        XCTAssertEqual(reduceCrowding([h, g, f]), [h, f])
+        XCTAssertEqual(reduceCrowding([h, g]), [h])
+
+        XCTAssertEqual(reduceCrowding([a, h, b, g, c, f, d, e]), [a, h, c, f])
+        XCTAssertEqual(reduceCrowding([a, h, g, b, c, f, e, d]), [a, h, c, f])
+    }
+
     func testComplexCrowdingScenarios() {
         let a = Item(frame: CGRect(origin: .zero, size: CGSize(width: 1, height: 1)))
         let b = Item(frame: CGRect(origin: .zero, size: CGSize(width: 1, height: 1)))
@@ -147,6 +179,9 @@ class PositionableTests: XCTestCase {
         let e = Item(frame: CGRect(origin: CGPoint(x: -9, y: 9), size: CGSize(width: 2, height: 2)))
         let f = Item(frame: CGRect(origin: CGPoint(x: -9, y: 9), size: CGSize(width: 2, height: 2)))
 
+        let g = Item(frame: CGRect(origin: CGPoint(x: -9, y: 9), size: CGSize(width: 4, height: 4)))
+        let h = Item(frame: CGRect(origin: CGPoint(x: -9, y: 9), size: CGSize(width: 4, height: 4)))
+
         XCTAssertEqual(reduceCrowding([a]), [a])
 
         XCTAssertEqual(reduceCrowding([a, c]), [c])
@@ -155,9 +190,11 @@ class PositionableTests: XCTestCase {
 
         XCTAssertEqual(reduceCrowding([a, b, c, d, e, f]), [c, e])
 
-        XCTAssertEqual(reduceCrowding([a, b, a, b, c, d, c, d, e, f, e, f]), [c, e])
+        XCTAssertEqual(reduceCrowding([a, b, c, d, e, f, g, h]), [c, e])
 
-        XCTAssertEqual(reduceCrowding([a, b, b, a, c, d, d, c, e, f, f, e]), [c, e])
+        XCTAssertEqual(reduceCrowding([a, b, a, b, c, d, c, d, e, f, e, f, g, h, g, h]), [c, e])
+
+        XCTAssertEqual(reduceCrowding([a, b, b, a, c, d, d, c, e, f, f, e, g, h, h, g]), [c, e])
     }
 
 }

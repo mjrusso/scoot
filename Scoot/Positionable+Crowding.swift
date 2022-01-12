@@ -79,7 +79,7 @@ extension Array where Element: Positionable, Element: Equatable {
                     // To reduce crowding, only one element is kept (either the
                     // candidate, or the accumulated). We choose the element
                     // with the larger area.
-                    if candidate.frame.area < accumulated.frame.area {
+                    if candidate.frame.area <= accumulated.frame.area {
                         // The frame with the larger area is already in the
                         // accumulator. Don't include the candidate.
                         return true
