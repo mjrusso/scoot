@@ -139,8 +139,8 @@ struct Accessibility {
                 let role: Role? = try? child.role()
 
                 if let role = role, let screen = screen {
-                    switch role {
-                    case .button, .link:
+
+                    func addElement() {
                         let element = Element(
                             role: role,
                             subrole: try? child.subrole(),
@@ -152,6 +152,11 @@ struct Accessibility {
                             frame: frame.convertToCocoa()
                         )
                         elements.append(element)
+                    }
+
+                    switch role {
+                    case .cell, .button, .radioButton, .link, .checkBox, .slider, .popUpButton, .menuButton, .incrementor, .handle:
+                        addElement()
                     default:
                         break
                     }
