@@ -74,7 +74,31 @@ class PositionableTests: XCTestCase {
         XCTAssertEqual(reduceCrowding(items), items)
     }
 
-    func testItemsRemovedWhenFramesOverlapAtLeastTenPercent() {
+    func testLargerItemsRemovedWhenFramesOverlapCompletely() {
+        let size = CGSize(width: 10, height: 10)
+
+        let a0 = Item(frame: CGRect(origin: .zero, size: size + CGSize(width: 1, height: 1)))
+        let a1 = Item(frame: CGRect(origin: .zero, size: size + CGSize(width: 0, height: 0)))
+
+        let b0 = Item(frame: CGRect(origin: .zero, size: size + CGSize(width: 0, height: 0)))
+        let b1 = Item(frame: CGRect(origin: .zero, size: size + CGSize(width: 1, height: 1)))
+
+        let overlap0 = a0.frame.percentageOverlapping(b0.frame)
+
+        XCTAssertEqual(overlap0, 1.0)
+
+        XCTAssertEqual(reduceCrowding([a0, b0]), [b0])
+        XCTAssertEqual(reduceCrowding([b0, a0]), [b0])
+
+        let overlap1 = a1.frame.percentageOverlapping(b1.frame)
+
+        XCTAssertEqual(overlap1, 1.0)
+
+        XCTAssertEqual(reduceCrowding([a1, b1]), [a1])
+        XCTAssertEqual(reduceCrowding([b1, a1]), [a1])
+    }
+
+    func testSmallerItemsRemovedWhenFramesOverlapAtLeastTenPercent() {
         let size = CGSize(width: 10, height: 10)
 
         let a0 = Item(frame: CGRect(origin: .zero, size: size + CGSize(width: 1, height: 1)))

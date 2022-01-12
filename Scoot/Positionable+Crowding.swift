@@ -7,6 +7,10 @@ extension Array where Element: Positionable, Element: Equatable {
     ///
     /// If two elements have duplicate frames, one of the elements is removed.
     ///
+    /// If two elements have frames that overlap fully (i.e., one of the frames
+    /// contains the other frame), the element with the smaller frame is
+    /// removed.
+    ///
     /// If two elements have frames that overlap more than
     /// `intersectionThreshold`%, the element with the smaller frame is
     /// removed.
@@ -52,7 +56,26 @@ extension Array where Element: Positionable, Element: Equatable {
 
                 let paddedFramesIntersect = candidate.frame.insetBy(dx: -paddingX, dy: -paddingY).intersects(accumulated.frame)
 
-                if (framesIntersect && percentageOverlapping >= intersectionThreshold) || (!framesIntersect && paddedFramesIntersect) {
+                if percentageOverlapping == 1 {
+                    // To reduce crowding, only one element is kept (either the
+                    // candidate, or the accumulated). In this case, where the
+                    // elements fully overlap, we choose to keep the element
+                    // with the smaller area. (This neatly handles the case
+                    // where an element has a child; typically, we will want to
+                    // keep the child, because it is more specific.)
+                    if candidate.frame.area >= accumulated.frame.area {
+                        // The frame with the smaller area is already in the
+                        // accumulator. Don't include the candidate.
+                        return true
+                    } else {
+                        // Include the candidate in the accumulator, because
+                        // its frame has a smaller area. (However, the other
+                        // element is already in the accumulator, and needs to
+                        // be removed.)
+                        discard.append(accumulated)
+                        return false
+                    }
+                } else if (framesIntersect && percentageOverlapping >= intersectionThreshold) || (!framesIntersect && paddedFramesIntersect) {
                     // To reduce crowding, only one element is kept (either the
                     // candidate, or the accumulated). We choose the element
                     // with the larger area.
