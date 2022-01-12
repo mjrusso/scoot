@@ -42,7 +42,7 @@ Each location is identified by a unique character sequence, making each element 
 
 * Scoot is an AppKit app, written in Swift. (There's still [some][carbon-events] [Carbon][carbon-accessibility] in here, too!)
 
-* Scoot complements mouse-related accessibility tools that ship as part of MacOS, such as [Mouse Keys][mouse-keys] and other [accessibility shortcuts][mac-accessibility-shortcuts].
+* Scoot complements mouse-related accessibility tools that ship as part of MacOS, such as [Mouse Keys][mouse-keys] and other [accessibility shortcuts][mac-accessibility-shortcuts], in addition to mouse emulation provided via keyboard firmware like [QMK][qmk-mouse-keys].
 
 ## Usage
 
@@ -145,7 +145,7 @@ On first run, you'll be presented with a prompt like the following:
   <img width="450" src="./Assets/Documentation/accessibility-prompt.png" alt="Scoot.app would like to control this computer using accessibility features" />
 </p>
 
-**Scoot will not work unless access is granted.**
+**Scoot will not work unless access is granted.** (Note that Scoot does not collect any user or usage-related information, and does not make any network requests. The app runs entirely locally, and treats its privileged access with the utmost respect.)
 
 To grant this permission, click _“Open System Preferences”_. Next, click the lock in the bottom left corner (_“Click the lock to make changes”_).
 
@@ -193,7 +193,7 @@ For reference, the following key sequence was used to grab the file and drop it 
 
 ## Feature Backlog
 
-See [the issue tracker][scoot-issues]. Contributions welcome!
+See the [issue tracker][scoot-issues]. Contributions welcome!
 
 ## License
 
@@ -209,6 +209,7 @@ Copyright (c) 2021-2022, [Michael Russo](https://mjrusso.com).
 [carbon-events]: https://developer.apple.com/library/archive/documentation/Carbon/Conceptual/Carbon_Event_Manager/Intro/CarbonEventsIntro.html
 [carbon-accessibility]: https://developer.apple.com/documentation/applicationservices/carbon_accessibility
 [avy]: https://github.com/abo-abo/avy
+[qmk-mouse-keys]: https://docs.qmk.fm/#/feature_mouse_keys?id=mouse-keys
 [mouse-keys]: https://support.apple.com/en-ca/guide/mac-help/mh27469/mac
 [mac-accessibility-shortcuts]: https://support.apple.com/en-ca/HT204434
 [mac-keyboard-shortcuts]: https://support.apple.com/en-ca/HT201236
