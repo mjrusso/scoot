@@ -122,6 +122,13 @@ struct Accessibility {
 
             for child in children {
 
+                // Bail, if the parent and child are (somehow?) the same node.
+                //
+                // See: https://github.com/mjrusso/scoot/issues/13
+                guard child != node else {
+                    continue
+                }
+
                 guard let frame: CGRect = try? child.attribute(.frame) else {
                     continue
                 }
