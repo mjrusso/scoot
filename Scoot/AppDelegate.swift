@@ -12,9 +12,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var hideMenuItem: NSMenuItem!
 
-    @IBOutlet weak var showElementsMenuItem: NSMenuItem!
+    @IBOutlet weak var useElementBasedNavigationMenuItem: NSMenuItem!
 
-    @IBOutlet weak var showGridMenuItem: NSMenuItem!
+    @IBOutlet weak var useGridBasedNavigationMenuItem: NSMenuItem!
+
+    @IBOutlet weak var useFreestyleNavigationMenuItem: NSMenuItem!
 
     lazy var inputWindow: KeyboardInputWindow = {
         NSApp.orderedWindows.compactMap({ $0 as? KeyboardInputWindow }).first!
@@ -30,18 +32,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         jumpWindowControllers.compactMap { $0.contentViewController as? JumpViewController }
     }
 
-    public var showElementsHotKey: HotKey? {
+    public var useElementBasedNavigationHotKey: HotKey? {
         didSet {
-            showElementsHotKey?.keyDownHandler = { [weak self] in
+            useElementBasedNavigationHotKey?.keyDownHandler = { [weak self] in
                 self?.bringToForeground(using: .element)
             }
         }
     }
 
-    public var showGridHotKey: HotKey? {
+    public var useGridBasedNavigationHotKey: HotKey? {
         didSet {
-            showGridHotKey?.keyDownHandler = { [weak self] in
+            useGridBasedNavigationHotKey?.keyDownHandler = { [weak self] in
                 self?.bringToForeground(using: .grid)
+            }
+        }
+    }
+
+    public var useFreestyleNavigationHotKey: HotKey? {
+        didSet {
+            useFreestyleNavigationHotKey?.keyDownHandler = { [weak self] in
+                self?.bringToForeground(using: .freestyle)
             }
         }
     }
@@ -87,9 +97,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
-        self.showElementsHotKey = HotKey(key: .j, modifiers: [.command, .shift])
+        self.useElementBasedNavigationHotKey = HotKey(key: .j, modifiers: [.command, .shift])
 
-        self.showGridHotKey = HotKey(key: .k, modifiers: [.command, .shift])
+        self.useGridBasedNavigationHotKey = HotKey(key: .k, modifiers: [.command, .shift])
+
+        self.useFreestyleNavigationHotKey = HotKey(key: .l, modifiers: [.command, .shift])
 
         self.configureMenuBarExtra()
 
@@ -251,12 +263,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         bringToBackground()
     }
 
-    @IBAction func showElementsPressed(_ sender: NSMenuItem) {
+    @IBAction func useElementBasedNavigationPressed(_ sender: NSMenuItem) {
         bringToForeground(using: .element)
     }
 
-    @IBAction func showGridPressed(_ sender: NSMenuItem) {
+    @IBAction func useGridBasedNavigationPressed(_ sender: NSMenuItem) {
         bringToForeground(using: .grid)
+    }
+
+    @IBAction func useFreestyleNavigationPressed(_ sender: NSMenuItem) {
+        bringToForeground(using: .freestyle)
     }
 
     @IBAction func helpPressed(_ sender: NSMenuItem) {

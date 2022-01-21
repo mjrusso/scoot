@@ -33,12 +33,14 @@ class KeyboardInputWindow: TransparentWindow {
 
     /// The underlying data structure enabling cursor movement via a
     /// character-based decision tree (as determined by the active jump mode).
-    var currentTree: Tree<CGRect> {
+    var currentTree: Tree<CGRect>? {
         switch activeJumpMode {
         case .grid:
             return treeForGridBasedNavigation
         case .element:
             return treeForElementBasedNavigation
+        case .freestyle:
+            return nil
         }
     }
 

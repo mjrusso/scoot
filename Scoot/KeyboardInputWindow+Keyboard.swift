@@ -22,10 +22,10 @@ extension KeyboardInputWindow {
 
         // FIXME: this logic would be better encoded as a state machine.
 
-        if modifiers.isEmpty && characters.count == 1 && event.keyCode != kVK_Return {
+        if let tree = currentTree, modifiers.isEmpty && characters.count == 1 && event.keyCode != kVK_Return {
             let character = characters[characters.startIndex]
 
-            if let nextNode = (currentNode ?? currentTree.root).step(by: character) {
+            if let nextNode = (currentNode ?? tree.root).step(by: character) {
                 if nextNode.isLeaf , let rect = nextNode.value {
                     mouse.move(to: CGPoint(x: rect.midX, y: rect.midY))
                     flashFeedback(at: rect, duration: 1.4)
