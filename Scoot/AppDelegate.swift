@@ -112,6 +112,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             Logger().log("* Screen: \(screen.localizedName) \(String(describing: screen.frame))")
         }
 
+        Logger().log("Using \(UserSettings.shared.keybindingMode.rawValue) keybindings.")
+
         self.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
 
         self.initializeChangeScreenParametersObserver()
