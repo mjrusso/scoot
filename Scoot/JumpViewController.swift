@@ -68,7 +68,7 @@ class JumpViewController: NSViewController {
             gridBackgroundAlphaComponent = clamp(
                 gridBackgroundAlphaComponent,
                 minValue: 0.01,
-                maxValue: 1.0
+                maxValue: 0.6
             )
             gridView.redraw()
         }
