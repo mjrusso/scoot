@@ -78,7 +78,7 @@ class ElementView: NSView {
 
             let textHeight = boundingRect.height
 
-            let padding = CGSize(width: 12.0, height: 12.0)
+            let padding = CGSize(width: 18.0, height: 18.0)
 
             let y = rect.origin.y - rect.height + (0.4 * textHeight) - padding.height
 
