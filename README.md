@@ -2,9 +2,11 @@
 
 _Meet **Scoot**, your friendly cursor teleportation and actuation tool._
 
-<img src="https://github.com/mjrusso/scoot/actions/workflows/main_test.yml/badge.svg" alt="build status"></a>
+Scoot helps you efficiently move your mouse cursor, using keyboard shortcuts!
 
-<a href="https://twitter.com/mjrusso" title="@mjrusso on Twitter"><img src="https://img.shields.io/badge/twitter-@mjrusso-blue.svg" alt="@mjrusso on Twitter"></a>
+For updates, [follow @mjrusso on Twitter](https://twitter.com/mjrusso).
+
+<img src="https://github.com/mjrusso/scoot/actions/workflows/main_test.yml/badge.svg" alt="build status"></a>
 
 <p align="center">
   <img src="./Assets/card.png" alt="Scoot, MacOS Cursor Actuator" />
@@ -14,9 +16,9 @@ _Meet **Scoot**, your friendly cursor teleportation and actuation tool._
 
 <img align="right" width="128" alt="Scoot App Icon" src="./Scoot/Assets.xcassets/AppIcon.appiconset/512.png" />
 
-Scoot is a tiny utility app that provides fast, keyboard-driven control over the mouse pointer. Scoot lets you move your mouse—and click and drag, too—all from the comfort of your keyboard!
+Scoot is a tiny utility app that provides fast, keyboard-driven control over the mouse pointer. Scoot lets you move your mouse—and click and drag, too—all from the comfort of your keyboard.
 
-Scoot supports two navigation modes: **element-based**, and **grid-based**.
+Scoot supports two primary navigation modes: **element-based**, and **grid-based**.
 
 * **Element-based navigation:** MacOS accessibility APIs are used to find user interface elements, such as buttons and links, on the user's screen. (In this mode, Scoot will look for elements in the focused window of the frontmost app.) Here, for example, Scoot has identified the only link on the page _("More information...")_, and assigned it the key sequence "aa":
 
@@ -32,6 +34,14 @@ Scoot supports two navigation modes: **element-based**, and **grid-based**.
 
 Each location is identified by a unique character sequence, making each element (or cell) uniquely addressable with the keyboard — simply type the associated key sequence to teleport your mouse cursor to that location.
 
+Scoot also supports moving the mouse cursor using text editing keyboard shortcuts that you're likely already familiar with (specifically, those for moving the insertion point). Scoot supports standard MacOS text editing shortcuts, as well as Emacs and vi keybindings. For a full breakdown, see the [usage documentation](#usage).
+
+There's also a supplementary usage mode:
+
+* **Freestyle:** a freeform usage mode that offers no special navigation assistance. It's like using the grid-based navigation mode, but _without_ bringing up the grid.
+
+Freestyle mode is particularly handy for those cases where you want to quickly nudge the cursor using the (re-purposed) text editing keyboard shortcuts, and would prefer to not have the grid or element-based views on screen.
+
 ## About
 
 * Scoot is experimental. Is it possible to craft a keyboard-driven mouse movement utility that's _actually_ efficient? Something that you'll actually _want_ to use? This is going to take some trial and error.
@@ -40,23 +50,25 @@ Each location is identified by a unique character sequence, making each element 
 
 * Scoot runs on MacOS 11 (Big Sur), and 12 (Monterey).
 
-* Scoot is an AppKit app, written in Swift. (There's still [some][carbon-events] [Carbon][carbon-accessibility] in here, too!)
+* Scoot is an AppKit app, written in Swift. (There's still some Carbon in here, too! [Yes][carbon-events], [really][carbon-accessibility].)
 
-* Scoot complements mouse-related accessibility tools that ship as part of MacOS, such as [Mouse Keys][mouse-keys] and other [accessibility shortcuts][mac-accessibility-shortcuts], in addition to mouse emulation provided via keyboard firmware like [QMK][qmk-mouse-keys].
+* Scoot complements mouse-related accessibility tools that ship as part of MacOS, such as [Mouse Keys][mouse-keys] and other [accessibility shortcuts][mac-accessibility-shortcuts], in addition to mouse emulation provided via keyboard firmware ([QMK][qmk-mouse-keys], for example).
 
 ## Usage
 
-To activate Scoot in the **element-based navigation mode**, use the ⇧⌘J global keyboard shortcut. Alternatively, to activate Scoot in the **grid-based navigation mode**, use the ⇧⌘K global keyboard shortcut.
+To activate Scoot in the **element-based navigation mode**, use the ⇧⌘J global keyboard shortcut. Alternatively, to activate Scoot in the **grid-based navigation mode**, use the ⇧⌘K global keyboard shortcut. And for **freestyle mode**, use the ⇧⌘L global keyboard shortcut.
 
-(As long as Scoot is running, either hotkey will bring the app to the foreground, and activate the requested navigation mode.)
+(As long as Scoot is running, any of these hotkeys will bring the app to the foreground, and activate the requested mode.)
 
 When Scoot is in the foreground:
 
 * You can jump directly to a cell (a UI element, or a location in the grid, depending on the active navigation mode). Each cell is marked with a label (e.g. “aaa”, “aas”, “aad”); type the characters, one letter at a time, and, as soon as a complete sequence is entered, the mouse cursor will move directly to the center of the corresponding cell. (This approach, including the use of a char-based decision tree, is heavily inspired by [avy][avy].)
   * If you make a mistake while entering a label, hit the escape key (⎋) to cancel and start over. (Alternatively, you can type ⌘. or C-G.)
+  * This feature is not available in freestyle mode, which does not present any special UI, or otherwise offer any navigation assistance via a char-based decision tree.
 
-* You can _also_ move the cursor via the standard Mac keyboard shortcuts for [moving the insertion point][mac-keyboard-shortcuts-text]. (This means that keyboard shortcuts intended for navigating around in a document have been re-purposed to control movement on a 2-dimensional grid. Some liberties have been taken with this mapping; hopefully you find these keybindings intuitive.)
+* You can _also_ move the cursor via the standard Mac keyboard shortcuts for [moving the insertion point][mac-keyboard-shortcuts-text]. (This means that keyboard shortcuts intended for navigating around in a document have been re-purposed to control movement on a 2-dimensional grid. Some liberties have been taken with this mapping; hopefully you find these keybindings intuitive.) This feature works in _all_ modes (element-based, grid-based, and freestyle).
     * The equivalent standard Emacs keybindings should also work out-of-the-box, if you have them configured system-wide (for example, via [Karabiner-Elements][karabiner-elements] [[complex modification][karabiner-elements-emacs-mod]], or by augmenting the [system defaults][emacs-keyboard-shortcuts-osx] [[DefaultKeyBinding.dict][defaultkeybinding.dict], [Cocoa Text System][cocoa-text-system], [Text System Defaults and Key Bindings][apple-dev-text-system]]).
+    * The equivalent vi bindings are also (optionally) available; see [keybindings](#keybindings) for details.
 
 * You can click with the left mouse button (at the current cursor location) by hitting the Return (↵) key.
 
@@ -67,39 +79,41 @@ When Scoot is in the foreground:
 
 * You can scroll, by pressing the Shift key in conjunction with the arrow key (↑, ↓, ←, →) pointing in the desired scroll direction.
 
-After clicking, the grid will automatically hide. You can also hide the grid at any time by pressing ⌘H.
+After clicking, any overlaid UI elements (such as the element view, or the grid) will automatically hide. You can also hide these UI elements (and send Scoot to the background) at any time by pressing ⌘H.
 
 ### Keybindings
 
 _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac-symbols], and [Emacs key notation][emacs-key-notation]._
 
+Note that vi keybindings are not enabled by default, and must be explicitly toggled on (documentation: [how to turn on vi keybindings](#activating-vi-keybindings)). Emacs keybindings (and most system keybindings) are disabled when vi keybindings are active.
 
-| Shortcut  | Emacs | Description                                                                                                       |
-|-----------|-------|-------------------------------------------------------------------------------------------------------------------|
-| ⇧⌘J       |       | Use element-based navigation (bring Scoot to foreground)                                                          |
-| ⇧⌘K       |       | Use grid-based navigation (bring Scoot to foreground)                                                             |
-| ⌘H        |       | Hide UI (bring Scoot to background)                                                                               |
-| ⎋ (or ⌘.) | C-g   | Cancel: if currently typing a label, clears all currently-typed characters; otherwise, brings Scoot to background |
+| Shortcut  | Alternate | Description                                                                                                       |
+|-----------|-----------|-------------------------------------------------------------------------------------------------------------------|
+| ⇧⌘J       |           | Use element-based navigation (bring Scoot to foreground)                                                          |
+| ⇧⌘K       |           | Use grid-based navigation (bring Scoot to foreground)                                                             |
+| ⇧⌘L       |           | Use freestyle mode (bring Scoot to foreground)                                                                    |
+| ⌘H        |           | Hide UI (bring Scoot to background)                                                                               |
+| ⎋ (or ⌘.) | C-g       | Cancel: if currently typing a label, clears all currently-typed characters; otherwise, brings Scoot to background |
 
 _Note:_ ⎋ signifies the Escape key.
 
 #### Cursor Movement
 
-| System | Emacs | Description                                                 |
-|--------|-------|-------------------------------------------------------------|
-| ↑      | C-p   | Move cursor up (partial step)                               |
-| ↓      | C-n   | Move cursor down (partial step)                             |
-| ←      | C-b   | Move cursor left (partial step)                             |
-| →      | C-f   | Move cursor right (partial step)                            |
-| ⌥↑     | M-a   | Move cursor up (full step)                                  |
-| ⌥↓     | M-e   | Move cursor down (full step)                                |
-| ⌥←     | M-b   | Move cursor left (full step)                                |
-| ⌥→     | M-f   | Move cursor right (full step)                               |
-| ⌘↑     | M-<   | Move cursor to top edge of screen                           |
-| ⌘↓     | M->   | Move cursor to bottom edge of screen                        |
-| ⌘←     | C-a   | Move cursor to left edge of screen                          |
-| ⌘→     | C-e   | Move cursor to right edge of screen                         |
-| ⌃L     | C-l   | Move cursor to center, and (on repeat) cycle around corners |
+| System | Emacs | vi  | Description                                                 |
+|--------|-------|-----|-------------------------------------------------------------|
+| ↑      | C-p   | j   | Move cursor up (partial step)                               |
+| ↓      | C-n   | k   | Move cursor down (partial step)                             |
+| ←      | C-b   | h   | Move cursor left (partial step)                             |
+| →      | C-f   | l   | Move cursor right (partial step)                            |
+| ⌥↑     | M-a   | C-j | Move cursor up (full step)                                  |
+| ⌥↓     | M-e   | C-k | Move cursor down (full step)                                |
+| ⌥←     | M-b   | C-h | Move cursor left (full step)                                |
+| ⌥→     | M-f   | C-l | Move cursor right (full step)                               |
+| ⌘↑     | M-<   | ⇧-j | Move cursor to top edge of screen                           |
+| ⌘↓     | M->   | ⇧-k | Move cursor to bottom edge of screen                        |
+| ⌘←     | C-a   | ⇧-h | Move cursor to left edge of screen                          |
+| ⌘→     | C-e   | ⇧-l | Move cursor to right edge of screen                         |
+| ⌃L     | C-l   | ⇧-m | Move cursor to center, and (on repeat) cycle around corners |
 
 #### Clicking
 
@@ -107,18 +121,18 @@ _Note:_ ⎋ signifies the Escape key.
 |----------|-----------------------------------------------------------------------------|
 | ↵        | Click left mouse button (at current cursor location)                        |
 | ⌘↵       | Press and hold left mouse button (once activated, type ⌘↵ again to release) |
-| ⇧↵       | Double-click left mouse button (at current cursor location) |
+| ⇧↵       | Double-click left mouse button (at current cursor location)                 |
 
 _Note:_ ↵ signifies the Return (a.k.a Enter) key. (Technically, Return and Enter are [two different keys][return-and-enter-are-two-different-keys].)
 
 #### Scrolling
 
-| System | Alt | Description                              |
-|--------|-----|------------------------------------------|
-| ⇧↑     | ⇧-p | Scroll up (at current cursor location) |
-| ⇧↓     | ⇧-n | Scroll down (at current cursor location) |
-| ⇧←     | ⇧-b | Scroll left (at current cursor location) |
-| ⇧→     | ⇧-f | Scroll right (at current cursor location) |
+| System | Emacs | vi  | Description                               |
+|--------|-------|-----|-------------------------------------------|
+| ⇧↑     | ⇧-p   | C-b | Scroll up (at current cursor location)    |
+| ⇧↓     | ⇧-n   | C-f | Scroll down (at current cursor location)  |
+| ⇧←     | ⇧-b   | C-i | Scroll left (at current cursor location)  |
+| ⇧→     | ⇧-f   | C-a | Scroll right (at current cursor location) |
 
 #### Presentation
 
@@ -174,6 +188,24 @@ As before, you'll need to click the lock in the bottom left corner to unlock thi
 </p>
 
 If you encounter any problems, feel free to [file an issue][scoot-issues].
+
+### Activating vi Keybindings
+
+There is currently no UI for setting the keybinding mode.
+
+To opt in to vi keybindings, execute the following command in your terminal:
+
+```
+defaults write ~/Library/Preferences/com.mjrusso.Scoot.plist KeybindingMode vi
+```
+
+If Scoot is running, restart it after running the `defaults write` command.
+
+To restore the default keybindings:
+
+```
+defaults write ~/Library/Preferences/com.mjrusso.Scoot.plist KeybindingMode emacs
+```
 
 ## Demos
 
