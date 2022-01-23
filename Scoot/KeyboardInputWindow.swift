@@ -33,12 +33,14 @@ class KeyboardInputWindow: TransparentWindow {
 
     /// The underlying data structure enabling cursor movement via a
     /// character-based decision tree (as determined by the active jump mode).
-    var currentTree: Tree<CGRect> {
+    var currentTree: Tree<CGRect>? {
         switch activeJumpMode {
         case .grid:
             return treeForGridBasedNavigation
         case .element:
             return treeForElementBasedNavigation
+        case .freestyle:
+            return nil
         }
     }
 
@@ -219,16 +221,23 @@ class KeyboardInputWindow: TransparentWindow {
             ["z", "x", "c", "v", "b", "n", "m"],
         ]
 
+        let selectedKeys: [Character]
+
         switch numCandidates {
         case 0..<80:
-            return keys[0] + keys[1]
+            selectedKeys = keys[0] + keys[1]
         case 80..<200:
-            return keys[0] + keys[1] + keys[2]
+            selectedKeys = keys[0] + keys[1] + keys[2]
         case 200..<1400:
-            return keys[0] + keys[1] + keys[2] + keys[3]
+            selectedKeys = keys[0] + keys[1] + keys[2] + keys[3]
         default:
-            return keys.flatMap { $0 }
+            selectedKeys = keys.flatMap { $0 }
         }
+
+        return selectedKeys.filter {
+            !UserSettings.shared.keybindingMode.isCharacterSpecial($0)
+        }
+
     }
 
 }

@@ -10,6 +10,8 @@
 		E511785B2636EEC800B4202F /* NSScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */; };
 		E51178602636EEEB00B4202F /* NSPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */; };
 		E52BFD172763D5FB00BB65AF /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52BFD162763D5FB00BB65AF /* Accessibility.swift */; };
+		E53AB9D0279BA7ED0048FBE1 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53AB9CF279BA7ED0048FBE1 /* UserSettings.swift */; };
+		E53AB9D2279C416F0048FBE1 /* KeybindingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53AB9D1279C416F0048FBE1 /* KeybindingMode.swift */; };
 		E5497A03276E2C47006EA19B /* ElementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5497A02276E2C47006EA19B /* ElementView.swift */; };
 		E5497A05276E5E9D006EA19B /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5497A04276E5E9D006EA19B /* CGPoint+Extensions.swift */; };
 		E5497A07277D4F6A006EA19B /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5497A06277D4F6A006EA19B /* CGRect+Extensions.swift */; };
@@ -69,6 +71,8 @@
 		E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extensions.swift"; sourceTree = "<group>"; };
 		E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPoint+Extensions.swift"; sourceTree = "<group>"; };
 		E52BFD162763D5FB00BB65AF /* Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
+		E53AB9CF279BA7ED0048FBE1 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		E53AB9D1279C416F0048FBE1 /* KeybindingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeybindingMode.swift; sourceTree = "<group>"; };
 		E5497A02276E2C47006EA19B /* ElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementView.swift; sourceTree = "<group>"; };
 		E5497A04276E5E9D006EA19B /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		E5497A06277D4F6A006EA19B /* CGRect+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
@@ -180,6 +184,7 @@
 			children = (
 				E5776232262F04D300849D7D /* Main.storyboard */,
 				E577622C262F04D100849D7D /* AppDelegate.swift */,
+				E53AB9CF279BA7ED0048FBE1 /* UserSettings.swift */,
 				E52BFD162763D5FB00BB65AF /* Accessibility.swift */,
 				E59F854B278938F000A9FBF6 /* Positionable.swift */,
 				E59F854E27893B3A00A9FBF6 /* Positionable+Crowding.swift */,
@@ -190,6 +195,7 @@
 				E5B1DE4226686E9D00F1AA77 /* KeyboardInputWindow+Actions.swift */,
 				E567D2A3263C7FB000A0A861 /* KeyboardInputWindow+Keyboard.swift */,
 				E591E5662636F1F900C037FF /* KeyboardInputWindow+StandardKeyBinds.swift */,
+				E53AB9D1279C416F0048FBE1 /* KeybindingMode.swift */,
 				E5497A08277D5AD1006EA19B /* JumpMode.swift */,
 				E5BD595B26615F5300BB5181 /* JumpWindow.swift */,
 				E5776268262F0EC700849D7D /* JumpWindowController.swift */,
@@ -368,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E53AB9D0279BA7ED0048FBE1 /* UserSettings.swift in Sources */,
 				E51178602636EEEB00B4202F /* NSPoint+Extensions.swift in Sources */,
 				E5497A03276E2C47006EA19B /* ElementView.swift in Sources */,
 				E52BFD172763D5FB00BB65AF /* Accessibility.swift in Sources */,
@@ -377,6 +384,7 @@
 				E567D2A2263C77FC00A0A861 /* Grid.swift in Sources */,
 				E5776261262F067700849D7D /* TransparentWindow.swift in Sources */,
 				E59F854C278938F100A9FBF6 /* Positionable.swift in Sources */,
+				E53AB9D2279C416F0048FBE1 /* KeybindingMode.swift in Sources */,
 				E59C1633264AC4F60033E2CC /* CGSize+Extensions.swift in Sources */,
 				E5776269262F0EC700849D7D /* JumpWindowController.swift in Sources */,
 				E577622F262F04D100849D7D /* JumpViewController.swift in Sources */,

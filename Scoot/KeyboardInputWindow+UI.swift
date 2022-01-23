@@ -11,10 +11,14 @@ extension KeyboardInputWindow {
             case .element:
                 $0.viewController.showElements()
                 $0.viewController.hideGrid()
+            case .freestyle:
+                $0.viewController.hideGrid()
+                $0.viewController.hideElements()
             }
         }
-        appDelegate?.showElementsMenuItem.isHidden = true
-        appDelegate?.showGridMenuItem.isHidden = true
+        appDelegate?.useElementBasedNavigationMenuItem.isHidden = true
+        appDelegate?.useGridBasedNavigationMenuItem.isHidden = true
+        appDelegate?.useFreestyleNavigationMenuItem.isHidden = true
         appDelegate?.hideMenuItem.isHidden = false
     }
 
@@ -23,8 +27,9 @@ extension KeyboardInputWindow {
             $0.viewController.hideGrid()
             $0.viewController.hideElements()
         }
-        appDelegate?.showElementsMenuItem.isHidden = false
-        appDelegate?.showGridMenuItem.isHidden = false
+        appDelegate?.useElementBasedNavigationMenuItem.isHidden = false
+        appDelegate?.useGridBasedNavigationMenuItem.isHidden = false
+        appDelegate?.useFreestyleNavigationMenuItem.isHidden = false
         appDelegate?.hideMenuItem.isHidden = true
     }
 

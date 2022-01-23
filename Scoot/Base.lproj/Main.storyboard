@@ -60,14 +60,19 @@
                                                 <action selector="hidePressed:" target="Voe-Tx-rLC" id="T4I-eg-084"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Show Elements" keyEquivalent="J" id="PJE-er-84e" userLabel="Show Elements">
+                                        <menuItem title="Use Element-Based Navigation" keyEquivalent="J" id="PJE-er-84e">
                                             <connections>
-                                                <action selector="showElementsPressed:" target="Voe-Tx-rLC" id="gLz-X4-6K0"/>
+                                                <action selector="useElementBasedNavigationPressed:" target="Voe-Tx-rLC" id="4Xw-km-gTr"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Show Grid" keyEquivalent="K" id="9ey-1D-QEB">
+                                        <menuItem title="Use Grid-Based Navigation" keyEquivalent="K" id="9ey-1D-QEB">
                                             <connections>
-                                                <action selector="showGridPressed:" target="Voe-Tx-rLC" id="clY-p7-5wv"/>
+                                                <action selector="useGridBasedNavigationPressed:" target="Voe-Tx-rLC" id="myZ-45-CPZ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Use Freestyle Navigation" keyEquivalent="L" id="GAo-D2-CNk">
+                                            <connections>
+                                                <action selector="useFreestyleNavigationPressed:" target="Voe-Tx-rLC" id="Lsy-R6-hic"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Tu3-wV-t86"/>
@@ -147,8 +152,9 @@
                     <connections>
                         <outlet property="hideMenuItem" destination="Olw-nP-bQN" id="9Tb-8L-TjN"/>
                         <outlet property="menu" destination="Rkb-lU-63l" id="H8S-nT-JvV"/>
-                        <outlet property="showElementsMenuItem" destination="PJE-er-84e" id="kK9-md-IPf"/>
-                        <outlet property="showGridMenuItem" destination="9ey-1D-QEB" id="5I7-h7-147"/>
+                        <outlet property="useElementBasedNavigationMenuItem" destination="PJE-er-84e" id="kK9-md-IPf"/>
+                        <outlet property="useFreestyleNavigationMenuItem" destination="GAo-D2-CNk" id="BmX-7K-ulv"/>
+                        <outlet property="useGridBasedNavigationMenuItem" destination="9ey-1D-QEB" id="5I7-h7-147"/>
                     </connections>
                 </customObject>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
