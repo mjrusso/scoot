@@ -6,10 +6,11 @@ extension KeyboardInputWindow: NSWindowDelegate {
         hideJumpViews()
 
         appDelegate?.inputWindow.currentNode = nil
+        appDelegate?.updateMenuBarStatusItemForInactiveState()
     }
 
     func windowDidBecomeMain(_ notification: Notification) {
-
+        appDelegate?.updateMenuBarStatusItemForActiveState()
     }
 
 }

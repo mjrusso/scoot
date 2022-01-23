@@ -214,15 +214,31 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             withLength: NSStatusItem.squareLength
         )
 
-        let image = NSImage(named: "MenuIcon")
-        image?.isTemplate = true
-
-        item.button?.image = image
+        item.button?.image = menuBarStatusItemDefaultImage
         item.button?.image?.size = NSSize(width: 18.0, height: 18.0)
 
         item.menu = menu
 
         self.statusItem = item
+    }
+
+    lazy var menuBarStatusItemDefaultImage: NSImage? = {
+        let image = NSImage(named: "MenuIcon")
+        image?.isTemplate = true
+        return image
+    }()
+
+    lazy var menuBarStatusItemTintedImage: NSImage? = {
+        let tintColor = NSColor.systemTeal.withAlphaComponent(0.9)
+        return menuBarStatusItemDefaultImage?.withTintColor(tintColor)
+    }()
+
+    func updateMenuBarStatusItemForInactiveState() {
+        self.statusItem?.button?.image = menuBarStatusItemDefaultImage
+    }
+
+    func updateMenuBarStatusItemForActiveState() {
+        self.statusItem?.button?.image = menuBarStatusItemTintedImage
     }
 
     // MARK: Activation

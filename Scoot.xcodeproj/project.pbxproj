@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E50A612D279DEC7900D970EF /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A612C279DEC7900D970EF /* NSImage+Extensions.swift */; };
 		E511785B2636EEC800B4202F /* NSScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */; };
 		E51178602636EEEB00B4202F /* NSPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */; };
 		E52BFD172763D5FB00BB65AF /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52BFD162763D5FB00BB65AF /* Accessibility.swift */; };
@@ -68,6 +69,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E50A612C279DEC7900D970EF /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extensions.swift"; sourceTree = "<group>"; };
 		E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPoint+Extensions.swift"; sourceTree = "<group>"; };
 		E52BFD162763D5FB00BB65AF /* Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				E5497A04276E5E9D006EA19B /* CGPoint+Extensions.swift */,
 				E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */,
 				E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */,
+				E50A612C279DEC7900D970EF /* NSImage+Extensions.swift */,
 				E59C1634264AC6FB0033E2CC /* Comparable+Extensions.swift */,
 			);
 			path = Extensions;
@@ -402,6 +405,7 @@
 				E59C1635264AC6FB0033E2CC /* Comparable+Extensions.swift in Sources */,
 				E5B1DE4126686E5B00F1AA77 /* KeyboardInputWindow+UI.swift in Sources */,
 				E5BD595C26615F5300BB5181 /* JumpWindow.swift in Sources */,
+				E50A612D279DEC7900D970EF /* NSImage+Extensions.swift in Sources */,
 				E59F854F27893B3A00A9FBF6 /* Positionable+Crowding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
