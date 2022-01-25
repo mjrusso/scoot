@@ -108,16 +108,16 @@ _Note:_ ⎋ signifies the Escape key.
 
 | System | Emacs | vi  | Description                                                 |
 |--------|-------|-----|-------------------------------------------------------------|
-| ↑      | C-p   | j   | Move cursor up (partial step)                               |
-| ↓      | C-n   | k   | Move cursor down (partial step)                             |
+| ↑      | C-p   | k   | Move cursor up (partial step)                               |
+| ↓      | C-n   | j   | Move cursor down (partial step)                             |
 | ←      | C-b   | h   | Move cursor left (partial step)                             |
 | →      | C-f   | l   | Move cursor right (partial step)                            |
-| ⌥↑     | M-a   | C-j | Move cursor up (full step)                                  |
-| ⌥↓     | M-e   | C-k | Move cursor down (full step)                                |
+| ⌥↑     | M-a   | C-k | Move cursor up (full step)                                  |
+| ⌥↓     | M-e   | C-j | Move cursor down (full step)                                |
 | ⌥←     | M-b   | C-h | Move cursor left (full step)                                |
 | ⌥→     | M-f   | C-l | Move cursor right (full step)                               |
-| ⌘↑     | M-<   | ⇧-j | Move cursor to top edge of screen                           |
-| ⌘↓     | M->   | ⇧-k | Move cursor to bottom edge of screen                        |
+| ⌘↑     | M-<   | ⇧-k | Move cursor to top edge of screen                           |
+| ⌘↓     | M->   | ⇧-j | Move cursor to bottom edge of screen                        |
 | ⌘←     | C-a   | ⇧-h | Move cursor to left edge of screen                          |
 | ⌘→     | C-e   | ⇧-l | Move cursor to right edge of screen                         |
 | ⌃L     | C-l   | ⇧-m | Move cursor to center, and (on repeat) cycle around corners |
