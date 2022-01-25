@@ -90,7 +90,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     self.installationHelpRequested(self)
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    Logger().log("Terminating because not trusted as an AX process.")
+                    OSLog.main.log("Terminating because not trusted as an AX process.")
                     NSApp.terminate(self)
                 }
             }
@@ -105,14 +105,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         self.configureMenuBarExtra()
 
-        Logger().log("Lauching Scoot (connected screens: \(NSScreen.screens.count))")
+        OSLog.main.log("Lauching Scoot (connected screens: \(NSScreen.screens.count))")
 
         for screen in NSScreen.screens {
             self.spawnJumpWindow(on: screen)
-            Logger().log("* Screen: \(screen.localizedName) \(String(describing: screen.frame))")
+            OSLog.main.log("* Screen: \(screen.localizedName) \(String(describing: screen.frame))")
         }
 
-        Logger().log("Using \(UserSettings.shared.keybindingMode.rawValue) keybindings.")
+        OSLog.main.log("Using \(UserSettings.shared.keybindingMode.rawValue) keybindings.")
 
         self.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
 
@@ -150,9 +150,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             queue: OperationQueue.main
         ) { [weak self] notification in
 
-            Logger().log("Received didChangeScreenParametersNotification (connected screens: \(NSScreen.screens.count))")
+            OSLog.main.log("Received didChangeScreenParametersNotification (connected screens: \(NSScreen.screens.count))")
             for screen in NSScreen.screens {
-                Logger().log("* Screen: \(screen.localizedName) \(String(describing: screen.frame))")
+                OSLog.main.log("* Screen: \(screen.localizedName) \(String(describing: screen.frame))")
             }
 
             guard let self = self else {
@@ -166,14 +166,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     NSScreen.screens.contains(screen),
                     let window = windowController.window
                 else {
-                    Logger().log("> Screen has gone away: \(windowController.assignedScreen?.localizedName ?? "<unknown>")")
+                    OSLog.main.log("> Screen has gone away: \(windowController.assignedScreen?.localizedName ?? "<unknown>")")
                     self.closeJumpWindow(managedBy: windowController)
                     mustReinitialize = true
                     continue
                 }
 
                 guard window.frame == screen.frame else {
-                    Logger().log("> Screen frame has changed: \(screen.localizedName) \(String(describing: screen.frame))")
+                    OSLog.main.log("> Screen frame has changed: \(screen.localizedName) \(String(describing: screen.frame))")
                     self.resizeJumpWindow(managedBy: windowController, to: screen.visibleFrame)
                     mustReinitialize = true
                     continue
@@ -187,13 +187,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let addedScreens = Set(NSScreen.screens).subtracting(assignedScreens)
 
             for screen in addedScreens {
-                Logger().log("> Screen was added: \(screen.localizedName) \(String(describing: screen.frame))")
+                OSLog.main.log("> Screen was added: \(screen.localizedName) \(String(describing: screen.frame))")
                 self.spawnJumpWindow(on: screen)
                 mustReinitialize = true
             }
 
             if mustReinitialize {
-                Logger().log("Re-initializing relevant data structures...")
+                OSLog.main.log("Re-initializing relevant data structures...")
                 self.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
             }
         }
@@ -247,7 +247,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.currentApp = NSWorkspace.shared.frontmostApplication
 
         if let app = self.currentApp {
-            Logger().log("Scoot invoked with frontmost app: \(String(describing: app.localizedName ?? "<unknown>"))")
+            OSLog.main.log("Scoot invoked with frontmost app: \(String(describing: app.localizedName ?? "<unknown>"))")
             self.inputWindow.initializeCoreDataStructuresForElementBasedMovement(of: app)
         }
 

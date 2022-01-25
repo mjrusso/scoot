@@ -74,7 +74,7 @@ struct Accessibility {
             return
         }
 
-        Logger().log("Disabling AXEnhancedUserInterface for \(String(describing: runningApp.localizedName ?? "<unknown>"))")
+        OSLog.main.log("Disabling AXEnhancedUserInterface for \(String(describing: runningApp.localizedName ?? "<unknown>"))")
 
         try? app.setAttribute(.enhancedUserInterface, value: false)
     }
