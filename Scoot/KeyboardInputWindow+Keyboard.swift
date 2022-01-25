@@ -113,10 +113,10 @@ extension KeyboardInputWindow {
             // Emacs: end-of-buffer
             moveToEndOfDocument(self)
 
-        case (.vi, [], "j"):
+        case (.vi, [], "k"):
             moveUp(self)
 
-        case (.vi, [], "k"):
+        case (.vi, [], "j"):
             moveDown(self)
 
         case (.vi, [], "h"):
@@ -125,10 +125,10 @@ extension KeyboardInputWindow {
         case (.vi, [], "l"):
             moveRight(self)
 
-        case (.vi, .control, "j"):
+        case (.vi, .control, "k"):
             moveToBeginningOfParagraph(self)
 
-        case (.vi, .control, "k"):
+        case (.vi, .control, "j"):
             moveToEndOfParagraph(self)
 
         case (.vi, .control, "h"):
@@ -137,10 +137,10 @@ extension KeyboardInputWindow {
         case (.vi, .control, "l"):
             moveWordRight(self)
 
-        case (.vi, .shift, "J"):
+        case (.vi, .shift, "K"):
             moveToBeginningOfDocument(self)
 
-        case (.vi, .shift, "K"):
+        case (.vi, .shift, "J"):
             moveToEndOfDocument(self)
 
         case (.vi, .shift, "H"):
