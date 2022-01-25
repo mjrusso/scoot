@@ -74,7 +74,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 
+        OSLog.main.log("Scoot: applicationDidFinishLaunching.")
+
         guard Accessibility.checkIfProcessIsTrusted(withPrompt: !isRunningTests) else {
+
+            OSLog.main.log("Process is not trusted for AX.")
+
             func showAlert(completion: (Bool) -> Void) {
                 let alert = NSAlert()
                 alert.messageText = "Accessibility Permission Required"
@@ -105,11 +110,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         self.configureMenuBarExtra()
 
-        OSLog.main.log("Lauching Scoot (connected screens: \(NSScreen.screens.count))")
+        OSLog.main.log("For reference: the primary screen is at index 0, contains the menu bar, and has origin (0,0).")
+
+        OSLog.main.logDetailsForAllConnectedScreens()
 
         for screen in NSScreen.screens {
             self.spawnJumpWindow(on: screen)
-            OSLog.main.log("* Screen: \(screen.localizedName) \(String(describing: screen.frame))")
         }
 
         OSLog.main.log("Using \(UserSettings.shared.keybindingMode.rawValue) keybindings.")
@@ -150,10 +156,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             queue: OperationQueue.main
         ) { [weak self] notification in
 
-            OSLog.main.log("Received didChangeScreenParametersNotification (connected screens: \(NSScreen.screens.count))")
-            for screen in NSScreen.screens {
-                OSLog.main.log("* Screen: \(screen.localizedName) \(String(describing: screen.frame))")
-            }
+            OSLog.main.log("Scoot: received didChangeScreenParametersNotification.")
+
+            OSLog.main.logDetailsForAllConnectedScreens()
 
             guard let self = self else {
                 return

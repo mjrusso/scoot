@@ -12,3 +12,17 @@ extension OSLog {
     static let main = createLogger(category: "Main")
 
 }
+
+extension Logger {
+
+    func logDetailsForAllConnectedScreens() {
+
+        self.log("Connected screens: \(NSScreen.screens.count)")
+
+        for (index, screen) in NSScreen.screens.enumerated() {
+            self.log("* Screen \(index): \(screen.localizedName) \(String(describing: screen.frame))")
+        }
+
+    }
+
+}
