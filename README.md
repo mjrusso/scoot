@@ -124,13 +124,21 @@ _Note:_ ⎋ signifies the Escape key.
 
 #### Clicking
 
-| Shortcut | Description                                                                 |
-|----------|-----------------------------------------------------------------------------|
-| ↵        | Click left mouse button (at current cursor location)                        |
-| ⌘↵       | Press and hold left mouse button (once activated, type ⌘↵ again to release) |
-| ⇧↵       | Double-click left mouse button (at current cursor location)                 |
+| Shortcut | Description                                                            |
+|----------|------------------------------------------------------------------------|
+| ↵        | Click left mouse button (at current cursor location)                   |
+| =        | Press and hold left mouse button (once activated, type `↵` to release) |
+| \        | Double-click left mouse button (at current cursor location)            |
+| [        | Click middle mouse button (at current cursor location)                 |
+| ]        | Click right mouse button (at current cursor location)                  |
 
-_Note:_ ↵ signifies the Return (a.k.a Enter) key. (Technically, Return and Enter are [two different keys][return-and-enter-are-two-different-keys].)
+Scoot will pass along any pressed modifier keys when simulating clicks. This means that Command-click, Option-click, Control-click, and Shift-click are all supported (or any combination thereof). For example, ⌘↵ will Command-click the left mouse button at the current cursor location, ⌥↵ will Option-click, ⌃↵ will Control-click, ⇧↵ will Shift-click, etc.
+
+Scoot can't take control of the mouse cursor when a context menu is active (for example, after right clicking). However, system-provided keyboard shortcuts for selecting the item in a menu (such as ↑, ↓, ←, →, C-n, C-p, ↵) will work as expected.
+
+For simplicity, Scoot only supports simulating holding/ dragging, and double clicking, with the left mouse button. (If you have a use case that requires more exotic click handling, please [file an issue][scoot-issues] with details.)
+
+_Note:_ ↵ signifies the Return (a.k.a Enter) key. _(Sidenote: technically, Return and Enter are [two different keys][return-and-enter-are-two-different-keys].)_
 
 #### Scrolling
 
@@ -226,7 +234,7 @@ For reference, the following key sequence was used to grab the file and drop it 
 
 - `⇧⌘K` to activate Scoot
 - `kh` to jump cursor to cell
-- `⌘↵` to press and hold the left mouse button
+- `=` to press and hold the left mouse button
 - `fd` to jump cursor to cell
 - `↵` to release the left mouse button
 

@@ -5,6 +5,21 @@ import Carbon.HIToolbox
 
 extension KeyboardInputWindow {
 
+    /// Returns true, if the character or keycode is specifically reserved for a keyboard shortcut.
+    func isReserved(_ character: Character, or keycode: UInt16) -> Bool {
+        let reservedCharacters: [Character] = ["\r", "[", "]", "=", "\\"]
+        let reservedKeycodes: [Int] = [
+            kVK_Return,
+            kVK_Escape,
+            kVK_UpArrow,
+            kVK_DownArrow,
+            kVK_LeftArrow,
+            kVK_RightArrow
+        ]
+        return reservedCharacters.contains(character) ||
+            reservedKeycodes.contains(Int(keycode))
+    }
+
     override func keyDown(with event: NSEvent) {
         let modifiers = event.modifierFlags.intersection(
             .deviceIndependentFlagsMask
@@ -26,7 +41,7 @@ extension KeyboardInputWindow {
 
         // FIXME: this logic would be better encoded as a state machine.
 
-        if let tree = currentTree, modifiers.isEmpty && characters.count == 1 && event.keyCode != kVK_Return && !mode.isCharacterSpecial(character) {
+        if let tree = currentTree, modifiers.isEmpty && characters.count == 1 && !isReserved(character, or: event.keyCode) && !mode.isCharacterSpecial(character) {
 
             if let nextNode = (currentNode ?? tree.root).step(by: character) {
                 if nextNode.isLeaf , let rect = nextNode.value {
@@ -44,23 +59,47 @@ extension KeyboardInputWindow {
             return
         }
 
-        if event.keyCode == kVK_Return {
-            switch (isHoldingDownMouseButton, modifiers) {
-            case (false, []):
-                mouse.click()
-            case (false, .command):
-                mouse.pressDown()
-                isHoldingDownMouseButton = true
-            case (false, .shift):
-                mouse.doubleClick()
-            case (true, _):
-                mouse.notifyDrag()
-                mouse.release()
-                isHoldingDownMouseButton = false
+        switch (character, isHoldingDownLeftMouseButton, modifiers) {
+        case ("\r", false, []):
+            mouse.click(button: .left)
+            return
+        case ("\r", false, _), ("[", false, _), ("]", false, _):
+            // The user is pressing the left mouse button while holding down
+            // one or more modifier keys, or pressing the middle or right mouse
+            // button (with or without modifiers). In any of these cases, a
+            // system-provided context menu will likely pop up. Scoot can't
+            // take control of the mouse cursor when a context menu is active,
+            // so it is a better user experience to bring Scoot to the
+            // background before issuing the click.
+            appDelegate?.bringToBackground()
+
+            // Note that if a modifier is being held, it will "pass through" to
+            // the corresponding click.
+            switch character {
+            case "\r":
+                mouse.click(button: .left)
+            case "[":
+                mouse.click(button: .center)
+            case "]":
+                mouse.click(button: .right)
             default:
                 break
             }
             return
+        case ("\r", true, _):
+            mouse.notifyDrag(.left)
+            mouse.release(.left)
+            isHoldingDownLeftMouseButton = false
+            return
+        case ("=", false, _):
+            mouse.pressDown(.left)
+            isHoldingDownLeftMouseButton = true
+            return
+        case ("\\", false, _):
+            mouse.doubleClick(button: .left)
+            return
+        default:
+            break
         }
 
         if modifiers.contains(.shift) {

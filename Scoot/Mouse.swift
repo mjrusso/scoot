@@ -2,6 +2,18 @@ import Cocoa
 
 struct Mouse {
 
+    enum Button {
+        case left
+        case right
+        case center
+    }
+
+    enum Event {
+        case down
+        case up
+        case drag
+    }
+
     /// The location of the mouse cursor, in the Core Graphics (Quartz) coordinate system.
     var currentLocation: CGPoint {
         NSEvent.mouseLocation.convertToCG()
@@ -24,7 +36,7 @@ struct Mouse {
         event?.post(tap: .cghidEventTap)
     }
 
-    func click() {
+    func click(button: Mouse.Button) {
         // It should be possible to `pressDown()` and then `release()` (after a
         // short delay), however that approach doesn't work reliably: in some
         // applications (for example, when trying to click on a hyperlink in a
@@ -49,56 +61,56 @@ struct Mouse {
         // unfortunately none of the proposed strategies seem to work.]
         //
         // [0]: https://stackoverflow.com/q/2369806/15304124
-        pressDown()
-        pressDown()
+        pressDown(button)
+        pressDown(button)
         usleep(40000)
-        release()
+        release(button)
     }
 
-    func pressDown() {
+    func pressDown(_ button: Mouse.Button) {
         CGEvent(
             mouseEventSource: nil,
-            mouseType: .leftMouseDown,
+            mouseType: button.cgEventType(for: .down),
             mouseCursorPosition: currentLocation,
-            mouseButton: .left
+            mouseButton: button.cgMouseButton
         )?.post(tap: .cghidEventTap)
     }
 
-    func notifyDrag() {
+    func notifyDrag(_ button: Mouse.Button) {
         CGEvent(
             mouseEventSource: nil,
-            mouseType: .leftMouseDragged,
+            mouseType: button.cgEventType(for: .drag),
             mouseCursorPosition: currentLocation,
-            mouseButton: .left
+            mouseButton: button.cgMouseButton
         )?.post(tap: .cghidEventTap)
     }
 
-    func release() {
+    func release(_ button: Mouse.Button) {
         CGEvent(
             mouseEventSource: nil,
-            mouseType: .leftMouseUp,
+            mouseType: button.cgEventType(for: .up),
             mouseCursorPosition: currentLocation,
-            mouseButton: .left
+            mouseButton: button.cgMouseButton
         )?.post(tap: .cghidEventTap)
     }
 
-    func doubleClick() {
-        click()
+    func doubleClick(button: Mouse.Button = .left) {
+        click(button: button)
 
         var event = CGEvent(
             mouseEventSource: nil,
-            mouseType: .leftMouseDown,
+            mouseType: button.cgEventType(for: .down),
             mouseCursorPosition: currentLocation,
-            mouseButton: .left
+            mouseButton: button.cgMouseButton
         )
         event?.setIntegerValueField(.mouseEventClickState, value: 2)
         event?.post(tap: .cghidEventTap)
 
         event = CGEvent(
             mouseEventSource: nil,
-            mouseType: .leftMouseUp,
+            mouseType: button.cgEventType(for: .up),
             mouseCursorPosition: currentLocation,
-            mouseButton: .left
+            mouseButton: button.cgMouseButton
         )
         event?.setIntegerValueField(.mouseEventClickState, value: 2)
         event?.post(tap: .cghidEventTap)
@@ -199,6 +211,44 @@ struct Mouse {
             scroll(x: offset, y: 0)
         case .right:
             scroll(x: -offset, y: 0)
+        }
+    }
+
+}
+
+extension Mouse.Button {
+
+    func cgEventType(for event: Mouse.Event) -> CGEventType {
+        switch (self, event) {
+        case (.left, .down):
+            return .leftMouseDown
+        case (.left, .up):
+            return .leftMouseUp
+        case (.left, .drag):
+            return .leftMouseDragged
+        case (.right, .down):
+            return .rightMouseDown
+        case (.right, .up):
+            return .rightMouseUp
+        case (.right, .drag):
+            return .rightMouseDragged
+        case (.center, .down):
+            return .otherMouseDown
+        case (.center, .up):
+            return .otherMouseUp
+        case (.center, .drag):
+            return .otherMouseDragged
+        }
+    }
+
+    var cgMouseButton: CGMouseButton {
+        switch self {
+        case .left:
+            return .left
+        case .right:
+            return .right
+        case .center:
+            return .center
         }
     }
 
