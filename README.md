@@ -224,6 +224,12 @@ defaults write ~/Library/Preferences/com.mjrusso.Scoot.plist KeybindingMode emac
 
 ## Demos
 
+### Element-based Navigation
+
+This is what it's like to navigate around Wikipedia in Safari, using the element-based navigation mode:
+
+https://user-images.githubusercontent.com/100451/151269537-627cdccd-b1a1-45e1-82aa-11992ca0dc9a.mp4
+
 ### Drag and Drop
 
 Here's what it's like to drag and drop with Scoot, using the grid-based navigation mode:
