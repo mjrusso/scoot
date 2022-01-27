@@ -65,7 +65,7 @@ class KeyboardInputWindow: TransparentWindow {
         currentNode != nil
     }
 
-    var isHoldingDownMouseButton = false
+    var isHoldingDownLeftMouseButton = false
 
     static let DEFAULT_CELL_SIZE = CGSize(width: 60.0, height: 60.0)
 

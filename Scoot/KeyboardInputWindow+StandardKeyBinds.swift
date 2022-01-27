@@ -40,7 +40,7 @@ extension KeyboardInputWindow {
     override func cancelOperation(_ sender: Any?) {
         defer {
             currentNode = nil
-            isHoldingDownMouseButton = false
+            isHoldingDownLeftMouseButton = false
         }
 
         if isWalkingDecisionTree {
