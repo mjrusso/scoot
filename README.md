@@ -85,7 +85,7 @@ Scoot includes a menu bar icon (an illustration of a Vespa-inspired scooter).
 
 <img align="right" width="256" alt="Scoot Menu Bar Icon" src="./Assets/menu-bar-icon.png" />
 
-* When Scoot is in the foreground, the icon will render with a tint, to make it clearer that Scoot is currently active. (This shouldn't generally be a concern, but it is handy when you're in freestyle mode.)
+* When Scoot is in the foreground, the icon will render in an outlined mode, to make it clearer that Scoot is currently active. (This shouldn't generally be a concern, but it is handy when you're in freestyle mode.)
 * Additional options are exposed when clicking on the menu bar icon, including a _help_ menu item — which currently opens this README in the user's default browser.
 
 ### Keybindings
