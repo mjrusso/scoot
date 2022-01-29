@@ -255,6 +255,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.inputWindow.initializeCoreDataStructuresForElementBasedMovement(of: app)
         }
 
+        OSLog.main.log("Using \(String(describing: self.inputWindow.activeJumpMode), privacy: .public) jump mode")
+
         self.inputWindow.showAppropriateJumpView()
 
         NSApp.activate(ignoringOtherApps: true)
