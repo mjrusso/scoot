@@ -136,6 +136,12 @@
                                                             <action selector="rebuildJumpWindows:" target="Ady-hI-5gd" id="mBj-zj-s6w"/>
                                                         </connections>
                                                     </menuItem>
+                                                    <menuItem title="Toggle Jump Window Tint" id="rvc-oT-cty">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="toggleJumpWindowTint:" target="Ady-hI-5gd" id="KXf-4h-YMI"/>
+                                                        </connections>
+                                                    </menuItem>
                                                 </items>
                                             </menu>
                                         </menuItem>

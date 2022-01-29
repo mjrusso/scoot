@@ -336,6 +336,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         bringToForeground()
     }
 
+    @IBAction func toggleJumpWindowTint(_ sender: NSMenuItem) {
+        OSLog.main.log("Debug: toggling tint of all jump windows.")
+
+        jumpWindows.forEach {
+            $0.backgroundColor = $0.backgroundColor == .clear ?
+                .systemPurple.withAlphaComponent(0.3) :
+                .clear
+        }
+    }
+
     // MARK: Testing
 
     var isRunningTests: Bool {
