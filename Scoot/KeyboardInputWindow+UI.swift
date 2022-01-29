@@ -35,8 +35,8 @@ extension KeyboardInputWindow {
 
     func redrawJumpViews() {
         appDelegate?.jumpWindowControllers.forEach {
-            $0.viewController.gridView.redraw()
-            $0.viewController.elementView.redraw()
+            $0.viewController.redrawGrid()
+            $0.viewController.redrawElements()
         }
     }
 

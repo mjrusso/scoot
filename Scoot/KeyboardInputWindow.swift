@@ -67,6 +67,10 @@ class KeyboardInputWindow: TransparentWindow {
 
     var isHoldingDownLeftMouseButton = false
 
+    var scrollEventMonitor: Any?
+
+    var scrollEventDebounceTimer: Timer?
+
     static let DEFAULT_CELL_SIZE = CGSize(width: 60.0, height: 60.0)
 
     var targetCellSize = DEFAULT_CELL_SIZE {

@@ -31,13 +31,13 @@ class JumpViewController: NSViewController {
 
     var isDisplayingGridLabels: Bool = true {
         didSet {
-            gridView.redraw()
+            redrawGrid()
         }
     }
 
     var isDisplayingGridLines: Bool = true {
         didSet {
-            gridView.redraw()
+            redrawGrid()
         }
     }
 
@@ -48,7 +48,7 @@ class JumpViewController: NSViewController {
                 minValue: 0.01,
                 maxValue: 1.0
             )
-            gridView.redraw()
+            redrawGrid()
         }
     }
 
@@ -59,7 +59,7 @@ class JumpViewController: NSViewController {
                 minValue: 0.01,
                 maxValue: 1.0
             )
-            gridView.redraw()
+            redrawGrid()
         }
     }
 
@@ -70,7 +70,7 @@ class JumpViewController: NSViewController {
                 minValue: 0.01,
                 maxValue: 0.6
             )
-            gridView.redraw()
+            redrawGrid()
         }
     }
 
@@ -81,7 +81,7 @@ class JumpViewController: NSViewController {
                 minValue: 0.01,
                 maxValue: 1.0
             )
-            elementView.redraw()
+            redrawElements()
         }
     }
 
@@ -92,7 +92,7 @@ class JumpViewController: NSViewController {
                 minValue: 0.01,
                 maxValue: 1.0
             )
-            elementView.redraw()
+            redrawElements()
         }
     }
 
@@ -103,7 +103,7 @@ class JumpViewController: NSViewController {
                 minValue: 0.01,
                 maxValue: 1.0
             )
-            elementView.redraw()
+            redrawElements()
         }
     }
 
@@ -137,12 +137,20 @@ extension JumpViewController {
         self.gridView.isHidden = true
     }
 
+    func redrawGrid() {
+        self.gridView.redraw()
+    }
+
     func showElements() {
         self.elementView.isHidden = false
     }
 
     func hideElements() {
         self.elementView.isHidden = true
+    }
+
+    func redrawElements() {
+        self.elementView.redraw()
     }
 
     func flashFeedback(at rect: NSRect, duration: TimeInterval) {

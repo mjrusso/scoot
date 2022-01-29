@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E50A612D279DEC7900D970EF /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A612C279DEC7900D970EF /* NSImage+Extensions.swift */; };
 		E50A612F27A03E4B00D970EF /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A612E27A03E4B00D970EF /* Log.swift */; };
+		E50A613127A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A613027A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift */; };
 		E511785B2636EEC800B4202F /* NSScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */; };
 		E51178602636EEEB00B4202F /* NSPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */; };
 		E52BFD172763D5FB00BB65AF /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E52BFD162763D5FB00BB65AF /* Accessibility.swift */; };
@@ -72,6 +73,7 @@
 /* Begin PBXFileReference section */
 		E50A612C279DEC7900D970EF /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		E50A612E27A03E4B00D970EF /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		E50A613027A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardInputWindow+EventMonitor.swift"; sourceTree = "<group>"; };
 		E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSScreen+Extensions.swift"; sourceTree = "<group>"; };
 		E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPoint+Extensions.swift"; sourceTree = "<group>"; };
 		E52BFD162763D5FB00BB65AF /* Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				E5776260262F067700849D7D /* TransparentWindow.swift */,
 				E5BD595726615DB700BB5181 /* KeyboardInputWindow.swift */,
 				E5BD595926615E5600BB5181 /* KeyboardInputWindow+Delegate.swift */,
+				E50A613027A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift */,
 				E5B1DE4026686E5B00F1AA77 /* KeyboardInputWindow+UI.swift */,
 				E5B1DE4226686E9D00F1AA77 /* KeyboardInputWindow+Actions.swift */,
 				E567D2A3263C7FB000A0A861 /* KeyboardInputWindow+Keyboard.swift */,
@@ -403,6 +406,7 @@
 				E5B9214A2656A18D000A0A75 /* FeedbackView.swift in Sources */,
 				E577622D262F04D100849D7D /* AppDelegate.swift in Sources */,
 				E5BD595826615DB700BB5181 /* KeyboardInputWindow.swift in Sources */,
+				E50A613127A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift in Sources */,
 				E5B1DE4326686E9D00F1AA77 /* KeyboardInputWindow+Actions.swift in Sources */,
 				E591E5672636F1F900C037FF /* KeyboardInputWindow+StandardKeyBinds.swift in Sources */,
 				E59C1635264AC6FB0033E2CC /* Comparable+Extensions.swift in Sources */,

@@ -17,14 +17,14 @@ extension KeyboardInputWindow {
     @IBAction func increaseGridSize(_ sender: NSMenuItem) {
         targetCellSize += CGSize(width: 10.0, height: 10.0)
         appDelegate?.jumpViewControllers.forEach {
-            $0.gridView.redraw()
+            $0.redrawGrid()
         }
     }
 
     @IBAction func decreaseGridSize(_ sender: NSMenuItem) {
         targetCellSize -= CGSize(width: 10.0, height: 10.0)
         appDelegate?.jumpViewControllers.forEach {
-            $0.gridView.redraw()
+            $0.redrawGrid()
         }
     }
 
