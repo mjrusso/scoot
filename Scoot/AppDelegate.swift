@@ -310,30 +310,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: Debug Actions
 
     @IBAction func logScreenConfigurationAndUserInterfaceState(_ sender: NSMenuItem) {
-
         OSLog.main.log("Debug: logging screen configuration and UI state.")
-
         OSLog.main.logDetailsForAllConnectedScreens()
-
-        OSLog.main.log("Jump Window Controllers: \(self.jumpWindowControllers.count)")
-
-        for (index, windowController) in jumpWindowControllers.enumerated() {
-            OSLog.main.log("* Jump Window Controller \(index):")
-
-            if let screen = windowController.assignedScreen {
-                OSLog.main.log("** Assigned Screen: \(screen.localizedName, privacy: .private(mask: .hash)), \(String(describing: screen.frame), privacy: .public)")
-            } else {
-                OSLog.main.log("** No assigned screen!")
-            }
-
-            if let window = windowController.window {
-                OSLog.main.log("** Jump Window: \(String(describing: window.frame), privacy: .public)")
-            } else {
-                OSLog.main.log("** No Jump Window!")
-            }
-
-            OSLog.main.log("** Jump View Controller: \(String(describing: windowController.viewController.view.frame), privacy: .public)")
-        }
+        OSLog.main.logDetailsForAllJumpWindows()
     }
 
     @IBAction func rebuildJumpWindows(_ sender: NSMenuItem) {
