@@ -118,7 +118,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.spawnJumpWindow(on: screen)
         }
 
-        OSLog.main.log("Using \(UserSettings.shared.keybindingMode.rawValue) keybindings.")
+        OSLog.main.log("Using \(UserSettings.shared.keybindingMode.rawValue, privacy: .public) keybindings.")
 
         self.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
 
@@ -171,14 +171,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     NSScreen.screens.contains(screen),
                     let window = windowController.window
                 else {
-                    OSLog.main.log("> Screen has gone away: \(windowController.assignedScreen?.localizedName ?? "<unknown>")")
+                    OSLog.main.log("> Screen has gone away: \(windowController.assignedScreen?.localizedName ?? "<unknown>", privacy: .private(mask: .hash))")
                     self.closeJumpWindow(managedBy: windowController)
                     mustReinitialize = true
                     continue
                 }
 
                 guard window.frame == screen.frame else {
-                    OSLog.main.log("> Screen frame has changed: \(screen.localizedName) \(String(describing: screen.frame))")
+                    OSLog.main.log("> Screen frame has changed: \(screen.localizedName, privacy: .private(mask: .hash)) \(String(describing: screen.frame), privacy: .public)")
                     self.resizeJumpWindow(managedBy: windowController, to: screen.visibleFrame)
                     mustReinitialize = true
                     continue
@@ -192,7 +192,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let addedScreens = Set(NSScreen.screens).subtracting(assignedScreens)
 
             for screen in addedScreens {
-                OSLog.main.log("> Screen was added: \(screen.localizedName) \(String(describing: screen.frame))")
+                OSLog.main.log("> Screen was added: \(screen.localizedName, privacy: .private(mask: .hash)) \(String(describing: screen.frame), privacy: .public)")
                 self.spawnJumpWindow(on: screen)
                 mustReinitialize = true
             }
@@ -251,7 +251,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.currentApp = NSWorkspace.shared.frontmostApplication
 
         if let app = self.currentApp {
-            OSLog.main.log("Scoot invoked with frontmost app: \(String(describing: app.localizedName ?? "<unknown>"))")
+            OSLog.main.log("Scoot invoked with frontmost app: \(String(describing: app.localizedName ?? "<unknown>"), privacy: .private(mask: .hash))")
             self.inputWindow.initializeCoreDataStructuresForElementBasedMovement(of: app)
         }
 

@@ -20,7 +20,7 @@ extension Logger {
         self.log("Connected screens: \(NSScreen.screens.count)")
 
         for (index, screen) in NSScreen.screens.enumerated() {
-            self.log("* Screen \(index): \(screen.localizedName) \(String(describing: screen.frame))")
+            self.log("* Screen \(index): \(screen.localizedName, privacy: .private(mask: .hash)) \(String(describing: screen.frame), privacy: .public)")
         }
 
     }
