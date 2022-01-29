@@ -16,25 +16,27 @@ extension OSLog {
 extension Logger {
 
     func logDetailsForAllConnectedScreens() {
+        let count = NSScreen.screens.count
 
-        self.log("Connected screens: \(NSScreen.screens.count)")
+        self.log("Number of connected screens: \(count)")
 
         for (index, screen) in NSScreen.screens.enumerated() {
-            self.log("* Screen \(index): \(screen.localizedName, privacy: .private(mask: .hash)) \(String(describing: screen.frame), privacy: .public)")
+            self.log("* Screen #\(index+1)[/\(count)]: \(screen.localizedName, privacy: .private(mask: .hash)) \(String(describing: screen.frame), privacy: .public)")
         }
 
     }
 
     func logDetailsForAllJumpWindows() {
-
         guard let jumpWindowControllers = (NSApp.delegate as? AppDelegate)?.jumpWindowControllers else {
             return
         }
 
-        self.log("Jump Window Controllers: \(jumpWindowControllers.count)")
+        let count = jumpWindowControllers.count
+
+        self.log("Number of Jump Window Controllers: \(count)")
 
         for (index, windowController) in jumpWindowControllers.enumerated() {
-            self.log("* Jump Window Controller \(index):")
+            self.log("* Jump Window Controller #\(index+1)[/\(count)]:")
 
             if let screen = windowController.assignedScreen {
                 self.log("** Assigned Screen: \(screen.localizedName, privacy: .private(mask: .hash)), \(String(describing: screen.frame), privacy: .public)")
