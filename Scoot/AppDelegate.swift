@@ -218,13 +218,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let item = NSStatusBar.system.statusItem(
             withLength: NSStatusItem.squareLength
         )
-        item.button?.image = menuBarStatusItemDefaultImage
+        item.button?.image = menuBarStatusItemOutlinedImage
         item.menu = menu
         self.statusItem = item
     }
 
-    lazy var menuBarStatusItemDefaultImage: NSImage? = {
-        let image = NSImage(named: "MenuIcon")
+    lazy var menuBarStatusItemFilledImage: NSImage? = {
+        let image = NSImage(named: "MenuIcon-Filled")
         image?.size = NSSize(width: 18.0, height: 18.0)
         image?.isTemplate = true
         return image
@@ -238,11 +238,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
 
     func updateMenuBarStatusItemForInactiveState() {
-        self.statusItem?.button?.image = menuBarStatusItemDefaultImage
+        self.statusItem?.button?.image = menuBarStatusItemOutlinedImage
     }
 
     func updateMenuBarStatusItemForActiveState() {
-        self.statusItem?.button?.image = menuBarStatusItemOutlinedImage
+        self.statusItem?.button?.image = menuBarStatusItemFilledImage
     }
 
     // MARK: Activation
