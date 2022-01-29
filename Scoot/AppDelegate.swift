@@ -307,6 +307,51 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSWorkspace.shared.open(URL(string: "https://github.com/mjrusso/scoot#installation")!)
     }
 
+    // MARK: Debug Actions
+
+    @IBAction func logScreenConfigurationAndUserInterfaceState(_ sender: NSMenuItem) {
+
+        OSLog.main.log("Debug: logging screen configuration and UI state.")
+
+        OSLog.main.logDetailsForAllConnectedScreens()
+
+        OSLog.main.log("Jump Window Controllers: \(self.jumpWindowControllers.count)")
+
+        for (index, windowController) in jumpWindowControllers.enumerated() {
+            OSLog.main.log("* Jump Window Controller \(index):")
+
+            if let screen = windowController.assignedScreen {
+                OSLog.main.log("** Assigned Screen: \(screen.localizedName, privacy: .private(mask: .hash)), \(String(describing: screen.frame), privacy: .public)")
+            } else {
+                OSLog.main.log("** No assigned screen!")
+            }
+
+            if let window = windowController.window {
+                OSLog.main.log("** Jump Window: \(String(describing: window.frame), privacy: .public)")
+            } else {
+                OSLog.main.log("** No Jump Window!")
+            }
+
+            OSLog.main.log("** Jump View Controller: \(String(describing: windowController.viewController.view.frame), privacy: .public)")
+        }
+    }
+
+    @IBAction func rebuildJumpWindows(_ sender: NSMenuItem) {
+        OSLog.main.log("Debug: rebuilding all jump windows.")
+
+        for windowController in jumpWindowControllers {
+            closeJumpWindow(managedBy: windowController)
+        }
+
+        for screen in NSScreen.screens {
+            spawnJumpWindow(on: screen)
+        }
+
+        inputWindow.initializeCoreDataStructuresForGridBasedMovement()
+
+        bringToForeground()
+    }
+
     // MARK: Testing
 
     var isRunningTests: Bool {

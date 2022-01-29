@@ -120,6 +120,26 @@
                                             </menu>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
+                                        <menuItem title="Debug" id="T76-9G-re8">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Debug" id="d7w-rA-VaB">
+                                                <items>
+                                                    <menuItem title="Log Screens and UI State" id="Xh6-gt-lD3">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="logScreenConfigurationAndUserInterfaceState:" target="Ady-hI-5gd" id="SZx-OW-O8D"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                    <menuItem title="Rebuild Jump Window Frames" id="xfd-b2-d2g">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="rebuildJumpWindows:" target="Ady-hI-5gd" id="mBj-zj-s6w"/>
+                                                        </connections>
+                                                    </menuItem>
+                                                </items>
+                                            </menu>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="6M9-7l-ysp"/>
                                         <menuItem title="About" id="u8K-d6-TrV" userLabel="About">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
