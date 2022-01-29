@@ -299,6 +299,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         bringToForeground(using: .freestyle)
     }
 
+    @IBAction func aboutPressed(_ sender: NSMenuItem) {
+        NSApp.activate(ignoringOtherApps: true)
+        NSApp.orderFrontStandardAboutPanel(sender)
+    }
+
     @IBAction func helpPressed(_ sender: NSMenuItem) {
         NSWorkspace.shared.open(URL(string: "https://github.com/mjrusso/scoot")!)
     }

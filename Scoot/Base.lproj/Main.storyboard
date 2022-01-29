@@ -143,7 +143,7 @@
                                         <menuItem title="About" id="u8K-d6-TrV" userLabel="About">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="y9D-oG-Rdr"/>
+                                                <action selector="aboutPressed:" target="Voe-Tx-rLC" id="I2k-bQ-kdu"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Help" keyEquivalent="?" id="FKE-Sm-Kum" userLabel="Help">
