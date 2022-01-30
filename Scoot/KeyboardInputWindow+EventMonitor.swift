@@ -10,7 +10,7 @@ extension KeyboardInputWindow {
 
     func startMonitoringScrollEvents() {
 
-        OSLog.main.log("Registering monitor for scroll events.")
+        OSLog.main.debug("Registering monitor for scroll events.")
 
         scrollEventMonitor = NSEvent.addGlobalMonitorForEvents(matching: .scrollWheel) {
             [weak self] _ in
@@ -44,7 +44,7 @@ extension KeyboardInputWindow {
     }
 
     func stopMonitoringScrollEvents() {
-        OSLog.main.log("De-registering monitor for scroll events.")
+        OSLog.main.debug("De-registering monitor for scroll events.")
 
         scrollEventDebounceTimer?.invalidate()
 
