@@ -118,6 +118,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.spawnJumpWindow(on: screen)
         }
 
+        OSLog.main.logDetailsForAllJumpWindows()
+
         OSLog.main.log("Using \(UserSettings.shared.keybindingMode.rawValue, privacy: .public) keybindings.")
 
         self.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
@@ -196,6 +198,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 self.spawnJumpWindow(on: screen)
                 mustReinitialize = true
             }
+
+            OSLog.main.logDetailsForAllJumpWindows()
 
             if mustReinitialize {
                 OSLog.main.log("Re-initializing relevant data structures...")
