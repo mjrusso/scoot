@@ -130,10 +130,10 @@
                                                             <action selector="logScreenConfigurationAndUserInterfaceState:" target="Ady-hI-5gd" id="SZx-OW-O8D"/>
                                                         </connections>
                                                     </menuItem>
-                                                    <menuItem title="Rebuild Jump Window Frames" id="xfd-b2-d2g">
+                                                    <menuItem title="Rebuild Jump Windows" id="xfd-b2-d2g">
                                                         <modifierMask key="keyEquivalentModifierMask"/>
                                                         <connections>
-                                                            <action selector="rebuildJumpWindows:" target="Ady-hI-5gd" id="mBj-zj-s6w"/>
+                                                            <action selector="debugRebuildJumpWindows:" target="Ady-hI-5gd" id="PyZ-2X-HGC"/>
                                                         </connections>
                                                     </menuItem>
                                                     <menuItem title="Toggle Jump Window Tint" id="rvc-oT-cty">

@@ -140,15 +140,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         jumpWindowControllers.append(controller)
     }
 
-    func resizeJumpWindow(managedBy controller: JumpWindowController, to size: NSRect) {
-        controller.setWindowFrame(size)
-    }
-
     func closeJumpWindow(managedBy controller: JumpWindowController) {
         controller.close()
         jumpWindowControllers.removeAll(where: {
             $0 == controller
         })
+    }
+
+    func rebuildJumpWindows() {
+        OSLog.main.log("Closing existing jump windows.")
+
+        for windowController in jumpWindowControllers {
+            closeJumpWindow(managedBy: windowController)
+        }
+
+        OSLog.main.log("Spawning new jump windows.")
+
+        for screen in NSScreen.screens {
+            spawnJumpWindow(on: screen)
+        }
+
+        OSLog.main.log("Finished spawning; logging updated state.")
+        OSLog.main.logDetailsForAllJumpWindows()
+
+        inputWindow.initializeCoreDataStructuresForGridBasedMovement()
     }
 
     func initializeChangeScreenParametersObserver() {
@@ -158,53 +173,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             queue: OperationQueue.main
         ) { [weak self] notification in
 
-            OSLog.main.log("Scoot: received didChangeScreenParametersNotification.")
-
-            OSLog.main.logDetailsForAllConnectedScreens()
+            OSLog.main.log("Received event: didChangeScreenParametersNotification.")
 
             guard let self = self else {
                 return
             }
 
-            var mustReinitialize = false
+            OSLog.main.logDetailsForAllConnectedScreens()
 
-            for windowController in self.jumpWindowControllers {
-                guard let screen = windowController.assignedScreen,
-                    NSScreen.screens.contains(screen),
-                    let window = windowController.window
-                else {
-                    OSLog.main.log("> Screen has gone away: \(windowController.assignedScreen?.localizedName ?? "<unknown>", privacy: .private(mask: .hash))")
-                    self.closeJumpWindow(managedBy: windowController)
-                    mustReinitialize = true
-                    continue
-                }
+            // For simplicity (and instead of diffing the current window state),
+            // always rebuild all jump windows.
+            self.rebuildJumpWindows()
 
-                guard window.frame == screen.frame else {
-                    OSLog.main.log("> Screen frame has changed: \(screen.localizedName, privacy: .private(mask: .hash)) \(String(describing: screen.frame), privacy: .public)")
-                    self.resizeJumpWindow(managedBy: windowController, to: screen.visibleFrame)
-                    mustReinitialize = true
-                    continue
-                }
-            }
-
-            let assignedScreens = self.jumpWindowControllers.compactMap {
-                $0.assignedScreen
-            }
-
-            let addedScreens = Set(NSScreen.screens).subtracting(assignedScreens)
-
-            for screen in addedScreens {
-                OSLog.main.log("> Screen was added: \(screen.localizedName, privacy: .private(mask: .hash)) \(String(describing: screen.frame), privacy: .public)")
-                self.spawnJumpWindow(on: screen)
-                mustReinitialize = true
-            }
-
-            OSLog.main.logDetailsForAllJumpWindows()
-
-            if mustReinitialize {
-                OSLog.main.log("Re-initializing relevant data structures...")
-                self.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
-            }
+            OSLog.main.log("Finished responding to screen change.")
         }
     }
 
@@ -324,18 +305,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         OSLog.main.logDetailsForAllJumpWindows()
     }
 
-    @IBAction func rebuildJumpWindows(_ sender: NSMenuItem) {
+    @IBAction func debugRebuildJumpWindows(_ sender: NSMenuItem) {
         OSLog.main.log("Debug: rebuilding all jump windows.")
 
-        for windowController in jumpWindowControllers {
-            closeJumpWindow(managedBy: windowController)
-        }
-
-        for screen in NSScreen.screens {
-            spawnJumpWindow(on: screen)
-        }
-
-        inputWindow.initializeCoreDataStructuresForGridBasedMovement()
+        rebuildJumpWindows()
 
         bringToForeground()
     }
