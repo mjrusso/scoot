@@ -17,20 +17,12 @@ extension NSPoint {
     /// https://developer.apple.com/library/archive/documentation/General/Conceptual/Devpedia-CocoaApp/CoordinateSystem.html
     /// for additional details.
     func swapVerticalAxisOrientation() -> Self {
-        // Unlike the advice in https://stackoverflow.com/a/19314037,
-        // everything seems to work properly when the tallest screen is used,
-        // not the current screen...
-        //
-        // guard let screen = self.currentScreen else {
-        //     return .zero
-        // }
-
-        guard let tallestScreen = NSScreen.tallest else {
+        guard let primary = NSScreen.primary else {
             return .zero
         }
 
         return Self(x: self.x,
-                    y: tallestScreen.frame.origin.y + tallestScreen.frame.size.height - self.y)
+                    y: primary.frame.origin.y + primary.frame.size.height - self.y)
     }
 
     /// Convert from the Cocoa/ AppKit coordinate system (origin at lower

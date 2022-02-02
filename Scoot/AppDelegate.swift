@@ -110,8 +110,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         self.configureMenuBarExtra()
 
-        OSLog.main.log("For reference: the primary screen is at index 0, contains the menu bar, and has origin (0,0).")
-
         OSLog.main.logDetailsForAllConnectedScreens()
 
         for screen in NSScreen.screens {

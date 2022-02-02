@@ -4,9 +4,12 @@ extension NSScreen {
 
     // MARK: - Convenience
 
-    /// The screen with the largest height.
-    static var tallest: NSScreen? {
-        NSScreen.screens.sorted { $0.frame.height < $1.frame.height }.last
+    /// The system's primary screen.
+    static var primary: NSScreen? {
+        // The primary screen is always at index 0 in the `NSScreen.screens`
+        // array. Also note that this screen always contains the menu bar, and
+        // has an origin at point (0, 0).
+        NSScreen.screens.first
     }
 
     // MARK: - Landmarks (Absolute and Relative)
