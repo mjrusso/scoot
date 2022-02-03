@@ -139,8 +139,10 @@ struct Accessibility {
                     continue
                 }
 
+                let convertedFrame = frame.convertToCocoa()
+
                 let screen = NSScreen.screens.first(where: {
-                    $0.frame.contains(frame)
+                    $0.frame.contains(convertedFrame)
                 })
 
                 let role: Role? = try? child.role()
@@ -156,7 +158,7 @@ struct Accessibility {
                             valueDescription: try? child.attribute(.valueDescription),
                             enabled: (try? child.attribute(.enabled)) ?? false,
                             screen: screen,
-                            frame: frame.convertToCocoa()
+                            frame: convertedFrame
                         )
                         elements.append(element)
                     }
