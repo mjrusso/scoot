@@ -176,6 +176,8 @@ struct Accessibility {
 
         traverse(node: focusedWindow)
 
+        OSLog.main.debug("Found \(elements.count) accessibility elements.")
+
         return elements
     }
 
