@@ -51,6 +51,7 @@
 		E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E87FFC2630A3550094FE9B /* GridView.swift */; };
 		E5EB845127837F380086A5D6 /* GeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB845027837F380086A5D6 /* GeometryTests.swift */; };
 		E5EB84532787E3F80086A5D6 /* PositionableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB84522787E3F80086A5D6 /* PositionableTests.swift */; };
+		E5F61EF027ACCF4B0056A6EB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F61EEF27ACCF4B0056A6EB /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		E5E87FFC2630A3550094FE9B /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GridView.swift; path = ../../scoot/Scoot/GridView.swift; sourceTree = "<group>"; };
 		E5EB845027837F380086A5D6 /* GeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryTests.swift; sourceTree = "<group>"; };
 		E5EB84522787E3F80086A5D6 /* PositionableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionableTests.swift; sourceTree = "<group>"; };
+		E5F61EEF27ACCF4B0056A6EB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,6 +217,7 @@
 				E59C162D264184500033E2CC /* Tree.swift */,
 				E5B921492656A18D000A0A75 /* FeedbackView.swift */,
 				E591E56B2636F8D000C037FF /* Mouse.swift */,
+				E5F61EEF27ACCF4B0056A6EB /* SettingsView.swift */,
 				E51178642636EF1500B4202F /* Extensions */,
 				E5776230262F04D300849D7D /* Assets.xcassets */,
 				E5776235262F04D300849D7D /* Info.plist */,
@@ -404,6 +407,7 @@
 				E5497A09277D5AD1006EA19B /* JumpMode.swift in Sources */,
 				E5BD595A26615E5600BB5181 /* KeyboardInputWindow+Delegate.swift in Sources */,
 				E5B9214A2656A18D000A0A75 /* FeedbackView.swift in Sources */,
+				E5F61EF027ACCF4B0056A6EB /* SettingsView.swift in Sources */,
 				E577622D262F04D100849D7D /* AppDelegate.swift in Sources */,
 				E5BD595826615DB700BB5181 /* KeyboardInputWindow.swift in Sources */,
 				E50A613127A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift in Sources */,

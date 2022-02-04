@@ -145,6 +145,12 @@
                                                 </items>
                                             </menu>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="CtG-5U-Qc2"/>
+                                        <menuItem title="Preferences..." keyEquivalent="," id="f0B-u5-XmQ">
+                                            <connections>
+                                                <action selector="preferencesPressed:" target="Ady-hI-5gd" id="FgU-A0-1xu"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="6M9-7l-ysp"/>
                                         <menuItem title="About" id="u8K-d6-TrV" userLabel="About">
                                             <modifierMask key="keyEquivalentModifierMask"/>

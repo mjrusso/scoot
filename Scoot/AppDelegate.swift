@@ -2,6 +2,7 @@ import Cocoa
 import Carbon
 import HotKey
 import OSLog
+import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -195,6 +196,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         })
     }
 
+    // MARK: Settings UI
+
+    lazy var settingsWindowController: NSWindowController = {
+        let size = NSSize(width: 300, height: 300)
+        let view = SettingsView().frame(width: size.width, height: size.height)
+
+        let hostingController = NSHostingController(rootView: view)
+
+        let window = NSWindow(contentViewController: hostingController)
+        window.setContentSize(size)
+        window.title = "Scoot Preferences"
+
+        return NSWindowController(window: window)
+    }()
+
     // MARK: Menu Bar
 
     func configureMenuBarExtra() {
@@ -280,6 +296,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func useFreestyleNavigationPressed(_ sender: NSMenuItem) {
         bringToForeground(using: .freestyle)
+    }
+
+    @IBAction func preferencesPressed(_ sender: NSMenuItem) {
+        NSApp.activate(ignoringOtherApps: true)
+        settingsWindowController.showWindow(sender)
     }
 
     @IBAction func aboutPressed(_ sender: NSMenuItem) {
