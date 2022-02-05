@@ -1,9 +1,22 @@
 import Foundation
 
+// IMPORTANT / FIXME: There is some duplication between the settings encoded
+// here, and in the SwiftUI settings views. It's unclear how to properly access
+// values wrapped with @AppStorage from outside of SwiftUI views. See the
+// discussion at https://developer.apple.com/forums/thread/658569 for more
+// context. For now, make sure to use the same identifier (see
+// UserSettings.Constants) with both @UserPersistedProperty and @AppStorage,
+// and be sure to set them to the same default value.
+
 class UserSettings {
+
+    struct Constants {
+        static let keybindingMode = "KeybindingMode"
+    }
+
     static let shared = UserSettings()
 
-    @UserPersistedProperty("KeybindingMode", defaultValue: .emacs)
+    @UserPersistedProperty(Constants.keybindingMode, defaultValue: .emacs)
     var keybindingMode: KeybindingMode
 }
 
