@@ -199,13 +199,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: Settings UI
 
     lazy var settingsWindowController: NSWindowController = {
-        let size = NSSize(width: 300, height: 300)
-        let view = SettingsView().frame(width: size.width, height: size.height)
-
-        let hostingController = NSHostingController(rootView: view)
+        let hostingController = NSHostingController(rootView: SettingsView())
 
         let window = NSWindow(contentViewController: hostingController)
-        window.setContentSize(size)
         window.title = "Scoot Preferences"
 
         return NSWindowController(window: window)
