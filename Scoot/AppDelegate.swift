@@ -77,7 +77,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         OSLog.main.log("Scoot: applicationDidFinishLaunching.")
 
-        guard Accessibility.checkIfProcessIsTrusted(withPrompt: !isRunningTests) else {
+        #if DEBUG
+        guard !isRunningTests && !isRunningSwiftUIPreviews else {
+            return
+        }
+        #endif
+
+        guard Accessibility.checkIfProcessIsTrusted(withPrompt: true) else {
 
             OSLog.main.log("Process is not trusted for AX.")
 
@@ -338,10 +344,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    // MARK: Testing
+    // MARK: Testing and Previewing
 
     var isRunningTests: Bool {
         ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+    }
+
+    var isRunningSwiftUIPreviews: Bool {
+        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
     }
 
 }
