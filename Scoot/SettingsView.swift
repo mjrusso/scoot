@@ -35,6 +35,11 @@ struct KeybindingsSettingsView: View {
                 Text("Emacs/ MacOS").tag(KeybindingMode.emacs)
                 Text("vi").tag(KeybindingMode.vi)
             }.onChange(of: keybindingMode) { newValue in
+                // Reset the grid, because changing the keybinding mode affects
+                // which characters are available to the character-based
+                // decision tree.
+                (NSApp.delegate as? AppDelegate)?.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
+
                 OSLog.main.log("Now using \(keybindingMode.rawValue, privacy: .public) keybindings.")
             }
         }
