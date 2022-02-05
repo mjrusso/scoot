@@ -103,7 +103,7 @@ _If you use multiple displays, and experience an issue with Scoot's windows draw
 
 _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac-symbols], and [Emacs key notation][emacs-key-notation]._
 
-Note that vi keybindings are not enabled by default, and must be explicitly toggled on (documentation: [how to turn on vi keybindings](#activating-vi-keybindings)). Emacs keybindings (and most system keybindings) are disabled when vi keybindings are active.
+Note that vi keybindings are not enabled by default, and must be explicitly toggled on (click Scoot's menu bar icon, then “Preferences…”, and change the keybinding mode). Emacs keybindings (and most system keybindings) are disabled when vi keybindings are active.
 
 | Shortcut  | Alternate | Description                                                                                                       |
 |-----------|-----------|-------------------------------------------------------------------------------------------------------------------|
@@ -214,24 +214,6 @@ As before, you'll need to click the lock in the bottom left corner to unlock thi
 </p>
 
 If you encounter any problems, feel free to [file an issue][scoot-issues].
-
-### Activating vi Keybindings
-
-There is currently no UI for setting the keybinding mode.
-
-To opt in to vi keybindings, execute the following command in your terminal:
-
-```
-defaults write ~/Library/Preferences/com.mjrusso.Scoot.plist KeybindingMode vi
-```
-
-If Scoot is running, restart it after running the `defaults write` command.
-
-To restore the default keybindings:
-
-```
-defaults write ~/Library/Preferences/com.mjrusso.Scoot.plist KeybindingMode emacs
-```
 
 ## Demos
 
