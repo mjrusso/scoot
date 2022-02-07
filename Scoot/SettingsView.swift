@@ -1,5 +1,6 @@
 import SwiftUI
 import OSLog
+import KeyboardShortcuts
 
 struct SettingsView: View {
 
@@ -16,7 +17,7 @@ struct SettingsView: View {
                 .tag(Tabs.keybindings)
         }
         .padding(20)
-        .frame(width: 375, height: 150)
+        .frame(width: 400, height: 220)
     }
 }
 
@@ -42,9 +43,12 @@ struct KeybindingsSettingsView: View {
 
                 OSLog.main.log("Now using \(keybindingMode.rawValue, privacy: .public) keybindings.")
             }
+            KeyboardShortcuts.Recorder(for: .useElementBasedNavigation).formLabel(Text("Element-Based Navigation:"))
+            KeyboardShortcuts.Recorder(for: .useGridBasedNavigation).formLabel(Text("Grid-Based Navigation:"))
+            KeyboardShortcuts.Recorder(for: .useFreestyleNavigation).formLabel(Text("Freestyle Navigation:"))
         }
         .padding(20)
-        .frame(width: 350, height: 60)
+        .frame(width: 360, height: 160)
     }
 }
 

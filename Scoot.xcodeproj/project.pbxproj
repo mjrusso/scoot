@@ -21,6 +21,7 @@
 		E5497A09277D5AD1006EA19B /* JumpMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5497A08277D5AD1006EA19B /* JumpMode.swift */; };
 		E567972927AEF961003EEBA8 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E567972827AEF961003EEBA8 /* KeyboardShortcuts */; };
 		E567972B27B16125003EEBA8 /* GlobalKeybindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567972A27B16125003EEBA8 /* GlobalKeybindings.swift */; };
+		E567972D27B16683003EEBA8 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567972C27B16682003EEBA8 /* View+Extensions.swift */; };
 		E567D2A2263C77FC00A0A861 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567D2A1263C77FC00A0A861 /* Grid.swift */; };
 		E567D2A4263C7FB000A0A861 /* KeyboardInputWindow+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567D2A3263C7FB000A0A861 /* KeyboardInputWindow+Keyboard.swift */; };
 		E577622D262F04D100849D7D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E577622C262F04D100849D7D /* AppDelegate.swift */; };
@@ -86,6 +87,7 @@
 		E5497A06277D4F6A006EA19B /* CGRect+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGRect+Extensions.swift"; sourceTree = "<group>"; };
 		E5497A08277D5AD1006EA19B /* JumpMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JumpMode.swift; sourceTree = "<group>"; };
 		E567972A27B16125003EEBA8 /* GlobalKeybindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalKeybindings.swift; sourceTree = "<group>"; };
+		E567972C27B16682003EEBA8 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
 		E567D2A1263C77FC00A0A861 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		E567D2A3263C7FB000A0A861 /* KeyboardInputWindow+Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardInputWindow+Keyboard.swift"; sourceTree = "<group>"; };
 		E5776229262F04D100849D7D /* Scoot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scoot.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +158,7 @@
 		E51178642636EF1500B4202F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E567972C27B16682003EEBA8 /* View+Extensions.swift */,
 				E59C1632264AC4F60033E2CC /* CGSize+Extensions.swift */,
 				E5497A06277D4F6A006EA19B /* CGRect+Extensions.swift */,
 				E5497A04276E5E9D006EA19B /* CGPoint+Extensions.swift */,
@@ -392,6 +395,7 @@
 				E53AB9D0279BA7ED0048FBE1 /* UserSettings.swift in Sources */,
 				E51178602636EEEB00B4202F /* NSPoint+Extensions.swift in Sources */,
 				E5497A03276E2C47006EA19B /* ElementView.swift in Sources */,
+				E567972D27B16683003EEBA8 /* View+Extensions.swift in Sources */,
 				E52BFD172763D5FB00BB65AF /* Accessibility.swift in Sources */,
 				E567D2A4263C7FB000A0A861 /* KeyboardInputWindow+Keyboard.swift in Sources */,
 				E591E56C2636F8D000C037FF /* Mouse.swift in Sources */,
