@@ -60,17 +60,20 @@
                                                 <action selector="hidePressed:" target="Voe-Tx-rLC" id="T4I-eg-084"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Use Element-Based Navigation" keyEquivalent="J" id="PJE-er-84e">
+                                        <menuItem title="Use Element-Based Navigation" id="PJE-er-84e">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="useElementBasedNavigationPressed:" target="Voe-Tx-rLC" id="4Xw-km-gTr"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Use Grid-Based Navigation" keyEquivalent="K" id="9ey-1D-QEB">
+                                        <menuItem title="Use Grid-Based Navigation" id="9ey-1D-QEB">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="useGridBasedNavigationPressed:" target="Voe-Tx-rLC" id="myZ-45-CPZ"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Use Freestyle Navigation" keyEquivalent="L" id="GAo-D2-CNk">
+                                        <menuItem title="Use Freestyle Navigation" id="GAo-D2-CNk">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="useFreestyleNavigationPressed:" target="Voe-Tx-rLC" id="Lsy-R6-hic"/>
                                             </connections>

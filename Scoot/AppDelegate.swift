@@ -1,6 +1,5 @@
 import Cocoa
 import Carbon
-import HotKey
 import OSLog
 import SwiftUI
 
@@ -31,30 +30,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var jumpViewControllers: [JumpViewController] {
         jumpWindowControllers.compactMap { $0.contentViewController as? JumpViewController }
-    }
-
-    public var useElementBasedNavigationHotKey: HotKey? {
-        didSet {
-            useElementBasedNavigationHotKey?.keyDownHandler = { [weak self] in
-                self?.bringToForeground(using: .element)
-            }
-        }
-    }
-
-    public var useGridBasedNavigationHotKey: HotKey? {
-        didSet {
-            useGridBasedNavigationHotKey?.keyDownHandler = { [weak self] in
-                self?.bringToForeground(using: .grid)
-            }
-        }
-    }
-
-    public var useFreestyleNavigationHotKey: HotKey? {
-        didSet {
-            useFreestyleNavigationHotKey?.keyDownHandler = { [weak self] in
-                self?.bringToForeground(using: .freestyle)
-            }
-        }
     }
 
     /// The frontmost application at the moment when Scoot was most recently
@@ -109,11 +84,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
-        self.useElementBasedNavigationHotKey = HotKey(key: .j, modifiers: [.command, .shift])
-
-        self.useGridBasedNavigationHotKey = HotKey(key: .k, modifiers: [.command, .shift])
-
-        self.useFreestyleNavigationHotKey = HotKey(key: .l, modifiers: [.command, .shift])
+        GlobalKeybindings.synchronizeMenuBarItemsWithGlobalKeyboardShortcuts()
+        GlobalKeybindings.registerGlobalKeyboardShortcuts()
 
         self.configureMenuBarExtra()
 
