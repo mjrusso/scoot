@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 // IMPORTANT / FIXME: There is some duplication between the settings encoded
 // here, and in the SwiftUI settings views. It's unclear how to properly access
@@ -12,12 +13,20 @@ class UserSettings {
 
     struct Constants {
         static let keybindingMode = "KeybindingMode"
+        static let showGridLines = "ShowGridLines"
+        static let showGridLabels = "ShowGridLabels"
     }
 
     static let shared = UserSettings()
 
     @UserPersistedProperty(Constants.keybindingMode, defaultValue: .emacs)
     var keybindingMode: KeybindingMode
+
+    @AppStorage(Constants.showGridLines)
+    var showGridLines = true
+
+    @AppStorage(Constants.showGridLabels)
+    var showGridLabels = true
 }
 
 /// A property wrapper to simplify reading and writing from UserDefaults.

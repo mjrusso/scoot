@@ -3,15 +3,13 @@ import Cocoa
 extension KeyboardInputWindow {
 
     @IBAction func toggleGridLabels(_ sender: NSMenuItem) {
-        appDelegate?.jumpViewControllers.forEach {
-            $0.isDisplayingGridLabels.toggle()
-        }
+        UserSettings.shared.showGridLabels.toggle()
+        redrawJumpViews()
     }
 
     @IBAction func toggleGridLines(_ sender: NSMenuItem) {
-        appDelegate?.jumpViewControllers.forEach {
-            $0.isDisplayingGridLines.toggle()
-        }
+        UserSettings.shared.showGridLines.toggle()
+        redrawJumpViews()
     }
 
     @IBAction func increaseGridSize(_ sender: NSMenuItem) {

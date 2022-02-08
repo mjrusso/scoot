@@ -29,18 +29,6 @@ class JumpViewController: NSViewController {
 
     @IBOutlet var elementView: ElementView!
 
-    var isDisplayingGridLabels: Bool = true {
-        didSet {
-            redrawGrid()
-        }
-    }
-
-    var isDisplayingGridLines: Bool = true {
-        didSet {
-            redrawGrid()
-        }
-    }
-
     var gridLineAlphaComponent: CGFloat = 0.15 {
         didSet {
             gridLineAlphaComponent = clamp(
