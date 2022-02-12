@@ -4,6 +4,22 @@ import KeyboardShortcuts
 
 struct SettingsView: View {
 
+    // MARK: Persisted Application State
+
+    // IMPORTANT: these @AppStorage-wrapped properties are deliberately not
+    // marked as private. See `UserSettings` for details.
+
+    @AppStorage(UserSettings.Constants.Names.keybindingMode)
+    var keybindingMode = UserSettings.Constants.DefaultValues.keybindingMode
+
+    @AppStorage(UserSettings.Constants.Names.showGridLines)
+    var showGridLines = UserSettings.Constants.DefaultValues.showGridLines
+
+    @AppStorage(UserSettings.Constants.Names.showGridLabels)
+    var showGridLabels = UserSettings.Constants.DefaultValues.showGridLabels
+
+    // MARK: User Interface
+
     private enum Tabs: Hashable {
         case keybindings
         case presentation
@@ -11,12 +27,12 @@ struct SettingsView: View {
 
     var body: some View {
         TabView {
-            PresentationSettingsView()
+            PresentationSettingsView(showGridLines: $showGridLines, showGridLabels: $showGridLabels)
                 .tabItem {
                     Label("Presentation", systemImage: "scribble.variable")
                 }
                 .tag(Tabs.presentation)
-            KeybindingsSettingsView()
+            KeybindingsSettingsView(keybindingMode: $keybindingMode)
                 .tabItem {
                     Label("Keybindings", systemImage: "keyboard")
                 }
@@ -34,7 +50,8 @@ struct SettingsView_Previews: PreviewProvider {
 }
 
 struct KeybindingsSettingsView: View {
-    @AppStorage(UserSettings.Constants.keybindingMode) private var keybindingMode = KeybindingMode.emacs
+
+    @Binding var keybindingMode: KeybindingMode
 
     var body: some View {
         Form {
@@ -43,8 +60,6 @@ struct KeybindingsSettingsView: View {
                 Text("vi").tag(KeybindingMode.vi)
             }
             .onChange(of: keybindingMode) { newValue in
-                UserSettings.shared.keybindingMode = newValue
-
                 // Reset the grid, because changing the keybinding mode affects
                 // which characters are available to the character-based
                 // decision tree.
@@ -63,14 +78,14 @@ struct KeybindingsSettingsView: View {
 
 struct KeybindingsSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        KeybindingsSettingsView()
+        KeybindingsSettingsView(keybindingMode: .constant(.emacs))
     }
 }
 
 struct PresentationSettingsView: View {
 
-    @AppStorage(UserSettings.Constants.showGridLines) private var showGridLines = true
-    @AppStorage(UserSettings.Constants.showGridLabels) private var showGridLabels = true
+    @Binding var showGridLines: Bool
+    @Binding var showGridLabels: Bool
 
     var body: some View {
         Form {
@@ -78,14 +93,12 @@ struct PresentationSettingsView: View {
             Toggle("Show grid labels", isOn: $showGridLabels)
         }
         .onChange(of: showGridLines) { newValue in
-            UserSettings.shared.showGridLines = newValue
-            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
             OSLog.main.log("Toggled showGridLines to \(showGridLines).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
         }
         .onChange(of: showGridLabels) { newValue in
-            UserSettings.shared.showGridLabels = newValue
-            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
             OSLog.main.log("Toggled showGridLabels to \(showGridLabels).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
         }
         .padding(20)
         .frame(width: 360)
@@ -94,6 +107,6 @@ struct PresentationSettingsView: View {
 
 struct PresentationSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        PresentationSettingsView()
+        PresentationSettingsView(showGridLines: .constant(false), showGridLabels: .constant(true))
     }
 }

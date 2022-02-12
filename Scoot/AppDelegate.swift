@@ -176,8 +176,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: Settings UI
 
+    lazy var settingsView: SettingsView = {
+        SettingsView()
+    }()
+
     lazy var settingsWindowController: NSWindowController = {
-        let hostingController = NSHostingController(rootView: SettingsView())
+        let hostingController = NSHostingController(rootView: self.settingsView)
 
         let window = NSWindow(contentViewController: hostingController)
         window.title = "Scoot Preferences"

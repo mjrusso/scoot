@@ -1,57 +1,78 @@
-import Foundation
-import SwiftUI
+import AppKit
 
-// IMPORTANT / FIXME: There is some duplication between the settings encoded
-// here, and in the SwiftUI settings views. It's unclear how to properly access
-// values wrapped with @AppStorage from outside of SwiftUI views. See the
-// discussion at https://developer.apple.com/forums/thread/658569 for more
-// context. For now, make sure to use the same identifier (see
-// UserSettings.Constants) with both @UserPersistedProperty and @AppStorage,
-// and be sure to set them to the same default value.
+
+// FIXME: To avoid duplicating code for reading/writing persisted state, code
+// in this class directly accesses @AppStorage-wrapped properties in
+// SettingsView. Architecturally, this is an odd (wrong!?) choice, however it's
+// the only thing I could actually get working.
+//
+// I've tried duplicating @AppStorage declarations (here and in the appropriate
+// SwiftUI view), however that didn't always work reliably: sometimes an
+// @AppStorage-wrapped property would have a stale value when the other
+// changed.
+//
+// I've also tried importing SwiftUI in this file, declaring all of the
+// @AppStorage properties here, and then using them as a @Binding from SwiftUI,
+// however that also led to incorrect behaviour: for example, toggling a
+// checkbox in the SwiftUI view would change the underlying value, but not
+// update the actual SwiftUI-managed UI. It's unclear if I'm doing something
+// wrong, or if this use case is deliberately unsupported, or if this is some
+// sort of SwiftUI bug.
+//
+// In any event, this (hacky) workaround seems to work...
+//
+// For posterity, a potential solution approach is described at
+// https://developer.apple.com/forums/thread/658569?answerId=700948022#700948022,
+// however there is no code sample, and I've been unable to get the described
+// approach to work.
 
 class UserSettings {
 
     struct Constants {
-        static let keybindingMode = "KeybindingMode"
-        static let showGridLines = "ShowGridLines"
-        static let showGridLabels = "ShowGridLabels"
+
+        struct Names {
+            static let keybindingMode = "KeybindingMode"
+            static let showGridLines = "ShowGridLines"
+            static let showGridLabels = "ShowGridLabels"
+        }
+
+        struct DefaultValues {
+            static let keybindingMode = KeybindingMode.emacs
+            static let showGridLines = true
+            static let showGridLabels = true
+        }
     }
 
     static let shared = UserSettings()
 
-    @UserPersistedProperty(Constants.keybindingMode, defaultValue: .emacs)
-    var keybindingMode: KeybindingMode
-
-    @AppStorage(Constants.showGridLines)
-    var showGridLines = true
-
-    @AppStorage(Constants.showGridLabels)
-    var showGridLabels = true
-}
-
-/// A property wrapper to simplify reading and writing from UserDefaults.
-///
-/// Adapted from: https://stackoverflow.com/a/63752463
-@propertyWrapper
-struct UserPersistedProperty<T: RawRepresentable> {
-
-    let key: String
-    let defaultValue: T
-
-    init(_ key: String, defaultValue: T) {
-        self.key = key
-        self.defaultValue = defaultValue
+    var settingsView: SettingsView? {
+        (NSApp.delegate as? AppDelegate)?.settingsView
     }
 
-    var wrappedValue: T {
+    var keybindingMode: KeybindingMode {
         get {
-            guard let rawValue = UserDefaults.standard.object(forKey: key) as? T.RawValue, let value = T(rawValue: rawValue) else {
-                return defaultValue
-            }
-            return value
+            settingsView?.keybindingMode ?? Constants.DefaultValues.keybindingMode
         }
         set {
-            UserDefaults.standard.set(newValue.rawValue, forKey: key)
+            settingsView?.keybindingMode = newValue
+        }
+    }
+
+    var showGridLines: Bool {
+        get {
+            settingsView?.showGridLines ?? Constants.DefaultValues.showGridLines
+        }
+        set {
+            settingsView?.showGridLines = newValue
+        }
+    }
+
+    var showGridLabels: Bool {
+        get {
+            settingsView?.showGridLabels ?? Constants.DefaultValues.showGridLabels
+        }
+        set {
+            settingsView?.showGridLabels = newValue
         }
     }
 
