@@ -13,17 +13,26 @@ extension KeyboardInputWindow {
     }
 
     @IBAction func increaseGridSize(_ sender: NSMenuItem) {
-        targetCellSize += CGSize(width: 10.0, height: 10.0)
-        appDelegate?.jumpViewControllers.forEach {
-            $0.redrawGrid()
-        }
+        let delta = UserSettings.Constants.Sliders.targetGridCellSideLength.step
+        modifyGridSize(by: delta)
     }
 
     @IBAction func decreaseGridSize(_ sender: NSMenuItem) {
-        targetCellSize -= CGSize(width: 10.0, height: 10.0)
-        appDelegate?.jumpViewControllers.forEach {
-            $0.redrawGrid()
-        }
+        let delta = UserSettings.Constants.Sliders.targetGridCellSideLength.step
+        modifyGridSize(by: -delta)
+    }
+
+    func modifyGridSize(by delta: Double) {
+        let config = UserSettings.Constants.Sliders.targetGridCellSideLength
+
+        UserSettings.shared.targetGridCellSideLength = clamp(
+            UserSettings.shared.targetGridCellSideLength + delta,
+            minValue: config.min,
+            maxValue: config.max
+        )
+
+        initializeCoreDataStructuresForGridBasedMovement()
+        redrawJumpViews()
     }
 
     @IBAction func increaseContrast(_ sender: NSMenuItem) {

@@ -34,13 +34,31 @@ class UserSettings {
             static let keybindingMode = "KeybindingMode"
             static let showGridLines = "ShowGridLines"
             static let showGridLabels = "ShowGridLabels"
+            static let targetGridCellSideLength = "TargetGridCellSideLength"
         }
 
         struct DefaultValues {
             static let keybindingMode = KeybindingMode.emacs
             static let showGridLines = true
             static let showGridLabels = true
+            static let targetGridCellSideLength = Double(60)
         }
+
+        struct Sliders {
+
+            struct Config {
+                let min: Double
+                let max: Double
+                let step: Double
+
+                var range: ClosedRange<Double> {
+                    min...max
+                }
+            }
+
+            static let targetGridCellSideLength = Config(min: 40, max: 80, step: 10)
+        }
+
     }
 
     static let shared = UserSettings()
@@ -73,6 +91,15 @@ class UserSettings {
         }
         set {
             settingsView?.showGridLabels = newValue
+        }
+    }
+
+    var targetGridCellSideLength: Double {
+        get {
+            settingsView?.targetGridCellSideLength ?? Constants.DefaultValues.targetGridCellSideLength
+        }
+        set {
+            settingsView?.targetGridCellSideLength = newValue
         }
     }
 

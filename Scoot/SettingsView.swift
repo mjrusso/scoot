@@ -18,6 +18,9 @@ struct SettingsView: View {
     @AppStorage(UserSettings.Constants.Names.showGridLabels)
     var showGridLabels = UserSettings.Constants.DefaultValues.showGridLabels
 
+    @AppStorage(UserSettings.Constants.Names.targetGridCellSideLength)
+    var targetGridCellSideLength = UserSettings.Constants.DefaultValues.targetGridCellSideLength
+
     // MARK: User Interface
 
     private enum Tabs: Hashable {
@@ -27,8 +30,11 @@ struct SettingsView: View {
 
     var body: some View {
         TabView {
-            PresentationSettingsView(showGridLines: $showGridLines, showGridLabels: $showGridLabels)
-                .tabItem {
+            PresentationSettingsView(
+                showGridLines: $showGridLines,
+                showGridLabels: $showGridLabels,
+                targetGridCellSideLength: $targetGridCellSideLength
+                ).tabItem {
                     Label("Presentation", systemImage: "scribble.variable")
                 }
                 .tag(Tabs.presentation)
@@ -86,11 +92,19 @@ struct PresentationSettingsView: View {
 
     @Binding var showGridLines: Bool
     @Binding var showGridLabels: Bool
+    @Binding var targetGridCellSideLength: Double
+
+    let targetGridCellSideLengthConfig = UserSettings.Constants.Sliders.targetGridCellSideLength
 
     var body: some View {
         Form {
             Toggle("Show grid lines", isOn: $showGridLines)
             Toggle("Show grid labels", isOn: $showGridLabels)
+            Slider(value: $targetGridCellSideLength, in: targetGridCellSideLengthConfig.range, step: targetGridCellSideLengthConfig.step) {
+                Label("Grid Cell Size:", systemImage: "gear")
+            }
+            .labelStyle(TitleOnlyLabelStyle())
+
         }
         .onChange(of: showGridLines) { newValue in
             OSLog.main.log("Toggled showGridLines to \(showGridLines).")
@@ -100,6 +114,11 @@ struct PresentationSettingsView: View {
             OSLog.main.log("Toggled showGridLabels to \(showGridLabels).")
             (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
         }
+        .onChange(of: targetGridCellSideLength) { newValue in
+            OSLog.main.log("Changed targetGridCellSideLength to \(targetGridCellSideLength).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
+        }
         .padding(20)
         .frame(width: 360)
     }
@@ -107,6 +126,10 @@ struct PresentationSettingsView: View {
 
 struct PresentationSettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        PresentationSettingsView(showGridLines: .constant(false), showGridLabels: .constant(true))
+        PresentationSettingsView(
+            showGridLines: .constant(false),
+            showGridLabels: .constant(true),
+            targetGridCellSideLength: .constant(60)
+        )
     }
 }
