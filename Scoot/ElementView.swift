@@ -33,7 +33,7 @@ class ElementView: NSView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
-        let foregroundColor = NSColor.systemTeal.withAlphaComponent(
+        let foregroundColor = UserSettings.shared.primaryColor.withAlphaComponent(
             viewController.elementLabelAlphaComponent
         )
 

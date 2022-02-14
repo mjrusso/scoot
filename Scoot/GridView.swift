@@ -29,7 +29,7 @@ class GridView: NSView {
         let cellSize = grid.cellSize
 
         ctx.cgContext.setStrokeColor(
-            NSColor.systemTeal.withAlphaComponent(
+            UserSettings.shared.primaryColor.withAlphaComponent(
                 viewController.gridLineAlphaComponent
             ).cgColor
         )
@@ -58,7 +58,7 @@ class GridView: NSView {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
-        let foregroundColor = NSColor.systemTeal.withAlphaComponent(
+        let foregroundColor = UserSettings.shared.primaryColor.withAlphaComponent(
             viewController.gridLabelAlphaComponent
         )
 

@@ -1,5 +1,5 @@
 import AppKit
-
+import SwiftUI
 
 // FIXME: To avoid duplicating code for reading/writing persisted state, code
 // in this class directly accesses @AppStorage-wrapped properties in
@@ -32,6 +32,8 @@ class UserSettings {
 
         struct Names {
             static let keybindingMode = "KeybindingMode"
+            static let primaryColor = "PrimaryColor"
+            static let secondaryColor = "SecondaryColor"
             static let showGridLines = "ShowGridLines"
             static let showGridLabels = "ShowGridLabels"
             static let targetGridCellSideLength = "TargetGridCellSideLength"
@@ -41,6 +43,8 @@ class UserSettings {
 
         struct DefaultValues {
             static let keybindingMode = KeybindingMode.emacs
+            static let primaryColor = Color("PrimaryColor")     // References a named color in Asset Bundle.
+            static let secondaryColor = Color("SecondaryColor") // Ditto.
             static let showGridLines = true
             static let showGridLabels = true
             static let targetGridCellSideLength = Double(60)
@@ -79,6 +83,24 @@ class UserSettings {
         }
         set {
             settingsView?.keybindingMode = newValue
+        }
+    }
+
+    var primaryColor: NSColor {
+        get {
+            NSColor(settingsView?.primaryColor ?? Constants.DefaultValues.primaryColor)
+        }
+        set {
+            settingsView?.primaryColor = Color(newValue)
+        }
+    }
+
+    var secondaryColor: NSColor {
+        get {
+            NSColor(settingsView?.secondaryColor ?? Constants.DefaultValues.secondaryColor)
+        }
+        set {
+            settingsView?.secondaryColor = Color(newValue)
         }
     }
 

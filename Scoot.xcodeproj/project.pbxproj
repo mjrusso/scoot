@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E500850527BAA0C70053CB02 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850427BAA0C70053CB02 /* Color+Extensions.swift */; };
 		E50A612D279DEC7900D970EF /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A612C279DEC7900D970EF /* NSImage+Extensions.swift */; };
 		E50A612F27A03E4B00D970EF /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A612E27A03E4B00D970EF /* Log.swift */; };
 		E50A613127A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A613027A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift */; };
@@ -74,6 +75,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E500850427BAA0C70053CB02 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		E50A612C279DEC7900D970EF /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		E50A612E27A03E4B00D970EF /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		E50A613027A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardInputWindow+EventMonitor.swift"; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				E567972C27B16682003EEBA8 /* View+Extensions.swift */,
+				E500850427BAA0C70053CB02 /* Color+Extensions.swift */,
 				E59C1632264AC4F60033E2CC /* CGSize+Extensions.swift */,
 				E5497A06277D4F6A006EA19B /* CGRect+Extensions.swift */,
 				E5497A04276E5E9D006EA19B /* CGPoint+Extensions.swift */,
@@ -403,6 +406,7 @@
 				E567D2A2263C77FC00A0A861 /* Grid.swift in Sources */,
 				E5776261262F067700849D7D /* TransparentWindow.swift in Sources */,
 				E59F854C278938F100A9FBF6 /* Positionable.swift in Sources */,
+				E500850527BAA0C70053CB02 /* Color+Extensions.swift in Sources */,
 				E53AB9D2279C416F0048FBE1 /* KeybindingMode.swift in Sources */,
 				E59C1633264AC4F60033E2CC /* CGSize+Extensions.swift in Sources */,
 				E5776269262F0EC700849D7D /* JumpWindowController.swift in Sources */,

@@ -12,6 +12,12 @@ struct SettingsView: View {
     @AppStorage(UserSettings.Constants.Names.keybindingMode)
     var keybindingMode = UserSettings.Constants.DefaultValues.keybindingMode
 
+    @AppStorage(UserSettings.Constants.Names.primaryColor)
+    var primaryColor = UserSettings.Constants.DefaultValues.primaryColor
+
+    @AppStorage(UserSettings.Constants.Names.secondaryColor)
+    var secondaryColor = UserSettings.Constants.DefaultValues.secondaryColor
+
     @AppStorage(UserSettings.Constants.Names.showGridLines)
     var showGridLines = UserSettings.Constants.DefaultValues.showGridLines
 
@@ -37,6 +43,8 @@ struct SettingsView: View {
     var body: some View {
         TabView {
             PresentationSettingsView(
+                primaryColor: $primaryColor,
+                secondaryColor: $secondaryColor,
                 showGridLines: $showGridLines,
                 showGridLabels: $showGridLabels,
                 targetGridCellSideLength: $targetGridCellSideLength,
@@ -98,6 +106,8 @@ struct KeybindingsSettingsView_Previews: PreviewProvider {
 
 struct PresentationSettingsView: View {
 
+    @Binding var primaryColor: Color
+    @Binding var secondaryColor: Color
     @Binding var showGridLines: Bool
     @Binding var showGridLabels: Bool
     @Binding var targetGridCellSideLength: Double
@@ -110,21 +120,22 @@ struct PresentationSettingsView: View {
 
     var body: some View {
         Form {
-            Toggle("Show grid lines", isOn: $showGridLines)
-            Toggle("Show grid labels", isOn: $showGridLabels)
-            Slider(value: $targetGridCellSideLength, in: targetGridCellSideLengthConfig.range, step: targetGridCellSideLengthConfig.step) {
-                Label("Grid Cell Size:", systemImage: "gear")
+            ColorPicker("Primary Color:", selection: $primaryColor, supportsOpacity: false)
+            ColorPicker("Secondary Color:", selection: $secondaryColor, supportsOpacity: false)
+            Slider(value: $elementViewOverallContrast, in: elementViewOverallContrastConfig.range, step: elementViewOverallContrastConfig.step) {
+                Label("Element Contrast:", systemImage: "gear")
             }
             .labelStyle(TitleOnlyLabelStyle())
             Slider(value: $gridViewOverallContrast, in: gridViewOverallContrastConfig.range, step: gridViewOverallContrastConfig.step) {
                 Label("Grid Contrast:", systemImage: "gear")
             }
             .labelStyle(TitleOnlyLabelStyle())
-            Slider(value: $elementViewOverallContrast, in: elementViewOverallContrastConfig.range, step: elementViewOverallContrastConfig.step) {
-                Label("Element Contrast:", systemImage: "gear")
+            Toggle("Show grid lines", isOn: $showGridLines)
+            Toggle("Show grid labels", isOn: $showGridLabels)
+            Slider(value: $targetGridCellSideLength, in: targetGridCellSideLengthConfig.range, step: targetGridCellSideLengthConfig.step) {
+                Label("Grid Cell Size:", systemImage: "gear")
             }
             .labelStyle(TitleOnlyLabelStyle())
-
         }
         .onChange(of: showGridLines) { newValue in
             OSLog.main.log("Toggled showGridLines to \(showGridLines).")
@@ -147,6 +158,14 @@ struct PresentationSettingsView: View {
             OSLog.main.log("Changed elementViewOverallContrast to \(newValue) from \(elementViewOverallContrast).")
             (NSApp.delegate as? AppDelegate)?.inputWindow.updateElementViewContrast()
         }
+        .onChange(of: primaryColor) { newValue in
+            OSLog.main.log("Changed primaryColor to \(newValue).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
+        }
+        .onChange(of: secondaryColor) { newValue in
+            OSLog.main.log("Changed secondaryColor to \(newValue).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
+        }
         .padding(20)
         .frame(width: 360)
     }
@@ -155,6 +174,8 @@ struct PresentationSettingsView: View {
 struct PresentationSettingsView_Previews: PreviewProvider {
     static var previews: some View {
         PresentationSettingsView(
+            primaryColor: .constant(Color("PrimaryColor")),
+            secondaryColor: .constant(Color("SecondaryColor")),
             showGridLines: .constant(false),
             showGridLabels: .constant(true),
             targetGridCellSideLength: .constant(60),

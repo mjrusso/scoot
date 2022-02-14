@@ -14,7 +14,7 @@ class FeedbackView: NSView {
 
     func commonInit() {
         self.wantsLayer = true
-        self.layer?.backgroundColor = NSColor.systemPurple.withAlphaComponent(0.4).cgColor
+        self.layer?.backgroundColor = UserSettings.shared.secondaryColor.withAlphaComponent(0.4).cgColor
 
         self.isHidden = true
     }

@@ -315,7 +315,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         jumpWindows.forEach {
             $0.backgroundColor = $0.backgroundColor == .clear ?
-                .systemPurple.withAlphaComponent(0.3) :
+                UserSettings.shared.secondaryColor.withAlphaComponent(0.3) :
                 .clear
         }
     }
