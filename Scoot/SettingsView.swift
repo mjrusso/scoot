@@ -42,6 +42,11 @@ struct SettingsView: View {
 
     var body: some View {
         TabView {
+            KeybindingsSettingsView(keybindingMode: $keybindingMode)
+                .tabItem {
+                    Label("Keybindings", systemImage: "keyboard")
+                }
+                .tag(Tabs.keybindings)
             PresentationSettingsView(
                 primaryColor: $primaryColor,
                 secondaryColor: $secondaryColor,
@@ -54,11 +59,6 @@ struct SettingsView: View {
                     Label("Presentation", systemImage: "scribble.variable")
                 }
                 .tag(Tabs.presentation)
-            KeybindingsSettingsView(keybindingMode: $keybindingMode)
-                .tabItem {
-                    Label("Keybindings", systemImage: "keyboard")
-                }
-                .tag(Tabs.keybindings)
         }
         .padding(20)
         .frame(width: 400)
