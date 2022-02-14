@@ -21,6 +21,12 @@ struct SettingsView: View {
     @AppStorage(UserSettings.Constants.Names.targetGridCellSideLength)
     var targetGridCellSideLength = UserSettings.Constants.DefaultValues.targetGridCellSideLength
 
+    @AppStorage(UserSettings.Constants.Names.gridViewOverallContrast)
+    var gridViewOverallContrast = UserSettings.Constants.DefaultValues.gridViewOverallContrast
+
+    @AppStorage(UserSettings.Constants.Names.elementViewOverallContrast)
+    var elementViewOverallContrast = UserSettings.Constants.DefaultValues.elementViewOverallContrast
+
     // MARK: User Interface
 
     private enum Tabs: Hashable {
@@ -33,7 +39,9 @@ struct SettingsView: View {
             PresentationSettingsView(
                 showGridLines: $showGridLines,
                 showGridLabels: $showGridLabels,
-                targetGridCellSideLength: $targetGridCellSideLength
+                targetGridCellSideLength: $targetGridCellSideLength,
+                gridViewOverallContrast: $gridViewOverallContrast,
+                elementViewOverallContrast: $elementViewOverallContrast
                 ).tabItem {
                     Label("Presentation", systemImage: "scribble.variable")
                 }
@@ -93,8 +101,12 @@ struct PresentationSettingsView: View {
     @Binding var showGridLines: Bool
     @Binding var showGridLabels: Bool
     @Binding var targetGridCellSideLength: Double
+    @Binding var gridViewOverallContrast: Double
+    @Binding var elementViewOverallContrast: Double
 
     let targetGridCellSideLengthConfig = UserSettings.Constants.Sliders.targetGridCellSideLength
+    let gridViewOverallContrastConfig = UserSettings.Constants.Sliders.gridViewOverallContrast
+    let elementViewOverallContrastConfig = UserSettings.Constants.Sliders.elementViewOverallContrast
 
     var body: some View {
         Form {
@@ -102,6 +114,14 @@ struct PresentationSettingsView: View {
             Toggle("Show grid labels", isOn: $showGridLabels)
             Slider(value: $targetGridCellSideLength, in: targetGridCellSideLengthConfig.range, step: targetGridCellSideLengthConfig.step) {
                 Label("Grid Cell Size:", systemImage: "gear")
+            }
+            .labelStyle(TitleOnlyLabelStyle())
+            Slider(value: $gridViewOverallContrast, in: gridViewOverallContrastConfig.range, step: gridViewOverallContrastConfig.step) {
+                Label("Grid Contrast:", systemImage: "gear")
+            }
+            .labelStyle(TitleOnlyLabelStyle())
+            Slider(value: $elementViewOverallContrast, in: elementViewOverallContrastConfig.range, step: elementViewOverallContrastConfig.step) {
+                Label("Element Contrast:", systemImage: "gear")
             }
             .labelStyle(TitleOnlyLabelStyle())
 
@@ -119,6 +139,14 @@ struct PresentationSettingsView: View {
             (NSApp.delegate as? AppDelegate)?.inputWindow.initializeCoreDataStructuresForGridBasedMovement()
             (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
         }
+        .onChange(of: gridViewOverallContrast) { [gridViewOverallContrast] newValue in
+            OSLog.main.log("Changed gridViewOverallContrast to \(newValue) from \(gridViewOverallContrast).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.updateGridViewContrast()
+        }
+        .onChange(of: elementViewOverallContrast) { [elementViewOverallContrast] newValue in
+            OSLog.main.log("Changed elementViewOverallContrast to \(newValue) from \(elementViewOverallContrast).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.updateElementViewContrast()
+        }
         .padding(20)
         .frame(width: 360)
     }
@@ -129,7 +157,9 @@ struct PresentationSettingsView_Previews: PreviewProvider {
         PresentationSettingsView(
             showGridLines: .constant(false),
             showGridLabels: .constant(true),
-            targetGridCellSideLength: .constant(60)
+            targetGridCellSideLength: .constant(60),
+            gridViewOverallContrast: .constant(0.0),
+            elementViewOverallContrast: .constant(0.0)
         )
     }
 }

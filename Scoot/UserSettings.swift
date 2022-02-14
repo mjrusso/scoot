@@ -35,6 +35,8 @@ class UserSettings {
             static let showGridLines = "ShowGridLines"
             static let showGridLabels = "ShowGridLabels"
             static let targetGridCellSideLength = "TargetGridCellSideLength"
+            static let gridViewOverallContrast = "GridViewOverallContrast"
+            static let elementViewOverallContrast = "ElementViewOverallContrast"
         }
 
         struct DefaultValues {
@@ -42,6 +44,8 @@ class UserSettings {
             static let showGridLines = true
             static let showGridLabels = true
             static let targetGridCellSideLength = Double(60)
+            static let gridViewOverallContrast = Double(0)
+            static let elementViewOverallContrast = Double(0)
         }
 
         struct Sliders {
@@ -57,6 +61,8 @@ class UserSettings {
             }
 
             static let targetGridCellSideLength = Config(min: 40, max: 80, step: 10)
+            static let gridViewOverallContrast = Config(min: -0.4, max: 0.5, step: 0.1)
+            static let elementViewOverallContrast = Config(min: -0.4, max: 0.5, step: 0.1)
         }
 
     }
@@ -100,6 +106,24 @@ class UserSettings {
         }
         set {
             settingsView?.targetGridCellSideLength = newValue
+        }
+    }
+
+    var gridViewOverallContrast: Double {
+        get {
+            settingsView?.gridViewOverallContrast ?? Constants.DefaultValues.gridViewOverallContrast
+        }
+        set {
+            settingsView?.gridViewOverallContrast = newValue
+        }
+    }
+
+    var elementViewOverallContrast: Double {
+        get {
+            settingsView?.elementViewOverallContrast ?? Constants.DefaultValues.elementViewOverallContrast
+        }
+        set {
+            settingsView?.elementViewOverallContrast = newValue
         }
     }
 

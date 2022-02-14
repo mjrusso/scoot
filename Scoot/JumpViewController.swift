@@ -2,6 +2,15 @@ import Cocoa
 
 class JumpViewController: NSViewController {
 
+    struct Defaults {
+        static let gridLineAlphaComponent: CGFloat = 0.15
+        static let gridLabelAlphaComponent: CGFloat = 0.95
+        static let gridBackgroundAlphaComponent: CGFloat = 0.45
+        static let elementLabelAlphaComponent: CGFloat = 0.95
+        static let elementLabelBackgroundAlphaComponent: CGFloat = 0.85
+        static let elementBackgroundAlphaComponent: CGFloat = 0.15
+    }
+
     /// A grid, subdividing the screen into a collection of evenly-sized cells.
     ///
     /// Used for grid-based navigation.
@@ -29,7 +38,7 @@ class JumpViewController: NSViewController {
 
     @IBOutlet var elementView: ElementView!
 
-    var gridLineAlphaComponent: CGFloat = 0.15 {
+    var gridLineAlphaComponent = Defaults.gridLineAlphaComponent {
         didSet {
             gridLineAlphaComponent = clamp(
                 gridLineAlphaComponent,
@@ -40,7 +49,7 @@ class JumpViewController: NSViewController {
         }
     }
 
-    var gridLabelAlphaComponent: CGFloat = 0.95 {
+    var gridLabelAlphaComponent = Defaults.gridLabelAlphaComponent {
         didSet {
             gridLabelAlphaComponent = clamp(
                 gridLabelAlphaComponent,
@@ -51,7 +60,7 @@ class JumpViewController: NSViewController {
         }
     }
 
-    var gridBackgroundAlphaComponent: CGFloat = 0.45 {
+    var gridBackgroundAlphaComponent = Defaults.gridBackgroundAlphaComponent {
         didSet {
             gridBackgroundAlphaComponent = clamp(
                 gridBackgroundAlphaComponent,
@@ -62,7 +71,7 @@ class JumpViewController: NSViewController {
         }
     }
 
-    var elementLabelAlphaComponent: CGFloat = 0.95 {
+    var elementLabelAlphaComponent = Defaults.elementLabelAlphaComponent {
         didSet {
             elementLabelAlphaComponent = clamp(
                 elementLabelAlphaComponent,
@@ -73,7 +82,7 @@ class JumpViewController: NSViewController {
         }
     }
 
-    var elementLabelBackgroundAlphaComponent: CGFloat = 0.85 {
+    var elementLabelBackgroundAlphaComponent = Defaults.elementLabelBackgroundAlphaComponent {
         didSet {
             elementLabelBackgroundAlphaComponent = clamp(
                 elementLabelBackgroundAlphaComponent,
@@ -84,12 +93,12 @@ class JumpViewController: NSViewController {
         }
     }
 
-    var elementBackgroundAlphaComponent: CGFloat = 0.15 {
+    var elementBackgroundAlphaComponent = Defaults.elementBackgroundAlphaComponent {
         didSet {
             elementBackgroundAlphaComponent = clamp(
                 elementBackgroundAlphaComponent,
                 minValue: 0.01,
-                maxValue: 1.0
+                maxValue: 0.6
             )
             redrawElements()
         }
@@ -100,6 +109,9 @@ class JumpViewController: NSViewController {
 
         gridView.viewController = self
         elementView.viewController = self
+
+        updateGridContrast()
+        updateElementContrast()
 
         hideGrid()
         hideElements()
@@ -140,6 +152,30 @@ extension JumpViewController {
     func redrawElements() {
         self.elementView.redraw()
     }
+
+}
+
+extension JumpViewController {
+
+    func updateGridContrast() {
+        let adjustmentFactor = UserSettings.shared.gridViewOverallContrast
+
+        gridLineAlphaComponent = Defaults.gridLineAlphaComponent + (1.0 * adjustmentFactor)
+        gridLabelAlphaComponent = Defaults.gridLabelAlphaComponent + (0.9 * adjustmentFactor)
+        gridBackgroundAlphaComponent = Defaults.gridBackgroundAlphaComponent + (0.8 * adjustmentFactor)
+    }
+
+    func updateElementContrast() {
+        let adjustmentFactor = UserSettings.shared.elementViewOverallContrast
+
+        elementLabelAlphaComponent = Defaults.elementLabelAlphaComponent + (0.8 * adjustmentFactor)
+        elementLabelBackgroundAlphaComponent = Defaults.elementLabelBackgroundAlphaComponent + (0.6 * adjustmentFactor)
+        elementBackgroundAlphaComponent = Defaults.elementBackgroundAlphaComponent + (0.4 * adjustmentFactor)
+    }
+
+}
+
+extension JumpViewController {
 
     func flashFeedback(at rect: NSRect, duration: TimeInterval) {
         let feedbackView = FeedbackView(frame: rect)

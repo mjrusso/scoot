@@ -36,24 +36,63 @@ extension KeyboardInputWindow {
     }
 
     @IBAction func increaseContrast(_ sender: NSMenuItem) {
-        appDelegate?.jumpViewControllers.forEach {
-            $0.gridLineAlphaComponent += 0.2
-            $0.gridLabelAlphaComponent += 0.05
-            $0.gridBackgroundAlphaComponent += 0.2
-            $0.elementLabelAlphaComponent += 0.01
-            $0.elementLabelBackgroundAlphaComponent += 0.05
-            $0.elementBackgroundAlphaComponent += 0.05
+        switch activeJumpMode {
+        case .element:
+            let delta = UserSettings.Constants.Sliders.elementViewOverallContrast.step
+            modifyElementViewContrast(by: delta)
+        case .grid:
+            let delta = UserSettings.Constants.Sliders.gridViewOverallContrast.step
+            modifyGridViewContrast(by: delta)
+        default:
+            break
         }
     }
 
     @IBAction func decreaseContrast(_ sender: NSMenuItem) {
+        switch activeJumpMode {
+        case .element:
+            let delta = UserSettings.Constants.Sliders.elementViewOverallContrast.step
+            modifyElementViewContrast(by: -delta)
+        case .grid:
+            let delta = UserSettings.Constants.Sliders.gridViewOverallContrast.step
+            modifyGridViewContrast(by: -delta)
+        default:
+            break
+        }
+    }
+
+    func modifyElementViewContrast(by delta: Double) {
+        let config = UserSettings.Constants.Sliders.elementViewOverallContrast
+
+        UserSettings.shared.elementViewOverallContrast = clamp(
+            UserSettings.shared.elementViewOverallContrast + delta,
+            minValue: config.min,
+            maxValue: config.max
+        )
+        updateElementViewContrast()
+    }
+
+    func modifyGridViewContrast(by delta: Double) {
+        let config = UserSettings.Constants.Sliders.gridViewOverallContrast
+
+        UserSettings.shared.gridViewOverallContrast = clamp(
+            UserSettings.shared.gridViewOverallContrast + delta,
+            minValue: config.min,
+            maxValue: config.max
+        )
+
+        updateGridViewContrast()
+    }
+
+    func updateGridViewContrast() {
         appDelegate?.jumpViewControllers.forEach {
-            $0.gridLineAlphaComponent -= 0.2
-            $0.gridLabelAlphaComponent -= 0.05
-            $0.gridBackgroundAlphaComponent -= 0.2
-            $0.elementLabelAlphaComponent -= 0.01
-            $0.elementLabelBackgroundAlphaComponent -= 0.05
-            $0.elementBackgroundAlphaComponent -= 0.05
+            $0.updateGridContrast()
+        }
+    }
+
+    func updateElementViewContrast() {
+        appDelegate?.jumpViewControllers.forEach {
+            $0.updateElementContrast()
         }
     }
 
