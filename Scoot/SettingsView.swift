@@ -96,6 +96,7 @@ struct KeybindingsSettingsView: View {
         .padding(20)
         .frame(width: 360)
     }
+
 }
 
 struct KeybindingsSettingsView_Previews: PreviewProvider {
@@ -125,17 +126,17 @@ struct PresentationSettingsView: View {
             Slider(value: $elementViewOverallContrast, in: elementViewOverallContrastConfig.range, step: elementViewOverallContrastConfig.step) {
                 Label("Element Contrast:", systemImage: "gear")
             }
-            .labelStyle(TitleOnlyLabelStyle())
+                .labelStyle(TitleOnlyLabelStyle())
             Slider(value: $gridViewOverallContrast, in: gridViewOverallContrastConfig.range, step: gridViewOverallContrastConfig.step) {
                 Label("Grid Contrast:", systemImage: "gear")
             }
-            .labelStyle(TitleOnlyLabelStyle())
+                .labelStyle(TitleOnlyLabelStyle())
             Toggle("Show grid lines", isOn: $showGridLines)
             Toggle("Show grid labels", isOn: $showGridLabels)
             Slider(value: $targetGridCellSideLength, in: targetGridCellSideLengthConfig.range, step: targetGridCellSideLengthConfig.step) {
                 Label("Grid Cell Size:", systemImage: "gear")
             }
-            .labelStyle(TitleOnlyLabelStyle())
+                .labelStyle(TitleOnlyLabelStyle())
             Spacer()
                 .frame(height: 40)
             Button("Restore Defaults", action: restoreDefaultsAction)
