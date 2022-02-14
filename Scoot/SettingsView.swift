@@ -136,6 +136,10 @@ struct PresentationSettingsView: View {
                 Label("Grid Cell Size:", systemImage: "gear")
             }
             .labelStyle(TitleOnlyLabelStyle())
+            Spacer()
+                .frame(height: 40)
+            Button("Restore Defaults", action: restoreDefaultsAction)
+
         }
         .onChange(of: showGridLines) { newValue in
             OSLog.main.log("Toggled showGridLines to \(showGridLines).")
@@ -169,6 +173,18 @@ struct PresentationSettingsView: View {
         .padding(20)
         .frame(width: 360)
     }
+
+    func restoreDefaultsAction() {
+        OSLog.main.log("Restoring default presentation-related settings.")
+        primaryColor = UserSettings.Constants.DefaultValues.primaryColor
+        secondaryColor = UserSettings.Constants.DefaultValues.secondaryColor
+        showGridLines = UserSettings.Constants.DefaultValues.showGridLines
+        showGridLabels = UserSettings.Constants.DefaultValues.showGridLabels
+        targetGridCellSideLength = UserSettings.Constants.DefaultValues.targetGridCellSideLength
+        gridViewOverallContrast = UserSettings.Constants.DefaultValues.gridViewOverallContrast
+        elementViewOverallContrast = UserSettings.Constants.DefaultValues.elementViewOverallContrast
+    }
+
 }
 
 struct PresentationSettingsView_Previews: PreviewProvider {
