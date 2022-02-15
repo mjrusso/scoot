@@ -16,6 +16,16 @@ jobs:
         run: |
           echo "SCHEME=$(xcodebuild -list -json | jq -r '.project.schemes[0]')" >> $GITHUB_ENV
 
+      - name: Resolve package dependencies
+        shell: bash --noprofile --norc -eo pipefail {0}
+        run: |
+          xcodebuild -resolvePackageDependencies
+
+      - name: Show build settings
+        shell: bash --noprofile --norc -eo pipefail {0}
+        run: |
+          xcodebuild -showBuildSettings
+
       - name: Build and test app
         shell: bash --noprofile --norc -eo pipefail {0}
         run: |
