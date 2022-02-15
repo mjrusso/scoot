@@ -133,28 +133,32 @@ struct PresentationSettingsView: View {
 
     var body: some View {
         Form {
-            ColorPicker("Primary Color:", selection: $primaryColor, supportsOpacity: false)
-            ColorPicker("Secondary Color:", selection: $secondaryColor, supportsOpacity: false)
-            Slider(value: $elementViewOverallContrast, in: elementViewOverallContrastConfig.range, step: elementViewOverallContrastConfig.step) {
-                Label("Element Contrast:", systemImage: "gear")
+            Group {
+                ColorPicker("Primary Color:", selection: $primaryColor, supportsOpacity: false)
+                ColorPicker("Secondary Color:", selection: $secondaryColor, supportsOpacity: false)
+                Slider(value: $elementViewOverallContrast, in: elementViewOverallContrastConfig.range, step: elementViewOverallContrastConfig.step) {
+                    Label("Element Contrast:", systemImage: "gear")
+                }
+                    .labelStyle(TitleOnlyLabelStyle())
+                Slider(value: $gridViewOverallContrast, in: gridViewOverallContrastConfig.range, step: gridViewOverallContrastConfig.step) {
+                    Label("Grid Contrast:", systemImage: "gear")
+                }
+                    .labelStyle(TitleOnlyLabelStyle())
+                Toggle("Show grid lines", isOn: $showGridLines)
+                Toggle("Show grid labels", isOn: $showGridLabels)
+                Slider(value: $targetGridCellSideLength, in: targetGridCellSideLengthConfig.range, step: targetGridCellSideLengthConfig.step) {
+                    Label("Grid Cell Size:", systemImage: "gear")
+                }
+                    .labelStyle(TitleOnlyLabelStyle())
             }
-                .labelStyle(TitleOnlyLabelStyle())
-            Slider(value: $gridViewOverallContrast, in: gridViewOverallContrastConfig.range, step: gridViewOverallContrastConfig.step) {
-                Label("Grid Contrast:", systemImage: "gear")
+            Group {
+                Spacer()
+                    .frame(height: 40)
+                Button("Restore Defaults", action: restoreDefaultsAction).formLabel(Text("Reset:"))
+                Text("Reset all presentation-related settings to their default values. This does not impact keybindings or other settings.")
+                    .font(.subheadline)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-                .labelStyle(TitleOnlyLabelStyle())
-            Toggle("Show grid lines", isOn: $showGridLines)
-            Toggle("Show grid labels", isOn: $showGridLabels)
-            Slider(value: $targetGridCellSideLength, in: targetGridCellSideLengthConfig.range, step: targetGridCellSideLengthConfig.step) {
-                Label("Grid Cell Size:", systemImage: "gear")
-            }
-                .labelStyle(TitleOnlyLabelStyle())
-            Spacer()
-                .frame(height: 40)
-            Button("Restore Defaults", action: restoreDefaultsAction).formLabel(Text("Reset:"))
-            Text("Reset all presentation-related settings to their default values. This does not impact keybindings or other settings.")
-                .font(.subheadline)
-                .fixedSize(horizontal: false, vertical: true)
         }
         .onChange(of: showGridLines) { newValue in
             OSLog.main.log("Toggled showGridLines to \(showGridLines).")
