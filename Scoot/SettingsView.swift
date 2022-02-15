@@ -61,7 +61,7 @@ struct SettingsView: View {
                 .tag(Tabs.presentation)
         }
         .padding(20)
-        .frame(width: 400)
+        .frame(width: 460)
     }
 }
 
@@ -139,8 +139,10 @@ struct PresentationSettingsView: View {
                 .labelStyle(TitleOnlyLabelStyle())
             Spacer()
                 .frame(height: 40)
-            Button("Restore Defaults", action: restoreDefaultsAction)
-
+            Button("Restore Defaults", action: restoreDefaultsAction).formLabel(Text("Reset:"))
+            Text("Reset all presentation-related settings to their default values. This does not impact keybindings or other settings.")
+                .font(.subheadline)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .onChange(of: showGridLines) { newValue in
             OSLog.main.log("Toggled showGridLines to \(showGridLines).")
@@ -172,7 +174,7 @@ struct PresentationSettingsView: View {
             (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
         }
         .padding(20)
-        .frame(width: 360)
+        .frame(width: 420)
     }
 
     func restoreDefaultsAction() {
