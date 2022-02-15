@@ -71,19 +71,9 @@ class KeyboardInputWindow: TransparentWindow {
 
     var scrollEventDebounceTimer: Timer?
 
-    static let DEFAULT_CELL_SIZE = CGSize(width: 60.0, height: 60.0)
-
-    var targetCellSize = DEFAULT_CELL_SIZE {
-        didSet {
-            targetCellSize = clamp(
-                targetCellSize,
-                minValue: CGSize(width: 45.0, height: 45.0),
-                maxValue: CGSize(width: 90.0, height: 90.0)
-            )
-            if targetCellSize != oldValue {
-                initializeCoreDataStructuresForGridBasedMovement()
-            }
-        }
+    var targetCellSize: CGSize {
+        let targetSideLength = UserSettings.shared.targetGridCellSideLength
+        return CGSize(width: targetSideLength, height: targetSideLength)
     }
 
     let numStepsPerCell = CGFloat(6.0)
@@ -150,7 +140,8 @@ class KeyboardInputWindow: TransparentWindow {
         )
 
         for (n, (grid, _)) in data.enumerated() {
-            assert(grid.numCells == grid.rects.count)
+            assert(grid.numCells == grid.rects.count,
+                   "grid.numCells \(grid.numCells) != grid.rects.count \(grid.rects.count)")
 
             let startIndex = data[0..<n].reduce(0, { $0 + $1.grid.numCells })
             let endIndex = startIndex + grid.numCells

@@ -56,9 +56,9 @@ Freestyle mode is particularly handy for those cases where you want to quickly n
 
 ## Usage
 
-To activate Scoot in the **element-based navigation mode**, use the ⇧⌘J global keyboard shortcut. Alternatively, to activate Scoot in the **grid-based navigation mode**, use the ⇧⌘K global keyboard shortcut. And for **freestyle mode**, use the ⇧⌘L global keyboard shortcut.
+To activate Scoot in the **element-based navigation mode**, use the ⇧⌘J global keyboard shortcut. Alternatively, to activate Scoot in the **grid-based navigation mode**, use the ⇧⌘K global keyboard shortcut. And for **freestyle mode**, use the ⇧⌘L global keyboard shortcut. (These shortcuts can be customized.)
 
-(As long as Scoot is running, any of these hotkeys will bring the app to the foreground, and activate the requested mode.)
+As long as Scoot is running, any of these hotkeys will bring the app to the foreground, and activate the requested mode.
 
 When Scoot is in the foreground:
 
@@ -99,23 +99,42 @@ Scoot also works on systems with multiple connected displays.
 
 _If you use multiple displays, and experience an issue with Scoot's windows drawing in an incorrect location when the app launches (e.g. all Scoot windows appearing on the same display), please post your findings [in this issue](https://github.com/mjrusso/scoot/issues/18), and note the value of your “Displays have separate Spaces” checkbox in Mission Control._ If you do happen to find yourself in this state, you should be able to fix the window arrangement by clicking Scoot's menu bar icon, then “Debug”, and finally “Rebuild Jump Windows”.
 
+To customize Scoot's settings, click Scoot's menu bar icon, then “Preferences…”, or type `⌘,` while Scoot is in the foreground. In addition to modifying keybindings, it is also possible to modify Scoot's appearance (including font sizes, colours, opacity, etc.).
+
 ### Keybindings
 
 _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac-symbols], and [Emacs key notation][emacs-key-notation]._
 
-Note that vi keybindings are not enabled by default, and must be explicitly toggled on (documentation: [how to turn on vi keybindings](#activating-vi-keybindings)). Emacs keybindings (and most system keybindings) are disabled when vi keybindings are active.
+### Global Keybindings
+
+Global keybindings are always active, as long as Scoot is currently running.
+
+
+| Default Shortcut | Description                                              |
+|------------------|----------------------------------------------------------|
+| ⇧⌘J              | Use element-based navigation (bring Scoot to foreground) |
+| ⇧⌘K              | Use grid-based navigation (bring Scoot to foreground)    |
+| ⇧⌘L              | Use freestyle mode (bring Scoot to foreground)           |
+
+All global keybindings are fully customizable. To modify the keybindings, click Scoot's menu bar icon, then “Preferences…”, and select the “Keybindings” tab.
+
+#### Local Keybindings
+
+Local keybindings are only active when Scoot is active (i.e., when Scoot is in the foreground).
+
+Note that vi keybindings are not enabled by default, and must be explicitly toggled on (click Scoot's menu bar icon, then “Preferences…”, select the “Keybindings” tab, and then change the keybinding mode). Emacs keybindings (and most system keybindings) are disabled when vi keybindings are active.
+
+##### General
 
 | Shortcut  | Alternate | Description                                                                                                       |
 |-----------|-----------|-------------------------------------------------------------------------------------------------------------------|
-| ⇧⌘J       |           | Use element-based navigation (bring Scoot to foreground)                                                          |
-| ⇧⌘K       |           | Use grid-based navigation (bring Scoot to foreground)                                                             |
-| ⇧⌘L       |           | Use freestyle mode (bring Scoot to foreground)                                                                    |
 | ⌘H        |           | Hide UI (bring Scoot to background)                                                                               |
 | ⎋ (or ⌘.) | C-g       | Cancel: if currently typing a label, clears all currently-typed characters; otherwise, brings Scoot to background |
 
+
 _Note:_ ⎋ signifies the Escape key.
 
-#### Cursor Movement
+##### Cursor Movement
 
 | System | Emacs | vi  | Description                                                 |
 |--------|-------|-----|-------------------------------------------------------------|
@@ -133,7 +152,7 @@ _Note:_ ⎋ signifies the Escape key.
 | ⌘→     | C-e   | ⇧-l | Move cursor to right edge of screen                         |
 | ⌃L     | C-l   | ⇧-m | Move cursor to center, and (on repeat) cycle around corners |
 
-#### Clicking
+##### Clicking
 
 | Shortcut | Description                                                            |
 |----------|------------------------------------------------------------------------|
@@ -151,7 +170,7 @@ For simplicity, Scoot only supports simulating holding/ dragging, and double cli
 
 _Note:_ ↵ signifies the Return (a.k.a Enter) key. _(Sidenote: technically, Return and Enter are [two different keys][return-and-enter-are-two-different-keys].)_
 
-#### Scrolling
+##### Scrolling
 
 | System | Emacs | vi  | Description                               |
 |--------|-------|-----|-------------------------------------------|
@@ -160,7 +179,7 @@ _Note:_ ↵ signifies the Return (a.k.a Enter) key. _(Sidenote: technically, Ret
 | ⇧←     | ⇧-b   | C-i | Scroll left (at current cursor location)  |
 | ⇧→     | ⇧-f   | C-a | Scroll right (at current cursor location) |
 
-#### Presentation
+##### Presentation
 
 | Shortcut | Description                                |
 |----------|--------------------------------------------|
@@ -214,24 +233,6 @@ As before, you'll need to click the lock in the bottom left corner to unlock thi
 </p>
 
 If you encounter any problems, feel free to [file an issue][scoot-issues].
-
-### Activating vi Keybindings
-
-There is currently no UI for setting the keybinding mode.
-
-To opt in to vi keybindings, execute the following command in your terminal:
-
-```
-defaults write ~/Library/Preferences/com.mjrusso.Scoot.plist KeybindingMode vi
-```
-
-If Scoot is running, restart it after running the `defaults write` command.
-
-To restore the default keybindings:
-
-```
-defaults write ~/Library/Preferences/com.mjrusso.Scoot.plist KeybindingMode emacs
-```
 
 ## Demos
 

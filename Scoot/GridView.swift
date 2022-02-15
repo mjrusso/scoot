@@ -29,13 +29,13 @@ class GridView: NSView {
         let cellSize = grid.cellSize
 
         ctx.cgContext.setStrokeColor(
-            NSColor.systemTeal.withAlphaComponent(
+            UserSettings.shared.primaryColor.withAlphaComponent(
                 viewController.gridLineAlphaComponent
             ).cgColor
         )
         ctx.cgContext.setLineWidth(2)
 
-        if viewController.isDisplayingGridLines {
+        if UserSettings.shared.showGridLines {
             for x in stride(from: 0.0, to: grid.size.width, by: cellSize.width) {
                 ctx.cgContext.move(to: CGPoint(x: x, y: 0))
                 ctx.cgContext.addLine(to: CGPoint(x: x, y: grid.size.height))
@@ -49,16 +49,17 @@ class GridView: NSView {
             ctx.cgContext.drawPath(using: .stroke)
         }
 
-        guard viewController.isDisplayingGridLabels else {
+        guard UserSettings.shared.showGridLabels else {
             return
         }
 
-        let font = NSFont.systemFont(ofSize: 18, weight: .medium)
+        let fontSize = UserSettings.shared.gridViewFontSize
+        let font = NSFont.monospacedSystemFont(ofSize: fontSize, weight: .medium)
 
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center
 
-        let foregroundColor = NSColor.systemTeal.withAlphaComponent(
+        let foregroundColor = UserSettings.shared.primaryColor.withAlphaComponent(
             viewController.gridLabelAlphaComponent
         )
 

@@ -1,7 +1,7 @@
 import Cocoa
 import Carbon
-import HotKey
 import OSLog
+import SwiftUI
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -32,30 +32,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         jumpWindowControllers.compactMap { $0.contentViewController as? JumpViewController }
     }
 
-    public var useElementBasedNavigationHotKey: HotKey? {
-        didSet {
-            useElementBasedNavigationHotKey?.keyDownHandler = { [weak self] in
-                self?.bringToForeground(using: .element)
-            }
-        }
-    }
-
-    public var useGridBasedNavigationHotKey: HotKey? {
-        didSet {
-            useGridBasedNavigationHotKey?.keyDownHandler = { [weak self] in
-                self?.bringToForeground(using: .grid)
-            }
-        }
-    }
-
-    public var useFreestyleNavigationHotKey: HotKey? {
-        didSet {
-            useFreestyleNavigationHotKey?.keyDownHandler = { [weak self] in
-                self?.bringToForeground(using: .freestyle)
-            }
-        }
-    }
-
     /// The frontmost application at the moment when Scoot was most recently
     /// invoked. (If Scoot happens to be the frontmost app when it is invoked,
     /// the previous frontmost app is returned.)
@@ -76,7 +52,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         OSLog.main.log("Scoot: applicationDidFinishLaunching.")
 
-        guard Accessibility.checkIfProcessIsTrusted(withPrompt: !isRunningTests) else {
+        #if DEBUG
+        guard !isRunningTests && !isRunningSwiftUIPreviews else {
+            return
+        }
+        #endif
+
+        guard Accessibility.checkIfProcessIsTrusted(withPrompt: true) else {
 
             OSLog.main.log("Process is not trusted for AX.")
 
@@ -102,11 +84,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
-        self.useElementBasedNavigationHotKey = HotKey(key: .j, modifiers: [.command, .shift])
-
-        self.useGridBasedNavigationHotKey = HotKey(key: .k, modifiers: [.command, .shift])
-
-        self.useFreestyleNavigationHotKey = HotKey(key: .l, modifiers: [.command, .shift])
+        GlobalKeybindings.synchronizeMenuBarItemsWithGlobalKeyboardShortcuts()
+        GlobalKeybindings.registerGlobalKeyboardShortcuts()
 
         self.configureMenuBarExtra()
 
@@ -195,6 +174,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         })
     }
 
+    // MARK: Settings UI
+
+    lazy var settingsView: SettingsView = {
+        SettingsView()
+    }()
+
+    lazy var settingsWindowController: NSWindowController = {
+        let hostingController = NSHostingController(rootView: self.settingsView)
+
+        let window = NSWindow(contentViewController: hostingController)
+        window.title = "Scoot Preferences"
+
+        return NSWindowController(window: window)
+    }()
+
     // MARK: Menu Bar
 
     func configureMenuBarExtra() {
@@ -282,6 +276,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         bringToForeground(using: .freestyle)
     }
 
+    @IBAction func preferencesPressed(_ sender: NSMenuItem) {
+        NSApp.activate(ignoringOtherApps: true)
+        settingsWindowController.showWindow(sender)
+    }
+
     @IBAction func aboutPressed(_ sender: NSMenuItem) {
         NSApp.activate(ignoringOtherApps: true)
         NSApp.orderFrontStandardAboutPanel(sender)
@@ -316,15 +315,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         jumpWindows.forEach {
             $0.backgroundColor = $0.backgroundColor == .clear ?
-                .systemPurple.withAlphaComponent(0.3) :
+                UserSettings.shared.secondaryColor.withAlphaComponent(0.3) :
                 .clear
         }
     }
 
-    // MARK: Testing
+    // MARK: Testing and Previewing
 
     var isRunningTests: Bool {
         ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+    }
+
+    var isRunningSwiftUIPreviews: Bool {
+        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
     }
 
 }
