@@ -12,19 +12,19 @@ jobs:
       - name: Checkout project
         uses: actions/checkout@v2
 
-      - name: Find first scheme of default project
+      - name: Find first relevant scheme of default project
         run: |
-          echo "SCHEME=$(xcodebuild -list -json | jq -r '.project.schemes[0]')" >> $GITHUB_ENV
+          echo "SCHEME=$(xcodebuild -list -json | jq -r '[.project.schemes[] | select(. != "KeyboardShortcuts")] | first')" >> $GITHUB_ENV
 
       - name: Resolve package dependencies
         shell: bash --noprofile --norc -eo pipefail {0}
         run: |
           xcodebuild -resolvePackageDependencies
 
-      - name: Show build settings
-        shell: bash --noprofile --norc -eo pipefail {0}
-        run: |
-          xcodebuild -showBuildSettings
+      # - name: Show build settings
+      #   shell: bash --noprofile --norc -eo pipefail {0}
+      #   run: |
+      #     xcodebuild -showBuildSettings
 
       - name: Build and test app
         shell: bash --noprofile --norc -eo pipefail {0}

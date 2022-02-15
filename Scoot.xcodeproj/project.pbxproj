@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E500850527BAA0C70053CB02 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850427BAA0C70053CB02 /* Color+Extensions.swift */; };
+		E500850827BC01760053CB02 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E500850727BC01760053CB02 /* KeyboardShortcuts */; };
 		E50A612D279DEC7900D970EF /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A612C279DEC7900D970EF /* NSImage+Extensions.swift */; };
 		E50A612F27A03E4B00D970EF /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A612E27A03E4B00D970EF /* Log.swift */; };
 		E50A613127A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A613027A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift */; };
@@ -20,7 +21,6 @@
 		E5497A05276E5E9D006EA19B /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5497A04276E5E9D006EA19B /* CGPoint+Extensions.swift */; };
 		E5497A07277D4F6A006EA19B /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5497A06277D4F6A006EA19B /* CGRect+Extensions.swift */; };
 		E5497A09277D5AD1006EA19B /* JumpMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5497A08277D5AD1006EA19B /* JumpMode.swift */; };
-		E567972927AEF961003EEBA8 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E567972827AEF961003EEBA8 /* KeyboardShortcuts */; };
 		E567972B27B16125003EEBA8 /* GlobalKeybindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567972A27B16125003EEBA8 /* GlobalKeybindings.swift */; };
 		E567972D27B16683003EEBA8 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567972C27B16682003EEBA8 /* View+Extensions.swift */; };
 		E567D2A2263C77FC00A0A861 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567D2A1263C77FC00A0A861 /* Grid.swift */; };
@@ -136,7 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5BE2E9126F25D7100BB754D /* AXSwift in Frameworks */,
-				E567972927AEF961003EEBA8 /* KeyboardShortcuts in Frameworks */,
+				E500850827BC01760053CB02 /* KeyboardShortcuts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +274,7 @@
 			name = Scoot;
 			packageProductDependencies = (
 				E5BE2E9026F25D7100BB754D /* AXSwift */,
-				E567972827AEF961003EEBA8 /* KeyboardShortcuts */,
+				E500850727BC01760053CB02 /* KeyboardShortcuts */,
 			);
 			productName = Scoot;
 			productReference = E5776229262F04D100849D7D /* Scoot.app */;
@@ -349,7 +349,7 @@
 			mainGroup = E5776220262F04D100849D7D;
 			packageReferences = (
 				E5BE2E8F26F25D7100BB754D /* XCRemoteSwiftPackageReference "AXSwift" */,
-				E567972727AEF961003EEBA8 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
+				E500850627BC01760053CB02 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */,
 			);
 			productRefGroup = E577622A262F04D100849D7D /* Products */;
 			projectDirPath = "";
@@ -766,7 +766,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E567972727AEF961003EEBA8 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
+		E500850627BC01760053CB02 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sindresorhus/KeyboardShortcuts";
 			requirement = {
@@ -785,9 +785,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E567972827AEF961003EEBA8 /* KeyboardShortcuts */ = {
+		E500850727BC01760053CB02 /* KeyboardShortcuts */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E567972727AEF961003EEBA8 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
+			package = E500850627BC01760053CB02 /* XCRemoteSwiftPackageReference "KeyboardShortcuts" */;
 			productName = KeyboardShortcuts;
 		};
 		E5BE2E9026F25D7100BB754D /* AXSwift */ = {
