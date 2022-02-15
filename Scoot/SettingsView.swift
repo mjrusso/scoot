@@ -92,9 +92,21 @@ struct KeybindingsSettingsView: View {
             KeyboardShortcuts.Recorder(for: .useElementBasedNavigation).formLabel(Text("Element-Based Navigation:"))
             KeyboardShortcuts.Recorder(for: .useGridBasedNavigation).formLabel(Text("Grid-Based Navigation:"))
             KeyboardShortcuts.Recorder(for: .useFreestyleNavigation).formLabel(Text("Freestyle Navigation:"))
+            Spacer()
+                .frame(height: 40)
+            Button("Restore Defaults", action: restoreDefaultsAction).formLabel(Text("Reset:"))
+            Text("Reset all keybinding-related settings to their default values. This does not impact any other settings.")
+                .font(.subheadline)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding(20)
-        .frame(width: 360)
+        .frame(width: 420)
+    }
+
+    func restoreDefaultsAction() {
+        OSLog.main.log("Restoring default keybinding-related settings.")
+        KeyboardShortcuts.reset(.useElementBasedNavigation, .useGridBasedNavigation, .useFreestyleNavigation)
+        keybindingMode = UserSettings.Constants.DefaultValues.keybindingMode
     }
 
 }
