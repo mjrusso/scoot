@@ -53,7 +53,8 @@ class GridView: NSView {
             return
         }
 
-        let font = NSFont.systemFont(ofSize: 18, weight: .medium)
+        let fontSize = UserSettings.shared.gridViewFontSize
+        let font = NSFont.systemFont(ofSize: fontSize, weight: .medium)
 
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center

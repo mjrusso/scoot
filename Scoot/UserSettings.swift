@@ -39,6 +39,8 @@ class UserSettings {
             static let targetGridCellSideLength = "TargetGridCellSideLength"
             static let gridViewOverallContrast = "GridViewOverallContrast"
             static let elementViewOverallContrast = "ElementViewOverallContrast"
+            static let gridViewFontSize = "GridViewFontSize"
+            static let elementViewFontSize = "ElementViewFontSize"
         }
 
         struct DefaultValues {
@@ -50,6 +52,8 @@ class UserSettings {
             static let targetGridCellSideLength = Double(60)
             static let gridViewOverallContrast = Double(0)
             static let elementViewOverallContrast = Double(0)
+            static let gridViewFontSize = Double(18)
+            static let elementViewFontSize = Double(14)
         }
 
         struct Sliders {
@@ -67,6 +71,8 @@ class UserSettings {
             static let targetGridCellSideLength = Config(min: 40, max: 80, step: 10)
             static let gridViewOverallContrast = Config(min: -0.4, max: 0.5, step: 0.1)
             static let elementViewOverallContrast = Config(min: -0.4, max: 0.5, step: 0.1)
+            static let gridViewFontSize = Config(min: 10, max: 24, step: 2)
+            static let elementViewFontSize = Config(min: 6, max: 22, step: 2)
         }
 
     }
@@ -146,6 +152,24 @@ class UserSettings {
         }
         set {
             settingsView?.elementViewOverallContrast = newValue
+        }
+    }
+
+    var gridViewFontSize: Double {
+        get {
+            settingsView?.gridViewFontSize ?? Constants.DefaultValues.gridViewFontSize
+        }
+        set {
+            settingsView?.gridViewFontSize = newValue
+        }
+    }
+
+    var elementViewFontSize: Double {
+        get {
+            settingsView?.elementViewFontSize ?? Constants.DefaultValues.elementViewFontSize
+        }
+        set {
+            settingsView?.elementViewFontSize = newValue
         }
     }
 

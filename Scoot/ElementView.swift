@@ -28,7 +28,8 @@ class ElementView: NSView {
             ctx.cgContext.fill(element.windowRect)
         }
 
-        let font = NSFont.systemFont(ofSize: 14, weight: .medium)
+        let fontSize = UserSettings.shared.elementViewFontSize
+        let font = NSFont.systemFont(ofSize: fontSize, weight: .medium)
 
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = .center

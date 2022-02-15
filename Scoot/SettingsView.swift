@@ -33,6 +33,12 @@ struct SettingsView: View {
     @AppStorage(UserSettings.Constants.Names.elementViewOverallContrast)
     var elementViewOverallContrast = UserSettings.Constants.DefaultValues.elementViewOverallContrast
 
+    @AppStorage(UserSettings.Constants.Names.gridViewFontSize)
+    var gridViewFontSize = UserSettings.Constants.DefaultValues.gridViewFontSize
+
+    @AppStorage(UserSettings.Constants.Names.elementViewFontSize)
+    var elementViewFontSize = UserSettings.Constants.DefaultValues.elementViewFontSize
+
     // MARK: User Interface
 
     private enum Tabs: Hashable {
@@ -54,7 +60,9 @@ struct SettingsView: View {
                 showGridLabels: $showGridLabels,
                 targetGridCellSideLength: $targetGridCellSideLength,
                 gridViewOverallContrast: $gridViewOverallContrast,
-                elementViewOverallContrast: $elementViewOverallContrast
+                elementViewOverallContrast: $elementViewOverallContrast,
+                gridViewFontSize: $gridViewFontSize,
+                elementViewFontSize: $elementViewFontSize
                 ).tabItem {
                     Label("Presentation", systemImage: "scribble.variable")
                 }
@@ -126,14 +134,27 @@ struct PresentationSettingsView: View {
     @Binding var targetGridCellSideLength: Double
     @Binding var gridViewOverallContrast: Double
     @Binding var elementViewOverallContrast: Double
+    @Binding var gridViewFontSize: Double
+    @Binding var elementViewFontSize: Double
 
     let targetGridCellSideLengthConfig = UserSettings.Constants.Sliders.targetGridCellSideLength
     let gridViewOverallContrastConfig = UserSettings.Constants.Sliders.gridViewOverallContrast
     let elementViewOverallContrastConfig = UserSettings.Constants.Sliders.elementViewOverallContrast
+    let gridViewFontSizeConfig = UserSettings.Constants.Sliders.gridViewFontSize
+    let elementViewFontSizeConfig = UserSettings.Constants.Sliders.elementViewFontSize
+
 
     var body: some View {
         Form {
             Group {
+                Slider(value: $elementViewFontSize, in: elementViewFontSizeConfig.range, step: elementViewFontSizeConfig.step) {
+                    Label("Element Font Size:", systemImage: "gear")
+                }
+                    .labelStyle(TitleOnlyLabelStyle())
+                Slider(value: $gridViewFontSize, in: gridViewFontSizeConfig.range, step: gridViewFontSizeConfig.step) {
+                    Label("Grid Font Size:", systemImage: "gear")
+                }
+                    .labelStyle(TitleOnlyLabelStyle())
                 ColorPicker("Primary Color:", selection: $primaryColor, supportsOpacity: false)
                 ColorPicker("Secondary Color:", selection: $secondaryColor, supportsOpacity: false)
                 Slider(value: $elementViewOverallContrast, in: elementViewOverallContrastConfig.range, step: elementViewOverallContrastConfig.step) {
@@ -181,6 +202,14 @@ struct PresentationSettingsView: View {
             OSLog.main.log("Changed elementViewOverallContrast to \(newValue) from \(elementViewOverallContrast).")
             (NSApp.delegate as? AppDelegate)?.inputWindow.updateElementViewContrast()
         }
+        .onChange(of: gridViewFontSize) { newValue in
+            OSLog.main.log("Toggled gridViewFontSize to \(newValue).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
+        }
+        .onChange(of: elementViewFontSize) { newValue in
+            OSLog.main.log("Toggled elementViewFontSize to \(newValue).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
+        }
         .onChange(of: primaryColor) { newValue in
             OSLog.main.log("Changed primaryColor to \(newValue).")
             (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
@@ -202,6 +231,8 @@ struct PresentationSettingsView: View {
         targetGridCellSideLength = UserSettings.Constants.DefaultValues.targetGridCellSideLength
         gridViewOverallContrast = UserSettings.Constants.DefaultValues.gridViewOverallContrast
         elementViewOverallContrast = UserSettings.Constants.DefaultValues.elementViewOverallContrast
+        gridViewFontSize = UserSettings.Constants.DefaultValues.gridViewFontSize
+        elementViewFontSize = UserSettings.Constants.DefaultValues.elementViewFontSize
     }
 
 }
@@ -215,7 +246,9 @@ struct PresentationSettingsView_Previews: PreviewProvider {
             showGridLabels: .constant(true),
             targetGridCellSideLength: .constant(60),
             gridViewOverallContrast: .constant(0.0),
-            elementViewOverallContrast: .constant(0.0)
+            elementViewOverallContrast: .constant(0.0),
+            gridViewFontSize: .constant(18),
+            elementViewFontSize: .constant(14)
         )
     }
 }
