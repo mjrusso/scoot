@@ -105,7 +105,7 @@ To customize Scoot's settings, click Scoot's menu bar icon, then â€œPreferencesâ
 
 _Not sure what these symbols mean? See the [symbol reference][what-are-those-mac-symbols], and [Emacs key notation][emacs-key-notation]._
 
-### Global Keybindings
+#### Global Keybindings
 
 Global keybindings are always active, as long as Scoot is currently running.
 
