@@ -189,6 +189,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return NSWindowController(window: window)
     }()
 
+    // MARK: About UI
+
+    lazy var aboutView: AboutView = {
+        AboutView()
+    }()
+
+    lazy var aboutWindowController: NSWindowController = {
+        let hostingController = NSHostingController(rootView: self.aboutView)
+
+        let window = NSWindow(contentViewController: hostingController)
+        window.styleMask = [.closable, .titled]
+        window.titlebarAppearsTransparent = true
+        window.title = ""
+
+        window.center()
+
+        return NSWindowController(window: window)
+    }()
+
     // MARK: Menu Bar
 
     func configureMenuBarExtra() {
@@ -283,7 +302,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func aboutPressed(_ sender: NSMenuItem) {
         NSApp.activate(ignoringOtherApps: true)
-        NSApp.orderFrontStandardAboutPanel(sender)
+        aboutWindowController.showWindow(sender)
     }
 
     @IBAction func helpPressed(_ sender: NSMenuItem) {

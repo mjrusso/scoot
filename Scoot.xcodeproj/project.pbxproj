@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		E500850527BAA0C70053CB02 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850427BAA0C70053CB02 /* Color+Extensions.swift */; };
 		E500850827BC01760053CB02 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E500850727BC01760053CB02 /* KeyboardShortcuts */; };
+		E500850A27BC09530053CB02 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850927BC09530053CB02 /* AboutView.swift */; };
+		E500850C27BC907D0053CB02 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850B27BC907D0053CB02 /* Bundle+Extensions.swift */; };
+		E500850E27BC964A0053CB02 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850D27BC964A0053CB02 /* CreditsView.swift */; };
+		E500851027BC9CA00053CB02 /* Credits.md in Resources */ = {isa = PBXBuildFile; fileRef = E500850F27BC9CA00053CB02 /* Credits.md */; };
 		E50A612D279DEC7900D970EF /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A612C279DEC7900D970EF /* NSImage+Extensions.swift */; };
 		E50A612F27A03E4B00D970EF /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A612E27A03E4B00D970EF /* Log.swift */; };
 		E50A613127A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A613027A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift */; };
@@ -43,7 +47,6 @@
 		E59F854C278938F100A9FBF6 /* Positionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59F854B278938F000A9FBF6 /* Positionable.swift */; };
 		E59F854F27893B3A00A9FBF6 /* Positionable+Crowding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59F854E27893B3A00A9FBF6 /* Positionable+Crowding.swift */; };
 		E59F8551278E7C5600A9FBF6 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E59F8550278E7C5600A9FBF6 /* LICENSE */; };
-		E59F8553278E7D0E00A9FBF6 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E59F8552278E7D0E00A9FBF6 /* Credits.rtf */; };
 		E5B1DE4126686E5B00F1AA77 /* KeyboardInputWindow+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B1DE4026686E5B00F1AA77 /* KeyboardInputWindow+UI.swift */; };
 		E5B1DE4326686E9D00F1AA77 /* KeyboardInputWindow+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B1DE4226686E9D00F1AA77 /* KeyboardInputWindow+Actions.swift */; };
 		E5B9214A2656A18D000A0A75 /* FeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B921492656A18D000A0A75 /* FeedbackView.swift */; };
@@ -76,6 +79,10 @@
 
 /* Begin PBXFileReference section */
 		E500850427BAA0C70053CB02 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		E500850927BC09530053CB02 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		E500850B27BC907D0053CB02 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
+		E500850D27BC964A0053CB02 /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
+		E500850F27BC9CA00053CB02 /* Credits.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Credits.md; sourceTree = "<group>"; };
 		E50A612C279DEC7900D970EF /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		E50A612E27A03E4B00D970EF /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		E50A613027A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardInputWindow+EventMonitor.swift"; sourceTree = "<group>"; };
@@ -116,7 +123,6 @@
 		E59F854B278938F000A9FBF6 /* Positionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Positionable.swift; sourceTree = "<group>"; };
 		E59F854E27893B3A00A9FBF6 /* Positionable+Crowding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Positionable+Crowding.swift"; sourceTree = "<group>"; };
 		E59F8550278E7C5600A9FBF6 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		E59F8552278E7D0E00A9FBF6 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		E5B1DE4026686E5B00F1AA77 /* KeyboardInputWindow+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardInputWindow+UI.swift"; sourceTree = "<group>"; };
 		E5B1DE4226686E9D00F1AA77 /* KeyboardInputWindow+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardInputWindow+Actions.swift"; sourceTree = "<group>"; };
 		E5B921492656A18D000A0A75 /* FeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackView.swift; sourceTree = "<group>"; };
@@ -160,6 +166,7 @@
 		E51178642636EF1500B4202F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E500850B27BC907D0053CB02 /* Bundle+Extensions.swift */,
 				E567972C27B16682003EEBA8 /* View+Extensions.swift */,
 				E500850427BAA0C70053CB02 /* Color+Extensions.swift */,
 				E59C1632264AC4F60033E2CC /* CGSize+Extensions.swift */,
@@ -180,7 +187,7 @@
 				E577622B262F04D100849D7D /* Scoot */,
 				E577623E262F04D300849D7D /* ScootTests */,
 				E5776249262F04D300849D7D /* ScootUITests */,
-				E59F8552278E7D0E00A9FBF6 /* Credits.rtf */,
+				E500850F27BC9CA00053CB02 /* Credits.md */,
 				E59F8550278E7C5600A9FBF6 /* LICENSE */,
 				E577622A262F04D100849D7D /* Products */,
 			);
@@ -227,6 +234,8 @@
 				E5B921492656A18D000A0A75 /* FeedbackView.swift */,
 				E591E56B2636F8D000C037FF /* Mouse.swift */,
 				E5F61EEF27ACCF4B0056A6EB /* SettingsView.swift */,
+				E500850927BC09530053CB02 /* AboutView.swift */,
+				E500850D27BC964A0053CB02 /* CreditsView.swift */,
 				E51178642636EF1500B4202F /* Extensions */,
 				E5776230262F04D300849D7D /* Assets.xcassets */,
 				E5776235262F04D300849D7D /* Info.plist */,
@@ -370,7 +379,7 @@
 				E59F8551278E7C5600A9FBF6 /* LICENSE in Resources */,
 				E5776231262F04D300849D7D /* Assets.xcassets in Resources */,
 				E5776234262F04D300849D7D /* Main.storyboard in Resources */,
-				E59F8553278E7D0E00A9FBF6 /* Credits.rtf in Resources */,
+				E500851027BC9CA00053CB02 /* Credits.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +415,7 @@
 				E567D2A2263C77FC00A0A861 /* Grid.swift in Sources */,
 				E5776261262F067700849D7D /* TransparentWindow.swift in Sources */,
 				E59F854C278938F100A9FBF6 /* Positionable.swift in Sources */,
+				E500850C27BC907D0053CB02 /* Bundle+Extensions.swift in Sources */,
 				E500850527BAA0C70053CB02 /* Color+Extensions.swift in Sources */,
 				E53AB9D2279C416F0048FBE1 /* KeybindingMode.swift in Sources */,
 				E59C1633264AC4F60033E2CC /* CGSize+Extensions.swift in Sources */,
@@ -415,6 +425,7 @@
 				E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */,
 				E5497A07277D4F6A006EA19B /* CGRect+Extensions.swift in Sources */,
 				E59C162E264184500033E2CC /* Tree.swift in Sources */,
+				E500850E27BC964A0053CB02 /* CreditsView.swift in Sources */,
 				E5497A09277D5AD1006EA19B /* JumpMode.swift in Sources */,
 				E5BD595A26615E5600BB5181 /* KeyboardInputWindow+Delegate.swift in Sources */,
 				E5B9214A2656A18D000A0A75 /* FeedbackView.swift in Sources */,
@@ -422,6 +433,7 @@
 				E567972B27B16125003EEBA8 /* GlobalKeybindings.swift in Sources */,
 				E577622D262F04D100849D7D /* AppDelegate.swift in Sources */,
 				E5BD595826615DB700BB5181 /* KeyboardInputWindow.swift in Sources */,
+				E500850A27BC09530053CB02 /* AboutView.swift in Sources */,
 				E50A613127A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift in Sources */,
 				E5B1DE4326686E9D00F1AA77 /* KeyboardInputWindow+Actions.swift in Sources */,
 				E591E5672636F1F900C037FF /* KeyboardInputWindow+StandardKeyBinds.swift in Sources */,
