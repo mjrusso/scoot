@@ -44,9 +44,9 @@ Freestyle mode is particularly handy for those cases where you want to quickly n
 
 ## About
 
-* Scoot is experimental. Is it possible to craft a keyboard-driven mouse movement utility that's _actually_ efficient? Something that you'll actually _want_ to use? This is going to take some trial and error.
+* This project started as an experiment: an attempt to craft a keyboard-driven mouse movement utility that's efficient, and (more importantly) that users will actually _want_ to use. It has met that bar, at least for the primary author. (Scoot may not be for you, and that's totally fine!)
 
-* Scoot is in the early proof of concept + prototyping stage.
+* Scoot is _not_ intended to replace the mouse or trackpad entirely. It's here to augment them.
 
 * Scoot runs on MacOS 11 (Big Sur), and 12 (Monterey).
 
