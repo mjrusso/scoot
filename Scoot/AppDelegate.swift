@@ -246,11 +246,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }()
 
     func updateMenuBarStatusItemForInactiveState() {
-        self.statusItem?.button?.image = menuBarStatusItemOutlinedImage
+        self.statusItem?.button?.image = isProcessTrustedForAccessibilityAccess ?
+            menuBarStatusItemOutlinedImage :
+            menuBarStatusItemOutlinedImage?.withTintColor(.systemRed)
     }
 
     func updateMenuBarStatusItemForActiveState() {
-        self.statusItem?.button?.image = menuBarStatusItemFilledImage
+        self.statusItem?.button?.image = isProcessTrustedForAccessibilityAccess ?
+            menuBarStatusItemFilledImage :
+            menuBarStatusItemFilledImage?.withTintColor(.systemRed)
     }
 
     // MARK: Activation
