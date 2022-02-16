@@ -52,7 +52,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 
-        OSLog.main.log("Scoot: applicationDidFinishLaunching.")
+        OSLog.main.log("Scoot: applicationDidFinishLaunching")
 
         #if DEBUG
         guard !isRunningTests && !isRunningSwiftUIPreviews else {
@@ -119,7 +119,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
+        #if DEBUG
+        OSLog.main.log("Scoot: applicationWillTerminate")
+        #endif
+    }
 
+    func applicationWillBecomeActive(_ notification: Notification) {
+        #if DEBUG
+        OSLog.main.debug("AppDelegate: applicationWillBecomeActive")
+        #endif
+    }
+
+    func applicationDidBecomeActive(_ notification: Notification) {
+        #if DEBUG
+        OSLog.main.debug("AppDelegate: applicationDidBecomeActive")
+        #endif
+    }
+
+    func applicationWillResignActive(_ notification: Notification) {
+        #if DEBUG
+        OSLog.main.debug("AppDelegate: applicationWillResignActive")
+        #endif
+    }
+
+    func applicationDidResignActive(_ notification: Notification) {
+        #if DEBUG
+        OSLog.main.debug("AppDelegate: applicationDidResignActive")
+        #endif
     }
 
     // MARK: Handling Screen Changes
