@@ -13,6 +13,7 @@
 		E500850C27BC907D0053CB02 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850B27BC907D0053CB02 /* Bundle+Extensions.swift */; };
 		E500850E27BC964A0053CB02 /* CreditsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850D27BC964A0053CB02 /* CreditsView.swift */; };
 		E500851027BC9CA00053CB02 /* Credits.md in Resources */ = {isa = PBXBuildFile; fileRef = E500850F27BC9CA00053CB02 /* Credits.md */; };
+		E500851227BD40790053CB02 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500851127BD40790053CB02 /* LicenseView.swift */; };
 		E50A612D279DEC7900D970EF /* NSImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A612C279DEC7900D970EF /* NSImage+Extensions.swift */; };
 		E50A612F27A03E4B00D970EF /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A612E27A03E4B00D970EF /* Log.swift */; };
 		E50A613127A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E50A613027A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift */; };
@@ -83,6 +84,7 @@
 		E500850B27BC907D0053CB02 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		E500850D27BC964A0053CB02 /* CreditsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsView.swift; sourceTree = "<group>"; };
 		E500850F27BC9CA00053CB02 /* Credits.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Credits.md; sourceTree = "<group>"; };
+		E500851127BD40790053CB02 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
 		E50A612C279DEC7900D970EF /* NSImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSImage+Extensions.swift"; sourceTree = "<group>"; };
 		E50A612E27A03E4B00D970EF /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		E50A613027A5ACD600D970EF /* KeyboardInputWindow+EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyboardInputWindow+EventMonitor.swift"; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				E5F61EEF27ACCF4B0056A6EB /* SettingsView.swift */,
 				E500850927BC09530053CB02 /* AboutView.swift */,
 				E500850D27BC964A0053CB02 /* CreditsView.swift */,
+				E500851127BD40790053CB02 /* LicenseView.swift */,
 				E51178642636EF1500B4202F /* Extensions */,
 				E5776230262F04D300849D7D /* Assets.xcassets */,
 				E5776235262F04D300849D7D /* Info.plist */,
@@ -422,6 +425,7 @@
 				E5776269262F0EC700849D7D /* JumpWindowController.swift in Sources */,
 				E577622F262F04D100849D7D /* JumpViewController.swift in Sources */,
 				E5497A05276E5E9D006EA19B /* CGPoint+Extensions.swift in Sources */,
+				E500851227BD40790053CB02 /* LicenseView.swift in Sources */,
 				E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */,
 				E5497A07277D4F6A006EA19B /* CGRect+Extensions.swift in Sources */,
 				E59C162E264184500033E2CC /* Tree.swift in Sources */,

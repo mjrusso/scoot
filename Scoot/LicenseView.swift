@@ -1,11 +1,11 @@
 import SwiftUI
 
-struct CreditsView: View {
+struct LicenseView: View {
 
     var body: some View {
         ScrollView {
             VStack {
-                Text(loadCreditsText())
+                Text(loadLicenseText())
                     .font(.system(.body, design: .monospaced))
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -14,8 +14,8 @@ struct CreditsView: View {
         .frame(minWidth: 680, minHeight: 520)
     }
 
-    func loadCreditsText() -> String {
-        guard let path = Bundle.main.path(forResource: "Credits", ofType: "md") else {
+    func loadLicenseText() -> String {
+        guard let path = Bundle.main.path(forResource: "LICENSE", ofType: "") else {
             return ""
         }
         return (try? String(contentsOfFile: path)) ?? ""
@@ -23,8 +23,8 @@ struct CreditsView: View {
 
 }
 
-struct CreditsView_Previews: PreviewProvider {
+struct LicenseView_Previews: PreviewProvider {
     static var previews: some View {
-        CreditsView()
+        LicenseView()
     }
 }

@@ -31,8 +31,12 @@ struct AboutView: View {
             }
             Group {
                 Spacer()
-                Button("Credits", action: showCreditsAction)
-                    .buttonStyle(.borderless)
+                HStack(spacing: 20)  {
+                    Button("Credits", action: showCreditsAction)
+                        .buttonStyle(.borderless)
+                    Button("License", action: showLicenseAction)
+                        .buttonStyle(.borderless)
+                }
                 Spacer()
                 Text(Bundle.main.copyright!)
                     .font(.subheadline)
@@ -45,15 +49,22 @@ struct AboutView: View {
 
     func showCreditsAction() {
         OSLog.main.log("Showing credits window.")
+        openWindow(rootView: CreditsView(), title: "\(Bundle.main.displayName!) Credits")
+    }
 
-        let hostingController = NSHostingController(rootView: CreditsView())
+    func showLicenseAction() {
+        OSLog.main.log("Showing license window.")
+        openWindow(rootView: LicenseView(), title: "\(Bundle.main.displayName!) License")
+    }
+
+    func openWindow<Content>(rootView: Content, title: String) where Content : View {
+
+        let hostingController = NSHostingController(rootView: rootView)
 
         let window = NSWindow(contentViewController: hostingController)
         window.styleMask = [.closable, .titled]
         window.titlebarAppearsTransparent = true
-        window.title = "Scoot Credits"
-
-        window.center()
+        window.title = title
 
         let controller = NSWindowController(window: window)
         controller.showWindow(self)
