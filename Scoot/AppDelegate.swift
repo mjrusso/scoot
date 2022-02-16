@@ -10,6 +10,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     var statusItem: NSStatusItem?
 
+    var isProcessTrustedForAccessibilityAccess = false
+
     @IBOutlet weak var hideMenuItem: NSMenuItem!
 
     @IBOutlet weak var useElementBasedNavigationMenuItem: NSMenuItem!
@@ -58,6 +60,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         #endif
 
+        #if !DEBUG
         guard Accessibility.checkIfProcessIsTrusted(withPrompt: true) else {
 
             OSLog.main.log("Process is not trusted for AX.")
@@ -83,6 +86,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             return
         }
+        isProcessTrustedForAccessibilityAccess = true
+        #else
+        if !Accessibility.checkIfProcessIsTrusted(withPrompt: false) {
+            OSLog.main.warning("Process is **not** trusted for AX; some features will not work!")
+        } else {
+            isProcessTrustedForAccessibilityAccess = true
+        }
+        #endif
+
 
         GlobalKeybindings.synchronizeMenuBarItemsWithGlobalKeyboardShortcuts()
         GlobalKeybindings.registerGlobalKeyboardShortcuts()
