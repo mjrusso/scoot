@@ -115,7 +115,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         self.initializeChangeScreenParametersObserver()
 
+        #if DEBUG
         self.bringToForeground(using: .element)
+        #endif
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
