@@ -290,12 +290,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func bringToForeground() {
         self.currentApp = NSWorkspace.shared.frontmostApplication
 
-        if let app = self.currentApp {
-            OSLog.main.log("Scoot invoked with frontmost app: \(String(describing: app.localizedName ?? "<unknown>"), privacy: .private(mask: .hash))")
+        OSLog.main.log("Scoot invoked with frontmost app: \(String(describing: self.currentApp?.localizedName ?? "<unknown>"), privacy: .private(mask: .hash))")
+
+        let activeJumpMode = self.inputWindow.activeJumpMode
+
+        if let app = self.currentApp , activeJumpMode == .element {
+            // For performance reasons, only traverse the accessibility tree if
+            // the user is actually using the element-based navigation mode.
+            // See https://github.com/mjrusso/scoot/issues/26 for more details.
             self.inputWindow.initializeCoreDataStructuresForElementBasedMovement(of: app)
         }
 
-        OSLog.main.log("Using \(String(describing: self.inputWindow.activeJumpMode), privacy: .public) jump mode")
+        OSLog.main.log("Using \(String(describing: activeJumpMode), privacy: .public) jump mode")
 
         self.inputWindow.showAppropriateJumpView()
 
