@@ -95,6 +95,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         #endif
 
+        Accessibility.enableEnhancedUserInterfaceForAllApps()
 
         GlobalKeybindings.synchronizeMenuBarItemsWithGlobalKeyboardShortcuts()
         GlobalKeybindings.registerGlobalKeyboardShortcuts()
@@ -124,6 +125,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         #if DEBUG
         OSLog.main.log("Scoot: applicationWillTerminate")
         #endif
+
+        // FIXME: Only remove `AXEnhancedUserInterface` attributes that Scoot
+        // itself was responsible for adding.
+        Accessibility.disableEnhancedUserInterfaceForAllApps()
     }
 
     func applicationWillBecomeActive(_ notification: Notification) {
