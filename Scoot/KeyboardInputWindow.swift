@@ -1,4 +1,5 @@
 import Cocoa
+import OSLog
 
 class KeyboardInputWindow: TransparentWindow {
 
@@ -105,6 +106,8 @@ class KeyboardInputWindow: TransparentWindow {
             return
         }
 
+        OSLog.main.log("Preparing data structures for grid-based nav")
+
         var data = [(grid: Grid, screenRects: [CGRect])]()
 
         for jumpWindowController in jumpWindowControllers {
@@ -160,6 +163,8 @@ class KeyboardInputWindow: TransparentWindow {
         guard let jumpWindowControllers = appDelegate?.jumpWindowControllers else {
             return
         }
+
+        OSLog.main.log("Preparing data structures for element-based nav")
 
         let elements = Accessibility
           .getAccessibleElementsForFocusedWindow(of: app)
