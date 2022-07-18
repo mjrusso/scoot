@@ -59,9 +59,10 @@ extension KeyboardInputWindow {
         for windowController in jumpWindowControllers {
             if let screen = windowController.assignedScreen {
                 if screen.frame.contains(screenRect) {
-                    let rect = NSRect( // Convert from screen coordinates to window coordinates.
-                        x: screenRect.origin.x - screen.frame.origin.x,
-                        y: screenRect.origin.y - screen.frame.origin.y,
+                    // Convert from screen coordinates to window coordinates, accounting the system Dock (when visible).
+                    let rect = NSRect(
+                        x: screenRect.origin.x - screen.frame.origin.x - (screen.visibleFrame.origin.x - screen.frame.origin.x),
+                        y: screenRect.origin.y - screen.frame.origin.y - (screen.visibleFrame.origin.y - screen.frame.origin.y),
                         width: screenRect.width,
                         height: screenRect.height
                     )

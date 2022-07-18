@@ -125,8 +125,8 @@ class KeyboardInputWindow: TransparentWindow {
             // screens are connected.)
             let screenRects = grid.rects.map {
                 CGRect(
-                    x: $0.origin.x + screen.frame.origin.x,
-                    y: $0.origin.y + screen.frame.origin.y,
+                    x: $0.origin.x + screen.visibleFrame.origin.x,
+                    y: $0.origin.y + screen.visibleFrame.origin.y,
                     width: $0.width,
                     height: $0.height
                 )
