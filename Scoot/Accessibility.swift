@@ -31,8 +31,8 @@ struct Accessibility {
 
         /// The element's frame, in Cocoa/AppKit window coordinates.
         var windowRect: CGRect {
-            CGRect(x: frame.origin.x - screen.frame.origin.x,
-                   y: frame.origin.y - screen.frame.origin.y,
+            CGRect(x: frame.origin.x - screen.visibleFrame.origin.x,
+                   y: frame.origin.y - screen.visibleFrame.origin.y,
                    width: frame.width,
                    height: frame.height)
         }
