@@ -93,10 +93,12 @@ extension KeyboardInputWindow {
             return
         case ("=", false, _):
             appDelegate?.bringToBackground()
+            usleep(10000)
             mouse.pressDown(.left)
             isHoldingDownLeftMouseButton = true
             // Automatically bring Scoot to the foreground, so the user can
             // continue their drag operation.
+            usleep(10000)
             appDelegate?.bringToForeground()
             return
         case ("\\", false, _):
