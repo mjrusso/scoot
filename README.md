@@ -72,8 +72,8 @@ When Scoot is in the foreground:
 
 * You can click with the left mouse button (at the current cursor location) by hitting the Return (↵) key.
 
-* You can hold the left mouse button down by hitting ⌘↵. (To release the button, type ⌘↵ again, or, alternatively, just press ↵ on its own.)
-  * To perform a drag-and-drop operation: situate the cursor above the object you want to drag and press ⌘↵, then move the mouse cursor to the desired drag destination (using one or more of the mechanisms that Scoot makes available), and then press ⌘↵ again to perform the drop.
+* You can hold the left mouse button down by pressing `=`. (To release the button, press ↵.)
+  * To perform a drag-and-drop operation: situate the cursor above the object you want to drag and press `=`, then move the mouse cursor to the desired drag destination (using one or more of the mechanisms that Scoot makes available), and then press ↵ to perform the drop.
 
 * You can double-click with the left mouse button (at the current cursor location) by hitting the Shift and Return keys together (⇧↵).
 
