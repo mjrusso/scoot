@@ -37,33 +37,8 @@ struct Mouse {
     }
 
     func click(button: Mouse.Button) {
-        // It should be possible to `pressDown()` and then `release()` (after a
-        // short delay), however that approach doesn't work reliably: in some
-        // applications (for example, when trying to click on a hyperlink in a
-        // browser, or in an apps that render their user interface using web
-        // technologies), mouse clicks don't actually register.
-        //
-        // For an unknown reason, posting two `leftMouseDown` events, followed
-        // by a single `leftMouseUp`, *seems* to work consistently everywhere.
-        // How's that for a hack?
-        //
-        // [N.B.: A previous implementation issued two clicks in a row (i.e.,
-        // `pressDown()`, `release()`, `pressDown()`, `release()`), and that
-        // worked better than one could reasonably expect. However, there were
-        // rare cases where two clicks would actually be registered: for example,
-        // in Safari, clicking the "close tab" button (the one embedded in the
-        // tab itself) would result in two tabs being closed. Another example:
-        // it wasn't possible to use Scoot to bring up it's menu bar: two clicks
-        // would register, and it would immediately close.]
-        //
-        // [N.B.: This question [0] on Stack Overflow ("Simulating mouse clicks
-        // on Mac OS X does not work for some applications") seems relevant, but
-        // unfortunately none of the proposed strategies seem to work.]
-        //
-        // [0]: https://stackoverflow.com/q/2369806/15304124
         pressDown(button)
-        pressDown(button)
-        usleep(40000)
+        usleep(10000)
         release(button)
     }
 

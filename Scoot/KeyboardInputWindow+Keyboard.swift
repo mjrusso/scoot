@@ -60,17 +60,16 @@ extension KeyboardInputWindow {
         }
 
         switch (character, isHoldingDownLeftMouseButton, modifiers) {
+        // Scoot is brought to the background before issuing any mouse-related
+        // operation (like clicking). If the target window was focused ahead of
+        // invoking Scoot, it will regain focus _before_ clicking, which
+        // significantly improves reliability. For more context, see
+        // <https://github.com/mjrusso/scoot/issues/28>.
         case ("\r", false, []):
+            appDelegate?.bringToBackground()
             mouse.click(button: .left)
             return
         case ("\r", false, _), ("[", false, _), ("]", false, _):
-            // The user is pressing the left mouse button while holding down
-            // one or more modifier keys, or pressing the middle or right mouse
-            // button (with or without modifiers). In any of these cases, a
-            // system-provided context menu will likely pop up. Scoot can't
-            // take control of the mouse cursor when a context menu is active,
-            // so it is a better user experience to bring Scoot to the
-            // background before issuing the click.
             appDelegate?.bringToBackground()
 
             // Note that if a modifier is being held, it will "pass through" to
@@ -87,15 +86,21 @@ extension KeyboardInputWindow {
             }
             return
         case ("\r", true, _):
+            appDelegate?.bringToBackground()
             mouse.notifyDrag(.left)
             mouse.release(.left)
             isHoldingDownLeftMouseButton = false
             return
         case ("=", false, _):
+            appDelegate?.bringToBackground()
             mouse.pressDown(.left)
             isHoldingDownLeftMouseButton = true
+            // Automatically bring Scoot to the foreground, so the user can
+            // continue their drag operation.
+            appDelegate?.bringToForeground()
             return
         case ("\\", false, _):
+            appDelegate?.bringToBackground()
             mouse.doubleClick(button: .left)
             return
         default:
