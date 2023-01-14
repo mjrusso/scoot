@@ -109,23 +109,21 @@ extension KeyboardInputWindow {
             break
         }
 
-        if modifiers.contains(.shift) {
-            switch (mode, Int(event.keyCode), character) {
-            case (_, kVK_UpArrow, _), (.emacs, _, "P"), (.vi, _, "B"):
-                mouse.scroll(.up, stepSize: 20)
-                return
-            case (_, kVK_DownArrow, _), (.emacs, _, "N"), (.vi, _, "F"):
-                mouse.scroll(.down, stepSize: 20)
-                return
-            case (_, kVK_LeftArrow, _), (.emacs, _, "B"), (.vi, _, "I"):
-                mouse.scroll(.left, stepSize: 20)
-                return
-            case (_, kVK_RightArrow, _), (.emacs, _, "F"), (.vi, _, "A"):
-                mouse.scroll(.right, stepSize: 20)
-                return
-            default:
-                break
-            }
+        switch (mode, modifiers, Int(event.keyCode), character) {
+        case (_, .shift, kVK_UpArrow, _), (.emacs, .shift, _, "P"), (.vi, .control, _, "B"):
+            mouse.scroll(.up, stepSize: 20)
+            return
+        case (_, .shift, kVK_DownArrow, _), (.emacs, .shift, _, "N"), (.vi, .control, _, "F"):
+            mouse.scroll(.down, stepSize: 20)
+            return
+        case (_, .shift, kVK_LeftArrow, _), (.emacs, .shift, _, "B"), (.vi, .control, _, "I"):
+            mouse.scroll(.left, stepSize: 20)
+            return
+        case (_, .shift, kVK_RightArrow, _), (.emacs, .shift, _, "F"), (.vi, .control, _, "A"):
+            mouse.scroll(.right, stepSize: 20)
+            return
+        default:
+            break
         }
 
         // By default, we vend to the system directly (by calling `interpretKeyEvents`
