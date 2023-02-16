@@ -192,11 +192,19 @@ _Note:_ ↵ signifies the Return (a.k.a Enter) key. _(Sidenote: technically, Ret
 
 ## Installation
 
-To install Scoot:
+Scoot is available on [Homebrew](https://brew.sh):
 
-1. Download and extract the latest build of [Scoot][latest-scoot-binary].
+```bash
+brew install --cask scoot
+```
+
+Alternatively, you can manually download the app bundle:
+
+1. Download and extract [the latest build of Scoot][latest-scoot-binary].
 2. Drag the extracted _Scoot.app_ into your computer's _Applications_ folder.
 3. Double-click on _Scoot.app_ (from the _Applications_ folder) to launch it.
+
+### Setup
 
 On first run, you'll be presented with a prompt like the following:
 
