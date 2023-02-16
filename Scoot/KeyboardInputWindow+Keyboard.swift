@@ -109,31 +109,28 @@ extension KeyboardInputWindow {
             break
         }
 
-        if modifiers.contains(.shift) {
-            switch (mode, Int(event.keyCode), character) {
-            case (_, kVK_UpArrow, _), (.emacs, _, "P"), (.vi, _, "B"):
-                mouse.scroll(.up, stepSize: 20)
-                return
-            case (_, kVK_DownArrow, _), (.emacs, _, "N"), (.vi, _, "F"):
-                mouse.scroll(.down, stepSize: 20)
-                return
-            case (_, kVK_LeftArrow, _), (.emacs, _, "B"), (.vi, _, "I"):
-                mouse.scroll(.left, stepSize: 20)
-                return
-            case (_, kVK_RightArrow, _), (.emacs, _, "F"), (.vi, _, "A"):
-                mouse.scroll(.right, stepSize: 20)
-                return
-            default:
-                break
-            }
-        }
-
         // By default, we vend to the system directly (by calling `interpretKeyEvents`
         // with the input event). However, in some cases we need to override the
         // system behaviour: for example, Control-A maps to `moveToBeginningOfParagraph`,
         // but `moveToBeginningOfLine` is more appropriate here.
 
         switch (mode, modifiers, character) {
+
+        case (.emacs, .shift, "P"), (.vi, .control, "b"),
+            (_, .shift, _) where Int(event.keyCode) == kVK_UpArrow:
+            mouse.scroll(.up, stepSize: 20)
+
+        case (.emacs, .shift, "N"), (.vi, .control, "f"),
+            (_, .shift, _) where Int(event.keyCode) == kVK_DownArrow:
+            mouse.scroll(.down, stepSize: 20)
+
+        case (.emacs, .shift, "B"), (.vi, .control, "i"),
+            (_, .shift, _) where Int(event.keyCode) == kVK_LeftArrow:
+            mouse.scroll(.left, stepSize: 20)
+
+        case (.emacs, .shift, "F"), (.vi, .control, "a"),
+            (_, .shift, _) where Int(event.keyCode) == kVK_RightArrow:
+            mouse.scroll(.right, stepSize: 20)
 
         case (.emacs, .control, "a"):
             // Emacs: move-beginning-of-line
