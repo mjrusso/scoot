@@ -272,7 +272,7 @@ See the [issue tracker][scoot-issues]. Contributions welcome!
 
 Scoot is released under the terms of the [BSD 3-Clause License](LICENSE).
 
-Copyright (c) 2021-2022, [Michael Russo](https://mjrusso.com).
+Copyright (c) 2021-2023, [Michael Russo](https://mjrusso.com).
 
 
 [latest-scoot-binary]: https://github.com/mjrusso/scoot/releases/latest/download/Scoot.app.zip
