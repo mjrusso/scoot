@@ -18,7 +18,10 @@ class ElementView: NSView {
         guard let ctx = NSGraphicsContext.current else {
             return
         }
-
+        
+        let shouldRoundBorders = UserSettings.shared.roundElementBorders
+        let borderOpacity = UserSettings.shared.elementBorderOpacity
+        
         ctx.cgContext.setFillColor(
             NSColor.black.withAlphaComponent(
                 viewController.elementBackgroundAlphaComponent
@@ -28,6 +31,7 @@ class ElementView: NSView {
             ctx.cgContext.fill(element.windowRect)
         }
 
+        // Setup font & font bg color
         let fontSize = UserSettings.shared.elementViewFontSize
         let font = NSFont.monospacedSystemFont(ofSize: fontSize, weight: .medium)
 
@@ -41,27 +45,29 @@ class ElementView: NSView {
         let backgroundColor = NSColor.black.withAlphaComponent(
             viewController.elementLabelBackgroundAlphaComponent
         )
-
+        
+        let borderColor = foregroundColor.withAlphaComponent(borderOpacity)
+    
         let attrs: [NSAttributedString.Key: Any] = [
             .font: font,
             .foregroundColor: foregroundColor,
-            .backgroundColor: backgroundColor,
             .paragraphStyle: paragraphStyle,
         ]
 
         let currentSequence = String(viewController.keyboardInputWindow?.currentSequence ?? [])
 
+        // Draw the Labels
         for (element, sequence) in elements {
             let rect = element.windowRect
 
             let text = sequence
             let string = NSMutableAttributedString(string: text)
-
             string.addAttributes(attrs, range: NSRange(text.startIndex..., in: text))
 
+            // Highlight logic
             if !currentSequence.isEmpty {
                 if let range = text.range(of: currentSequence),
-                   text.distance(from: text.startIndex, to: range.lowerBound) == 0  {
+                    text.distance(from: text.startIndex, to: range.lowerBound) == 0  {
                     string.addAttribute(.foregroundColor,
                                         value: foregroundColor.withAlphaComponent(0.5),
                                         range: NSRange(range, in: text))
@@ -72,31 +78,53 @@ class ElementView: NSView {
                 }
             }
 
-            let boundingRect = string.boundingRect(
-                with: rect.size,
-                options: .usesLineFragmentOrigin
-            ).integral
+            let labelSize = string.size()
+            
+            // Text padding
+            let xPadding: CGFloat = 10.0
+            let yPadding: CGFloat = 6.0
+            let bgWidth = labelSize.width + xPadding
+            let bgHeight = labelSize.height + yPadding
+                
+            // Calculate Y position
+            let padding = CGSize(width: 8.0, height: 8.0)
+            let y = rect.origin.y - rect.height + (0.4 * labelSize.height) - padding.height
+            let clampedY = max(y, self.frame.minY)
 
-            let textHeight = boundingRect.height
+            // Calculate X position
+            let bgX = rect.origin.x + (rect.width - bgWidth) / 2
+                
+            // Create the elment text bg Rectangle
+            let badgeRect = CGRect(x: bgX, y: clampedY, width: bgWidth, height: bgHeight)
+                
+            // Draw Rounded Background
+            let cornerRadius: CGFloat = shouldRoundBorders ? 4.0 : 0.0
+            let bezierPath = NSBezierPath(roundedRect: badgeRect, xRadius: cornerRadius, yRadius: cornerRadius)
+            
+            backgroundColor.setFill()
+            bezierPath.fill()
+            
+            // Add border
+            if shouldRoundBorders {
+                bezierPath.lineWidth = 1.5
+                borderColor.setStroke()
+                bezierPath.stroke()
+            }
+            
+            // Calculate the math to center the smaller text rect inside the larger badge rect
+            let yOffset = (badgeRect.height - labelSize.height) / 2
 
-            let padding = CGSize(width: 18.0, height: 18.0)
-
-            let y = rect.origin.y - rect.height + (0.4 * textHeight) - padding.height
-
-            string.draw(
-                with: CGRect(
-                    origin: CGPoint(
-                        x: rect.origin.x - (padding.width / 2),
-                        y: max(y, self.frame.minY)
-                    ),
-                    size: rect.size + padding
-                ),
-                options: .usesLineFragmentOrigin,
-                context: nil
+            // IMPORTANT: We use 'labelSize.height' for the height, not 'badgeRect.height'.
+            // If you use the full badge height, draw(in:) will stick the text to the top.
+            let textDrawRect = CGRect(
+                x: badgeRect.origin.x,
+                y: badgeRect.origin.y + yOffset + 1.0,
+                width: badgeRect.width,
+                height: labelSize.height
             )
 
+            string.draw(in: textDrawRect)
         }
-
     }
 
 }
