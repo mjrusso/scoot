@@ -11,14 +11,26 @@ class TransparentWindow: NSWindow {
         isMovable = false
         ignoresMouseEvents = true
 
+        styleMask = .borderless
         collectionBehavior = [
-            // When the window becomes active, move it to the active space
-            // instead of switching spaces.
-            .moveToActiveSpace,
+            // The window exists on all Spaces simultaneously.
+            // This prevents the OS (or tiling window managers) from forcefully
+            // moving the window to the current display on activation.
+            .canJoinAllSpaces,
 
+            .fullScreenAuxiliary,
             // The window floats in Spaces and hides in Exposé.
             .transient,
         ]
+    }
+    
+    // Overrides tell Macos to handle keyboard events despite window being borderless
+    override var canBecomeKey: Bool {
+        return true
+    }
+
+    override var canBecomeMain: Bool {
+        return true
     }
 
 }
