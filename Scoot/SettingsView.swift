@@ -38,6 +38,12 @@ struct SettingsView: View {
 
     @AppStorage(UserSettings.Constants.Names.elementViewFontSize)
     var elementViewFontSize = UserSettings.Constants.DefaultValues.elementViewFontSize
+    
+    @AppStorage(UserSettings.Constants.Names.roundElementBorders)
+    var roundElementBorders = UserSettings.Constants.DefaultValues.roundElementBorders
+    
+    @AppStorage(UserSettings.Constants.Names.elementBorderOpacity)
+    var elementBorderOpacity = UserSettings.Constants.DefaultValues.elementBorderOpacity
 
     // MARK: User Interface
 
@@ -62,7 +68,9 @@ struct SettingsView: View {
                 gridViewOverallContrast: $gridViewOverallContrast,
                 elementViewOverallContrast: $elementViewOverallContrast,
                 gridViewFontSize: $gridViewFontSize,
-                elementViewFontSize: $elementViewFontSize
+                elementViewFontSize: $elementViewFontSize,
+                roundElementBorders: $roundElementBorders,
+                elementBorderOpacity: $elementBorderOpacity
                 ).tabItem {
                     Label("Presentation", systemImage: "scribble.variable")
                 }
@@ -136,12 +144,15 @@ struct PresentationSettingsView: View {
     @Binding var elementViewOverallContrast: Double
     @Binding var gridViewFontSize: Double
     @Binding var elementViewFontSize: Double
+    @Binding var roundElementBorders: Bool
+    @Binding var elementBorderOpacity: Double
 
     let targetGridCellSideLengthConfig = UserSettings.Constants.Sliders.targetGridCellSideLength
     let gridViewOverallContrastConfig = UserSettings.Constants.Sliders.gridViewOverallContrast
     let elementViewOverallContrastConfig = UserSettings.Constants.Sliders.elementViewOverallContrast
     let gridViewFontSizeConfig = UserSettings.Constants.Sliders.gridViewFontSize
     let elementViewFontSizeConfig = UserSettings.Constants.Sliders.elementViewFontSize
+    let elementBorderOpacityConfig = UserSettings.Constants.Sliders.elementBorderOpacity
 
 
     var body: some View {
@@ -167,6 +178,11 @@ struct PresentationSettingsView: View {
                     .labelStyle(TitleOnlyLabelStyle())
                 Toggle("Show grid lines", isOn: $showGridLines)
                 Toggle("Show grid labels", isOn: $showGridLabels)
+                Toggle("Round element borders", isOn: $roundElementBorders)
+                Slider(value: $elementBorderOpacity, in: elementBorderOpacityConfig.range, step: elementBorderOpacityConfig.step){
+                    Label("Element border opacity", systemImage: "gear")
+                }
+                    .labelStyle(TitleOnlyLabelStyle())
                 Slider(value: $targetGridCellSideLength, in: targetGridCellSideLengthConfig.range, step: targetGridCellSideLengthConfig.step) {
                     Label("Grid Cell Size:", systemImage: "gear")
                 }
@@ -187,6 +203,14 @@ struct PresentationSettingsView: View {
         }
         .onChange(of: showGridLabels) { newValue in
             OSLog.main.log("Toggled showGridLabels to \(showGridLabels).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
+        }
+        .onChange(of: roundElementBorders) { newValue in
+            OSLog.main.log("Toggled roundElementBorders to \(roundElementBorders).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
+        }
+        .onChange(of: elementBorderOpacity){ newValue in
+            OSLog.main.log("Changed elementBorderOpacity to \(elementBorderOpacity).")
             (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
         }
         .onChange(of: targetGridCellSideLength) { newValue in
@@ -233,6 +257,8 @@ struct PresentationSettingsView: View {
         elementViewOverallContrast = UserSettings.Constants.DefaultValues.elementViewOverallContrast
         gridViewFontSize = UserSettings.Constants.DefaultValues.gridViewFontSize
         elementViewFontSize = UserSettings.Constants.DefaultValues.elementViewFontSize
+        roundElementBorders = UserSettings.Constants.DefaultValues.roundElementBorders
+        elementBorderOpacity = UserSettings.Constants.DefaultValues.elementBorderOpacity
     }
 
 }
@@ -248,7 +274,9 @@ struct PresentationSettingsView_Previews: PreviewProvider {
             gridViewOverallContrast: .constant(0.0),
             elementViewOverallContrast: .constant(0.0),
             gridViewFontSize: .constant(18),
-            elementViewFontSize: .constant(14)
+            elementViewFontSize: .constant(14),
+            roundElementBorders: .constant(false),
+            elementBorderOpacity: .constant(0.7)
         )
     }
 }
