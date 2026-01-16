@@ -43,6 +43,7 @@ class UserSettings {
             static let elementViewFontSize = "ElementViewFontSize"
             static let roundElementBorders = "RoundElementBorders"
             static let elementBorderOpacity = "ElementBorderOpacity"
+            static let elementBackgroundOpacity = "ElementBackgroundOpacity"
         }
 
         struct DefaultValues {
@@ -58,6 +59,7 @@ class UserSettings {
             static let elementViewFontSize = Double(14)
             static let roundElementBorders = false
             static let elementBorderOpacity = Double(0.7)
+            static let elementBackgroundOpacity = Double(1)
         }
 
         struct Sliders {
@@ -78,6 +80,7 @@ class UserSettings {
             static let gridViewFontSize = Config(min: 10, max: 24, step: 2)
             static let elementViewFontSize = Config(min: 6, max: 22, step: 2)
             static let elementBorderOpacity = Config(min: 0.0, max: 1.0, step: 0.1)
+            static let elementBackgroundOpacity = Config(min: 0.0, max: 1.0, step: 0.1)
         }
 
     }
@@ -193,6 +196,15 @@ class UserSettings {
         }
         set {
             settingsView?.elementBorderOpacity = newValue
+        }
+    }
+    
+    var elementBackgroundOpacity: Double {
+        get {
+            settingsView?.elementBackgroundOpacity ?? Constants.DefaultValues.elementBackgroundOpacity
+        }
+        set {
+            settingsView?.elementBackgroundOpacity = newValue
         }
     }
 

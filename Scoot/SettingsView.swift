@@ -44,6 +44,9 @@ struct SettingsView: View {
     
     @AppStorage(UserSettings.Constants.Names.elementBorderOpacity)
     var elementBorderOpacity = UserSettings.Constants.DefaultValues.elementBorderOpacity
+    
+    @AppStorage(UserSettings.Constants.Names.elementBackgroundOpacity)
+    var elementBackgroundOpacity = UserSettings.Constants.DefaultValues.elementBackgroundOpacity
 
     // MARK: User Interface
 
@@ -70,7 +73,8 @@ struct SettingsView: View {
                 gridViewFontSize: $gridViewFontSize,
                 elementViewFontSize: $elementViewFontSize,
                 roundElementBorders: $roundElementBorders,
-                elementBorderOpacity: $elementBorderOpacity
+                elementBorderOpacity: $elementBorderOpacity,
+                elementBackgroundOpacity: $elementBackgroundOpacity
                 ).tabItem {
                     Label("Presentation", systemImage: "scribble.variable")
                 }
@@ -146,6 +150,7 @@ struct PresentationSettingsView: View {
     @Binding var elementViewFontSize: Double
     @Binding var roundElementBorders: Bool
     @Binding var elementBorderOpacity: Double
+    @Binding var elementBackgroundOpacity: Double
 
     let targetGridCellSideLengthConfig = UserSettings.Constants.Sliders.targetGridCellSideLength
     let gridViewOverallContrastConfig = UserSettings.Constants.Sliders.gridViewOverallContrast
@@ -153,6 +158,7 @@ struct PresentationSettingsView: View {
     let gridViewFontSizeConfig = UserSettings.Constants.Sliders.gridViewFontSize
     let elementViewFontSizeConfig = UserSettings.Constants.Sliders.elementViewFontSize
     let elementBorderOpacityConfig = UserSettings.Constants.Sliders.elementBorderOpacity
+    let elementBackgroundOpacityConfig = UserSettings.Constants.Sliders.elementBackgroundOpacity
 
 
     var body: some View {
@@ -183,6 +189,10 @@ struct PresentationSettingsView: View {
                     Label("Element border opacity", systemImage: "gear")
                 }
                     .labelStyle(TitleOnlyLabelStyle())
+                Slider(value: $elementBackgroundOpacity, in: elementBackgroundOpacityConfig.range, step: elementBackgroundOpacityConfig.step){
+                    Label("Element background opacity", systemImage: "gear")
+                }
+                .labelStyle(TitleOnlyLabelStyle())
                 Slider(value: $targetGridCellSideLength, in: targetGridCellSideLengthConfig.range, step: targetGridCellSideLengthConfig.step) {
                     Label("Grid Cell Size:", systemImage: "gear")
                 }
@@ -211,6 +221,10 @@ struct PresentationSettingsView: View {
         }
         .onChange(of: elementBorderOpacity){ newValue in
             OSLog.main.log("Changed elementBorderOpacity to \(elementBorderOpacity).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
+        }
+        .onChange(of: elementBackgroundOpacity){ newValue in
+            OSLog.main.log("Change elementBackgroundOpacity to \(elementBackgroundOpacity).")
             (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
         }
         .onChange(of: targetGridCellSideLength) { newValue in
@@ -259,6 +273,7 @@ struct PresentationSettingsView: View {
         elementViewFontSize = UserSettings.Constants.DefaultValues.elementViewFontSize
         roundElementBorders = UserSettings.Constants.DefaultValues.roundElementBorders
         elementBorderOpacity = UserSettings.Constants.DefaultValues.elementBorderOpacity
+        elementBackgroundOpacity = UserSettings.Constants.DefaultValues.elementBackgroundOpacity
     }
 
 }
@@ -276,7 +291,8 @@ struct PresentationSettingsView_Previews: PreviewProvider {
             gridViewFontSize: .constant(18),
             elementViewFontSize: .constant(14),
             roundElementBorders: .constant(false),
-            elementBorderOpacity: .constant(0.7)
+            elementBorderOpacity: .constant(0.7),
+            elementBackgroundOpacity: .constant(1)
         )
     }
 }

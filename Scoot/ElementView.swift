@@ -21,6 +21,7 @@ class ElementView: NSView {
         
         let shouldRoundBorders = UserSettings.shared.roundElementBorders
         let borderOpacity = UserSettings.shared.elementBorderOpacity
+        let backgroundOpacity = UserSettings.shared.elementBackgroundOpacity
         
         ctx.cgContext.setFillColor(
             NSColor.black.withAlphaComponent(
@@ -44,7 +45,7 @@ class ElementView: NSView {
 
         let backgroundColor = NSColor.black.withAlphaComponent(
             viewController.elementLabelBackgroundAlphaComponent
-        )
+        ).withAlphaComponent(backgroundOpacity)
         
         let borderColor = foregroundColor.withAlphaComponent(borderOpacity)
     
