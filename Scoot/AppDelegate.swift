@@ -20,6 +20,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var useFreestyleNavigationMenuItem: NSMenuItem!
 
+    private var lastScreenValidationAlertAt: Date = .distantPast
+    private let screenValidationAlertCooldown: TimeInterval = 10
+
     lazy var inputWindow: KeyboardInputWindow = {
         NSApp.orderedWindows.compactMap({ $0 as? KeyboardInputWindow }).first!
     }()
@@ -217,6 +220,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.jumpWindowControllers.first(where: {
             $0.assignedScreen == screen
         })
+    }
+
+    func presentScreenValidationAlertIfNeeded(details: String? = nil) {
+        let now = Date()
+
+        guard now.timeIntervalSince(lastScreenValidationAlertAt) >= screenValidationAlertCooldown else {
+            return
+        }
+
+        lastScreenValidationAlertAt = now
+
+        let alert = NSAlert()
+        alert.alertStyle = .warning
+        alert.messageText = "Screen configuration error"
+        alert.informativeText = """
+        Could not validate native/scaled screen size.
+        Scoot will retry automatically. If this persists, try restoring display scaling or reconnecting the monitor.
+        \(details.map { "\n\nDetails: \($0)" } ?? "")
+        """
+        alert.addButton(withTitle: "OK")
+        alert.runModal()
     }
 
     // MARK: Settings UI
