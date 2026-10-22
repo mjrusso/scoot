@@ -6,17 +6,24 @@ struct SettingsView: View {
 
     // MARK: Persisted Application State
 
-    // IMPORTANT: these @AppStorage-wrapped properties are deliberately not
-    // marked as private. See `UserSettings` for details.
-
     @AppStorage(UserSettings.Constants.Names.keybindingMode)
     var keybindingMode = UserSettings.Constants.DefaultValues.keybindingMode
 
     @AppStorage(UserSettings.Constants.Names.primaryColor)
-    var primaryColor = UserSettings.Constants.DefaultValues.primaryColor
+    private var storedPrimaryColor = UserSettings.Constants.DefaultValues.primaryColor.rawValue
 
     @AppStorage(UserSettings.Constants.Names.secondaryColor)
-    var secondaryColor = UserSettings.Constants.DefaultValues.secondaryColor
+    private var storedSecondaryColor = UserSettings.Constants.DefaultValues.secondaryColor.rawValue
+
+    var primaryColor: Color {
+        get { Color(rawValue: storedPrimaryColor) }
+        nonmutating set { storedPrimaryColor = newValue.rawValue }
+    }
+
+    var secondaryColor: Color {
+        get { Color(rawValue: storedSecondaryColor) }
+        nonmutating set { storedSecondaryColor = newValue.rawValue }
+    }
 
     @AppStorage(UserSettings.Constants.Names.showGridLines)
     var showGridLines = UserSettings.Constants.DefaultValues.showGridLines
@@ -54,8 +61,8 @@ struct SettingsView: View {
                 }
                 .tag(Tabs.keybindings)
             PresentationSettingsView(
-                primaryColor: $primaryColor,
-                secondaryColor: $secondaryColor,
+                primaryColor: Binding(get: { primaryColor }, set: { primaryColor = $0 }),
+                secondaryColor: Binding(get: { secondaryColor }, set: { secondaryColor = $0 }),
                 showGridLines: $showGridLines,
                 showGridLabels: $showGridLabels,
                 targetGridCellSideLength: $targetGridCellSideLength,

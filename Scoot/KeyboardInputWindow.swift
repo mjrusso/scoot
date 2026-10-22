@@ -47,7 +47,7 @@ class KeyboardInputWindow: TransparentWindow {
 
     // Non-nil, if the user is in the process of entering a key sequence to
     // navigate via the decision tree.
-    var currentNode: Tree<CGRect>.Node<CGRect>? {
+    var currentNode: Tree<CGRect>.Node? {
         didSet {
             if let currentNode = currentNode {
                 currentSequence.append(currentNode.label)

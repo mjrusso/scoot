@@ -48,7 +48,7 @@ Freestyle mode is particularly handy for those cases where you want to quickly n
 
 * Scoot is _not_ intended to replace the mouse or trackpad entirely. It's here to augment them.
 
-* Scoot runs on MacOS 11 (Big Sur), and 12 (Monterey).
+* Scoot requires macOS 12 (Monterey) or later. Builds from this source no longer support macOS 11 (Big Sur).
 
 * Scoot is an AppKit app, written in Swift. (There's still some Carbon in here, too! [Yes][carbon-events], [really][carbon-accessibility].)
 

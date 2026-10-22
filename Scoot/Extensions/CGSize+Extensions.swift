@@ -15,11 +15,3 @@ func += (left: inout CGSize, right: CGSize) {
 func -= (left: inout CGSize, right: CGSize) {
     left = left - right
 }
-
-extension CGSize: Comparable {
-
-    public static func < (lhs: CGSize, rhs: CGSize) -> Bool {
-        (lhs.width < rhs.width) && (lhs.height < rhs.height)
-    }
-
-}
