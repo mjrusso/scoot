@@ -48,7 +48,7 @@ Freestyle mode is particularly handy for those cases where you want to quickly n
 
 * Scoot is _not_ intended to replace the mouse or trackpad entirely. It's here to augment them.
 
-* Scoot requires macOS 12 (Monterey) or later. Builds from this source no longer support macOS 11 (Big Sur).
+* Scoot requires MacOS 12 (Monterey) or later.
 
 * Scoot is an AppKit app, written in Swift. (There's still some Carbon in here, too! [Yes][carbon-events], [really][carbon-accessibility].)
 
@@ -206,7 +206,7 @@ Alternatively, you can manually download the app bundle:
 
 ### Setup
 
-On first run, you'll be presented with a prompt like the following:
+On first run, MacOS asks for permission to let Scoot control your computer. The screenshots in this section show the older System Preferences interface; newer versions use different setting names.
 
 <p align="center">
   <img width="450" src="./Assets/Documentation/accessibility-prompt.png" alt="Scoot.app would like to control this computer using accessibility features" />
@@ -214,13 +214,23 @@ On first run, you'll be presented with a prompt like the following:
 
 **Scoot will not work unless access is granted.** (Note that Scoot does not collect any user or usage-related information, and does not make any network requests. The app runs entirely locally, and treats its privileged access with the utmost respect.)
 
-To grant this permission, click _“Open System Preferences”_. Next, click the lock in the bottom left corner (_“Click the lock to make changes”_).
+Open the permission pane for your MacOS version:
+
+| MacOS version | Permission pane                                                           |
+|---------------|---------------------------------------------------------------------------|
+| MacOS 27      | System Settings → Privacy & Security → **Device Control and Data Access** |
+| MacOS 13–26   | System Settings → Privacy & Security → **Accessibility**                  |
+| MacOS 12      | System Preferences → Security & Privacy → Privacy → **Accessibility**     |
+
+Enable **Scoot** in the list. If it is missing, click **+** and select **Scoot.app** from your Applications folder. Restart Scoot after granting access.
+
+On MacOS 12, click the lock in the bottom left corner (_“Click the lock to make changes”_) before changing permissions:
 
 <p align="center">
   <img width="550" src="./Assets/Documentation/privacy-locked.png" alt="Locked accessibility settings" />
 </p>
 
-Finally, check _“Scoot.app”_ to give Scoot the ability to move your cursor, and to click, drag, and scroll.
+Check _“Scoot.app”_ to give Scoot the ability to move your cursor, and to click, drag, and scroll:
 
 <p align="center">
   <img width="550" src="./Assets/Documentation/accessibility-access-granted.png" alt="Scoot.app granted accessibility access" />
@@ -228,13 +238,15 @@ Finally, check _“Scoot.app”_ to give Scoot the ability to move your cursor, 
 
 See the [usage documentation](#usage) for details on how to use Scoot.
 
-If you're finding Scoot helpful, you may want to configure the app to launch automatically when you log in. To set this up, open System Preferences again, click _“Users & Groups”_, and then _“Login Items”_:
+To launch Scoot automatically when you log in, add **Scoot.app** to your [login items](https://support.apple.com/guide/mac-help/open-items-automatically-when-you-log-in-mh15189/mac). On MacOS 13 or later, open **System Settings → General → Login Items** (called **Login Items & Extensions** on newer versions).
+
+On MacOS 12, open **System Preferences → Users & Groups → Login Items**:
 
 <p align="center">
   <img width="550" src="./Assets/Documentation/login-items-locked.png" alt="Locked login items settings" />
 </p>
 
-As before, you'll need to click the lock in the bottom left corner to unlock this preference pane. Once unlocked, click the “+” button, and select _“Scoot.app”_ from the _Applications_ folder. Checking the _“Hide”_ checkbox is recommended.
+On MacOS 12, click the lock in the bottom left corner to unlock this preference pane. Once unlocked, click the “+” button, and select _“Scoot.app”_ from the _Applications_ folder. Checking the _“Hide”_ checkbox is recommended.
 
 <p align="center">
   <img width="550" src="./Assets/Documentation/start-automatically.png" alt="Scoot configured to start automatically" />

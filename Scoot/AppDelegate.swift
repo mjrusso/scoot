@@ -68,8 +68,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             func showAlert(completion: (Bool) -> Void) {
                 let alert = NSAlert()
-                alert.messageText = "Accessibility Permission Required"
-                alert.informativeText = "Please re-launch Scoot after authorizing."
+                alert.messageText = "Allow Scoot to Control Your Mac"
+                alert.informativeText = "Grant access in your Mac’s privacy settings, then relaunch Scoot."
                 alert.alertStyle = .critical
                 alert.addButton(withTitle: "View Documentation")
                 alert.addButton(withTitle: "Exit")
