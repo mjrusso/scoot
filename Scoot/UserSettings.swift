@@ -5,6 +5,7 @@ import SwiftUI
 // AppDelegate's SettingsView, using computed properties for colors and wrapped
 // properties for the other settings.
 
+@MainActor
 class UserSettings {
 
     struct Constants {

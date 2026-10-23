@@ -4,6 +4,7 @@ import OSLog
 import SwiftUI
 
 @main
+@MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var menu: NSMenu!
@@ -194,20 +195,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             object: NSApplication.shared,
             queue: OperationQueue.main
         ) { [weak self] notification in
+            MainActor.assumeIsolated {
+                OSLog.main.log("Received event: didChangeScreenParametersNotification.")
 
-            OSLog.main.log("Received event: didChangeScreenParametersNotification.")
+                guard let self = self else {
+                    return
+                }
 
-            guard let self = self else {
-                return
+                OSLog.main.logDetailsForAllConnectedScreens()
+                self.rebuildJumpWindows()
+                OSLog.main.log("Finished responding to screen change.")
             }
-
-            OSLog.main.logDetailsForAllConnectedScreens()
-
-            // For simplicity (and instead of diffing the current window state),
-            // always rebuild all jump windows.
-            self.rebuildJumpWindows()
-
-            OSLog.main.log("Finished responding to screen change.")
         }
     }
 

@@ -3,10 +3,9 @@ import OSLog
 
 class KeyboardInputWindow: TransparentWindow {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func configureWindow() {
+        super.configureWindow()
 
-        backgroundColor = .clear
         delegate = self
 
         makeFirstResponder(self)

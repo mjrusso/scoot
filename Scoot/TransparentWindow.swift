@@ -2,9 +2,17 @@ import Cocoa
 
 class TransparentWindow: NSWindow {
 
-    override func awakeFromNib() {
+    final override func awakeFromNib() {
         super.awakeFromNib()
 
+        // These windows are loaded from AppKit storyboards on the main thread.
+        MainActor.assumeIsolated {
+            configureWindow()
+        }
+    }
+
+    @MainActor
+    func configureWindow() {
         backgroundColor = NSColor.clear
 
         isOpaque = false
