@@ -99,7 +99,7 @@ Scoot also works on systems with multiple connected displays.
 
 _If you use multiple displays, and experience an issue with Scoot's windows drawing in an incorrect location when the app launches (e.g. all Scoot windows appearing on the same display), please post your findings [in this issue](https://github.com/mjrusso/scoot/issues/18), and note the value of your “Displays have separate Spaces” checkbox in Mission Control._ If you do happen to find yourself in this state, you should be able to fix the window arrangement by clicking Scoot's menu bar icon, then “Debug”, and finally “Rebuild Jump Windows”.
 
-To customize Scoot's settings, click Scoot's menu bar icon, then “Preferences…”, or type `⌘,` while Scoot is in the foreground. In addition to modifying keybindings, it is also possible to modify Scoot's appearance (including font sizes, colours, opacity, etc.).
+To customize Scoot's settings, click Scoot's menu bar icon, then “Settings…”, or type `⌘,` while Scoot is in the foreground. In addition to modifying keybindings, it is also possible to modify Scoot's appearance (including font sizes, colours, opacity, etc.).
 
 ### Keybindings
 
@@ -116,13 +116,13 @@ Global keybindings are always active, as long as Scoot is currently running.
 | ⇧⌘K              | Use grid-based navigation (bring Scoot to foreground)    |
 | ⇧⌘L              | Use freestyle mode (bring Scoot to foreground)           |
 
-All global keybindings are fully customizable. To modify the keybindings, click Scoot's menu bar icon, then “Preferences…”, and select the “Keybindings” tab.
+All global keybindings are fully customizable. To modify the keybindings, click Scoot's menu bar icon, then “Settings…”, and select the “Keybindings” tab.
 
 #### Local Keybindings
 
 Local keybindings are only active when Scoot is active (i.e., when Scoot is in the foreground).
 
-Note that vi keybindings are not enabled by default, and must be explicitly toggled on (click Scoot's menu bar icon, then “Preferences…”, select the “Keybindings” tab, and then change the keybinding mode). Emacs keybindings (and most system keybindings) are disabled when vi keybindings are active.
+Note that vi keybindings are not enabled by default, and must be explicitly toggled on (click Scoot's menu bar icon, then “Settings…”, select the “Keybindings” tab, and then change the keybinding mode). Emacs keybindings (and most system keybindings) are disabled when vi keybindings are active.
 
 ##### General
 

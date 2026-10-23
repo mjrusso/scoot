@@ -96,7 +96,7 @@ struct KeybindingsSettingsView: View {
     var body: some View {
         Form {
             Picker("Keybinding Mode:", selection: $keybindingMode) {
-                Text("Emacs/ MacOS").tag(KeybindingMode.emacs)
+                Text("Emacs / MacOS").tag(KeybindingMode.emacs)
                 Text("vi").tag(KeybindingMode.vi)
             }
             .onChange(of: keybindingMode) { newValue in

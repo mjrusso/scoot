@@ -227,7 +227,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let hostingController = NSHostingController(rootView: self.settingsView)
 
         let window = NSWindow(contentViewController: hostingController)
-        window.title = "Scoot Preferences"
+        window.title = "Scoot Settings"
 
         return NSWindowController(window: window)
     }()
@@ -348,7 +348,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         bringToForeground(using: .freestyle)
     }
 
-    @IBAction func preferencesPressed(_ sender: NSMenuItem) {
+    @IBAction func settingsPressed(_ sender: NSMenuItem) {
         NSApp.activate(ignoringOtherApps: true)
         settingsWindowController.showWindow(sender)
     }
