@@ -6,6 +6,9 @@ struct SettingsView: View {
 
     // MARK: Persisted Application State
 
+    // UserSettings requires access to the settings properties; only the underlying
+    // color storage is private.
+
     @AppStorage(UserSettings.Constants.Names.keybindingMode)
     var keybindingMode = UserSettings.Constants.DefaultValues.keybindingMode
 
