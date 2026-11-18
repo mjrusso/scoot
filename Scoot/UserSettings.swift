@@ -48,7 +48,9 @@ class UserSettings {
                 }
             }
 
-            static let targetGridCellSideLength = Config(min: 40, max: 80, step: 10)
+            // A few big cells, then arrow-key
+            // nudges, is often faster than many small ones (⇧⌘= / ⇧⌘-).
+            static let targetGridCellSideLength = Config(min: 30, max: 200, step: 10)
             static let gridViewOverallContrast = Config(min: -0.4, max: 0.5, step: 0.1)
             static let elementViewOverallContrast = Config(min: -0.4, max: 0.5, step: 0.1)
             static let gridViewFontSize = Config(min: 10, max: 24, step: 2)
