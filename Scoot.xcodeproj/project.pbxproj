@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7DAB924A9CC663786ACF8B09 /* ColorStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7819B5ECE743DB5A5FA78A18 /* ColorStorageTests.swift */; };
 		E500850527BAA0C70053CB02 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850427BAA0C70053CB02 /* Color+Extensions.swift */; };
 		E500850827BC01760053CB02 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E500850727BC01760053CB02 /* KeyboardShortcuts */; };
 		E500850A27BC09530053CB02 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850927BC09530053CB02 /* AboutView.swift */; };
@@ -57,7 +58,6 @@
 		E5BE2E9126F25D7100BB754D /* AXSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E5BE2E9026F25D7100BB754D /* AXSwift */; };
 		E5E87FFD2630A3550094FE9B /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E87FFC2630A3550094FE9B /* GridView.swift */; };
 		E5EB845127837F380086A5D6 /* GeometryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB845027837F380086A5D6 /* GeometryTests.swift */; };
-		A1C010000000000000000001 /* ColorStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C010000000000000000002 /* ColorStorageTests.swift */; };
 		E5EB84532787E3F80086A5D6 /* PositionableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EB84522787E3F80086A5D6 /* PositionableTests.swift */; };
 		E5F61EF027ACCF4B0056A6EB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F61EEF27ACCF4B0056A6EB /* SettingsView.swift */; };
 /* End PBXBuildFile section */
@@ -80,6 +80,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7819B5ECE743DB5A5FA78A18 /* ColorStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStorageTests.swift; sourceTree = "<group>"; };
 		E500850427BAA0C70053CB02 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		E500850927BC09530053CB02 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		E500850B27BC907D0053CB02 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
@@ -135,7 +136,6 @@
 		E5E87FF4263061250094FE9B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../scoot/README.md; sourceTree = "<group>"; };
 		E5E87FFC2630A3550094FE9B /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GridView.swift; path = ../../scoot/Scoot/GridView.swift; sourceTree = "<group>"; };
 		E5EB845027837F380086A5D6 /* GeometryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeometryTests.swift; sourceTree = "<group>"; };
-		A1C010000000000000000002 /* ColorStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStorageTests.swift; sourceTree = "<group>"; };
 		E5EB84522787E3F80086A5D6 /* PositionableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionableTests.swift; sourceTree = "<group>"; };
 		E5F61EEF27ACCF4B0056A6EB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -254,7 +254,7 @@
 			children = (
 				E59C1629263E52540033E2CC /* GridTests.swift */,
 				E5EB845027837F380086A5D6 /* GeometryTests.swift */,
-				A1C010000000000000000002 /* ColorStorageTests.swift */,
+				7819B5ECE743DB5A5FA78A18 /* ColorStorageTests.swift */,
 				E59C1630264185940033E2CC /* TreeTests.swift */,
 				E5EB84522787E3F80086A5D6 /* PositionableTests.swift */,
 				E5776241262F04D300849D7D /* Info.plist */,
@@ -459,7 +459,7 @@
 			files = (
 				E59C162A263E52540033E2CC /* GridTests.swift in Sources */,
 				E5EB845127837F380086A5D6 /* GeometryTests.swift in Sources */,
-				A1C010000000000000000001 /* ColorStorageTests.swift in Sources */,
+				7DAB924A9CC663786ACF8B09 /* ColorStorageTests.swift in Sources */,
 				E59C1631264185940033E2CC /* TreeTests.swift in Sources */,
 				E5EB84532787E3F80086A5D6 /* PositionableTests.swift in Sources */,
 				E59C162F264184500033E2CC /* Tree.swift in Sources */,
