@@ -296,10 +296,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let activeJumpMode = self.inputWindow.activeJumpMode
 
         if let app = self.currentApp , activeJumpMode == .element {
-            // For performance reasons, only traverse the accessibility tree if
-            // the user is actually using the element-based navigation mode.
-            // See https://github.com/mjrusso/scoot/issues/26 for more details.
-            self.inputWindow.initializeCoreDataStructuresForElementBasedMovement(of: app)
+            self.scanElements(of: app)
         }
 
         OSLog.main.log("Using \(String(describing: activeJumpMode), privacy: .public) jump mode")
@@ -413,6 +410,49 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             $0.backgroundColor = $0.backgroundColor == .clear ?
                 UserSettings.shared.secondaryColor.withAlphaComponent(0.3) :
                 .clear
+        }
+    }
+
+    /// Scans the focused window for element-based navigation, retrying when the
+    /// app has not finished waking its accessibility tree.
+    ///
+    /// Firefox and Chromium/Electron expose only a handful of untitled stub
+    /// nodes for a moment (about two seconds in Zen) after
+    /// `AXEnhancedUserInterface` is switched on, so a single synchronous scan
+    /// can come back with no usable labels. Retrying keeps the overlay
+    /// responsive (it is already on screen) while the labels fill in.
+    func scanElements(of app: NSRunningApplication, attempt: Int = 1) {
+
+        guard inputWindow.activeJumpMode == .element else {
+            return
+        }
+
+        // For performance reasons, only traverse the accessibility tree if the
+        // user is actually using element-based navigation.
+        // See https://github.com/mjrusso/scoot/issues/26
+        inputWindow.initializeCoreDataStructuresForElementBasedMovement(of: app)
+
+        let count = jumpViewControllers.reduce(0) { $0 + $1.elements.count }
+        let maximumAttempts = 8
+
+        // A window that legitimately has a few controls is rescanned too, which
+        // is cheap and deterministic: the same candidates produce the same label
+        // sequences. Stop as soon as the user starts typing, so a late scan can
+        // never invalidate a half-entered sequence.
+        guard count < 10, attempt < maximumAttempts, !inputWindow.isWalkingDecisionTree else {
+            return
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) { [weak self] in
+
+            guard let self,
+                  self.currentApp === app,
+                  self.inputWindow.activeJumpMode == .element else {
+                return
+            }
+
+            self.scanElements(of: app, attempt: attempt + 1)
+            self.inputWindow.redrawJumpViews()
         }
     }
 
