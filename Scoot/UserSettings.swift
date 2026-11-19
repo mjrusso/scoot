@@ -21,6 +21,9 @@ class UserSettings {
             static let elementViewOverallContrast = "ElementViewOverallContrast"
             static let gridViewFontSize = "GridViewFontSize"
             static let elementViewFontSize = "ElementViewFontSize"
+            static let roundElementLabelCorners = "RoundElementLabelCorners"
+            static let elementLabelBorderOpacity = "ElementLabelBorderOpacity"
+            static let elementLabelBackgroundOpacity = "ElementLabelBackgroundOpacity"
         }
 
         struct DefaultValues {
@@ -34,6 +37,9 @@ class UserSettings {
             static let elementViewOverallContrast = Double(0)
             static let gridViewFontSize = Double(18)
             static let elementViewFontSize = Double(14)
+            static let roundElementLabelCorners = false
+            static let elementLabelBorderOpacity = Double(0)
+            static let elementLabelBackgroundOpacity = Double(1)
         }
 
         struct Sliders {
@@ -53,6 +59,8 @@ class UserSettings {
             static let elementViewOverallContrast = Config(min: -0.4, max: 0.5, step: 0.1)
             static let gridViewFontSize = Config(min: 10, max: 24, step: 2)
             static let elementViewFontSize = Config(min: 6, max: 22, step: 2)
+            static let elementLabelBorderOpacity = Config(min: 0.0, max: 1.0, step: 0.1)
+            static let elementLabelBackgroundOpacity = Config(min: 0.0, max: 1.0, step: 0.1)
         }
 
     }
@@ -108,6 +116,15 @@ class UserSettings {
         }
     }
 
+    var roundElementLabelCorners: Bool {
+        get {
+            settingsView?.roundElementLabelCorners ?? Constants.DefaultValues.roundElementLabelCorners
+        }
+        set {
+            settingsView?.roundElementLabelCorners = newValue
+        }
+    }
+
     var targetGridCellSideLength: Double {
         get {
             settingsView?.targetGridCellSideLength ?? Constants.DefaultValues.targetGridCellSideLength
@@ -150,6 +167,24 @@ class UserSettings {
         }
         set {
             settingsView?.elementViewFontSize = newValue
+        }
+    }
+
+    var elementLabelBorderOpacity: Double {
+        get {
+            settingsView?.elementLabelBorderOpacity ?? Constants.DefaultValues.elementLabelBorderOpacity
+        }
+        set {
+            settingsView?.elementLabelBorderOpacity = newValue
+        }
+    }
+
+    var elementLabelBackgroundOpacity: Double {
+        get {
+            settingsView?.elementLabelBackgroundOpacity ?? Constants.DefaultValues.elementLabelBackgroundOpacity
+        }
+        set {
+            settingsView?.elementLabelBackgroundOpacity = newValue
         }
     }
 

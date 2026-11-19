@@ -19,6 +19,10 @@ class ElementView: NSView {
             return
         }
 
+        let shouldRoundCorners = UserSettings.shared.roundElementLabelCorners
+        let borderOpacity = UserSettings.shared.elementLabelBorderOpacity
+        let backgroundOpacity = UserSettings.shared.elementLabelBackgroundOpacity
+
         ctx.cgContext.setFillColor(
             NSColor.black.withAlphaComponent(
                 viewController.elementBackgroundAlphaComponent
@@ -39,13 +43,14 @@ class ElementView: NSView {
         )
 
         let backgroundColor = NSColor.black.withAlphaComponent(
-            viewController.elementLabelBackgroundAlphaComponent
+            viewController.elementLabelBackgroundAlphaComponent * backgroundOpacity
         )
+
+        let borderColor = foregroundColor.withAlphaComponent(borderOpacity)
 
         let attrs: [NSAttributedString.Key: Any] = [
             .font: font,
             .foregroundColor: foregroundColor,
-            .backgroundColor: backgroundColor,
             .paragraphStyle: paragraphStyle,
         ]
 
@@ -72,29 +77,44 @@ class ElementView: NSView {
                 }
             }
 
-            let boundingRect = string.boundingRect(
-                with: rect.size,
-                options: .usesLineFragmentOrigin
-            ).integral
+            let labelSize = string.size()
 
-            let textHeight = boundingRect.height
+            let labelPadding = CGSize(width: 10.0, height: 6.0)
+            let badgeSize = labelSize + labelPadding
 
-            let padding = CGSize(width: 18.0, height: 18.0)
+            let padding = CGSize(width: 8.0, height: 8.0)
+            let y = rect.origin.y - rect.height + (0.4 * labelSize.height) - padding.height
 
-            let y = rect.origin.y - rect.height + (0.4 * textHeight) - padding.height
-
-            string.draw(
-                with: CGRect(
-                    origin: CGPoint(
-                        x: rect.origin.x - (padding.width / 2),
-                        y: max(y, self.frame.minY)
-                    ),
-                    size: rect.size + padding
+            let badgeRect = CGRect(
+                origin: CGPoint(
+                    x: rect.origin.x + (rect.width - badgeSize.width) / 2,
+                    y: max(y, self.frame.minY)
                 ),
-                options: .usesLineFragmentOrigin,
-                context: nil
+                size: badgeSize
             )
 
+            let cornerRadius: CGFloat = shouldRoundCorners ? 4.0 : 0.0
+            let bezierPath = NSBezierPath(roundedRect: badgeRect, xRadius: cornerRadius, yRadius: cornerRadius)
+
+            backgroundColor.setFill()
+            bezierPath.fill()
+
+            if borderOpacity > 0 {
+                bezierPath.lineWidth = 1.5
+                borderColor.setStroke()
+                bezierPath.stroke()
+            }
+
+            // Draw into a rect that is only as tall as the text, centered
+            // vertically in the badge; `draw(in:)` top-aligns text.
+            let textDrawRect = CGRect(
+                x: badgeRect.origin.x,
+                y: badgeRect.origin.y + (badgeRect.height - labelSize.height) / 2 + 1.0,
+                width: badgeRect.width,
+                height: labelSize.height
+            )
+
+            string.draw(in: textDrawRect)
         }
 
     }

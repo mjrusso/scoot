@@ -49,6 +49,15 @@ struct SettingsView: View {
     @AppStorage(UserSettings.Constants.Names.elementViewFontSize)
     var elementViewFontSize = UserSettings.Constants.DefaultValues.elementViewFontSize
 
+    @AppStorage(UserSettings.Constants.Names.roundElementLabelCorners)
+    var roundElementLabelCorners = UserSettings.Constants.DefaultValues.roundElementLabelCorners
+
+    @AppStorage(UserSettings.Constants.Names.elementLabelBorderOpacity)
+    var elementLabelBorderOpacity = UserSettings.Constants.DefaultValues.elementLabelBorderOpacity
+
+    @AppStorage(UserSettings.Constants.Names.elementLabelBackgroundOpacity)
+    var elementLabelBackgroundOpacity = UserSettings.Constants.DefaultValues.elementLabelBackgroundOpacity
+
     // MARK: User Interface
 
     private enum Tabs: Hashable {
@@ -72,7 +81,10 @@ struct SettingsView: View {
                 gridViewOverallContrast: $gridViewOverallContrast,
                 elementViewOverallContrast: $elementViewOverallContrast,
                 gridViewFontSize: $gridViewFontSize,
-                elementViewFontSize: $elementViewFontSize
+                elementViewFontSize: $elementViewFontSize,
+                roundElementLabelCorners: $roundElementLabelCorners,
+                elementLabelBorderOpacity: $elementLabelBorderOpacity,
+                elementLabelBackgroundOpacity: $elementLabelBackgroundOpacity
                 ).tabItem {
                     Label("Presentation", systemImage: "scribble.variable")
                 }
@@ -146,12 +158,17 @@ struct PresentationSettingsView: View {
     @Binding var elementViewOverallContrast: Double
     @Binding var gridViewFontSize: Double
     @Binding var elementViewFontSize: Double
+    @Binding var roundElementLabelCorners: Bool
+    @Binding var elementLabelBorderOpacity: Double
+    @Binding var elementLabelBackgroundOpacity: Double
 
     let targetGridCellSideLengthConfig = UserSettings.Constants.Sliders.targetGridCellSideLength
     let gridViewOverallContrastConfig = UserSettings.Constants.Sliders.gridViewOverallContrast
     let elementViewOverallContrastConfig = UserSettings.Constants.Sliders.elementViewOverallContrast
     let gridViewFontSizeConfig = UserSettings.Constants.Sliders.gridViewFontSize
     let elementViewFontSizeConfig = UserSettings.Constants.Sliders.elementViewFontSize
+    let elementLabelBorderOpacityConfig = UserSettings.Constants.Sliders.elementLabelBorderOpacity
+    let elementLabelBackgroundOpacityConfig = UserSettings.Constants.Sliders.elementLabelBackgroundOpacity
 
 
     var body: some View {
@@ -177,6 +194,15 @@ struct PresentationSettingsView: View {
                     .labelStyle(TitleOnlyLabelStyle())
                 Toggle("Show grid lines", isOn: $showGridLines)
                 Toggle("Show grid labels", isOn: $showGridLabels)
+                Toggle("Round element label corners", isOn: $roundElementLabelCorners)
+                Slider(value: $elementLabelBorderOpacity, in: elementLabelBorderOpacityConfig.range, step: elementLabelBorderOpacityConfig.step) {
+                    Label("Element Label Border Opacity:", systemImage: "gear")
+                }
+                    .labelStyle(TitleOnlyLabelStyle())
+                Slider(value: $elementLabelBackgroundOpacity, in: elementLabelBackgroundOpacityConfig.range, step: elementLabelBackgroundOpacityConfig.step) {
+                    Label("Element Label Background Opacity:", systemImage: "gear")
+                }
+                    .labelStyle(TitleOnlyLabelStyle())
                 Slider(value: $targetGridCellSideLength, in: targetGridCellSideLengthConfig.range, step: targetGridCellSideLengthConfig.step) {
                     Label("Grid Cell Size:", systemImage: "gear")
                 }
@@ -197,6 +223,18 @@ struct PresentationSettingsView: View {
         }
         .onChange(of: showGridLabels) { newValue in
             OSLog.main.log("Toggled showGridLabels to \(showGridLabels).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
+        }
+        .onChange(of: roundElementLabelCorners) { newValue in
+            OSLog.main.log("Toggled roundElementLabelCorners to \(roundElementLabelCorners).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
+        }
+        .onChange(of: elementLabelBorderOpacity) { newValue in
+            OSLog.main.log("Changed elementLabelBorderOpacity to \(elementLabelBorderOpacity).")
+            (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
+        }
+        .onChange(of: elementLabelBackgroundOpacity) { newValue in
+            OSLog.main.log("Changed elementLabelBackgroundOpacity to \(elementLabelBackgroundOpacity).")
             (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
         }
         .onChange(of: targetGridCellSideLength) { newValue in
@@ -243,6 +281,9 @@ struct PresentationSettingsView: View {
         elementViewOverallContrast = UserSettings.Constants.DefaultValues.elementViewOverallContrast
         gridViewFontSize = UserSettings.Constants.DefaultValues.gridViewFontSize
         elementViewFontSize = UserSettings.Constants.DefaultValues.elementViewFontSize
+        roundElementLabelCorners = UserSettings.Constants.DefaultValues.roundElementLabelCorners
+        elementLabelBorderOpacity = UserSettings.Constants.DefaultValues.elementLabelBorderOpacity
+        elementLabelBackgroundOpacity = UserSettings.Constants.DefaultValues.elementLabelBackgroundOpacity
     }
 
 }
@@ -258,7 +299,10 @@ struct PresentationSettingsView_Previews: PreviewProvider {
             gridViewOverallContrast: .constant(0.0),
             elementViewOverallContrast: .constant(0.0),
             gridViewFontSize: .constant(18),
-            elementViewFontSize: .constant(14)
+            elementViewFontSize: .constant(14),
+            roundElementLabelCorners: .constant(false),
+            elementLabelBorderOpacity: .constant(0),
+            elementLabelBackgroundOpacity: .constant(1)
         )
     }
 }
