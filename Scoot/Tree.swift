@@ -12,7 +12,7 @@ import Foundation
 
 class Tree<T>: CustomStringConvertible where T: Equatable {
 
-    class Node<T>: Equatable, CustomStringConvertible where T: Equatable {
+    class Node: Equatable, CustomStringConvertible {
 
         /// The label of the edge connecting this node to its parent.
         ///
@@ -44,13 +44,13 @@ class Tree<T>: CustomStringConvertible where T: Equatable {
             self.children.append(child)
         }
 
-        func step(by character: Character) -> Node<T>? {
+        func step(by character: Character) -> Node? {
             self.children.first(where: {
                 $0.label == character
             })
         }
 
-        static func == (lhs: Node<T>, rhs: Node<T>) -> Bool {
+        static func == (lhs: Node, rhs: Node) -> Bool {
             return lhs.label == rhs.label &&
                 lhs.value == rhs.value &&
                 lhs.children == rhs.children
@@ -58,14 +58,14 @@ class Tree<T>: CustomStringConvertible where T: Equatable {
 
     }
 
-    let root: Node<T>
+    let root: Node
 
     var description: String {
         String(describing: root)
     }
 
-    lazy var leaves: [Node<T>] = {
-        func traverse(from node: Node<T>) -> [Node<T>] {
+    lazy var leaves: [Node] = {
+        func traverse(from node: Node) -> [Node] {
             node.isLeaf ? [node] : node.children.flatMap { traverse(from: $0)}
         }
         return traverse(from: self.root)
@@ -76,7 +76,7 @@ class Tree<T>: CustomStringConvertible where T: Equatable {
     /// (Each sequence  is a string of non-overlapping characters used to uniquely identify one of
     /// the candidates represented in the tree.)
     lazy var sequences: [String] = {
-        func traverse(from node: Node<T>, path: String = "") -> [String] {
+        func traverse(from node: Node, path: String = "") -> [String] {
             node.isLeaf ?
                 [String("\(path)\(String(node.label))".dropFirst())] :
                 node.children.flatMap {
@@ -107,10 +107,10 @@ class Tree<T>: CustomStringConvertible where T: Equatable {
             self.root.addChild(Node(label: key))
         }
 
-        func buildLevel(level: [Node<T>]) {
+        func buildLevel(level: [Node]) {
             numLeafs = level.count
 
-            var nextLevel = [Node<T>]()
+            var nextLevel = [Node]()
 
             for node in level {
                 for key in keys {
@@ -118,7 +118,7 @@ class Tree<T>: CustomStringConvertible where T: Equatable {
                         break
                     }
 
-                    let child = Node<T>(label: key)
+                    let child = Node(label: key)
                     node.addChild(child)
                     nextLevel.append(child)
 
@@ -145,8 +145,8 @@ class Tree<T>: CustomStringConvertible where T: Equatable {
         }
     }
 
-    func walk(sequence: [Character]) -> Node<T>? {
-        func traverse(from node: Node<T>, sequence: [Character]) -> Node<T>? {
+    func walk(sequence: [Character]) -> Node? {
+        func traverse(from node: Node, sequence: [Character]) -> Node? {
             if sequence.isEmpty {
                 return node.isLeaf ? node : nil
             }

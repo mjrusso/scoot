@@ -4,6 +4,7 @@ import OSLog
 import SwiftUI
 
 @main
+@MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var menu: NSMenu!
@@ -67,8 +68,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             func showAlert(completion: (Bool) -> Void) {
                 let alert = NSAlert()
-                alert.messageText = "Accessibility Permission Required"
-                alert.informativeText = "Please re-launch Scoot after authorizing."
+                alert.messageText = "Allow Scoot to Control Your Mac"
+                alert.informativeText = "Grant access in your Mac’s privacy settings, then relaunch Scoot."
                 alert.alertStyle = .critical
                 alert.addButton(withTitle: "View Documentation")
                 alert.addButton(withTitle: "Exit")
@@ -194,20 +195,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             object: NSApplication.shared,
             queue: OperationQueue.main
         ) { [weak self] notification in
+            MainActor.assumeIsolated {
+                OSLog.main.log("Received event: didChangeScreenParametersNotification.")
 
-            OSLog.main.log("Received event: didChangeScreenParametersNotification.")
+                guard let self = self else {
+                    return
+                }
 
-            guard let self = self else {
-                return
+                OSLog.main.logDetailsForAllConnectedScreens()
+
+                // For simplicity (and instead of diffing the current window state),
+                // always rebuild all jump windows.
+                self.rebuildJumpWindows()
+
+                OSLog.main.log("Finished responding to screen change.")
             }
-
-            OSLog.main.logDetailsForAllConnectedScreens()
-
-            // For simplicity (and instead of diffing the current window state),
-            // always rebuild all jump windows.
-            self.rebuildJumpWindows()
-
-            OSLog.main.log("Finished responding to screen change.")
         }
     }
 
@@ -229,7 +231,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let hostingController = NSHostingController(rootView: self.settingsView)
 
         let window = NSWindow(contentViewController: hostingController)
-        window.title = "Scoot Preferences"
+        window.title = "Scoot Settings"
 
         return NSWindowController(window: window)
     }()
@@ -350,7 +352,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         bringToForeground(using: .freestyle)
     }
 
-    @IBAction func preferencesPressed(_ sender: NSMenuItem) {
+    @IBAction func settingsPressed(_ sender: NSMenuItem) {
         NSApp.activate(ignoringOtherApps: true)
         settingsWindowController.showWindow(sender)
     }
