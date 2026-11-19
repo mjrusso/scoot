@@ -53,8 +53,14 @@ struct Accessibility {
         UIElement.isProcessTrusted(withPrompt: showPrompt)
     }
 
+    /// Applications whose `AXEnhancedUserInterface` attribute Scoot switched on.
+    ///
+    /// Only these are reverted at quit, and only while the PID still belongs to
+    /// the same app: apps that had the attribute on before Scoot started keep it.
+    @MainActor private static var enhancedUserInterfaceEnabledByScoot = [pid_t: String]()
+
     @discardableResult
-    static func enableEnhancedUserInterfaceIfNecessary(for runningApp: NSRunningApplication) -> Bool {
+    @MainActor static func enableEnhancedUserInterfaceIfNecessary(for runningApp: NSRunningApplication) -> Bool {
 
         guard let app = Application(runningApp) else {
             return false
@@ -67,12 +73,23 @@ struct Accessibility {
             OSLog.main.log("Enabling AXEnhancedUserInterface for \(String(describing: runningApp.localizedName ?? "<unknown>"), privacy: .private(mask: .hash))")
 
             try? app.setAttribute(.enhancedUserInterface, value: true)
+
+            enhancedUserInterfaceEnabledByScoot[runningApp.processIdentifier] = runningApp.bundleIdentifier ?? ""
         }
 
         return enhancedUserInterfaceAlreadyEnabled
     }
 
-    static func disableEnhancedUserInterface(for runningApp: NSRunningApplication) {
+    @MainActor static func disableEnhancedUserInterface(for runningApp: NSRunningApplication) {
+
+        let pid = runningApp.processIdentifier
+
+        guard enhancedUserInterfaceEnabledByScoot[pid] == (runningApp.bundleIdentifier ?? "") else {
+            return
+        }
+
+        enhancedUserInterfaceEnabledByScoot[pid] = nil
+
         guard let app = Application(runningApp) else {
             return
         }
@@ -96,7 +113,7 @@ struct Accessibility {
     // incomplete picture of all available elements.
     //
     // For additional notes and discussion, see: https://github.com/mjrusso/scoot/issues/11
-    static func enableEnhancedUserInterfaceForAllApps() {
+    @MainActor static func enableEnhancedUserInterfaceForAllApps() {
         NSWorkspace.shared.runningApplications.filter {
             $0.activationPolicy == .regular
         }.forEach { app in
@@ -106,17 +123,19 @@ struct Accessibility {
         NSWorkspace.shared.notificationCenter.addObserver(
             forName: NSWorkspace.didLaunchApplicationNotification,
             object: nil,
-            queue: nil
+            queue: .main
         ) { notification in
             guard let app = notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication else {
                 return
             }
 
-            Accessibility.enableEnhancedUserInterfaceIfNecessary(for: app)
+            MainActor.assumeIsolated {
+                _ = Accessibility.enableEnhancedUserInterfaceIfNecessary(for: app)
+            }
         }
     }
 
-    static func disableEnhancedUserInterfaceForAllApps() {
+    @MainActor static func disableEnhancedUserInterfaceForAllApps() {
         NSWorkspace.shared.runningApplications.filter {
             $0.activationPolicy == .regular
         }.forEach { app in
