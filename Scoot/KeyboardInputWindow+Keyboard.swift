@@ -66,44 +66,48 @@ extension KeyboardInputWindow {
         // significantly improves reliability. For more context, see
         // <https://github.com/mjrusso/scoot/issues/28>.
         case ("\r", false, []):
-            appDelegate?.bringToBackground()
-            mouse.click(button: .left)
+            appDelegate?.bringToBackground { [mouse] in
+                mouse.click(button: .left)
+            }
             return
         case ("\r", false, _), ("[", false, _), ("]", false, _):
-            appDelegate?.bringToBackground()
-
             // Note that if a modifier is being held, it will "pass through" to
             // the corresponding click.
-            switch character {
-            case "\r":
-                mouse.click(button: .left)
-            case "[":
-                mouse.click(button: .center)
-            case "]":
-                mouse.click(button: .right)
-            default:
-                break
+            appDelegate?.bringToBackground { [mouse] in
+                switch character {
+                case "\r":
+                    mouse.click(button: .left)
+                case "[":
+                    mouse.click(button: .center)
+                case "]":
+                    mouse.click(button: .right)
+                default:
+                    break
+                }
             }
             return
         case ("\r", true, _):
-            appDelegate?.bringToBackground()
-            mouse.notifyDrag(.left)
-            mouse.release(.left)
             isHoldingDownLeftMouseButton = false
+            appDelegate?.bringToBackground { [mouse] in
+                mouse.notifyDrag(.left)
+                mouse.release(.left)
+            }
             return
         case ("=", false, _):
-            appDelegate?.bringToBackground()
-            usleep(10000)
-            mouse.pressDown(.left)
             isHoldingDownLeftMouseButton = true
-            // Automatically bring Scoot to the foreground, so the user can
-            // continue their drag operation.
-            usleep(10000)
-            appDelegate?.bringToForeground()
+            appDelegate?.bringToBackground { [mouse, weak appDelegate] in
+                usleep(10000)
+                mouse.pressDown(.left)
+                // Automatically bring Scoot to the foreground, so the user can
+                // continue their drag operation.
+                usleep(10000)
+                appDelegate?.bringToForeground()
+            }
             return
         case ("\\", false, _):
-            appDelegate?.bringToBackground()
-            mouse.doubleClick(button: .left)
+            appDelegate?.bringToBackground { [mouse] in
+                mouse.doubleClick(button: .left)
+            }
             return
         default:
             break
