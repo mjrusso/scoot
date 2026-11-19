@@ -165,6 +165,14 @@ class KeyboardInputWindow: TransparentWindow {
 
         OSLog.main.log("Preparing data structures for element-based nav")
 
+        // Apps that gate their accessibility tree behind the VoiceOver flag —
+        // Firefox and Chromium/Electron among them — expose a handful of
+        // untitled stub nodes until `AXEnhancedUserInterface` is on. The flag is
+        // also switched on for every app at launch, but an app started after
+        // Scoot, or one that dropped the flag again, would otherwise be scanned
+        // in its stub state and show no labels at all.
+        Accessibility.enableEnhancedUserInterfaceIfNecessary(for: app)
+
         let elements = Accessibility
           .getAccessibleElementsForFocusedWindow(of: app)
         // Because Scoot places labels vertically, horizontal congestion is

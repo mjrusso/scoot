@@ -140,6 +140,7 @@ struct Accessibility {
         }
 
         func traverse(node: UIElement) {
+
             guard let children: [UIElement] = try? node.arrayAttribute(.children) else {
                 return
             }
@@ -153,45 +154,46 @@ struct Accessibility {
                     continue
                 }
 
-                guard let frame: CGRect = try? child.attribute(.frame) else {
-                    continue
-                }
+                // A node without a frame can still have children worth
+                // visiting: Firefox exposes the page as an AXWebArea that
+                // reports no frame of its own, and Chromium does the same for
+                // some containers. Skipping the subtree of such a node is what
+                // makes element mode see browser chrome only.
+                if let frame: CGRect = try? child.attribute(.frame) {
 
-                // Ignore any elements that don't intersect with the window
-                // bounds.
-                guard focusedWindowFrame.intersects(frame) else {
-                    continue
-                }
-
-                let convertedFrame = frame.convertToCocoa()
-
-                let screen = NSScreen.screens.first(where: {
-                    $0.frame.contains(convertedFrame)
-                })
-
-                let role: Role? = try? child.role()
-
-                if let role = role, let screen = screen {
-
-                    func addElement() {
-                        let element = Element(
-                            role: role,
-                            subrole: try? child.subrole(),
-                            title: try? child.attribute(.title),
-                            description: try? child.attribute(.description),
-                            valueDescription: try? child.attribute(.valueDescription),
-                            enabled: (try? child.attribute(.enabled)) ?? false,
-                            screen: screen,
-                            frame: convertedFrame
-                        )
-                        elements.append(element)
+                    // Ignore any elements that don't intersect with the window
+                    // bounds, along with their subtrees.
+                    guard focusedWindowFrame.intersects(frame) else {
+                        continue
                     }
 
-                    switch role {
-                    case .cell, .button, .radioButton, .link, .checkBox, .slider, .popUpButton, .menuButton, .incrementor, .handle:
-                        addElement()
-                    default:
-                        break
+                    let convertedFrame = frame.convertToCocoa()
+
+                    // A control straddling two displays is kept and assigned to
+                    // the first one it overlaps.
+                    let screen = NSScreen.screens.first(where: {
+                        $0.frame.intersects(convertedFrame)
+                    })
+
+                    let role: Role? = try? child.role()
+
+                    if let role = role, let screen = screen {
+
+                        switch role {
+                        case .cell, .button, .radioButton, .link, .checkBox, .slider, .popUpButton, .menuButton, .incrementor, .handle:
+                            elements.append(Element(
+                                role: role,
+                                subrole: try? child.subrole(),
+                                title: try? child.attribute(.title),
+                                description: try? child.attribute(.description),
+                                valueDescription: try? child.attribute(.valueDescription),
+                                enabled: (try? child.attribute(.enabled)) ?? false,
+                                screen: screen,
+                                frame: convertedFrame
+                            ))
+                        default:
+                            break
+                        }
                     }
                 }
 
