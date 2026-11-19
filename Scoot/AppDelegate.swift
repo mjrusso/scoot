@@ -203,7 +203,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 }
 
                 OSLog.main.logDetailsForAllConnectedScreens()
+
+                // For simplicity (and instead of diffing the current window state),
+                // always rebuild all jump windows.
                 self.rebuildJumpWindows()
+
                 OSLog.main.log("Finished responding to screen change.")
             }
         }
