@@ -1,5 +1,4 @@
 import XCTest
-@testable import Scoot
 
 func makeRect(width: CGFloat, height: CGFloat) -> CGRect {
     CGRect(origin: .zero, size: CGSize(width: width, height: height))

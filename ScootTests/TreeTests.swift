@@ -1,5 +1,4 @@
 import XCTest
-@testable import Scoot
 
 class TreeTests: XCTestCase {
 
