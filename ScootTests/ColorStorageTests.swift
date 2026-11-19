@@ -1,6 +1,5 @@
 import XCTest
 import SwiftUI
-@testable import Scoot
 
 class ColorStorageTests: XCTestCase {
 

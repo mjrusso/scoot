@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E5F0A0B9679856114DE5D2B3 /* NSScreen+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511785A2636EEC800B4202F /* NSScreen+Extensions.swift */; };
+		E5F0A0E44031F063E2E1881D /* NSPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E511785F2636EEEB00B4202F /* NSPoint+Extensions.swift */; };
+		E5F0A04DACF24E42AEFF9FBD /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567D2A1263C77FC00A0A861 /* Grid.swift */; };
+		E5F0A06AB7A15A937E1539B5 /* Positionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59F854B278938F000A9FBF6 /* Positionable.swift */; };
+		E5F0A0B7CA292883FA61EBC1 /* Positionable+Crowding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59F854E27893B3A00A9FBF6 /* Positionable+Crowding.swift */; };
+		E5F0A009329083E176AA2543 /* CGRect+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5497A06277D4F6A006EA19B /* CGRect+Extensions.swift */; };
+		E5F0A00A68678579E36D81EE /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E59C1632264AC4F60033E2CC /* CGSize+Extensions.swift */; };
+		E5F0A04822269DC7A2D80D7B /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5497A04276E5E9D006EA19B /* CGPoint+Extensions.swift */; };
+		E5F0A0FFEC85B0660E2DCC5C /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850427BAA0C70053CB02 /* Color+Extensions.swift */; };
 		7DAB924A9CC663786ACF8B09 /* ColorStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7819B5ECE743DB5A5FA78A18 /* ColorStorageTests.swift */; };
 		E500850527BAA0C70053CB02 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850427BAA0C70053CB02 /* Color+Extensions.swift */; };
 		E500850827BC01760053CB02 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E500850727BC01760053CB02 /* KeyboardShortcuts */; };
@@ -463,6 +472,15 @@
 				E59C1631264185940033E2CC /* TreeTests.swift in Sources */,
 				E5EB84532787E3F80086A5D6 /* PositionableTests.swift in Sources */,
 				E59C162F264184500033E2CC /* Tree.swift in Sources */,
+				E5F0A0B9679856114DE5D2B3 /* NSScreen+Extensions.swift in Sources */,
+				E5F0A0E44031F063E2E1881D /* NSPoint+Extensions.swift in Sources */,
+				E5F0A04DACF24E42AEFF9FBD /* Grid.swift in Sources */,
+				E5F0A06AB7A15A937E1539B5 /* Positionable.swift in Sources */,
+				E5F0A0B7CA292883FA61EBC1 /* Positionable+Crowding.swift in Sources */,
+				E5F0A009329083E176AA2543 /* CGRect+Extensions.swift in Sources */,
+				E5F0A00A68678579E36D81EE /* CGSize+Extensions.swift in Sources */,
+				E5F0A04822269DC7A2D80D7B /* CGPoint+Extensions.swift in Sources */,
+				E5F0A0FFEC85B0660E2DCC5C /* Color+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,7 +688,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ScootTests/Info.plist;
@@ -683,7 +700,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjrusso.ScootTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 6.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scoot.app/Contents/MacOS/Scoot";
 			};
 			name = Debug;
 		};
@@ -691,7 +707,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ScootTests/Info.plist;
@@ -704,7 +719,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjrusso.ScootTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 6.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scoot.app/Contents/MacOS/Scoot";
 			};
 			name = Release;
 		};

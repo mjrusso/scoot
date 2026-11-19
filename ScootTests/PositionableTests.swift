@@ -1,5 +1,4 @@
 import XCTest
-@testable import Scoot
 
 struct Item: Positionable, Equatable {
     var frame: CGRect
