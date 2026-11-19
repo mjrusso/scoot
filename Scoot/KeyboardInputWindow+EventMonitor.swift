@@ -36,10 +36,13 @@ extension KeyboardInputWindow {
             self.scrollEventDebounceTimer?.invalidate()
 
             self.scrollEventDebounceTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
-                self.initializeCoreDataStructuresForElementBasedMovement(of: app)
-                self.appDelegate?.jumpViewControllers.forEach {
-                    $0.redrawElements()
-                    $0.showElements()
+                // The timer is scheduled on the main run loop.
+                MainActor.assumeIsolated {
+                    self.initializeCoreDataStructuresForElementBasedMovement(of: app)
+                    self.appDelegate?.jumpViewControllers.forEach {
+                        $0.redrawElements()
+                        $0.showElements()
+                    }
                 }
             }
         }

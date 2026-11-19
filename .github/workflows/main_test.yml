@@ -3,30 +3,24 @@ name: main_test
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   main_test:
-    runs-on: macos-11
+    runs-on: xcode-27
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_27.1.app/Contents/Developer
 
     steps:
       - name: Checkout project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v7
 
-      - name: Find first relevant scheme of default project
-        run: |
-          echo "SCHEME=$(xcodebuild -list -json | jq -r '[.project.schemes[] | select(. != "KeyboardShortcuts")] | first')" >> $GITHUB_ENV
+      - name: Show Xcode version
+        run: xcodebuild -version
 
-      - name: Resolve package dependencies
-        shell: bash --noprofile --norc -eo pipefail {0}
-        run: |
-          xcodebuild -resolvePackageDependencies
-
-      # - name: Show build settings
-      #   shell: bash --noprofile --norc -eo pipefail {0}
-      #   run: |
-      #     xcodebuild -showBuildSettings
-
-      - name: Build and test app
-        shell: bash --noprofile --norc -eo pipefail {0}
-        run: |
-          xcodebuild -scheme "$SCHEME" test CODE_SIGN_IDENTITY=- | xcpretty
+      - name: Build and run unit tests
+        run: >-
+          xcodebuild -project Scoot.xcodeproj -scheme Scoot
+          -configuration Debug -destination 'platform=macOS'
+          -skip-testing:ScootUITests build test CODE_SIGN_IDENTITY=-

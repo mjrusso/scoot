@@ -1,6 +1,7 @@
 import AppKit
 import KeyboardShortcuts
 
+@MainActor
 extension KeyboardShortcuts.Name {
 
     static let useElementBasedNavigation = Self(
@@ -21,6 +22,7 @@ extension KeyboardShortcuts.Name {
 }
 
 
+@MainActor
 struct GlobalKeybindings {
 
     static var appDelegate: AppDelegate? {

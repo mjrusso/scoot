@@ -19,15 +19,18 @@ class FeedbackView: NSView {
         self.isHidden = true
     }
 
-    func flash(duration: TimeInterval = 0.15, completion: (() -> Void)? = nil) {
+    func flash(duration: TimeInterval = 0.15, completion: (@MainActor () -> Void)? = nil) {
         self.isHidden = false
         NSAnimationContext.runAnimationGroup { context in
             context.duration = duration
             self.animator().alphaValue = 0
         } completionHandler: {
-            self.isHidden = true
-            self.alphaValue = 1
-            completion?()
+            // NSAnimationContext delivers completion handlers on the main thread.
+            MainActor.assumeIsolated {
+                self.isHidden = true
+                self.alphaValue = 1
+                completion?()
+            }
         }
     }
 

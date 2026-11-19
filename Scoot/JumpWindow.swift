@@ -2,8 +2,8 @@ import Cocoa
 
 class JumpWindow: TransparentWindow {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func configureWindow() {
+        super.configureWindow()
 
         level = .floating
     }

@@ -48,7 +48,7 @@ Freestyle mode is particularly handy for those cases where you want to quickly n
 
 * Scoot is _not_ intended to replace the mouse or trackpad entirely. It's here to augment them.
 
-* Scoot runs on MacOS 11 (Big Sur), and 12 (Monterey).
+* Scoot requires MacOS 12 (Monterey) or later.
 
 * Scoot is an AppKit app, written in Swift. (There's still some Carbon in here, too! [Yes][carbon-events], [really][carbon-accessibility].)
 
@@ -99,7 +99,7 @@ Scoot also works on systems with multiple connected displays.
 
 _If you use multiple displays, and experience an issue with Scoot's windows drawing in an incorrect location when the app launches (e.g. all Scoot windows appearing on the same display), please post your findings [in this issue](https://github.com/mjrusso/scoot/issues/18), and note the value of your “Displays have separate Spaces” checkbox in Mission Control._ If you do happen to find yourself in this state, you should be able to fix the window arrangement by clicking Scoot's menu bar icon, then “Debug”, and finally “Rebuild Jump Windows”.
 
-To customize Scoot's settings, click Scoot's menu bar icon, then “Preferences…”, or type `⌘,` while Scoot is in the foreground. In addition to modifying keybindings, it is also possible to modify Scoot's appearance (including font sizes, colours, opacity, etc.).
+To customize Scoot's settings, click Scoot's menu bar icon, then “Settings…”, or type `⌘,` while Scoot is in the foreground. In addition to modifying keybindings, it is also possible to modify Scoot's appearance (including font sizes, colours, opacity, etc.).
 
 ### Keybindings
 
@@ -116,13 +116,13 @@ Global keybindings are always active, as long as Scoot is currently running.
 | ⇧⌘K              | Use grid-based navigation (bring Scoot to foreground)    |
 | ⇧⌘L              | Use freestyle mode (bring Scoot to foreground)           |
 
-All global keybindings are fully customizable. To modify the keybindings, click Scoot's menu bar icon, then “Preferences…”, and select the “Keybindings” tab.
+All global keybindings are fully customizable. To modify the keybindings, click Scoot's menu bar icon, then “Settings…”, and select the “Keybindings” tab.
 
 #### Local Keybindings
 
 Local keybindings are only active when Scoot is active (i.e., when Scoot is in the foreground).
 
-Note that vi keybindings are not enabled by default, and must be explicitly toggled on (click Scoot's menu bar icon, then “Preferences…”, select the “Keybindings” tab, and then change the keybinding mode). Emacs keybindings (and most system keybindings) are disabled when vi keybindings are active.
+Note that vi keybindings are not enabled by default, and must be explicitly toggled on (click Scoot's menu bar icon, then “Settings…”, select the “Keybindings” tab, and then change the keybinding mode). Emacs keybindings (and most system keybindings) are disabled when vi keybindings are active.
 
 ##### General
 
@@ -206,7 +206,7 @@ Alternatively, you can manually download the app bundle:
 
 ### Setup
 
-On first run, you'll be presented with a prompt like the following:
+On first run, MacOS asks for permission to let Scoot control your computer. The screenshots in this section show the older System Preferences interface; newer versions use different setting names.
 
 <p align="center">
   <img width="450" src="./Assets/Documentation/accessibility-prompt.png" alt="Scoot.app would like to control this computer using accessibility features" />
@@ -214,13 +214,23 @@ On first run, you'll be presented with a prompt like the following:
 
 **Scoot will not work unless access is granted.** (Note that Scoot does not collect any user or usage-related information, and does not make any network requests. The app runs entirely locally, and treats its privileged access with the utmost respect.)
 
-To grant this permission, click _“Open System Preferences”_. Next, click the lock in the bottom left corner (_“Click the lock to make changes”_).
+Open the permission pane for your MacOS version:
+
+| MacOS version | Permission pane                                                           |
+|---------------|---------------------------------------------------------------------------|
+| MacOS 27      | System Settings → Privacy & Security → **Device Control and Data Access** |
+| MacOS 13–26   | System Settings → Privacy & Security → **Accessibility**                  |
+| MacOS 12      | System Preferences → Security & Privacy → Privacy → **Accessibility**     |
+
+Enable **Scoot** in the list. If it is missing, click **+** and select **Scoot.app** from your Applications folder. Restart Scoot after granting access.
+
+On MacOS 12, click the lock in the bottom left corner (_“Click the lock to make changes”_) before changing permissions:
 
 <p align="center">
   <img width="550" src="./Assets/Documentation/privacy-locked.png" alt="Locked accessibility settings" />
 </p>
 
-Finally, check _“Scoot.app”_ to give Scoot the ability to move your cursor, and to click, drag, and scroll.
+Check _“Scoot.app”_ to give Scoot the ability to move your cursor, and to click, drag, and scroll:
 
 <p align="center">
   <img width="550" src="./Assets/Documentation/accessibility-access-granted.png" alt="Scoot.app granted accessibility access" />
@@ -228,13 +238,15 @@ Finally, check _“Scoot.app”_ to give Scoot the ability to move your cursor, 
 
 See the [usage documentation](#usage) for details on how to use Scoot.
 
-If you're finding Scoot helpful, you may want to configure the app to launch automatically when you log in. To set this up, open System Preferences again, click _“Users & Groups”_, and then _“Login Items”_:
+To launch Scoot automatically when you log in, add **Scoot.app** to your [login items](https://support.apple.com/guide/mac-help/open-items-automatically-when-you-log-in-mh15189/mac). On MacOS 13 or later, open **System Settings → General → Login Items** (called **Login Items & Extensions** on newer versions).
+
+On MacOS 12, open **System Preferences → Users & Groups → Login Items**:
 
 <p align="center">
   <img width="550" src="./Assets/Documentation/login-items-locked.png" alt="Locked login items settings" />
 </p>
 
-As before, you'll need to click the lock in the bottom left corner to unlock this preference pane. Once unlocked, click the “+” button, and select _“Scoot.app”_ from the _Applications_ folder. Checking the _“Hide”_ checkbox is recommended.
+On MacOS 12, click the lock in the bottom left corner to unlock this preference pane. Once unlocked, click the “+” button, and select _“Scoot.app”_ from the _Applications_ folder. Checking the _“Hide”_ checkbox is recommended.
 
 <p align="center">
   <img width="550" src="./Assets/Documentation/start-automatically.png" alt="Scoot configured to start automatically" />
@@ -272,7 +284,7 @@ See the [issue tracker][scoot-issues]. Contributions welcome!
 
 Scoot is released under the terms of the [BSD 3-Clause License](LICENSE).
 
-Copyright (c) 2021-2023, [Michael Russo](https://mjrusso.com).
+Copyright (c) 2021-2026, [Michael Russo](https://mjrusso.com).
 
 
 [latest-scoot-binary]: https://github.com/mjrusso/scoot/releases/latest/download/Scoot.app.zip

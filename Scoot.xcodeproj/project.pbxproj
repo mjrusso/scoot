@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7DAB924A9CC663786ACF8B09 /* ColorStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7819B5ECE743DB5A5FA78A18 /* ColorStorageTests.swift */; };
 		E500850527BAA0C70053CB02 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850427BAA0C70053CB02 /* Color+Extensions.swift */; };
 		E500850827BC01760053CB02 /* KeyboardShortcuts in Frameworks */ = {isa = PBXBuildFile; productRef = E500850727BC01760053CB02 /* KeyboardShortcuts */; };
 		E500850A27BC09530053CB02 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E500850927BC09530053CB02 /* AboutView.swift */; };
@@ -79,6 +80,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7819B5ECE743DB5A5FA78A18 /* ColorStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStorageTests.swift; sourceTree = "<group>"; };
 		E500850427BAA0C70053CB02 /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		E500850927BC09530053CB02 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		E500850B27BC907D0053CB02 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			children = (
 				E59C1629263E52540033E2CC /* GridTests.swift */,
 				E5EB845027837F380086A5D6 /* GeometryTests.swift */,
+				7819B5ECE743DB5A5FA78A18 /* ColorStorageTests.swift */,
 				E59C1630264185940033E2CC /* TreeTests.swift */,
 				E5EB84522787E3F80086A5D6 /* PositionableTests.swift */,
 				E5776241262F04D300849D7D /* Info.plist */,
@@ -456,6 +459,7 @@
 			files = (
 				E59C162A263E52540033E2CC /* GridTests.swift in Sources */,
 				E5EB845127837F380086A5D6 /* GeometryTests.swift in Sources */,
+				7DAB924A9CC663786ACF8B09 /* ColorStorageTests.swift in Sources */,
 				E59C1631264185940033E2CC /* TreeTests.swift in Sources */,
 				E5EB84532787E3F80086A5D6 /* PositionableTests.swift in Sources */,
 				E59C162F264184500033E2CC /* Tree.swift in Sources */,
@@ -548,7 +552,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				LM_SKIP_METADATA_EXTRACTION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -603,7 +608,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				LM_SKIP_METADATA_EXTRACTION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -628,11 +634,11 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjrusso.Scoot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -652,11 +658,11 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjrusso.Scoot;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -673,10 +679,10 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjrusso.ScootTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scoot.app/Contents/MacOS/Scoot";
 			};
 			name = Debug;
@@ -694,10 +700,10 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjrusso.ScootTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scoot.app/Contents/MacOS/Scoot";
 			};
 			name = Release;
@@ -714,9 +720,10 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjrusso.ScootUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TEST_TARGET_NAME = Scoot;
 			};
 			name = Debug;
@@ -733,9 +740,10 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mjrusso.ScootUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TEST_TARGET_NAME = Scoot;
 			};
 			name = Release;
