@@ -30,13 +30,15 @@ class Grid {
         var rects = [CGRect]()
         rects.reserveCapacity(numCells)
 
-        let xs = stride(from: 0.0, to: size.width, by: cellWidth)
-        let ys = stride(from: 0.0, to: size.height, by: cellHeight)
-
-        for y in ys {
-            for x in xs {
-                let rect = CGRect(origin: CGPoint(x: x, y: y), size: cellSize)
-                rects.append(rect)
+        // Index-based, not `stride(from: 0, to: width, by: cellWidth)`: with a
+        // fractional cell size the last step can land a hair under the edge
+        // and emit an extra row or column (e.g. 800×1865 at 160 pt gave 60
+        // rects for 55 cells), which tripped the cell-count assertion when
+        // the grid was resized with ⇧⌘- and mislabelled cells in Release.
+        for row in 0..<numRows {
+            for column in 0..<numColumns {
+                let origin = CGPoint(x: CGFloat(column) * cellWidth, y: CGFloat(row) * cellHeight)
+                rects.append(CGRect(origin: origin, size: cellSize))
             }
         }
 
