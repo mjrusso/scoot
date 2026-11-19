@@ -43,8 +43,8 @@ class ElementView: NSView {
         )
 
         let backgroundColor = NSColor.black.withAlphaComponent(
-            viewController.elementLabelBackgroundAlphaComponent
-        ).withAlphaComponent(backgroundOpacity)
+            viewController.elementLabelBackgroundAlphaComponent * backgroundOpacity
+        )
 
         let borderColor = foregroundColor.withAlphaComponent(borderOpacity)
 
