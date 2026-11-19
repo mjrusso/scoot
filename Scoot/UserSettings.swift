@@ -115,7 +115,7 @@ class UserSettings {
             settingsView?.showGridLabels = newValue
         }
     }
-    
+
     var roundElementBorders: Bool {
         get {
             settingsView?.roundElementBorders ?? Constants.DefaultValues.roundElementBorders
@@ -169,7 +169,7 @@ class UserSettings {
             settingsView?.elementViewFontSize = newValue
         }
     }
-    
+
     var elementBorderOpacity: Double {
         get {
             settingsView?.elementBorderOpacity ?? Constants.DefaultValues.elementBorderOpacity
@@ -178,7 +178,7 @@ class UserSettings {
             settingsView?.elementBorderOpacity = newValue
         }
     }
-    
+
     var elementBackgroundOpacity: Double {
         get {
             settingsView?.elementBackgroundOpacity ?? Constants.DefaultValues.elementBackgroundOpacity

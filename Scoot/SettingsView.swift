@@ -48,13 +48,13 @@ struct SettingsView: View {
 
     @AppStorage(UserSettings.Constants.Names.elementViewFontSize)
     var elementViewFontSize = UserSettings.Constants.DefaultValues.elementViewFontSize
-    
+
     @AppStorage(UserSettings.Constants.Names.roundElementBorders)
     var roundElementBorders = UserSettings.Constants.DefaultValues.roundElementBorders
-    
+
     @AppStorage(UserSettings.Constants.Names.elementBorderOpacity)
     var elementBorderOpacity = UserSettings.Constants.DefaultValues.elementBorderOpacity
-    
+
     @AppStorage(UserSettings.Constants.Names.elementBackgroundOpacity)
     var elementBackgroundOpacity = UserSettings.Constants.DefaultValues.elementBackgroundOpacity
 
@@ -195,14 +195,14 @@ struct PresentationSettingsView: View {
                 Toggle("Show grid lines", isOn: $showGridLines)
                 Toggle("Show grid labels", isOn: $showGridLabels)
                 Toggle("Round element borders", isOn: $roundElementBorders)
-                Slider(value: $elementBorderOpacity, in: elementBorderOpacityConfig.range, step: elementBorderOpacityConfig.step){
+                Slider(value: $elementBorderOpacity, in: elementBorderOpacityConfig.range, step: elementBorderOpacityConfig.step) {
                     Label("Element border opacity", systemImage: "gear")
                 }
                     .labelStyle(TitleOnlyLabelStyle())
-                Slider(value: $elementBackgroundOpacity, in: elementBackgroundOpacityConfig.range, step: elementBackgroundOpacityConfig.step){
+                Slider(value: $elementBackgroundOpacity, in: elementBackgroundOpacityConfig.range, step: elementBackgroundOpacityConfig.step) {
                     Label("Element background opacity", systemImage: "gear")
                 }
-                .labelStyle(TitleOnlyLabelStyle())
+                    .labelStyle(TitleOnlyLabelStyle())
                 Slider(value: $targetGridCellSideLength, in: targetGridCellSideLengthConfig.range, step: targetGridCellSideLengthConfig.step) {
                     Label("Grid Cell Size:", systemImage: "gear")
                 }
@@ -229,12 +229,12 @@ struct PresentationSettingsView: View {
             OSLog.main.log("Toggled roundElementBorders to \(roundElementBorders).")
             (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
         }
-        .onChange(of: elementBorderOpacity){ newValue in
+        .onChange(of: elementBorderOpacity) { newValue in
             OSLog.main.log("Changed elementBorderOpacity to \(elementBorderOpacity).")
             (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
         }
-        .onChange(of: elementBackgroundOpacity){ newValue in
-            OSLog.main.log("Change elementBackgroundOpacity to \(elementBackgroundOpacity).")
+        .onChange(of: elementBackgroundOpacity) { newValue in
+            OSLog.main.log("Changed elementBackgroundOpacity to \(elementBackgroundOpacity).")
             (NSApp.delegate as? AppDelegate)?.inputWindow.redrawJumpViews()
         }
         .onChange(of: targetGridCellSideLength) { newValue in
