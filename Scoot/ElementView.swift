@@ -99,7 +99,7 @@ class ElementView: NSView {
             backgroundColor.setFill()
             bezierPath.fill()
 
-            if shouldRoundCorners {
+            if borderOpacity > 0 {
                 bezierPath.lineWidth = 1.5
                 borderColor.setStroke()
                 bezierPath.stroke()

@@ -38,7 +38,7 @@ class UserSettings {
             static let gridViewFontSize = Double(18)
             static let elementViewFontSize = Double(14)
             static let roundElementLabelCorners = false
-            static let elementLabelBorderOpacity = Double(0.7)
+            static let elementLabelBorderOpacity = Double(0)
             static let elementLabelBackgroundOpacity = Double(1)
         }
 

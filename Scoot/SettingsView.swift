@@ -301,7 +301,7 @@ struct PresentationSettingsView_Previews: PreviewProvider {
             gridViewFontSize: .constant(18),
             elementViewFontSize: .constant(14),
             roundElementLabelCorners: .constant(false),
-            elementLabelBorderOpacity: .constant(0.7),
+            elementLabelBorderOpacity: .constant(0),
             elementLabelBackgroundOpacity: .constant(1)
         )
     }
