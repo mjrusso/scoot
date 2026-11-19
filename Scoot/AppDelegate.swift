@@ -413,19 +413,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    /// Scans the focused window for element-based navigation, retrying when the
-    /// app has not finished waking its accessibility tree.
+    /// Scans the focused window for element-based navigation, retrying when
+    /// Scoot has just woken the app's accessibility tree.
     ///
     /// Firefox and Chromium/Electron expose only a handful of untitled stub
     /// nodes for a moment (about two seconds in Zen) after
     /// `AXEnhancedUserInterface` is switched on, so a single synchronous scan
     /// can come back with no usable labels. Retrying keeps the overlay
-    /// responsive (it is already on screen) while the labels fill in.
-    func scanElements(of app: NSRunningApplication, attempt: Int = 1) {
+    /// responsive (it is already on screen) while the labels fill in. Apps
+    /// that already had the flag on are scanned once, so a window that really
+    /// has few controls (a dialog) is not rescanned.
+    func scanElements(of app: NSRunningApplication, attempt: Int = 1, waking: Bool? = nil) {
 
         guard inputWindow.activeJumpMode == .element else {
             return
         }
+
+        let waking = waking ?? !Accessibility.enableEnhancedUserInterfaceIfNecessary(for: app)
 
         // For performance reasons, only traverse the accessibility tree if the
         // user is actually using element-based navigation.
@@ -435,23 +439,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let count = jumpViewControllers.reduce(0) { $0 + $1.elements.count }
         let maximumAttempts = 8
 
-        // A window that legitimately has a few controls is rescanned too, which
-        // is cheap and deterministic: the same candidates produce the same label
-        // sequences. Stop as soon as the user starts typing, so a late scan can
-        // never invalidate a half-entered sequence.
-        guard count < 10, attempt < maximumAttempts, !inputWindow.isWalkingDecisionTree else {
+        guard waking, count < 10, attempt < maximumAttempts, !inputWindow.isWalkingDecisionTree else {
             return
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) { [weak self] in
 
+            // Stop as soon as the user starts typing, so a late scan can never
+            // invalidate a half-entered sequence.
             guard let self,
                   self.currentApp === app,
-                  self.inputWindow.activeJumpMode == .element else {
+                  self.inputWindow.activeJumpMode == .element,
+                  !self.inputWindow.isWalkingDecisionTree else {
                 return
             }
 
-            self.scanElements(of: app, attempt: attempt + 1)
+            self.scanElements(of: app, attempt: attempt + 1, waking: true)
             self.inputWindow.redrawJumpViews()
         }
     }
