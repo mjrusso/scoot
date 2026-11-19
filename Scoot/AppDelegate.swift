@@ -150,12 +150,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         #endif
     }
 
-    func applicationDidResignActive(_ notification: Notification) {
-        #if DEBUG
-        OSLog.main.debug("AppDelegate: applicationDidResignActive")
-        #endif
-    }
-
     // MARK: Handling Screen Changes
 
     func spawnJumpWindow(on screen: NSScreen) {
@@ -331,7 +325,33 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: Deactivation
 
     func bringToBackground() {
+        // Hide the overlay explicitly. `NSApp.hide` alone can leave the labels on
+        // screen: the jump windows are borderless, transparent and join all
+        // Spaces, and the input window does not always resign main when the app
+        // is hidden, so `windowDidResignMain` — the other place that hides the
+        // labels — is skipped, and they stay stranded while the target window
+        // moves underneath.
+        inputWindow.hideJumpViews()
+        jumpWindows.forEach { $0.orderOut(nil) }
+
         NSApp.hide(self)
+    }
+
+    /// Safety net: never leave the overlay up when Scoot is no longer active
+    /// (for example when another app is activated without going through the
+    /// click path).
+    func applicationDidResignActive(_ notification: Notification) {
+
+        #if DEBUG
+        OSLog.main.debug("AppDelegate: applicationDidResignActive")
+        #endif
+
+        for viewController in jumpViewControllers {
+            viewController.hideGrid()
+            viewController.hideElements()
+        }
+
+        jumpWindows.forEach { $0.orderOut(nil) }
     }
 
     // MARK: Actions
