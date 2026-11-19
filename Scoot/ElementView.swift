@@ -19,9 +19,9 @@ class ElementView: NSView {
             return
         }
 
-        let shouldRoundBorders = UserSettings.shared.roundElementBorders
-        let borderOpacity = UserSettings.shared.elementBorderOpacity
-        let backgroundOpacity = UserSettings.shared.elementBackgroundOpacity
+        let shouldRoundCorners = UserSettings.shared.roundElementLabelCorners
+        let borderOpacity = UserSettings.shared.elementLabelBorderOpacity
+        let backgroundOpacity = UserSettings.shared.elementLabelBackgroundOpacity
 
         ctx.cgContext.setFillColor(
             NSColor.black.withAlphaComponent(
@@ -93,13 +93,13 @@ class ElementView: NSView {
                 size: badgeSize
             )
 
-            let cornerRadius: CGFloat = shouldRoundBorders ? 4.0 : 0.0
+            let cornerRadius: CGFloat = shouldRoundCorners ? 4.0 : 0.0
             let bezierPath = NSBezierPath(roundedRect: badgeRect, xRadius: cornerRadius, yRadius: cornerRadius)
 
             backgroundColor.setFill()
             bezierPath.fill()
 
-            if shouldRoundBorders {
+            if shouldRoundCorners {
                 bezierPath.lineWidth = 1.5
                 borderColor.setStroke()
                 bezierPath.stroke()
