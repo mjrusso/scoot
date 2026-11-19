@@ -1,4 +1,5 @@
 import Cocoa
+import OSLog
 
 class JumpWindowController: NSWindowController {
 
@@ -31,7 +32,16 @@ extension JumpWindowController {
 
     func assignScreen(screen: NSScreen) {
         self.assignedScreen = screen
-        setWindowFrame(screen.visibleFrame)
+
+        let frame = screen.visibleFrame
+
+        guard frame.isUsableScreenFrame else {
+            OSLog.main.error("Invalid screen frame detected: \(String(describing: frame), privacy: .public)")
+            appDelegate?.presentScreenValidationAlertIfNeeded(details: "\(frame)")
+            return
+        }
+
+        setWindowFrame(frame)
     }
 
     func setWindowFrame(_ frame: NSRect) {
