@@ -5,6 +5,25 @@ import Carbon.HIToolbox
 
 extension KeyboardInputWindow {
 
+    /// While the overlay is up, ⌘Q means "dismiss this", not "quit the
+    /// background agent".
+    ///
+    /// Key equivalents reach the main menu before they reach `keyDown`, so ⌘Q
+    /// used to terminate Scoot outright: the overlay disappeared and the menu
+    /// bar icon went with it. Swallowing the shortcut here keeps the app
+    /// running; Quit is still available from the menu bar.
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+
+        let modifiers = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+
+        if modifiers == .command, event.charactersIgnoringModifiers?.lowercased() == "q" {
+            cancelOperation(self)
+            return true
+        }
+
+        return super.performKeyEquivalent(with: event)
+    }
+
     /// Returns true, if the character or keycode is specifically reserved for a keyboard shortcut.
     func isReserved(_ character: Character, or keycode: UInt16) -> Bool {
         let reservedCharacters: [Character] = ["\r", "[", "]", "=", "\\"]
