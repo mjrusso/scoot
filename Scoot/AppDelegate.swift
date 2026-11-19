@@ -127,8 +127,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         OSLog.main.log("Scoot: applicationWillTerminate")
         #endif
 
-        // FIXME: Only remove `AXEnhancedUserInterface` attributes that Scoot
-        // itself was responsible for adding.
         Accessibility.disableEnhancedUserInterfaceForAllApps()
     }
 
