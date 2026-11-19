@@ -3,6 +3,8 @@ name: main_test
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   main_test:
